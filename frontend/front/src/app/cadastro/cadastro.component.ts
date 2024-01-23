@@ -9,7 +9,8 @@ import {FormGroup,NonNullableFormBuilder,Validators} from '@angular/forms';
 })
 export class CadastroComponent {
   hide = true;
-
+  visibility: boolean = false;
+  password: string = "password";
   form!: FormGroup;
 
   constructor(private formBuilder: NonNullableFormBuilder){}
@@ -27,5 +28,12 @@ export class CadastroComponent {
     return 'Field required';
   }
 
-
+  onClick() {
+    this.visibility = !this.visibility;
+    if (this.password === "text"){
+      this.password = "password";
+    } else if (this.password === "password"){
+      this.password = "text";
+    }
+  }
 }

@@ -1,13 +1,13 @@
 <p id = "titulo-login">Entre no Orange Portfólio</p>
 <div id = "div-signin">
-    <div id = "div-botao-google">
-        <button id = "botao-google"> Entrar com google </button> <!-- alterar posteriormente -->  
+    <div id = "div-btn-google">
+        <button id = "btn-google"> Entrar com google </button> <!-- alterar posteriormente -->  
     </div>   
 </div>
 <div id = "div-form">
 <form [formGroup]="form">
     <p id = "msg-login">Faça login com email</p>
-    <div id = "div-campos">
+    <div>
         <mat-form-field class="field">
             <input matInput placeholder="Email address" formControlName="email" required>
             <mat-error *ngIf="form.get('email')?.invalid">{{formErrorMessage()}}</mat-error>
@@ -17,9 +17,9 @@
             <mat-error *ngIf="form.get('password')?.invalid">{{formErrorMessage()}}</mat-error>
         </mat-form-field>
     </div>
-    <div id = "div-botao-entrar">
-        <button id = "botao-entrar" mat-button color="primary" size="large">  Entrar </button>    
+    <div id = "div-btn-login">
+        <button id = "btn-login" mat-button color="primary" size="large">  Entrar </button>    
     </div>
-    <p id = "msg-cadastro"> Cadastre-se</p>
+    <p id = "msg-register"> Cadastre-se</p>
 </form>
 </div>

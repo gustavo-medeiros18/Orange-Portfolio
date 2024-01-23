@@ -4,4 +4,19 @@
     justify-content: center;
     align-content: center;
     flex-direction: column; 
+}
+
+.div-form {
+    display: flex;
+    width: 19.5rem;
+    height: 16.9375rem;
+    padding-bottom: 0.1875rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.125rem;
   }
+
+h5 {
+    margin-bottom: 5rem; // 4rem
+}

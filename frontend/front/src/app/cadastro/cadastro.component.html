@@ -1,29 +1,28 @@
 <div class = "container"> 
       <h5> Cadastre-se </h5>
-      <div id = "div-form">
+      <div class = "div-form">
             <form [formGroup]="form">
-                <div id = "div-campos">
-                  <mat-form-field appearance="outline">
+                <div>
+                  <mat-form-field class = "input" appearance="outline">
                         <mat-label>Nome</mat-label>
                         <input matInput>
                   </mat-form-field>
-                  <mat-form-field appearance="outline">
+                  <mat-form-field  class = "input" appearance="outline">
                         <mat-label>Sobrenome</mat-label>
                         <input matInput>
                   </mat-form-field>
-                  <mat-form-field appearance="outline">
+                  <mat-form-field class = "input" appearance="outline">
                         <mat-label>Email address</mat-label>
                         <input matInput>
                   </mat-form-field>
-                  <mat-form-field>
-                        <mat-label>Enter your password</mat-label>
-                        <input matInput [type]="hide ? 'password' : 'text'">
-                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        </button>
+                  <mat-form-field  class = "input" appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input type={{password}} matInput>
+                        <mat-icon (click)= "onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
+                        <mat-icon (click)= "onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
                   </mat-form-field>
                 </div>
-                <!-- botao cadastro-->
+                <button class = "btn" mat-raised-button color="primary">Cadastrar</button>
             </form>
       </div>
 </div>
