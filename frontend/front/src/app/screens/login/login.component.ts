@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup,NonNullableFormBuilder,Validators} from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
-
 export class LoginComponent implements OnInit {
-
-
-  
   form!: FormGroup;
 
-  constructor(private formBuilder: NonNullableFormBuilder){}
+  constructor(private formBuilder: NonNullableFormBuilder) {}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -25,6 +22,4 @@ export class LoginComponent implements OnInit {
   formErrorMessage() {
     return 'Field required';
   }
-
 }
-

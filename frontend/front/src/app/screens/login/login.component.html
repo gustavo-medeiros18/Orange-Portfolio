@@ -1,0 +1,30 @@
+<div class="container">
+  <p id="titulo-login">Entre no Orange Portfólio</p>
+  <div id="div-signin">
+    <div id="div-botao-google">
+      <button id="botao-google"> Entrar com google </button> <!-- alterar posteriormente -->
+    </div>
+  </div>
+  <div id="div-form">
+    <form [formGroup]="form">
+      <p id="msg-login">Faça login com e-mail</p>
+      <div id="div-campos">
+        <mat-form-field appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input type="email" matInput placeholder="e-amil">
+          <mat-error *ngIf="form.get('email')?.invalid">{{formErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input type="email" matInput placeholder="Password">
+          <mat-error *ngIf="form.get('Password')?.invalid">{{formErrorMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div id="div-botao-entrar">
+        <button id="botao-entrar" mat-button color="primary" size="large"> Entrar </button>
+      </div>
+      <p id="msg-cadastro"> Cadastre-se</p>
+    </form>
+  </div>
+
+</div>
