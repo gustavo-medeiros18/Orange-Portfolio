@@ -1,4 +1,6 @@
 
+# Antes de criar a imagem, instalar o ts node
+# npm install ts-node-dev --save-dev
 FROM node:latest
 
 
