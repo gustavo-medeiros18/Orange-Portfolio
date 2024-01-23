@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +8,8 @@ import { MatButton } from '@angular/material/button';
 })
 export class LoginComponent implements OnInit {
   form!: FormGroup;
+  visibility: boolean = false;
+  password: string = 'password';
 
   constructor(private formBuilder: NonNullableFormBuilder) {}
 
@@ -21,5 +22,14 @@ export class LoginComponent implements OnInit {
 
   formErrorMessage() {
     return 'Field required';
+  }
+
+  onClick() {
+    this.visibility = !this.visibility;
+    if (this.password === 'text') {
+      this.password = 'password';
+    } else if (this.password === 'password') {
+      this.password = 'text';
+    }
   }
 }

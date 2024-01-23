@@ -11,7 +11,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './screens/login/login.component';
 
-
 @NgModule({
   declarations: [AppComponent, LoginComponent],
   imports: [

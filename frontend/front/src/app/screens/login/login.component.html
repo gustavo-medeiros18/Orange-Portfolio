@@ -1,29 +1,33 @@
 <div class="container">
-  <p id="titulo-login">Entre no Orange Portfólio</p>
-  <div id="div-signin">
-    <div id="div-botao-google">
-      <button id="botao-google"> Entrar com google </button> <!-- alterar posteriormente -->
+  <h5 class="titulo-login">Entre no Orange Portfólio</h5>
+  <div class="div-signin">
+    <div class="div-botao-google">
+      <a mat-raised-button routerLink=".">
+        <mat-icon>favorite</mat-icon>
+        Entrar com o google
+      </a>
     </div>
   </div>
-  <div id="div-form">
+  <div class="div-form">
     <form [formGroup]="form">
-      <p id="msg-login">Faça login com e-mail</p>
-      <div id="div-campos">
-        <mat-form-field appearance="outline">
+      <p class="msg-login">Faça login com e-mail</p>
+      <div class="div-campos">
+        <mat-form-field class="input" appearance="outline">
           <mat-label>E-mail</mat-label>
           <input type="email" matInput placeholder="e-amil">
           <mat-error *ngIf="form.get('email')?.invalid">{{formErrorMessage()}}</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field class="input" appearance="outline">
           <mat-label>Password</mat-label>
-          <input type="email" matInput placeholder="Password">
-          <mat-error *ngIf="form.get('Password')?.invalid">{{formErrorMessage()}}</mat-error>
-        </mat-form-field>
+          <input type={{password}} matInput>
+          <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
+          <mat-icon (click)="onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
+          </mat-form-field>
       </div>
-      <div id="div-botao-entrar">
-        <button id="botao-entrar" mat-button color="primary" size="large"> Entrar </button>
+      <div class="div-botao-entrar">
+        <button mat-raised-button class="btn-primary">Entrar</button>
       </div>
-      <p id="msg-cadastro"> Cadastre-se</p>
+      <p class="msg-cadastro"> Cadastre-se</p>
     </form>
   </div>
 
