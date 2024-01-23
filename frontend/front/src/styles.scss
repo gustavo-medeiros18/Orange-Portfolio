@@ -17,3 +17,47 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+:root {
+  --primary-color: #3f51b5;
+}
+h1 {
+  font-size: 6rem;
+  font-style: normal;
+  font-weight: 300;
+}
+h2 {
+  font-size: 3.75rem;
+  font-style: normal;
+  font-weight: 300;
+}
+h3 {
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: 400;
+}
+h4 {
+  font-size: 2.125rem;
+  font-style: normal;
+  font-weight: 400;
+}
+h5 {
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+}
+h6 {
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 500;
+}
+p {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+}
+.btn {
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 500;
+}
