@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/pedroaugusto04/Hackathon-Orange-Juice-2024/issues"
   },
-  "homepage": "https://github.com/pedroaugusto04/Hackathon-Orange-Juice-2024#readme"
+  "homepage": "https://github.com/pedroaugusto04/Hackathon-Orange-Juice-2024#readme",
+  "dependencies": {
+    "@angular/cdk": "^17.1.0",
+    "@angular/material": "^17.1.0"
+  }
 }
