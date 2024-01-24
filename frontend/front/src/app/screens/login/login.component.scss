@@ -9,6 +9,17 @@
   margin: 1rem;
 }
 
+.msg-login {
+  color: var(--Neutral-Colors-Neutral-110, #515255);
+}
+.msg-cadastro {
+  color: var(--Neutral-Colors-Neutral-110, #515255);
+  text-decoration: none;
+}
+
+.div-botao-entrar {
+  margin-bottom: 1.13rem;
+}
 .div-form {
   display: flex;
   width: 19.5rem;
@@ -18,10 +29,6 @@
   justify-content: center;
   align-items: flex-start;
   gap: 1.125rem;
-}
-
-.msg-cadastro {
-  margin-top: 1.13rem;
 }
 
 .div-botao-google {
