@@ -8,7 +8,7 @@ const findAll = async (): Promise<User[]> => {
   return user;
 };
 
-const login = async (email: string, password: string): Promise<string> => {
+const login = async (email: string, password: string): Promise<User> => {
   const user = await userModel.findByEmail(email);
 
   if (!user || password !== user.password) {
