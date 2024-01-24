@@ -7,9 +7,8 @@ const routes: Routes = [
   {path: "cadastro", loadChildren: () =>  import ("./screens/cadastro/cadastro-routing.module").then(m => m.CadastroRoutingModule)}
 ];
 
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
