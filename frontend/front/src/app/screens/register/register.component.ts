@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup,NonNullableFormBuilder,Validators} from '@angular/forms';
-
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -10,10 +9,13 @@ import {FormGroup,NonNullableFormBuilder,Validators} from '@angular/forms';
 export class RegisterComponent {
   hide = true;
   visibility: boolean = false;
-  password: string = "password";
+  password: string = 'password';
   form!: FormGroup;
 
-  constructor(private formBuilder: NonNullableFormBuilder){}
+  // Variável de controle para o estado de carregamento
+  loading: boolean = false;
+
+  constructor(private formBuilder: NonNullableFormBuilder) {}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -30,10 +32,21 @@ export class RegisterComponent {
 
   onClick() {
     this.visibility = !this.visibility;
-    if (this.password === "text"){
-      this.password = "password";
-    } else if (this.password === "password"){
-      this.password = "text";
+    if (this.password === 'text') {
+      this.password = 'password';
+    } else if (this.password === 'password') {
+      this.password = 'text';
     }
+  }
+
+  // Função de simulação de login assíncrono
+  singUp() {
+    this.loading = true;
+
+    // Simula uma operação assíncrona (por exemplo, uma requisição HTTP)
+    // Deve ser alterado quando implementar o service de autenticação!
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
   }
 }

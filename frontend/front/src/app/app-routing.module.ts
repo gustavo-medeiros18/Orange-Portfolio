@@ -8,9 +8,8 @@ const routes: Routes = [
   {path: "profile", loadChildren: () =>  import ("./screens/profile/profile-routing.module").then(m => m.ProfileRoutingModule)}
 ];
 
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

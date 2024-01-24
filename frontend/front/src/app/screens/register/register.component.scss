@@ -1,81 +1,44 @@
-app-cadastro {
-    width: 100%;
-    height: 100%; 
-  }
-
-.container-img{
-    display: none;
+.container {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
 }
 
-.container {
-    display: flex ;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column; 
+.img-container {
+  display: none;
 }
 
 .div-form {
-    display: flex;
-    width: 19.5rem;
-    height: 16.9375rem;
-    padding-bottom: 0.1875rem;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 8%;
+}
+@media screen and (min-width: 992px) {
+  .container {
+    justify-content: flex-start;
+  }
+  .img-container {
+    display: block;
+  }
+  .img-container img {
+    height: 100vh;
   }
 
-.div-form form {
-    width: 100%;
-}
+  .div-form h5 {
+    font-size: 3rem !important;
+    margin-bottom: 3rem;
+  }
 
-h5 {
-    margin-bottom: 5rem;
-}
+  .sub-fomulario {
+    display: flex;
+    justify-content: space-between;
+    gap: 1+0.25rem;
+  }
 
-@media screen and (min-width: 992px) {
-
-    .container-cadastro {
-        display: flex;
-    }
-
-    .div-form {
-        width: 32.3125rem;
-        height: 16.125rem;
-        gap: 1rem;
-    }
-
-    .container-img {
-        display: flex;
-        width: 34.3125rem;
-        height: 52rem;
-        flex-shrink: 0;
-    }
-
-    .container {
-        width: 80rem;
-        height: 52rem;
-    }
-
-    h5 {
-        color: var(--Color-Brand-Primria-Primary-90, #224) !important;
-        font-size: 3rem !important;
-        font-style: normal !important; 
-        font-weight: 400 !important;
-        line-height: 2.5rem !important;  
-        margin-bottom: 2rem;
-        padding-right: 3.1rem;
-    }
-
-    .gapFields {
-        display: flex;
-        gap: 1.12rem;
-    }
-
-    #nameField {
-        width: 50%; 
-    }
-    
-    #lastNameField {
-        width: 50%;
-    }
+  .div-form {
+    width: 70%;
+  }
 }

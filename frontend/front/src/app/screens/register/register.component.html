@@ -1,6 +1,6 @@
-<div class = "container-cadastro">
+<div class = "container-register">
       <div class = "container-img">
-            <img src = "../../assets/imgs/img_cadastro.svg" alt = "Profissional feminina codificando em um notebook">
+            <img src = "../../assets/imgs/img_register.svg" alt = "Profissional feminina codificando em um notebook">
       </div>
       <div class = "container"> 
             <h5> Cadastre-se </h5> 
@@ -32,4 +32,20 @@
                   </form>
             </div>
       </div>
+      <mat-form-field class="input" appearance="outline">
+        <mat-label>Email address</mat-label>
+        <input matInput>
+      </mat-form-field>
+      <mat-form-field class="input" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input type={{password}} matInput>
+        <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
+        <mat-icon (click)="onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
+      </mat-form-field>
+      <button (click)="singUp()" class="btn-primary" mat-raised-button color="primary">
+        <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
+          [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
+        <span *ngIf="!loading">CADASTRAR</span></button>
+    </form>
+  </div>
 </div>
