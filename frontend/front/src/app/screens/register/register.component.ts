@@ -3,8 +3,8 @@ import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  templateUrl: 'register.component.html',
+  styleUrls: ['register.component.scss']
 })
 export class RegisterComponent {
   hide = true;

@@ -1,51 +1,34 @@
-<div class = "container-register">
-      <div class = "container-img">
-            <img src = "../../assets/imgs/img_register.svg" alt = "Profissional feminina codificando em um notebook">
+<div class="container">
+      <div class="img-container">
+        <img src="assets/imgs/img_register.svg" alt="cadastro_orange_portfolio">
       </div>
-      <div class = "container"> 
-            <h5> Cadastre-se </h5> 
-            <div class = "div-form">
-                  <form [formGroup]="form">
-                      <div>
-                        <div class = "gapFields">
-                              <mat-form-field class = "input" id = "nameField" appearance="outline">
-                                    <mat-label>Nome</mat-label>
-                                    <input matInput>
-                              </mat-form-field>
-                              <mat-form-field  class = "input" id = "lastNameField" appearance="outline">
-                                    <mat-label>Sobrenome</mat-label>
-                                    <input matInput>
-                              </mat-form-field>
-                        </div>
-                        <mat-form-field class = "input" appearance="outline">
-                              <mat-label>Email address</mat-label>
-                              <input matInput>
-                        </mat-form-field>
-                        <mat-form-field  class = "input" appearance="outline">
-                              <mat-label>Password</mat-label>
-                              <input type={{password}} matInput>
-                              <mat-icon (click)= "onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
-                              <mat-icon (click)= "onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
-                        </mat-form-field>
-                      </div>
-                      <button class = "btn-primary" mat-raised-button color="primary">CADASTRAR</button>
-                  </form>
-            </div>
+      <div class="div-form">
+        <h5> Cadastre-se </h5>
+        <form [formGroup]="form">
+          <div class="sub-fomulario">
+            <mat-form-field class="input" id="nameField" appearance="outline">
+              <mat-label>Nome</mat-label>
+              <input matInput>
+            </mat-form-field>
+            <mat-form-field class="input" id="lastNameField" appearance="outline">
+              <mat-label>Sobrenome</mat-label>
+              <input matInput>
+            </mat-form-field>
+          </div>
+          <mat-form-field class="input" appearance="outline">
+            <mat-label>Email address</mat-label>
+            <input matInput>
+          </mat-form-field>
+          <mat-form-field class="input" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input type={{password}} matInput>
+            <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
+            <mat-icon (click)="onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
+          </mat-form-field>
+          <button (click)="singUp()" class="btn-primary" mat-raised-button color="primary">
+            <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
+              [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
+            <span *ngIf="!loading">CADASTRAR</span></button>
+        </form>
       </div>
-      <mat-form-field class="input" appearance="outline">
-        <mat-label>Email address</mat-label>
-        <input matInput>
-      </mat-form-field>
-      <mat-form-field class="input" appearance="outline">
-        <mat-label>Password</mat-label>
-        <input type={{password}} matInput>
-        <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
-        <mat-icon (click)="onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
-      </mat-form-field>
-      <button (click)="singUp()" class="btn-primary" mat-raised-button color="primary">
-        <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
-          [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
-        <span *ngIf="!loading">CADASTRAR</span></button>
-    </form>
-  </div>
-</div>
+    </div>

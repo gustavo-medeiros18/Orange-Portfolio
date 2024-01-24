@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CadastroRoutingModule } from './register-routing.module';
+import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
@@ -16,11 +16,11 @@ import {MatButtonModule} from '@angular/material/button';
   ],
   imports: [
     CommonModule,
-    CadastroRoutingModule,
+    RegisterRoutingModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatButtonModule
   ]
 })
-export class CadastroModule {}
+export class RegisterModule {}
