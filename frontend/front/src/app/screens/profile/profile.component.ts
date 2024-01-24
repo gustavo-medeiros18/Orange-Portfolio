@@ -8,7 +8,31 @@ import { Component } from '@angular/core';
 })
 export class ProfileComponent {
   //Array para projetos
-  projects: IProjects[] = [];
+  projects: IProjects[] = [  {
+    title: 'teste',
+    tags: ['ux', 'ui'],
+    link: 'https://github.com/costaowillian/cashquest',
+    description: 'teste, teste, teste',
+    img: 'assets/imgs/img_landingpage_orange_portfolio.svg',
+    releaseDate: '12/10'
+  },
+  {
+    title: 'teste1',
+    tags: ['ux', 'ui'],
+    link: 'https://github.com/costaowillian/cashquest',
+    description: 'teste, teste, teste',
+    img: 'assets/imgs/img_landingpage_orange_portfolio.svg',
+    releaseDate: '12/10'
+  },
+  {
+    title: 'teste2',
+    tags: ['ux', 'ui'],
+    link: 'https://github.com/costaowillian/cashquest',
+    description: 'teste, teste, teste',
+    img: 'assets/imgs/img_landingpage_orange_portfolio.svg',
+    releaseDate: '12/10'
+  }
+];
 
   constructor() {}
 }

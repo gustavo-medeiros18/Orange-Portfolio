@@ -4,4 +4,5 @@ export interface IProjects {
   link?: string;
   description: string;
   img?: string;
+  releaseDate: string;
 }

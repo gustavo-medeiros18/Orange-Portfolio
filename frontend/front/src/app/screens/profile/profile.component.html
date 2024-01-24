@@ -31,21 +31,22 @@
         </a>
       </div>
 
-      <div class="projects-list">
-        <mat-card class="example-card">
-          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-            alt="Photo of a Shiba Inu">
-          <mat-card-header>
-            <div mat-card-avatar class="example-header-image">
-            </div>
-            <mat-card-title>Shiba Inu</mat-card-title>
-            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-          </mat-card-actions>
-        </mat-card>
+      <div class="projects-list" *ngIf="projects.length">
+        <div *ngFor="let project of projects">
+          <mat-card class="example-card">
+            <img mat-card-image src="{{project.img}}" alt="{{project.title}}">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image">
+              </div>
+              <mat-card-title>Shiba Inu</mat-card-title>
+              <mat-card-subtitle>{{project.releaseDate}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions *ngFor="let item of project.tags">
+              <button mat-button>{{item}}</button>
+            </mat-card-actions>
+          </mat-card>
+
+        </div>
       </div>
 
     </div>
