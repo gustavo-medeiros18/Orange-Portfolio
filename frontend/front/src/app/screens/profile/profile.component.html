@@ -1,15 +1,15 @@
 <div class="container">
   <div class="profile">
     <div>
-      <img class="profile-img" src="assets\imgs\img_profile_orange_portfolio.png" alt="">
+      <img class="profile-img" src={{user.profileImg}} alt="">
     </div>
     <div class="user-data">
       <h5>
-        Camila Soares
+        {{user.name}}
       </h5>
-      <p>Brasil</p>
+      <p>{{user.locale}}</p>
       <div class="create-project">
-        <button mat-raised-button class="btn-secondary">ENTRAR</button>
+        <button mat-raised-button class="btn-secondary">ADICIONAR PROJETO</button>
       </div>
     </div>
   </div>
@@ -36,9 +36,9 @@
           <mat-card class="example-card">
             <img mat-card-image src="{{project.img}}" alt="{{project.title}}">
             <mat-card-header>
-              <div mat-card-avatar class="example-header-image">
+              <div mat-card-avatar class="example-header-image" style="background-image: url({{user.profileImg}})">
               </div>
-              <mat-card-title>Shiba Inu</mat-card-title>
+              <mat-card-title>{{user.name}}</mat-card-title>
               <mat-card-subtitle>{{project.releaseDate}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-actions *ngFor="let item of project.tags">
