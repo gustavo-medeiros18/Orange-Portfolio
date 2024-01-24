@@ -1,0 +1,33 @@
+<div class = "container-cadastro">
+      <div class = "container-img">
+            <img src = "../../assets/imgs/img_cadastro.svg" alt = "Profissional feminina codificando em um notebook">
+      </div>
+      <div class = "container"> 
+            <h5> Cadastre-se </h5> 
+            <div class = "div-form">
+                  <form [formGroup]="form">
+                      <div>
+                        <mat-form-field class = "input" id = "nameField" appearance="outline">
+                              <mat-label>Nome</mat-label>
+                              <input matInput>
+                        </mat-form-field>
+                        <mat-form-field  class = "input" id = "lastNameField" appearance="outline">
+                              <mat-label>Sobrenome</mat-label>
+                              <input matInput>
+                        </mat-form-field>
+                        <mat-form-field class = "input" appearance="outline">
+                              <mat-label>Email address</mat-label>
+                              <input matInput>
+                        </mat-form-field>
+                        <mat-form-field  class = "input" appearance="outline">
+                              <mat-label>Password</mat-label>
+                              <input type={{password}} matInput>
+                              <mat-icon (click)= "onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
+                              <mat-icon (click)= "onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
+                        </mat-form-field>
+                      </div>
+                      <button class = "btn" mat-raised-button color="primary">CADASTRAR</button>
+                  </form>
+            </div>
+      </div>
+</div>

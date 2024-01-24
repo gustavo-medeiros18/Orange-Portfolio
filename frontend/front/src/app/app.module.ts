@@ -6,14 +6,22 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './screens/login/login.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CadastroComponent } from './screens/cadastro/cadastro.component';
+
+
+
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    CadastroComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,8 +29,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatIconModule,
     MatButtonModule,
     MatInputModule,
-    MatFormFieldModule,
     ReactiveFormsModule,
+    MatFormFieldModule
     MatProgressSpinnerModule,
   ],
   providers: [],
