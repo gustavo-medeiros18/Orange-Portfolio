@@ -25,7 +25,10 @@
         <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
         <mat-icon (click)="onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
       </mat-form-field>
-      <button class="btn-primary" mat-raised-button color="primary">CADASTRAR</button>
+      <button (click)="singUp()" class="btn-primary" mat-raised-button color="primary">
+        <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
+          [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
+        <span *ngIf="!loading">CADASTRAR</span></button>
     </form>
   </div>
 </div>
