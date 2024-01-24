@@ -17,10 +17,12 @@
   <div class="project-container">
     <div class="search-bar">
       <h6>Buscar projetos</h6>
-      <mat-form-field class="input" appearance="outline">
-        <mat-label>Buscar tags</mat-label>
-        <input type="text" matInput>
-      </mat-form-field>
+      <form [formGroup]="searchForm" action="">
+        <mat-form-field class="input" appearance="outline">
+          <mat-label>Buscar tags</mat-label>
+          <input type="text" formControlName="search" matInput>
+        </mat-form-field>
+      </form>
     </div>
     <div class="projects">
       <div class="empty-projects" *ngIf="!projects.length">

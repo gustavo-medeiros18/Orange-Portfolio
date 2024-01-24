@@ -1,12 +1,19 @@
+import { FormBuilder, Validators } from '@angular/forms';
 import { IProjects } from './models/project';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { debounceTime, distinctUntilChanged, tap } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
+  //formulário do angular
+  searchForm = this.formBuilder.group({
+    search: [''],
+  });
+
   //controle de dados do usuário
   user = {
     name: 'Camila Soares',
@@ -42,5 +49,8 @@ export class ProfileComponent {
     },
   ];
 
-  constructor() {}
+  constructor(private formBuilder: FormBuilder) {}
+  ngOnInit(): void {
+
+  }
 }
