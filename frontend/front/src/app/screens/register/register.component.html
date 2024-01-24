@@ -7,14 +7,16 @@
             <div class = "div-form">
                   <form [formGroup]="form">
                       <div>
-                        <mat-form-field class = "input" id = "nameField" appearance="outline">
-                              <mat-label>Nome</mat-label>
-                              <input matInput>
-                        </mat-form-field>
-                        <mat-form-field  class = "input" id = "lastNameField" appearance="outline">
-                              <mat-label>Sobrenome</mat-label>
-                              <input matInput>
-                        </mat-form-field>
+                        <div class = "gapFields">
+                              <mat-form-field class = "input" id = "nameField" appearance="outline">
+                                    <mat-label>Nome</mat-label>
+                                    <input matInput>
+                              </mat-form-field>
+                              <mat-form-field  class = "input" id = "lastNameField" appearance="outline">
+                                    <mat-label>Sobrenome</mat-label>
+                                    <input matInput>
+                              </mat-form-field>
+                        </div>
                         <mat-form-field class = "input" appearance="outline">
                               <mat-label>Email address</mat-label>
                               <input matInput>
@@ -26,7 +28,7 @@
                               <mat-icon (click)= "onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
                         </mat-form-field>
                       </div>
-                      <button class = "btn" mat-raised-button color="primary">CADASTRAR</button>
+                      <button class = "btn-primary" mat-raised-button color="primary">CADASTRAR</button>
                   </form>
             </div>
       </div>

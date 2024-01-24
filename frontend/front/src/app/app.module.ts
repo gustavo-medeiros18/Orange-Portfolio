@@ -10,7 +10,11 @@ import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './screens/login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { CadastroComponent } from './screens/cadastro/cadastro.component';
+import { RegisterComponent } from './screens/register/register.component';
+import { ProfileComponent } from './screens/profile/profile.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { HttpClientModule } from '@angular/common/http';
+import { NavBarComponent } from './componentes/nav-bar/nav-bar.component';
 
 
 
@@ -19,7 +23,9 @@ import { CadastroComponent } from './screens/cadastro/cadastro.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    CadastroComponent
+    RegisterComponent,
+    ProfileComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +35,9 @@ import { CadastroComponent } from './screens/cadastro/cadastro.component';
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatToolbarModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
