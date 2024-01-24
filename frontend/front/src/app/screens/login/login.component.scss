@@ -1,12 +1,23 @@
 .container {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  height: 100vh;
   width: 100%;
 }
 
-.div-signin {
-  margin: 1rem;
+h5 {
+  font-size: 1.5rem;
+}
+
+.img-container {
+  display: none;
+}
+
+.formulario-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .msg-login {
@@ -20,6 +31,7 @@
 .div-botao-entrar {
   margin-bottom: 1.13rem;
 }
+
 .div-form {
   display: flex;
   width: 19.5rem;
@@ -27,12 +39,14 @@
   padding-bottom: 0.1875rem;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: 1.125rem;
 }
 
 .div-botao-google {
+  width: 16rem;
   display: flex;
+  align-self: center;
   align-items: center !important;
   justify-content: center !important;
   gap: 16px !important;
@@ -51,4 +65,20 @@
 .google-logo {
   width: 24px;
   height: 24px;
+}
+
+@media screen and (min-width: 992px) {
+  .container {
+    justify-content: flex-start;
+  }
+  .img-container {
+    display: block;
+  }
+  .img-container img {
+    height: 100vh;
+  }
+
+  .formulario-container {
+    width: 70%;
+  }
 }
