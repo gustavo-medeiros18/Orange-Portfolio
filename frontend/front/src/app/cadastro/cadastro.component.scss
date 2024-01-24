@@ -3,10 +3,7 @@ app-cadastro {
     height: 100%; 
   }
 
-
-@media screen and (max-width: 765px)  {
-
-.container-img img {
+.container-img{
     display: none;
 }
 
@@ -32,20 +29,28 @@ app-cadastro {
 h5 {
     margin-bottom: 5rem; // 4rem
 }
-}
-@media screen and (min-width: 766px) {
+
+@media screen and (min-width: 900px) {
 
     .container-cadastro {
         display: flex;
-        width: 100%;
+    }
+
+    .div-form {
+        width: 32.3125rem;
+        height: 16.125rem;
     }
 
     .container-img {
-        width: 50%;
+        display: flex;
+        width: 34.3125rem;
+        height: 52rem;
+        flex-shrink: 0;
     }
-    
+
     .container {
-        width: 50%;
+        width: 80rem;
+        height: 52rem;
     }
 
     h5 {
@@ -54,18 +59,31 @@ h5 {
         font-size: 3rem !important;
         font-style: normal !important; 
         font-weight: 400 !important;
-        line-height: 2.5rem !important; 
-    }
+        line-height: 2.5rem !important;  
+        margin-bottom: 2rem; 
+       }
 
-    .div-form {
-        margin-top: 4rem;
+    .form {
         display: flex;
         width: 32.3125rem;
         height: 16.125rem;
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        gap: 1rem;
-        flex-shrink: 0;     
+        flex-shrink: 0;  
+    }
+
+    .form .input {
+        display: flex;
+        width: 100%;
+    }
+
+    #nameField {
+        width: 50%; 
+        margin-right: 1%;
+    }
+    
+    #lastNameField {
+        width: 49%;
     }
 }
