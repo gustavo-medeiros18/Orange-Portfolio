@@ -11,6 +11,9 @@ export class LoginComponent implements OnInit {
   visibility: boolean = false;
   password: string = 'password';
 
+  //variavel de an
+  loading: boolean = false;
+
   constructor(private formBuilder: NonNullableFormBuilder) {}
 
   ngOnInit() {
@@ -31,5 +34,15 @@ export class LoginComponent implements OnInit {
     } else if (this.password === 'password') {
       this.password = 'text';
     }
+  }
+
+
+  login() {
+    this.loading = true;
+
+
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
   }
 }
