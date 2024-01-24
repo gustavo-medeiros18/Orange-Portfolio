@@ -6,7 +6,7 @@ import {
   distinctUntilChanged,
   filter,
   map,
-  switchMap
+  switchMap,
 } from 'rxjs';
 
 @Component({
@@ -75,10 +75,10 @@ export class ProfileComponent implements OnInit {
 
   handleSearch(value: string) {
     console.log(value);
-    for (let projetc of this.projects) {
-      for (let i = 0; i <= projetc.tags!.length; i++) {
-        if (projetc.tags![i] == value) {
-          this.searchProjects.push(projetc);
+    for (let project of this.projects) {
+      for (let i = 0; i <= project.tags!.length; i++) {
+        if (project.tags![i] == value) {
+          this.searchProjects.push(project);
           console.log(this.searchProjects);
         }
       }
