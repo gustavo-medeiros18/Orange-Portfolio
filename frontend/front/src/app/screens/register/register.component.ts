@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';;
+import { RegisterService } from './register.service';
 
 @Component({
   selector: 'app-register',
@@ -14,8 +15,10 @@ export class RegisterComponent {
 
   // Variável de controle para o estado de carregamento
   loading: boolean = false;
+  // Variavel para exibicao da mensagem de sucesso ( mudar posteriormente ) 
+  successAlert: boolean = true;
 
-  constructor(private formBuilder: NonNullableFormBuilder) {}
+  constructor(private formBuilder: NonNullableFormBuilder, private service: RegisterService) {}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -48,5 +51,20 @@ export class RegisterComponent {
     setTimeout(() => {
       this.loading = false;
     }, 2000);
+
+    const teste: boolean = true;
+    if (teste){
+      this.onSuccess();
+    } else {
+      this.onError();
+    }
+
   }
+
+  onSuccess(){
+  }
+
+  onError(){
+  }
+
 }

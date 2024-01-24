@@ -16,7 +16,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { NavBarComponent } from './componentes/nav-bar/nav-bar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
@@ -40,6 +40,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     HttpClientModule,
     FlexLayoutModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],

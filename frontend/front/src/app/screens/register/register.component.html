@@ -2,7 +2,15 @@
       <div class="img-container">
         <img src="assets/imgs/img_register.svg" alt="cadastro_orange_portfolio">
       </div>
-      <div class="div-form">
+        <div class="div-form">
+        <div class = "on-sign-up" *ngIf="successAlert">
+          <div class = "on-sign-up-icon">
+            <img src="../../../assets/logos/success-icon.svg" alt="Success Icon">
+          </div>
+          <div class = "on-sign-up-text">
+            <span> Cadastro feito com sucesso</span>
+          </div>
+        </div>
         <h5> Cadastre-se </h5>
         <form [formGroup]="form">
           <div class="sub-fomulario">
