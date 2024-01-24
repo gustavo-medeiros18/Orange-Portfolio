@@ -19,6 +19,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
+import { ProjectCardComponent } from './componentes/project-card/project-card.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MatCardModule } from '@angular/material/card';
     RegisterComponent,
     ProfileComponent,
     NavBarComponent,
+    ProjectCardComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="profile">
     <div>
-      <img class="profile-img" src={{user.profileImg}} alt="">
+      <img class="profile-img" src={{user.profileImg}} alt={{user.name}}>
     </div>
     <div class="user-data">
       <h5>
@@ -33,21 +33,8 @@
         </a>
       </div>
 
-      <div class="projects-list" *ngIf="projects.length">
-        <div *ngFor="let project of projects">
-          <mat-card class="example-card">
-            <img mat-card-image src="{{project.img}}" alt="{{project.title}}">
-            <mat-card-header>
-              <div mat-card-avatar class="example-header-image" style="background-image: url({{user.profileImg}})">
-              </div>
-              <mat-card-title>{{user.name}}</mat-card-title>
-              <mat-card-subtitle>{{project.releaseDate}}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-actions *ngFor="let item of project.tags">
-              <button mat-button>{{item}}</button>
-            </mat-card-actions>
-          </mat-card>
-        </div>
+      <div class="projects-list" *ngIf="projects.length || searchProjects">
+        <app-project-card [userName]="user.name" [projects]="projects" [userImg]="user.profileImg"></app-project-card>
       </div>
 
     </div>
