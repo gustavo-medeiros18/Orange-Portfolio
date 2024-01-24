@@ -27,3 +27,47 @@
 .profile-img {
   border-radius: 100px;
 }
+
+.project-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 80%;
+}
+
+.empty-projects {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 19.5rem;
+  height: 16.125rem;
+  padding: var(--none, 4.25rem) var(--none, 1.3125rem);
+  border-radius: var(--borderRadius, 0.25rem);
+  background: var(--Neutral-Colors-Neutral-70, #e6e9f2);
+}
+
+.add-project {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-18 {
+  align-self: center;
+  width: 2.875rem;
+  height: 2.875rem;
+  font-size: 2.857rem;
+  margin-bottom: 1rem;
+}
+.add-project p {
+  color: var(--Neutral-Colors-Neutral-120, #303133);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.add-project label {
+  color: var(--Neutral-Colors-Neutral-120, #303133);
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+}
