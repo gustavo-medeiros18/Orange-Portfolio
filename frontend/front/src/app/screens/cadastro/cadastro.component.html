@@ -5,14 +5,16 @@
   <div class="div-form">
     <h5> Cadastre-se </h5>
     <form [formGroup]="form">
-      <mat-form-field class="input" id="nameField" appearance="outline">
-        <mat-label>Nome</mat-label>
-        <input matInput>
-      </mat-form-field>
-      <mat-form-field class="input" id="lastNameField" appearance="outline">
-        <mat-label>Sobrenome</mat-label>
-        <input matInput>
-      </mat-form-field>
+      <div class="sub-fomulario">
+        <mat-form-field class="input" id="nameField" appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <mat-form-field class="input" id="lastNameField" appearance="outline">
+          <mat-label>Sobrenome</mat-label>
+          <input matInput>
+        </mat-form-field>
+      </div>
       <mat-form-field class="input" appearance="outline">
         <mat-label>Email address</mat-label>
         <input matInput>
