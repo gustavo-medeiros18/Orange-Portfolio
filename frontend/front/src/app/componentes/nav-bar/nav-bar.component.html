@@ -1,0 +1,26 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" fxHide.gt-sm>
+            <mat-icon>menu</mat-icon>
+        </button>
+        <div class="right-side">
+            <div class = "div-logo">
+                <a routerLink="." >
+                    <mat-icon id = "icon-logo" svgIcon="Logo Orange Juice">menu</mat-icon>
+                  </a>
+            </div>
+            <div class = "sections" fxShow.gt-sm fxHide.lt-md>
+                <a id = "my-projects" routerLink = ".">Meus Projetos</a>
+                <a id = "discover" routerLink = ".">Descobrir</a>    
+            </div>
+        </div>
+        <div class = "div-icons">
+            <a class = "div-icon" mat-icon-button routerLink=".">
+                <mat-icon id = "icon-profile" svgIcon="Circle">menu</mat-icon>
+              </a>
+              <a class = "div-icon" mat-icon-button routerLink=".">
+                <mat-icon id = "icon-notification" svgIcon="Icon Notification">menu</mat-icon>
+              </a>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>

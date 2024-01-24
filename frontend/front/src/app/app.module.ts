@@ -10,12 +10,23 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './screens/login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { CadastroComponent } from './screens/cadastro/cadastro.component';
+import { RegisterComponent } from './screens/register/register.component';
+import { ProfileComponent } from './screens/profile/profile.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { HttpClientModule } from '@angular/common/http';
+import { NavBarComponent } from './componentes/nav-bar/nav-bar.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, CadastroComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent,
+    NavBarComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,6 +36,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatInputModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatToolbarModule,
+    HttpClientModule,
+    FlexLayoutModule,
     MatProgressSpinnerModule,
   ],
   providers: [],
