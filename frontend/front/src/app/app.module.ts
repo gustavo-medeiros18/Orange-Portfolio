@@ -15,6 +15,7 @@ import { ProfileComponent } from './screens/profile/profile.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { NavBarComponent } from './componentes/nav-bar/nav-bar.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 
@@ -37,7 +38,8 @@ import { NavBarComponent } from './componentes/nav-bar/nav-bar.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatToolbarModule,
-    HttpClientModule
+    HttpClientModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent],

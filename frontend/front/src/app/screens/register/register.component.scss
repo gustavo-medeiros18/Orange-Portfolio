@@ -24,11 +24,15 @@ app-cadastro {
     align-items: flex-start;
   }
 
+.div-form form {
+    width: 100%;
+}
+
 h5 {
     margin-bottom: 5rem;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 992px) {
 
     .container-cadastro {
         display: flex;
