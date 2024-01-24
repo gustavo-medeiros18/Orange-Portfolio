@@ -6,3 +6,24 @@
   background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
   background-size: cover;
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.profile-img {
+  border-radius: 100px;
+}
