@@ -1,1 +1,53 @@
-<p>profile works!</p>
+<div class="container">
+  <div class="profile">
+    <div class="profile-img">
+      <img src="assets\imgs\img_profile_orange_portfolio.png" alt="">
+    </div>
+    <div class="user-data">
+      <h5>
+        Camila Soares
+      </h5>
+      <p>Brasil</p>
+    </div>
+    <div class="create-project">
+      <button mat-raised-button class="btn-secondary">ENTRAR</button>
+    </div>
+  </div>
+
+  <div class="project-container">
+    <div class="search-bar">
+      <mat-form-field class="input" appearance="outline">
+        <mat-label>Buscar tags</mat-label>
+        <input type="text" matInput>
+      </mat-form-field>
+    </div>
+    <div class="project-list">
+      <div class="empty-projects" *ngIf="!projects.length">
+        <a type="button" class="add-project">
+          <mat-icon class="mat-18">ligature</mat-icon>
+          <h6>Adicione seu primeiro projeto</h6>
+          <p>Compartilhe seu talento com milhares de pessoas</p>
+        </a>
+      </div>
+
+      <div class="projects-list">
+        <mat-card class="example-card">
+          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            alt="Photo of a Shiba Inu">
+          <mat-card-header>
+            <div mat-card-avatar class="example-header-image">
+            </div>
+            <mat-card-title>Shiba Inu</mat-card-title>
+            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-actions>
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+    </div>
+  </div>
+
+</div>
