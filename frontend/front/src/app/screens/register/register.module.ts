@@ -1,26 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CadastroRoutingModule } from './register-routing.module';
+import { RegisterRoutingModule } from './register-routing.module';
 import { RegisterComponent } from './register.component';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatButtonModule} from '@angular/material/button';
-
-
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [
-    RegisterComponent
-  ],
+  declarations: [RegisterComponent],
   imports: [
     CommonModule,
-    CadastroRoutingModule,
+    RegisterRoutingModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
-    MatButtonModule
-  ]
+    MatButtonModule,
+  ],
 })
-export class CadastroModule {}
+export class RegisterModule {}
