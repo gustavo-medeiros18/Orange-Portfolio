@@ -17,6 +17,7 @@ services:
   mysql-db:
     image: mysql:latest
     container_name: mysql-db
+    hostname: app_host
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root_password
