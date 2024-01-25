@@ -9,10 +9,10 @@ import { ModalActionComponent } from './modal-action.component';
 export class ModalActionService {
   constructor(private dialog: MatDialog) {}
 
-  openDialog() {
+  openDialog(name: string) {
     const dialogRef = this.dialog.open(ModalActionComponent, {
-      width: '16.6rem',
-      position: { top: '9.25rem' }
+      position: { top: '9.25rem'},
+      data: {name:name}
     });
   }
 }

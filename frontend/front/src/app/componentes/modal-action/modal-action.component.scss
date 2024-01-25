@@ -71,3 +71,13 @@ h5 {
     letter-spacing: 0.02875rem;
     text-transform: uppercase;
 }
+
+
+
+@media screen and (min-width: 992px) {
+    .container {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 3rem;
+    }
+}

@@ -1,6 +1,7 @@
-import { Component } from "@angular/core";
-import { MatDialog, MatDialogModule } from "@angular/material/dialog";
+import { Component, Inject, Input } from "@angular/core";
 import { FormGroup } from "@angular/forms";
+import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { IModal } from "./models/modal";
 
 @Component({
   selector: "app-modal-action",
@@ -10,5 +11,5 @@ import { FormGroup } from "@angular/forms";
 export class ModalActionComponent {
   form!: FormGroup;
 
-  constructor() {}
+  constructor(@Inject(MAT_DIALOG_DATA) public modal: IModal) {}
 }

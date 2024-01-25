@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
 
   // Função de simulação de login assíncrono
   login() {
+    console.log(this.form.value.email);
     this.loading = true;
 
     // Simula uma operação assíncrona (por exemplo, uma requisição HTTP)

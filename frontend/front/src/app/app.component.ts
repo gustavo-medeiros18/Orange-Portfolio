@@ -12,7 +12,7 @@ export class AppComponent {
   title = 'front';
   constructor(private dialog: MatDialog,private modalActionService: ModalActionService) {}
 
-  openDialog() {
-    this.modalActionService.openDialog();
+  openDialog(name: string) {
+    this.modalActionService.openDialog(name);
   }
 }
