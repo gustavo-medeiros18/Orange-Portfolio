@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { IUserRegister } from "../screens/register/models/iUserRegister";
+import { IUserRegister } from "../models/iUserRegister";
 import { environment } from "src/environments/environment.development";
-import { IUserLogin } from "../screens/login/models/iUserLogin";
+import { IUserLogin } from "../models/iUserLogin";
 
 @Injectable({
   providedIn: "root",
