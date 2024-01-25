@@ -3,4 +3,5 @@ export const environment = {
     baseUrl: "http://localhost:3000/",
     apiRegister: "register",
     apiAuthenticate:"login",
+    apiProjects:"projects"
 };
