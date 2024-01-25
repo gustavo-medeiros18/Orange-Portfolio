@@ -16,12 +16,12 @@
         <div class="div-campos">
           <mat-form-field class="input" appearance="outline">
             <mat-label>E-mail</mat-label>
-            <input type="email" matInput formControlName = "email">
+            <input type="email" matInput formControlName="email">
             <mat-error *ngIf="form.get('email')?.invalid">{{formErrorMessage()}}</mat-error>
           </mat-form-field>
           <mat-form-field class="input" appearance="outline">
             <mat-label>Password</mat-label>
-            <input type={{password}} matInput formControlName = "password">
+            <input type={{password}} matInput formControlName="password">
             <mat-error *ngIf="form.get('password')?.invalid">{{formErrorMessage()}}</mat-error>
             <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
             <mat-icon (click)="onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
@@ -33,7 +33,7 @@
               [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
             <span *ngIf="!loading">ENTRAR</span></button>
         </div>
-        <a routerLink="." class="msg-register"> Cadastre-se</a>
+        <a routerLink="/register" class="msg-register"> Cadastre-se</a>
       </form>
     </div>
   </div>

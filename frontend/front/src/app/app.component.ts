@@ -10,7 +10,7 @@ import { ModalActionService } from './componentes/modal-action/modal-action.serv
 })
 export class AppComponent {
   title = 'front';
-  constructor(private dialog: MatDialog,private modalActionService: ModalActionService) {}
+  constructor(private modalActionService: ModalActionService) {}
 
   openDialog(name: string) {
     this.modalActionService.openDialog(name);
