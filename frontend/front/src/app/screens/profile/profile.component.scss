@@ -20,6 +20,9 @@
   border-radius: 100px;
 }
 
+h6 {
+  color: var(--color-neutral-130, #0b0c0d) !important;
+}
 .empty-projects {
   display: flex;
   align-items: center;
@@ -28,7 +31,7 @@
   height: 16.125rem;
   padding: var(--none, 4.25rem) var(--none, 1.3125rem);
   border-radius: var(--borderRadius, 0.25rem);
-  background: var(--Neutral-Colors-Neutral-70, #e6e9f2);
+  background: var(--color-principal-70, #e6e9f2);
 }
 
 .add-project {
