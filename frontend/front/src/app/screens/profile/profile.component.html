@@ -33,10 +33,9 @@
         </a>
       </div>
       <div *ngIf="searchResultEmpty">No results found.</div>
-      <div class="projects-list" *ngIf="!searchResultEmpty">
-        <app-project-card [userName]="user.name" [projects]="searchProjects.length ? searchProjects : projects"
-          [userImg]="user.profileImg"></app-project-card>
-
+      <div *ngIf="!searchResultEmpty">
+        <app-project-card class="projects-list" [userName]="user.name"
+          [projects]="searchProjects.length ? searchProjects : projects" [userImg]="user.profileImg"></app-project-card>
       </div>
     </div>
   </div>
