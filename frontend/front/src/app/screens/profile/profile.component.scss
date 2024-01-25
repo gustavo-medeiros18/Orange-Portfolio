@@ -83,4 +83,11 @@ h6 {
   .input {
     width: 32.0625rem !important;
   }
+
+  .project-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 76rem;
+  }
 }
