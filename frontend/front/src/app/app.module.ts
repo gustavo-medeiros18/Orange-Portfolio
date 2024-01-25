@@ -16,8 +16,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { NavBarComponent } from './componentes/nav-bar/nav-bar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ModalActionComponent } from './componentes/modal-action/modal-action.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    NavBarComponent
+    NavBarComponent,
+    ModalActionComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     HttpClientModule,
     FlexLayoutModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],
