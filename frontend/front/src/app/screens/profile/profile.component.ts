@@ -74,14 +74,9 @@ export class ProfileComponent implements OnInit {
   }
 
   handleSearch(value: string) {
-    console.log(value);
-    for (let project of this.projects) {
-      for (let i = 0; i <= project.tags!.length; i++) {
-        if (project.tags![i] == value) {
-          this.searchProjects.push(project);
-          console.log(this.searchProjects);
-        }
-      }
-    }
+    this.searchProjects = this.projects.filter(
+      (project) => project.tags && project.tags.includes(value)
+    );
+    console.log(this.searchProjects);
   }
 }
