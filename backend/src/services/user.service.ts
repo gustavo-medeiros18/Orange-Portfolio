@@ -5,6 +5,7 @@ import { User } from "../models/user.model";
 class UserService {
   public static async getAllUsers(): Promise<User[]> {
     const [rows] = await connection.query<RowDataPacket[]>("SELECT * FROM users");
+
     return rows as User[];
   }
 
