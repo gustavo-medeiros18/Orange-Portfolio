@@ -20,6 +20,9 @@ export class ProfileComponent implements OnInit {
     search: [''],
   });
 
+  //controle de mensagem de pesquisa
+  searchResultEmpty: boolean = false;
+
   //controle de dados do usuário
   user = {
     name: 'Camila Soares',
@@ -75,7 +78,13 @@ export class ProfileComponent implements OnInit {
 
   handleSearch(value: string) {
     this.searchProjects = this.projects.filter(
-      (project) => project.tags && project.tags.includes(value)
+      (project) =>
+        project.tags && project.tags.some((tag) => tag.includes(value))
     );
+    this.searchResultEmpty = this.searchProjects.length === 0;
+  }
+
+  isSearchEmpty() {
+    this.searchResultEmpty = this.searchForm.value.search?.trim().length !== 0;
   }
 }

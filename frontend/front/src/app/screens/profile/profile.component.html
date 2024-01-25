@@ -20,7 +20,7 @@
       <form [formGroup]="searchForm" action="">
         <mat-form-field class="input" appearance="outline">
           <mat-label>Buscar tags</mat-label>
-          <input type="text" formControlName="search" matInput>
+          <input type="text" (blur)="isSearchEmpty()" formControlName="search" matInput>
         </mat-form-field>
       </form>
     </div>
@@ -32,13 +32,12 @@
           <label>Compartilhe seu talento com milhares de pessoas</label>
         </a>
       </div>
-
-      <div class="projects-list" *ngIf="searchProjects.length ||  projects.length">
-        <app-project-card [userName]=" user.name" [projects]="searchProjects.length ? searchProjects : projects"
+      <div *ngIf="searchResultEmpty">No results found.</div>
+      <div class="projects-list" *ngIf="!searchResultEmpty">
+        <app-project-card [userName]="user.name" [projects]="searchProjects.length ? searchProjects : projects"
           [userImg]="user.profileImg"></app-project-card>
-      </div>
 
+      </div>
     </div>
   </div>
-
 </div>
