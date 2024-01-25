@@ -84,7 +84,10 @@ export class ProfileComponent implements OnInit {
     this.searchResultEmpty = this.searchProjects.length === 0;
   }
 
-  isSearchEmpty() {
-    this.searchResultEmpty = this.searchForm.value.search?.trim().length !== 0;
+  clearSearch() {
+    this.searchProjects.length = 0;
+    if (this.searchResultEmpty) {
+      this.searchResultEmpty = !this.searchResultEmpty;
+    }
   }
 }
