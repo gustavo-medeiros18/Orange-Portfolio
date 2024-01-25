@@ -1,14 +1,19 @@
 <div class="container-card" *ngFor="let project of projects">
-  <mat-card class="example-card">
+  <mat-card class="project-card">
     <img mat-card-image src="{{project.img}}" alt="{{project.title}}">
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image" style="background-image: url({{userImg}})">
+      <div class="card-infos">
+        <div class="data-user">
+          <div mat-card-avatar class="project-header-image" style="background-image: url({{userImg}})">
+          </div>
+          <p> {{userName}} &nbsp;&bull; {{project.releaseDate}}</p>
+        </div>
+        <div class="chips">
+          <mat-card-actions *ngFor="let item of project.tags">
+            <mat-chip>{{item}}</mat-chip>
+          </mat-card-actions>
+        </div>
       </div>
-      <mat-card-title>{{userName}}</mat-card-title>
-      <mat-card-subtitle>{{project.releaseDate}}</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-actions *ngFor="let item of project.tags">
-      <button mat-button>{{item}}</button>
-    </mat-card-actions>
   </mat-card>
 </div>

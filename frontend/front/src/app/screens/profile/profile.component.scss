@@ -61,15 +61,19 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
+  height: 100%;
   gap: 1.5rem;
 }
 
 @media screen and (min-width: 992px) {
   .profile {
     flex-direction: row;
+    gap: 2.62rem;
   }
   .projects-list {
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 1.5rem;
   }
 }

@@ -4,10 +4,10 @@ import { IProjects } from 'src/app/screens/profile/models/project';
 @Component({
   selector: 'app-project-card',
   templateUrl: './project-card.component.html',
-  styleUrls: ['./project-card.component.scss']
+  styleUrls: ['./project-card.component.scss'],
 })
 export class ProjectCardComponent {
   @Input() projects: IProjects[] = [];
-  @Input() userName: string = "";
-  @Input() userImg: string = "";
+  @Input() userName: string = '';
+  @Input() userImg: string = '';
 }

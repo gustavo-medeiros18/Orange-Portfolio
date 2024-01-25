@@ -20,6 +20,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { ProjectCardComponent } from './componentes/project-card/project-card.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ProjectCardComponent } from './componentes/project-card/project-card.co
     FlexLayoutModule,
     MatProgressSpinnerModule,
     MatCardModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

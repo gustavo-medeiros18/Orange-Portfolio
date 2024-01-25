@@ -1,7 +1,40 @@
-.example-card {
-  max-width: 400px;
+.project-card {
+  width: 19.5rem;
 }
 
-.example-header-image {
+.project-header-image {
   background-size: cover;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+}
+
+p {
+  margin-left: 0.2rem;
+  font-size: 1rem !important;
+}
+
+.card-infos {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.data-user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.chips {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+@media screen and (min-width: 992px) {
+  .project-card {
+    width: 24.3125rem;
+  }
 }

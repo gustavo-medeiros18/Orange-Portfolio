@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
     },
     {
       title: 'teste1',
-      tags: ['teste', 'figma', 'photoshop'],
+      tags: ['teste', 'figma'],
       link: 'https://github.com/costaowillian/cashquest',
       description: 'teste, teste, teste',
       img: 'assets/imgs/img_landingpage_orange_portfolio.svg',
