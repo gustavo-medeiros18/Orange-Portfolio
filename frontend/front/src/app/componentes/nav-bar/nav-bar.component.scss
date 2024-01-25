@@ -37,6 +37,20 @@ mat-toolbar {
     margin-right: 3rem;
 }
 
+.divider {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    border-radius: 0.25rem;
+}
+
+.divider-row {
+    width: 13.75rem;
+    height: var(--none, 0.0625rem);
+    background: var(--divider, rgba(0, 0, 0, 0.12));
+}
+
 #discover {
     color: var(--Neutral-Colors-Neutral-60, #FCFDFF);
     text-decoration: none;
