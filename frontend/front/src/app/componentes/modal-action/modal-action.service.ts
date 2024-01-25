@@ -12,8 +12,7 @@ export class ModalActionService {
   openDialog() {
     const dialogRef = this.dialog.open(ModalActionComponent, {
       width: '16.6rem',
-      height: '50.1rem',
-      position: { top: '9.25rem', bottom: '1.63rem' },
+      position: { top: '9.25rem' }
     });
   }
 }
