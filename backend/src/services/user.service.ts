@@ -1,25 +1,12 @@
-import { User } from '../types/user';
-import userModel from '../models/user.model';
+import connection from "../database/config";
+import { RowDataPacket } from "mysql2";
+import { User } from "../models/user.model";
 
-
-const findAll = async (): Promise<User[]> => {
-  const user = await userModel.findAll();
-
-  return user;
-};
-
-const login = async (email: string, password: string): Promise<User> => {
-  const user = await userModel.findByEmail(email);
-
-  if (!user || password !== user.password) {
-    throw new Error('UNAUTHORIZED');
+class UserService {
+  public static async getAllUsers(): Promise<User[]> {
+    const [rows] = await connection.query<RowDataPacket[]>("SELECT * FROM users");
+    return rows as User[];
   }
+}
 
-  
-  return user;
-};
-
-export default {
-  findAll,
-  login,
-};
+export default UserService;

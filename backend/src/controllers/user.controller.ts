@@ -1,20 +1,16 @@
+import UserService from "../services/user.service";
+
 import { Request, Response } from "express";
-import userService from "../services/user.service";
 
-const findAll = async (_req: Request, res: Response) => {
-    const users = await userService.findAll();
-    console.log(users)
-    return res.status(200).json({message: users});
+class UserController {
+  public static async getAllUsers(_req: Request, res: Response) {
+    const user = await UserService.getAllUsers();
+
+    if (!user) {
+      return res.status(500);
+    }
+    return res.status(200).json(user);
+  }
 }
 
-const login = async (req: Request, res: Response) => {
-    const {email} = await req.body;
-
-    return res.status(200).json({ email })
-    
-}
-
-export default {
-    findAll,
-    login,
-}
+export default UserController;
