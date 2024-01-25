@@ -3,12 +3,20 @@
         <img src="assets/imgs/img_register.svg" alt="cadastro_orange_portfolio">
       </div>
         <div class="div-form">
-        <div class = "on-sign-up" *ngIf="successAlert">
-          <div class = "on-sign-up-icon">
+        <div class = "on-sign-up-success" *ngIf="successAlert">
+          <div class = "on-sign-up-success-icon">
             <img src="../../../assets/logos/success-icon.svg" alt="Success Icon">
           </div>
           <div class = "on-sign-up-text">
             <span> Cadastro feito com sucesso</span>
+          </div>
+        </div>
+        <div class = "on-sign-up-error" *ngIf="errorAlert">
+          <div class = "on-sign-up-error-icon">
+            <img src="../../../assets/logos/error-icon.svg" alt="Error Icon">
+          </div>
+          <div class = "on-sign-up-text">
+            <span> Ocorreu um erro ao tentar realizar o cadastro</span>
           </div>
         </div>
         <h5> Cadastre-se </h5>

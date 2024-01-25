@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';;
 import { RegisterService } from './register.service';
 
@@ -15,8 +15,9 @@ export class RegisterComponent {
 
   // Variável de controle para o estado de carregamento
   loading: boolean = false;
-  // Variavel para exibicao da mensagem de sucesso ( mudar posteriormente ) 
-  successAlert: boolean = true;
+  // Variaveis  para exibicao da mensagem de sucesso/erro ( mudar posteriormente ) 
+  successAlert: boolean = false;
+  errorAlert: boolean = true;
 
   constructor(private formBuilder: NonNullableFormBuilder, private service: RegisterService) {}
 
