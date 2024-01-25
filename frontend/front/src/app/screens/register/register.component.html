@@ -24,20 +24,24 @@
           <div class="sub-fomulario">
             <mat-form-field class="input" id="nameField" appearance="outline">
               <mat-label>Nome</mat-label>
-              <input matInput>
+              <input matInput formControlName = "name">
+              <mat-error *ngIf="form.get('name')?.invalid">{{formErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field class="input" id="lastNameField" appearance="outline">
               <mat-label>Sobrenome</mat-label>
-              <input matInput>
+              <input matInput formControlName = "lastName">
+              <mat-error *ngIf="form.get('lastName')?.invalid">{{formErrorMessage()}}</mat-error>
             </mat-form-field>
           </div>
           <mat-form-field class="input" appearance="outline">
             <mat-label>Email address</mat-label>
-            <input matInput>
+            <input matInput formControlName = "email">
+            <mat-error *ngIf="form.get('email')?.invalid">{{formErrorMessage()}}</mat-error>
           </mat-form-field>
           <mat-form-field class="input" appearance="outline">
             <mat-label>Password</mat-label>
-            <input type={{password}} matInput>
+            <input type={{password}} matInput formControlName = "password">
+            <mat-error *ngIf="form.get('password')?.invalid">{{formErrorMessage()}}</mat-error>
             <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
             <mat-icon (click)="onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
           </mat-form-field>

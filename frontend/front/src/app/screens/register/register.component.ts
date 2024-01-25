@@ -8,14 +8,14 @@ import { RegisterService } from './register.service';
   styleUrls: ['register.component.scss']
 })
 export class RegisterComponent {
-  hide = true;
   visibility: boolean = false;
   password: string = 'password';
+  
   form!: FormGroup;
 
   // Variável de controle para o estado de carregamento
   loading: boolean = false;
-  // Variaveis  para exibicao da mensagem de sucesso/erro ( mudar posteriormente ) 
+  // Variaveis  para exibicao da mensagem de sucesso/erro 
   successAlert: boolean = false;
   errorAlert: boolean = true;
 
@@ -23,10 +23,10 @@ export class RegisterComponent {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      nome: ['', [Validators.required]],
-      sobrenome: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       email: ['', [Validators.required]],
-      senha: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
 
@@ -52,20 +52,17 @@ export class RegisterComponent {
     setTimeout(() => {
       this.loading = false;
     }, 2000);
-
-    const teste: boolean = true;
-    if (teste){
-      this.onSuccess();
-    } else {
-      this.onError();
-    }
-
+    this.service.save(this.form);
+    this.getSuccessAlert();
+    this.getErrorAlert();
   }
 
-  onSuccess(){
+  getSuccessAlert(){
+    this.successAlert = this.service.getSuccessAlert();
   }
 
-  onError(){
+  getErrorAlert(){
+    this.errorAlert = this.service.getErrorAlert();
   }
 
 }
