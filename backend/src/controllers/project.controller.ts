@@ -9,6 +9,15 @@ class ProjectController {
 
     return res.status(200).json(projects);
   }
+
+  public static async getAllProjectsByUserId(req: Request, res: Response) {
+    const userId = parseInt(req.params.userId);
+    const projects = await ProjectService.getAllProjectsByUserId(userId);
+
+    if (!projects) return res.status(500);
+
+    return res.status(200).json(projects);
+  }
 }
 
 export default ProjectController;
