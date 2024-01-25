@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { environment } from "src/environments/environment.development";
+import { IProject } from "../models/iProject";
 
 @Injectable({
   providedIn: "root",
@@ -14,6 +15,7 @@ export class ProjectService {
 
   getProjects(): Observable<IProject[]> {
     const apiUrl = new URL(environment.apiProjects, this.API).toString();
-    this.httpClient.get<IProject[]>(apiUrl, { headers: this.headers }).subscribe();
+    this.httpClient.get<IProject[]>(apiUrl, { headers: this.headers });
+    return of();
   }
 }

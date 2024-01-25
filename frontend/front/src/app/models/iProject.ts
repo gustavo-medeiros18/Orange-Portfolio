@@ -1,4 +1,4 @@
-export interface IProjects {
+export interface IProject {
   title: string;
   tags?: string[];
   link?: string;

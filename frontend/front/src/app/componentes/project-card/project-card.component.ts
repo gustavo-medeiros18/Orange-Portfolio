@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { IProjects } from "src/app/models/iProject";
+import { IProject } from "src/app/models/iProject";
 
 @Component({
   selector: "app-project-card",
@@ -7,7 +7,7 @@ import { IProjects } from "src/app/models/iProject";
   styleUrls: ["./project-card.component.scss"],
 })
 export class ProjectCardComponent {
-  @Input() projects: IProjects[] = [];
+  @Input() projects: IProject[] = [];
   @Input() userName: string = "";
   @Input() userImg: string = "";
 }

@@ -1,5 +1,6 @@
+import { ProfileService } from "./services/profile.service";
 import { FormBuilder } from "@angular/forms";
-import { IProjects } from "../../models/iProject";
+import { IProject } from "../../models/iProject";
 import { Component, OnInit } from "@angular/core";
 import { debounceTime, distinctUntilChanged, filter, map, switchMap } from "rxjs";
 
@@ -25,37 +26,13 @@ export class ProfileComponent implements OnInit {
   };
 
   //controle de dados pesquisados
-  searchProjects: IProjects[] = [];
+  searchProjects: IProject[] = [];
 
   //Array para projetos
-  projects: IProjects[] = [
-    {
-      title: "teste",
-      tags: ["design", "ui"],
-      link: "https://github.com/costaowillian/cashquest",
-      description: "teste, teste, teste",
-      img: "assets/imgs/img_landingpage_orange_portfolio.svg",
-      releaseDate: "12/10",
-    },
-    {
-      title: "teste1",
-      tags: ["teste", "figma"],
-      link: "https://github.com/costaowillian/cashquest",
-      description: "teste, teste, teste",
-      img: "assets/imgs/img_landingpage_orange_portfolio.svg",
-      releaseDate: "12/10",
-    },
-    {
-      title: "teste2",
-      tags: ["c++"],
-      link: "https://github.com/costaowillian/cashquest",
-      description: "teste, teste, teste",
-      img: "assets/imgs/img_landingpage_orange_portfolio.svg",
-      releaseDate: "12/10",
-    },
-  ];
+  projects: IProject[] = [];
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder, private profileService: ProfileService) {}
+  
   ngOnInit(): void {
     this.searchForm
       .get("search")
@@ -68,6 +45,7 @@ export class ProfileComponent implements OnInit {
         switchMap(async (value) => this.handleSearch(value))
       )
       .subscribe();
+    this.getAllProjects();
   }
 
   handleSearch(value: string) {
@@ -82,5 +60,16 @@ export class ProfileComponent implements OnInit {
     if (this.searchResultEmpty) {
       this.searchResultEmpty = !this.searchResultEmpty;
     }
+  }
+
+  getAllProjects() {
+    this.profileService.getProjectsProfile().subscribe({
+      next: (projects: IProject[]) => {
+        this.projects = projects;
+      },
+      error: (error) => {
+        console.error("Erro ao recuperar projetos:", error);
+      },
+    });
   }
 }
