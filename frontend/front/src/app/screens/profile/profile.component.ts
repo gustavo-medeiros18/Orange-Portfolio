@@ -77,6 +77,5 @@ export class ProfileComponent implements OnInit {
     this.searchProjects = this.projects.filter(
       (project) => project.tags && project.tags.includes(value)
     );
-    console.log(this.searchProjects);
   }
 }
