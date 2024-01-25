@@ -52,17 +52,22 @@ export class RegisterComponent {
     setTimeout(() => {
       this.loading = false;
     }, 2000);
-    this.service.save(this.form);
-    this.getSuccessAlert();
-    this.getErrorAlert();
+    if (this.form.valid){
+      //this.service.save(this.form);
+      this.onSuccess();
+    } else {
+      this.onError();
+    }
   }
 
-  getSuccessAlert(){
-    this.successAlert = this.service.getSuccessAlert();
+  onSuccess(){
+    this.successAlert = true;
+    this.errorAlert = false;
   }
 
-  getErrorAlert(){
-    this.errorAlert = this.service.getErrorAlert();
+  onError(){
+    this.errorAlert = true;
+    this.successAlert = false;
   }
 
 }

@@ -13,7 +13,7 @@ export class UserService {
   constructor(private httpClient: HttpClient) { }
   
   save(record: IUserRegister) {
-    const apiUrl = new URL(environment.apiRegister, environment.baseUrl).toString();
+    const apiUrl = new URL(environment.apiRegister,this.API).toString();
     const requestBody: string = JSON.stringify(record);
     this.httpClient.post<IUserRegister>(apiUrl, requestBody, { headers: this.headers }).subscribe();
   }
