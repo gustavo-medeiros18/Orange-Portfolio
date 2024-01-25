@@ -6,20 +6,30 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './screens/login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { CadastroComponent } from './screens/cadastro/cadastro.component';
-
-
-
+import { RegisterComponent } from './screens/register/register.component';
+import { ProfileComponent } from './screens/profile/profile.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { HttpClientModule } from '@angular/common/http';
+import { NavBarComponent } from './componentes/nav-bar/nav-bar.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ModalActionComponent } from './componentes/modal-action/modal-action.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    CadastroComponent
+    RegisterComponent,
+    ProfileComponent,
+    NavBarComponent,
+    ModalActionComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +39,14 @@ import { CadastroComponent } from './screens/cadastro/cadastro.component';
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatToolbarModule,
+    HttpClientModule,
+    FlexLayoutModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    FormsModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent],

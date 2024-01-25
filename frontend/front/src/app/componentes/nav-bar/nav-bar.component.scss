@@ -1,0 +1,129 @@
+mat-toolbar {
+    background-color: #111133;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+
+    border-radius:  0 0 0.25rem 0.25rem;
+    background: var(--Color-Brand-Primria-Primary-100, #113);
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.20), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+.right-side {
+    width: 100%;
+    display: inline-flex;
+    padding-top: 0.0625rem;
+    align-items: center;
+    height: 2.5rem;
+}
+
+#icon-logo {
+    width: 5.1875rem;
+    height: 1.9375rem;
+}
+
+#my-projects {
+
+    color: var(--Neutral-Colors-Neutral-60, #FCFDFF);
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem; 
+    letter-spacing: 0.00938rem;
+
+    margin-left: 6.25rem;
+    margin-right: 3rem;
+}
+
+.divider {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    border-radius: 0.25rem;
+}
+
+.divider-row {
+    width: 13.75rem;
+    height: var(--none, 0.0625rem);
+    background: var(--divider, rgba(0, 0, 0, 0.12));
+}
+
+#discover {
+    color: var(--Neutral-Colors-Neutral-60, #FCFDFF);
+    text-decoration: none;
+    font-family: Roboto;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+    letter-spacing: 0.00938rem;
+}
+
+.button-menu {
+    margin-left: 0;
+}
+
+.info-user {
+    display: flex;
+    padding: var(--1, 0.5rem) var(--2, 1rem);
+    align-items: center;
+    align-self: stretch;
+}
+
+.info-user-text {
+    display: flex;
+    padding: var(--borderRadius, 0.25rem) var(--none, 0rem);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--none, 0rem);
+    flex: 1 0 0;
+}
+
+#username-info {
+    color: var(--text-primary, rgba(0, 0, 0, 0.87));
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto;
+    font-size: 1rem;
+    font-style: normal;
+    align-self: stretch;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: 0.00938rem;
+    align-self: stretch;
+    padding: 0;
+}
+
+#username-email-info {
+    color: var(--text-secondary, rgba(0, 0, 0, 0.60));
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 143%; 
+    letter-spacing: 0.01063rem;
+    align-self: stretch;
+    padding: 0;
+}
+
+.sections-text {
+    color: var(--text-primary, rgba(0, 0, 0, 0.87));
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Roboto;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    letter-spacing: 0.00938rem;
+    flex: 1 0 0;
+}
+
+@media (max-width: 992px) {
+    mat-toolbar-row {
+        margin: 0;
+        padding: 0;
+    }
+}
