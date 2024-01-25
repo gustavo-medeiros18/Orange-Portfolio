@@ -1,9 +1,11 @@
-import { createConnection } from "mysql2";
+import { createPool } from "mysql2/promise";
 
-export const connection = createConnection({
-  host: "app_host",
+const connection = createPool({
+  host: "mysql-db",
+  port: 3306,
   user: "app_user",
   password: "app_password",
   database: "app_database",
-  port: 3306,
 });
+
+export default connection;
