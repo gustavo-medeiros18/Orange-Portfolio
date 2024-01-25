@@ -1,8 +1,34 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" fxHide.gt-sm>
-            <mat-icon>menu</mat-icon>
-        </button>
+            <button class="button-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu button" fxHide.gt-sm>
+                <mat-icon>menu</mat-icon>
+            </button>
+          <mat-menu class = "mat-menu" #menu="matMenu">
+            <div class = "info-user" >
+                <div class = "info-user-text">
+                    <span id = "username-info" >Username</span>
+                    <span id = "username-email-info">username@gmail.com</span>   
+                </div>
+            </div>
+            <div class = "divider">
+                <div class = "divider-row"></div>
+            </div>
+            <div class = "sections">
+                <button mat-menu-item>
+                    <span class = "sections-text">Meus projetos</span>
+                </button>
+                <button mat-menu-item>
+                    <span class = "sections-text">Descobrir</span>
+                </button>
+                <div class = "divider">
+                    <div class = "divider-row"></div>
+                </div>
+                <button mat-menu-item>
+                    <mat-icon>exit_to_app</mat-icon> <!--ligeiramente diferente do icone do design... mudar?-->
+                    <span class = "sections-text">Sair</span>
+                </button>
+            </div>
+          </mat-menu>
         <div class="right-side">
             <div class = "div-logo">
                 <a routerLink="." >

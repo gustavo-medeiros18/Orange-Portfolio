@@ -1,13 +1,12 @@
-import express, { Request, Response } from 'express';
+import express from "express";
+import userRouter from "./routers/user.router";
+import projectRouter from "./routers/project.router";
+
 const app = express();
-const port = 3000;
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, Dockerized Node.js App!');
-});
+app.use(express.json());
 
-app.listen(port, () => {
-  console.log(`rodando na porta ${port}`);
-});
+app.listen(3000, () => console.log(`express rodando na porta ${3000}`));
 
-
+app.use(userRouter);
+app.use(projectRouter);

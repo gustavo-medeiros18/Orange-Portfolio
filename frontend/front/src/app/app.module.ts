@@ -16,11 +16,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { NavBarComponent } from './componentes/nav-bar/nav-bar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { ProjectCardComponent } from './componentes/project-card/project-card.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { ModalActionComponent } from './componentes/modal-action/modal-action.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,7 @@ import { MatChipsModule } from '@angular/material/chips';
     ProfileComponent,
     NavBarComponent,
     ProjectCardComponent,
+    ModalActionComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +50,9 @@ import { MatChipsModule } from '@angular/material/chips';
     MatProgressSpinnerModule,
     MatCardModule,
     MatChipsModule,
+    MatDialogModule,
+    FormsModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent],
