@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { LoginService } from './services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -19,13 +20,13 @@ export class LoginComponent implements OnInit {
   // Variável de controle para o estado de carregamento
   loading: boolean = false;
 
-  constructor(private formBuilder: NonNullableFormBuilder) {}
+  constructor(private formBuilder: NonNullableFormBuilder, private loginService: LoginService) {}
 
   ngOnInit() {
     // Inicialização do formulário
     this.form = this.formBuilder.group({
       email: ['', [Validators.required]],
-      senha: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
 
@@ -46,7 +47,6 @@ export class LoginComponent implements OnInit {
 
   // Função de simulação de login assíncrono
   login() {
-    console.log(this.form.value.email);
     this.loading = true;
 
     // Simula uma operação assíncrona (por exemplo, uma requisição HTTP)
@@ -54,5 +54,25 @@ export class LoginComponent implements OnInit {
     setTimeout(() => {
       this.loading = false;
     }, 2000);
+
+    if(this.form.invalid) this.onError();
+    this.loginService.authenticate(this.form).subscribe(
+      {
+        next: () => {
+          this.onSuccess();
+        },
+        error: (error) => {
+          this.onError();
+        }
+      }
+    );
+  }
+
+  onSuccess() {
+    // implementar
+  }
+
+  onError() {
+    // implementar
   }
 }
