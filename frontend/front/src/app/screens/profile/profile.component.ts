@@ -39,32 +39,28 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getAllProjects();
     this.searchForm
       .get("search")
       ?.valueChanges.pipe(
         map((value) => value!.trim()),
-        filter((value) => value.length > 1),
         debounceTime(300),
         distinctUntilChanged(),
         //tap((value => console.log(value)))),
-        switchMap(async (value) => this.handleSearch(value))
+        switchMap(async (value) => {
+          this.handleSearch(value);
+        })
       )
       .subscribe();
-    this.getAllProjects();
   }
 
   handleSearch(value: string) {
     this.searchProjects = this.projects.filter(
-      (project) => project.tags && project.tags.some((tag) => tag.includes(value))
+      (project) => {
+        return project.tags && project.tags.some((tag) => tag.startsWith(value))
+      }
     );
     this.searchResultEmpty = this.searchProjects.length === 0;
-  }
-
-  clearSearch() {
-    this.searchProjects.length = 0;
-    if (this.searchResultEmpty) {
-      this.searchResultEmpty = !this.searchResultEmpty;
-    }
   }
 
   openDialog(name: string) {
