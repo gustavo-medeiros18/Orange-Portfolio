@@ -16,7 +16,7 @@ export class ProfileService {
       const projects: IProject[] = [
         {
           title: "teste",
-          tags: ["design", "ui"],
+          tags: ["design", "teste"],
           link: "https://github.com/costaowillian/cashquest",
           description: "teste, teste, teste",
           img: "assets/imgs/img_landingpage_orange_portfolio.svg",
