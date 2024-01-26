@@ -17,7 +17,7 @@ export class ModalActionComponent implements OnInit, OnDestroy {
 
   hasError: string = "";
 
-  project!: IProject;
+  project!: IProject | null;
 
   private subscription = new Subscription();
   constructor(
@@ -28,7 +28,9 @@ export class ModalActionComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    console.log({ antesDeSub: this.project });
     this.listenerModalEvent();
+    console.log({ DeSub: this.project });
     this.form = this.formBuilder.group({
       title: [this.project ? this.project.title : "", [Validators.required]],
       tags: [this.project ? this.project.tags : "", [Validators.required]],
@@ -39,16 +41,16 @@ export class ModalActionComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.modalService.completeEmitter();
   }
 
   private listenerModalEvent(): void {
     this.subscription.add(
       this.modalService.onComponentEvent
         .pipe(
-          filter(
-            (event): event is IProjectEvent<ProjecEventEnum, IProject> =>
-              event !== null && event.type === ProjecEventEnum.ADD_PROJECT
-          ),
+          filter((event): event is IProjectEvent<ProjecEventEnum, IProject> => {
+            return event !== null && event.type === ProjecEventEnum.ADD_PROJECT;
+          }),
           tap((event) => {
             this.project = event.data;
           })

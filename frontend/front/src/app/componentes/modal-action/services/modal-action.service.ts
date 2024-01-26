@@ -26,6 +26,10 @@ export class ModalActionService {
     this.emitter.next({ ...action });
   }
 
+  completeEmitter(): void {
+    this.emitter.complete();
+  }
+
   pathProjectModal(params: IProject): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       this.projectService.patchProject(params).subscribe({
