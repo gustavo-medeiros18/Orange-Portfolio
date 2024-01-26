@@ -20,6 +20,12 @@ class UserService {
 
     return undefined;
   }
+
+  public static async createUser(newUser: User): Promise<User> {
+    const [result] = await connection.query("INSERT INTO users SET ?", [newUser]);
+    const id = (result as any).insertId;
+    return { ...newUser, id } as User;
+  }
 }
 
 export default UserService;
