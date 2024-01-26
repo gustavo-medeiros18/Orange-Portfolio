@@ -21,6 +21,7 @@ import { ModalActionComponent } from './componentes/modal-action/modal-action.co
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
+import { ProjectActionComponent } from './componentes/project-action/project-action.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {MatMenuModule} from '@angular/material/menu';
     RegisterComponent,
     ProfileComponent,
     NavBarComponent,
-    ModalActionComponent
+    ModalActionComponent,
+    ProjectActionComponent
   ],
   imports: [
     BrowserModule,
