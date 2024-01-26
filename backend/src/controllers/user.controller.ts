@@ -1,6 +1,6 @@
 import { User } from "../models/user.model";
 import UserService from "../services/user.service";
-
+import { hashPassword } from "../utils/bcryptUtils";
 import { Request, Response } from "express";
 
 class UserController {
@@ -27,6 +27,8 @@ class UserController {
   public static async createUser(req: Request, res: Response) {
     const newUser: User = req.body;
     const createdUser = await UserService.createUser(newUser);
+    newUser.password = await hashPassword(newUser.password);
+
     if (!newUser || !newUser.name || !newUser.email) {
       return res
         .status(400)
