@@ -1,14 +1,35 @@
 import ProjectService from "../services/project.service";
 import { Request, Response } from "express";
+import multer from "multer";
 
 class ProjectController {
   public static async createProject(req: Request, res: Response) {
-    const project = req.body;
-    const projectId = await ProjectService.createProject(project);
+    const storage = multer.diskStorage({
+      destination: function (req, file, cb) {
+        cb(null, "./uploads");
+      },
+      filename: function (req, file, cb) {
+        cb(null, Date.now() + "-" + file.originalname);
+      },
+    });
 
-    if (!projectId) return res.status(500);
+    const upload = multer({ storage: storage });
 
-    return res.status(201).json({ projectId });
+    upload.single("image_file")(req, res, function (err) {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+
+      const project = req.body;
+
+      console.log(project);
+
+      // const projectId = await ProjectService.createProject(project);
+
+      // if (!projectId) return res.status(500);
+
+      return res.status(201).json({ message: "Projeto criado com sucesso" });
+    });
   }
 
   public static async getAllProjects(_req: Request, res: Response) {
