@@ -31,8 +31,6 @@ class UserController {
 
     const createdUser = await UserService.createUser(newUser);
 
-    console.log(newUser.password);
-
     if (!newUser || !newUser.name || !newUser.email) {
       return res
         .status(400)
