@@ -4,32 +4,9 @@ import multer from "multer";
 
 class ProjectController {
   public static async createProject(req: Request, res: Response) {
-    const storage = multer.diskStorage({
-      destination: function (req, file, cb) {
-        cb(null, "./uploads");
-      },
-      filename: function (req, file, cb) {
-        cb(null, Date.now() + "-" + file.originalname);
-      },
-    });
+    console.log(req.file);
 
-    const upload = multer({ storage: storage });
-
-    upload.single("image_file")(req, res, function (err) {
-      if (err) {
-        return res.status(500).json({ error: err.message });
-      }
-
-      const project = req.body;
-
-      console.log(project);
-
-      // const projectId = await ProjectService.createProject(project);
-
-      // if (!projectId) return res.status(500);
-
-      return res.status(201).json({ message: "Projeto criado com sucesso" });
-    });
+    res.send("ok");
   }
 
   public static async getAllProjects(_req: Request, res: Response) {
