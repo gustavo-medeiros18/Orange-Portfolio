@@ -10,10 +10,13 @@ export class ProjectActionService {
   constructor(private dialog: MatDialog) {}
 
   openDialog(action: string, result: string) {
+  const isMobile = window.innerWidth <= 992;
+  const position = (isMobile && action != "deletar") ? { top: "11.87rem" } : {};
     this.dialog.open(ProjectActionComponent, {
       width: "21.9375rem",
       height: "15.125rem",
-      data: {action:action, result:result}
+      data: {action:action, result:result},
+      position
     });
   }
 }
