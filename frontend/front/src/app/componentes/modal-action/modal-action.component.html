@@ -2,24 +2,24 @@
 <mat-dialog-content class="mat-typography">
   <div class="container">
     <div class="div-form">
-      <form>
+      <form [formGroup]="form">
         <div class="sub-fomulario">
           <mat-form-field class="input" id="nameField" appearance="outline">
             <mat-label>Título</mat-label>
-            <input matInput />
+            <input matInput formControlName="title" />
           </mat-form-field>
           <mat-form-field class="input" id="lastNameField" appearance="outline">
             <mat-label>Tags</mat-label>
-            <input matInput />
+            <input matInput formControlName="tags" />
           </mat-form-field>
         </div>
         <mat-form-field class="input" appearance="outline">
           <mat-label>Link</mat-label>
-          <input matInput />
+          <input matInput formControlName="link" />
         </mat-form-field>
         <mat-form-field id="description-field" class="input" appearance="outline">
           <mat-label>Descrição</mat-label>
-          <input matInput />
+          <input matInput formControlName="description" />
         </mat-form-field>
       </form>
     </div>

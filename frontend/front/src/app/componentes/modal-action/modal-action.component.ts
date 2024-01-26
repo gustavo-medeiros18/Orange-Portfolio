@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { IModal } from "./models/imodal";
 import { ModalActionService } from "./services/modal-action.service";
@@ -13,7 +13,7 @@ import { IProject, IProjectEvent, ProjecEventEnum } from "src/app/models/iProjec
   styleUrls: ["./modal-action.component.scss"],
 })
 export class ModalActionComponent implements OnInit, OnDestroy {
-  //form!: FormGroup;
+  form!: FormGroup;
 
   hasError: string = "";
 
@@ -23,11 +23,18 @@ export class ModalActionComponent implements OnInit, OnDestroy {
   constructor(
     @Inject(MAT_DIALOG_DATA) public modal: IModal,
     private modalService: ModalActionService,
-    private alertService: ProjectActionService
+    private alertService: ProjectActionService,
+    private formBuilder: NonNullableFormBuilder
   ) {}
 
   ngOnInit(): void {
     this.listenerModalEvent();
+    this.form = this.formBuilder.group({
+      title: [this.project ? this.project.title : "", [Validators.required]],
+      tags: [this.project ? this.project.tags : "", [Validators.required]],
+      link: [this.project ? this.project.link : "", [Validators.required]],
+      description: [this.project ? this.project.description : "", [Validators.required]],
+    });
   }
 
   ngOnDestroy(): void {
@@ -43,7 +50,6 @@ export class ModalActionComponent implements OnInit, OnDestroy {
               event !== null && event.type === ProjecEventEnum.ADD_PROJECT
           ),
           tap((event) => {
-            console.log("Evento recebido no componente:", event.data);
             this.project = event.data;
           })
         )

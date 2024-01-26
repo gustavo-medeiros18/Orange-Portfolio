@@ -46,7 +46,6 @@ export class ProfileComponent implements OnInit {
         map((value) => value!.trim()),
         debounceTime(300),
         distinctUntilChanged(),
-        //tap((value => console.log(value)))),
         switchMap(async (value) => {
           this.handleSearch(value);
         })

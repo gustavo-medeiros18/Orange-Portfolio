@@ -24,9 +24,6 @@ export class ModalActionService {
 
   public dispatch(action: IProjectEvent<ProjecEventEnum, IProject>) {
     this.emitter.next({ ...action });
-    this.emitter.subscribe({
-      next: (data) => console.log(data),
-    });
   }
 
   pathProjectModal(params: IProject): Promise<boolean> {
