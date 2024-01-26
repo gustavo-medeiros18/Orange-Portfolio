@@ -1,0 +1,30 @@
+version: '3'
+services:
+  node-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: node-app
+    restart: always 
+    ports:
+      - "3000:3000"
+    working_dir: /app
+    depends_on:
+      - mysql-db
+    # command: ["./wait-for-it.sh", "mysql-db:3306", "--", "npm", "start"]
+    volumes: 
+      - ./:/app/
+
+  mysql-db:
+    image: mysql:latest
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: app_database
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql-data:/var/lib/mysql

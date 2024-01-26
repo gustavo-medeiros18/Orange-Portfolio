@@ -1,0 +1,33 @@
+<div class="container-card" *ngFor="let project of projects">
+  <mat-card class="project-card">
+    <div class="button-container">
+      <button class="radios-btn" mat-icon-button [matMenuTriggerFor]="beforeMenu"
+        aria-label="Example icon-button with a menu">
+        <mat-icon class="icon">edit</mat-icon>
+      </button>
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button (click)="openDialog('Editar projeto')" mat-menu-item>
+          <span>Editar</span>
+        </button>
+        <button mat-menu-item>
+          <span>Excluir</span>
+        </button>
+      </mat-menu>
+    </div>
+    <img mat-card-image src="{{project.img}}" alt="{{project.title}}">
+    <mat-card-header>
+      <div class="card-infos">
+        <div class="data-user">
+          <div mat-card-avatar class="project-header-image" style="background-image: url({{userImg}})">
+          </div>
+          <p> {{userName}} &nbsp;&bull; {{project.releaseDate}}</p>
+        </div>
+        <div class="chips">
+          <mat-card-actions *ngFor="let item of project.tags">
+            <mat-chip>{{item}}</mat-chip>
+          </mat-card-actions>
+        </div>
+      </div>
+    </mat-card-header>
+  </mat-card>
+</div>

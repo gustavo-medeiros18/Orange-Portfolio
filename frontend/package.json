@@ -1,0 +1,23 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "Frontend Hackathon Orange Juice",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedroaugusto04/Hackathon-Orange-Juice-2024.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pedroaugusto04/Hackathon-Orange-Juice-2024/issues"
+  },
+  "homepage": "https://github.com/pedroaugusto04/Hackathon-Orange-Juice-2024#readme",
+  "dependencies": {
+    "@angular/cdk": "^17.1.0",
+    "@angular/material": "^17.1.0"
+  }
+}

@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="img-container">
+    <img src="assets/imgs/img_login_orange_portfolio.svg" alt="cadastro_orange_portfolio">
+  </div>
+  <div class="form-container">
+    <h5 class="title-login">Entre no Orange Portfólio</h5>
+    <div class="div-singin-google">
+      <a class="div-btn-google" routerLink=".">
+        <img src="assets/button-icons/logoGoogle.svg" alt="Logo do Google" class="google-logo">
+        <span class="btntexto">Entrar com o google</span>
+      </a>
+    </div>
+    <div class="div-form">
+      <form [formGroup]="form">
+        <p class="msg-login">Faça login com e-mail</p>
+        <div class="div-campos">
+          <mat-form-field class="input" appearance="outline">
+            <mat-label>E-mail</mat-label>
+            <input type="email" matInput formControlName="email">
+            <mat-error *ngIf="form.get('email')?.invalid">{{formErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="input" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input type={{password}} matInput formControlName="password">
+            <mat-error *ngIf="form.get('password')?.invalid">{{formErrorMessage()}}</mat-error>
+            <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
+            <mat-icon (click)="onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="div-btn-signin">
+          <button [disabled]="loading" (click)="login()" mat-raised-button class="btn-primary">
+            <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
+              [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
+            <span *ngIf="!loading">ENTRAR</span></button>
+        </div>
+        <a routerLink="/register" class="msg-register"> Cadastre-se</a>
+      </form>
+    </div>
+  </div>
+</div>
