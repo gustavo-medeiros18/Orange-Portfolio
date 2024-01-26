@@ -26,8 +26,12 @@ class UserController {
 
   public static async createUser(req: Request, res: Response) {
     const newUser: User = req.body;
-    const createdUser = await UserService.createUser(newUser);
+
     newUser.password = await hashPassword(newUser.password);
+
+    const createdUser = await UserService.createUser(newUser);
+
+    console.log(newUser.password);
 
     if (!newUser || !newUser.name || !newUser.email) {
       return res
