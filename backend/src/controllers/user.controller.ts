@@ -27,7 +27,12 @@ class UserController {
   public static async createUser(req: Request, res: Response) {
     const newUser: User = req.body;
     const createdUser = await UserService.createUser(newUser);
-    res.status(201).json(createdUser);
+    if (!newUser || !newUser.name || !newUser.email) {
+      return res
+        .status(400)
+        .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
+    }
+    return res.status(201).json(createdUser);
   }
 }
 
