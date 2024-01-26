@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { ModalActionService } from './modal-action.service';
+import { ModalActionService } from "./services/modal-action.service";
 
-describe('ModalActionService', () => {
+describe("ModalActionService", () => {
   let service: ModalActionService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('ModalActionService', () => {
     service = TestBed.inject(ModalActionService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

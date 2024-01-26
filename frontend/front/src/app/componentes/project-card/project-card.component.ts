@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { IProject } from "src/app/models/iProject";
-import { ModalActionService } from "../modal-action/modal-action.service";
+import { ModalActionService } from "../modal-action/services/modal-action.service";
 
 @Component({
   selector: "app-project-card",
@@ -12,9 +12,7 @@ export class ProjectCardComponent {
   @Input() userName: string = "";
   @Input() userImg: string = "";
 
-  constructor(
-    private modalActionService: ModalActionService
-  ) {}
+  constructor(private modalActionService: ModalActionService) {}
 
   openDialog(name: string) {
     this.modalActionService.openDialog(name);

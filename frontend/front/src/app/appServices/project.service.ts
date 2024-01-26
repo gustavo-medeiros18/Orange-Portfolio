@@ -18,4 +18,10 @@ export class ProjectService {
     this.httpClient.get<IProject[]>(apiUrl, { headers: this.headers });
     return of();
   }
+
+  patchProject(): Observable<boolean> {
+    const apiUrl = new URL(environment.apiPatchProjects, this.API).toString();
+    this.httpClient.patch<IProject>(apiUrl, { headers: this.headers });
+    return of();
+  }
 }
