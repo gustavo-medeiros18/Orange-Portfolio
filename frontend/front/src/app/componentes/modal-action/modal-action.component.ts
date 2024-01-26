@@ -1,7 +1,7 @@
 import { Component, Inject, Input } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { IModal } from "./models/modal";
+import { IModal } from "./models/imodal";
 
 @Component({
   selector: "app-modal-action",

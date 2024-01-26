@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalActionService } from './componentes/modal-action/modal-action.service';
+import { ProjectActionService } from './componentes/project-action/services/project-action.service';
 
 
 @Component({
@@ -10,9 +10,9 @@ import { ModalActionService } from './componentes/modal-action/modal-action.serv
 })
 export class AppComponent {
   title = 'front';
-  constructor(private modalActionService: ModalActionService) {}
+  constructor(private projectActionService: ProjectActionService) {}
 
-  openDialog(name: string) {
-    this.modalActionService.openDialog(name);
+  openDialog(action: string,result: string) {
+    this.projectActionService.openDialog(action,result);
   }
 }
