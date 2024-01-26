@@ -6,7 +6,7 @@
         <mat-icon class="icon">edit</mat-icon>
       </button>
       <mat-menu #beforeMenu="matMenu" xPosition="before">
-        <button (click)="openDialog('Editar projeto')" mat-menu-item>
+        <button (click)="editItem(project)" mat-menu-item>
           <span>Editar</span>
         </button>
         <button mat-menu-item>

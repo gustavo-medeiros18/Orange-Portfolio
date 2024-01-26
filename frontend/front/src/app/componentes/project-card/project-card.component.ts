@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { IProject } from "src/app/models/iProject";
+import { IProject, ProjecEventEnum } from "src/app/models/iProject";
 import { ModalActionService } from "../modal-action/services/modal-action.service";
 
 @Component({
@@ -16,5 +16,12 @@ export class ProjectCardComponent {
 
   openDialog(name: string) {
     this.modalActionService.openDialog(name);
+  }
+
+  editItem(item: IProject) {
+    this.modalActionService.dispatch({
+      type: ProjecEventEnum.ADD_PROJECT,
+      data: item,
+    });
   }
 }
