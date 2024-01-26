@@ -3,15 +3,15 @@ import { MatDialog } from "@angular/material/dialog";
 import { ModalActionComponent } from "../modal-action.component";
 import { IProject, IProjectEvent, ProjecEventEnum } from "src/app/models/iProject";
 import { ProjectService } from "src/app/appServices/project.service";
-import { Observable, Observer, Subject, of } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class ModalActionService {
-
-  private emmitter: Subject<IProjectEvent<ProjecEventEnum, any>> = new Subject();
-  public onComponentEvent = this.emmitter.asObservable();
+  private emitter: BehaviorSubject<IProjectEvent<ProjecEventEnum, IProject> | null> =
+    new BehaviorSubject<IProjectEvent<ProjecEventEnum, IProject> | null>(null);
+  public onComponentEvent = this.emitter.asObservable();
 
   constructor(private dialog: MatDialog, private projectService: ProjectService) {}
 
@@ -22,22 +22,10 @@ export class ModalActionService {
     });
   }
 
-  public dispatch (action: IProjectEvent<ProjecEventEnum, any>){
-    this.emmitter.next({...action});
-  }
-
-  openEditDialog(name: string, params: IProject) {
-    this.dialog.open(ModalActionComponent, {
-      position: { top: "9.25rem" },
-      data: {
-        title: params.title,
-        name: name,
-        tags: params.tags,
-        link: params.link,
-        description: params.description,
-        img: params.img,
-        id: params.id,
-      },
+  public dispatch(action: IProjectEvent<ProjecEventEnum, IProject>) {
+    this.emitter.next({ ...action });
+    this.emitter.subscribe({
+      next: (data) => console.log(data),
     });
   }
 

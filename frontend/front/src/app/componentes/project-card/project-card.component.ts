@@ -19,9 +19,11 @@ export class ProjectCardComponent {
   }
 
   editItem(item: IProject) {
+    console.log("Despachando item:", item);
     this.modalActionService.dispatch({
       type: ProjecEventEnum.ADD_PROJECT,
       data: item,
     });
+    this.modalActionService.openDialog("Editar Projeto");
   }
 }

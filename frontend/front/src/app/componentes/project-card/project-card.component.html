@@ -2,7 +2,7 @@
   <mat-card class="project-card">
     <div class="button-container">
       <button class="radios-btn" mat-icon-button [matMenuTriggerFor]="beforeMenu"
-        aria-label="Example icon-button with a menu">
+        aria-label="Example icon-button with a menu" (click)="$event.stopPropagation()">
         <mat-icon class="icon">edit</mat-icon>
       </button>
       <mat-menu #beforeMenu="matMenu" xPosition="before">
