@@ -14,7 +14,8 @@ class ProjectController {
     const userId = parseInt(req.params.userId);
     const projects = await ProjectService.getAllProjectsByUserId(userId);
 
-    if (!projects) return res.status(500);
+    if (projects.length == 0)
+      return res.status(404).json({ message: "Esse usuário não tem projetos" });
 
     return res.status(200).json(projects);
   }
