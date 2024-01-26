@@ -1,3 +1,4 @@
+import { User } from "../models/user.model";
 import UserService from "../services/user.service";
 
 import { Request, Response } from "express";
@@ -21,6 +22,12 @@ class UserController {
     } else {
       res.status(404).json({ message: "User not found" });
     }
+  }
+
+  public static async createUser(req: Request, res: Response) {
+    const newUser: User = req.body;
+    const createdUser = await UserService.createUser(newUser);
+    res.status(201).json(createdUser);
   }
 }
 
