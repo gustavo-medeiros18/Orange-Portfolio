@@ -12,11 +12,14 @@ import { LoginComponent } from './screens/login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RegisterComponent } from './screens/register/register.component';
 import { ProfileComponent } from './screens/profile/profile.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { NavBarComponent } from './componentes/nav-bar/nav-bar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
+import { ProjectCardComponent } from './componentes/project-card/project-card.component';
+import { MatChipsModule } from '@angular/material/chips';
 import { ModalActionComponent } from './componentes/modal-action/modal-action.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
@@ -30,6 +33,7 @@ import { ProjectActionComponent } from './componentes/project-action/project-act
     RegisterComponent,
     ProfileComponent,
     NavBarComponent,
+    ProjectCardComponent,
     ModalActionComponent,
     ProjectActionComponent
   ],
@@ -46,6 +50,8 @@ import { ProjectActionComponent } from './componentes/project-action/project-act
     HttpClientModule,
     FlexLayoutModule,
     MatProgressSpinnerModule,
+    MatCardModule,
+    MatChipsModule,
     MatDialogModule,
     FormsModule,
     MatMenuModule
