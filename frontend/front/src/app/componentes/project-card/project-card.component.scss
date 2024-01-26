@@ -1,11 +1,25 @@
 .project-card {
   width: 19.5rem;
+  position: relative;
 }
 
 .project-header-image {
   background-size: cover;
   width: 1.5rem !important;
   height: 1.5rem !important;
+}
+
+.button-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  margin: 0.5rem;
+}
+
+.radios-btn {
+  z-index: inherit;
+  background-color: var(--Secondary-70, #fc9);
 }
 
 p {
