@@ -8,6 +8,15 @@ class ProjectService {
 
     return rows as Project[];
   }
+
+  public static async getAllProjectsByUserId(userId: number): Promise<Project[]> {
+    const [rows] = await connection.query<RowDataPacket[]>(
+      "SELECT * FROM projects WHERE id_user = ?",
+      [userId]
+    );
+
+    return rows as Project[];
+  }
 }
 
 export default ProjectService;
