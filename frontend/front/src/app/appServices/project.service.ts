@@ -24,4 +24,10 @@ export class ProjectService {
     this.httpClient.patch<IProject>(apiUrl, { headers: this.headers });
     return of();
   }
+
+  deleteProject(id: number): Observable<boolean> {
+    const apiUrl = new URL(environment.apiDeleteProjects, this.API).toString();
+    this.httpClient.delete<IProject>(apiUrl, { headers: this.headers });
+    return of();
+  }
 }
