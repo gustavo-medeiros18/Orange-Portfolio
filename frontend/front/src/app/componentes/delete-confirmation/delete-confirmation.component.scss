@@ -1,0 +1,83 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background: var(--Neutral-Colors-Neutral-60, #fcfdff);
+}
+
+.div-info {
+  width: 15.9375rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+h5 {
+  color: var(--Neutral-Colors-Neutral-110, #515255) !important;
+  line-height: 1.5rem;
+  padding: 0;
+  margin: 1.5rem 0 0 0;
+}
+
+span {
+  color: var(--Neutral-Colors-Neutral-110, var(--Neutral-Colors-Neutral-110, #515255));
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem;
+  letter-spacing: 0.03125rem;
+}
+
+.div-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+}
+
+#button-save {
+  display: flex;
+  padding: 0.5rem 1.375rem;
+  width: 6.625rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#button-cancel {
+  display: flex;
+  width: 7.75rem;
+  padding: 0.5rem 1.375rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 992px) {
+  .container {
+    display: flex;
+    height: 100%;
+    padding: 2.5rem 2.625rem;
+    gap: var(--4, 2rem) var(--2, 1rem);
+  }
+
+  h5 {
+    margin-top: 0;
+  }
+
+  span {
+    width: 21.0625rem;
+  }
+
+  .div-info {
+    width: 21.0625rem;
+  }
+
+  .div-buttons {
+    width: 15.375rem;
+  }
+}

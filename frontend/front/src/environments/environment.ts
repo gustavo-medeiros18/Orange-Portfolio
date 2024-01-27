@@ -2,5 +2,6 @@ export const environment = {
     production: true,
     baseUrl: "",
     apiRegister: "register",
-    apiAuthenticate:"login"
+    apiAuthenticate:"login",
+    apiProjects:"projects"
 };

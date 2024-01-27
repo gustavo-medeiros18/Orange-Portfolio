@@ -17,9 +17,12 @@ export class RegisterComponent {
   loading: boolean = false;
   // Variaveis  para exibicao da mensagem de sucesso/erro
   successAlert: boolean = false;
-  errorAlert: boolean = true;
+  errorAlert: boolean = false;
 
-  constructor(private formBuilder: NonNullableFormBuilder, private registerService: RegisterService) {}
+  constructor(
+    private formBuilder: NonNullableFormBuilder,
+    private registerService: RegisterService
+  ) {}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -54,16 +57,14 @@ export class RegisterComponent {
     }, 2000);
 
     if (this.form.invalid) this.onError();
-    this.registerService.save(this.form).subscribe(
-      {
-        next: () => {
-          this.onSuccess();
-        },
-        error: (error) => {
-          this.onError();
-        }
-      }
-    );
+    this.registerService.save(this.form).subscribe({
+      next: () => {
+        this.onSuccess();
+      },
+      error: (error) => {
+        this.onError();
+      },
+    });
   }
 
   onSuccess() {

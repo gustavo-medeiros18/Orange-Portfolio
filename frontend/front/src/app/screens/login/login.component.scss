@@ -13,7 +13,7 @@ h5 {
   display: none;
 }
 
-.formulario-container {
+.form-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,12 +23,12 @@ h5 {
 .msg-login {
   color: var(--Neutral-Colors-Neutral-110, #515255);
 }
-.msg-cadastro {
+.msg-register{
   color: var(--Neutral-Colors-Neutral-110, #515255);
   text-decoration: none;
 }
 
-.div-botao-entrar {
+.div-btn-signin {
   margin-bottom: 1.13rem;
 }
 
@@ -43,7 +43,7 @@ h5 {
   gap: 1.125rem;
 }
 
-.div-botao-google {
+.div-btn-google {
   width: 16rem;
   display: flex;
   align-self: center;
@@ -79,12 +79,12 @@ h5 {
     height: 100vh;
   }
 
-  .formulario-container h5 {
+  .form-container h5 {
     font-size: 3rem !important;
     margin-bottom: 3rem;
   }
 
-  .formulario-container {
+  .form-container {
     width: 70%;
   }
 

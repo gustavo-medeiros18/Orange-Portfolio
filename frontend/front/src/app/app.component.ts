@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalActionService } from './componentes/modal-action/modal-action.service';
+import { ProjectActionService } from './componentes/project-action/services/project-action.service';
+import { DeleteConfirmationService } from './componentes/delete-confirmation/services/delete-confirmation.service';
 
 
 @Component({
@@ -10,9 +11,13 @@ import { ModalActionService } from './componentes/modal-action/modal-action.serv
 })
 export class AppComponent {
   title = 'front';
-  constructor(private dialog: MatDialog,private modalActionService: ModalActionService) {}
+  constructor(private projectActionService: ProjectActionService, private deleteConfirmationService: DeleteConfirmationService) {}
 
-  openDialog(name: string) {
-    this.modalActionService.openDialog(name);
+  openDialog(action: string,result: string) {
+    this.projectActionService.openDialog(action,result);
+  }
+
+  openDialogDelete() {
+    this.deleteConfirmationService.openDialog();
   }
 }

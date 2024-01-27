@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.profile-img {
+  border-radius: 100px;
+}
+
+h6 {
+  color: var(--color-neutral-130, #0b0c0d) !important;
+}
+.empty-projects {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 19.5rem;
+  height: 16.125rem;
+  padding: var(--none, 4.25rem) var(--none, 1.3125rem);
+  border-radius: var(--borderRadius, 0.25rem);
+  background: var(--color-principal-70, #e6e9f2);
+}
+
+.add-project {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-18 {
+  align-self: center;
+  width: 2.875rem;
+  height: 2.875rem;
+  font-size: 2.857rem;
+  margin-bottom: 1rem;
+}
+.add-project p {
+  color: var(--Neutral-Colors-Neutral-120, #303133);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.add-project label {
+  color: var(--Neutral-Colors-Neutral-120, #303133);
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column; 
+  width: 100%;
+  height: 100%;
+  gap: 1.5rem;
+}
+
+@media screen and (min-width: 992px) {
+  .profile {
+    flex-direction: row;
+    gap: 2.62rem;
+  }
+  .projects-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .input {
+    width: 32.0625rem !important;
+  }
+
+  .project-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 76rem;
+  }
+}

@@ -1,1 +1,53 @@
-<p>profile works!</p>
+<app-nav-bar></app-nav-bar>
+<div class="container">
+  <div class="profile">
+    <div>
+      <img class="profile-img" src={{user.profileImg}} alt={{user.name}}>
+    </div>
+    <div class="user-data">
+      <h5>
+        {{user.name}}
+      </h5>
+      <p>{{user.locale}}</p>
+      <div class="create-project">
+        <button mat-raised-button (click)="openDialog('Adicionar Projeto')" class="btn-secondary">ADICIONAR
+          PROJETO</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-container">
+    <div class="search-bar">
+      <h6>Meus projetos</h6>
+      <form [formGroup]="searchForm" action="">
+        <mat-form-field class="input" appearance="outline">
+          <mat-label>Buscar tags</mat-label>
+          <input type="text" formControlName="search" matInput>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="projects">
+      <a type="button" (click)="openDialog('Adicionar Projeto')">
+        <div class="empty-projects" *ngIf="!projects.length; else hasProjects">
+          <a type="button" class="add-project">
+            <mat-icon class="mat-18">collections</mat-icon>
+            <p>Adicione seu primeiro projeto</p>
+            <label>Compartilhe seu talento com milhares de pessoas</label>
+          </a>
+        </div>
+
+      </a>
+
+      <ng-template #hasProjects>
+        <div *ngIf="searchResultEmpty; else hasResults">Sem resultados.</div>
+        <ng-template #hasResults>
+          <div *ngIf="searchProjects.length || projects">
+            <app-project-card *ngIf="searchProjects.length || projects" class="projects-list" [userName]="user.name"
+              [projects]="searchProjects.length ? searchProjects : projects"
+              [userImg]="user.profileImg"></app-project-card>
+          </div>
+        </ng-template>
+      </ng-template>
+    </div>
+  </div>
+</div>
