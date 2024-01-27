@@ -24,7 +24,7 @@ export class ModalActionComponent implements OnInit{
     @Inject(MAT_DIALOG_DATA) public modal: IModal,
     private modalService: ModalActionService,
     private alertService: ProjectActionService,
-    private formBuilder: NonNullableFormBuilder
+    private formBuilder: NonNullableFormBuilder,
   ) {}
 
   ngOnInit(): void {
@@ -62,9 +62,41 @@ export class ModalActionComponent implements OnInit{
     }
   }
 
+  handleOnConfirm() {
+    //this.project?.id ? this.updateProject() : this.createProject();
+    this.alertService.openDialog("editar", "success");
+
+  }
+  createProject() {
+    if (this.form.invalid) {
+      this.hasError = "Preencha todos os campos";
+      return;
+    }
+
+    if(!this.selectedImage) {
+      this.hasError = "Adicione uma imagem de capa ao seu projeto";
+      return;
+    }
+
+    const result = this.modalService.createProject(this.form.value);
+
+    if (!result) {
+      this.alertService.openDialog("editar", "error");
+      return;
+    }
+
+    this.alertService.openDialog("editar", "success");
+  }
+
   updateProject() {
     if (this.form.invalid) {
       this.hasError = "Preencha todos os campos";
+      return;
+    }
+
+    if(!this.selectedImage) {
+      this.hasError = "Adicione uma imagem de capa ao seu projeto";
+      return;
     }
 
     const result = this.modalService.pathProjectModal(this.form.value);
