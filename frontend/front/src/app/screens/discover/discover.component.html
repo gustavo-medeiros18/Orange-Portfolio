@@ -16,9 +16,8 @@
       </ng-container>
       <ng-template #hasResults>
         <div *ngIf="searchProjects.length || projects">
-          <app-project-card *ngIf="searchProjects.length || projects" class="projects-list" [userName]="'teste'"
-            [projects]="searchProjects.length ? searchProjects : projects"
-            [userImg]="'assets/imgs/img_profile_orange_portfolio.png'"></app-project-card>
+          <app-display-project *ngIf="searchProjects.length || projects" class="projects-list"
+            [projects]="searchProjects.length ? searchProjects : projects" [userImg]="userImg"></app-display-project>
         </div>
       </ng-template>
     </div>

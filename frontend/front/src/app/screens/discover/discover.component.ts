@@ -15,6 +15,8 @@ export class DiscoverComponent implements OnInit {
     search: [""],
   });
 
+  userImg: string = 'assets/imgs/img_profile_orange_portfolio.png'
+
   //controle de mensagem de pesquisa
   searchResultEmpty: boolean = false;
 
