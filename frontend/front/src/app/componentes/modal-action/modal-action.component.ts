@@ -5,6 +5,7 @@ import { ModalActionService } from "./services/modal-action.service";
 import { ProjectActionService } from "../project-action/services/project-action.service";
 import { IProject } from "src/app/models/iProject";
 import { IModal } from "../models/iModal";
+import { ViewProjectInfoService } from "../view-project-info/services/view-project-info.service";
 
 @Component({
   selector: "app-modal-action",
@@ -16,6 +17,7 @@ export class ModalActionComponent implements OnInit {
 
   hasError: string = "";
 
+  // projeto que esta sendo editado
   project!: IProject | null;
 
   selectedImage: string | undefined;
@@ -23,7 +25,7 @@ export class ModalActionComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public modal: IModal,
     private modalService: ModalActionService,
-    private alertService: ProjectActionService,
+    private viewProjectInfoService: ViewProjectInfoService,
     private formBuilder: NonNullableFormBuilder
   ) {}
 
@@ -61,7 +63,51 @@ export class ModalActionComponent implements OnInit {
     }
   }
 
-  updateProject() {
+  addProject(form: FormGroup){
+    const user: IModal = {
+      name: "Camila",
+      lastName: "Soares",
+      email: "camilasoares123@gmail.com",
+      profileImg: "assets/imgs/img_profile_orange_portfolio.png",
+    };
+    const projectForm = this.form.value;
+    const project: IProject = {
+      title: projectForm.title,
+      tags: projectForm.tags.split(","),
+      link: projectForm.link,
+      description: projectForm.description,
+      releaseDate: "2024-01-27",
+      id: 1,
+      img: this.selectedImage
+    };
+    this.viewProjectInfoService.openDialog(user,project);
+    //call to API
+    // call project-action
+  }
+
+  editProject(form: FormGroup){
+    const user: IModal = {
+      name: "Camila",
+      lastName: "Soares",
+      email: "camilasoares123@gmail.com",
+      profileImg: "assets/imgs/img_profile_orange_portfolio.png",
+    };
+    const projectForm = this.form.value;
+    const project: IProject = {
+      title: projectForm.title,
+      tags: projectForm.tags.split(","),
+      link: projectForm.link,
+      description: projectForm.description,
+      releaseDate: "2024-01-27",
+      id: 1,
+      img: this.selectedImage
+    };
+    this.viewProjectInfoService.openDialog(user,project);
+    // call to API
+    // call project-action
+  }
+
+  /*updateProject() {
     if (this.form.invalid) {
       this.hasError = "Preencha todos os campos";
     }
@@ -74,5 +120,5 @@ export class ModalActionComponent implements OnInit {
     }
 
     this.alertService.openDialog("editar", "success");
-  }
+  }*/
 }

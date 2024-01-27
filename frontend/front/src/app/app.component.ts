@@ -13,29 +13,10 @@ import { IModal } from "./componentes/models/iModal";
 export class AppComponent {
   title = "front";
 
-  project: IProject;
-  user: IModal;
-
   constructor(
     private projectActionService: ProjectActionService,
     private deleteConfirmationService: DeleteConfirmationService,
-    private viewProjectInfoService: ViewProjectInfoService
-  ) {
-    this.project = {
-      title: "Projeto Aleatório",
-      tags: ["Tag1", "Tag2", "Tag3"],
-      link: "https://exemplo.com",
-      description: "Este é um projeto aleatório com informações fictícias",
-      releaseDate: "2024-01-27",
-      id: 1,
-    };
-    this.user = {
-      name: "Username",
-      lastName: "Da silva",
-      email: "123@gmail.com",
-
-    }
-  }
+  ) {}
 
   openDialog(action: string, result: string) {
     this.projectActionService.openDialog(action, result);
@@ -43,9 +24,5 @@ export class AppComponent {
 
   openDialogDelete() {
     this.deleteConfirmationService.openDialog();
-  }
-
-  openDialogViewProject(user: IModal, project: IProject) {
-    this.viewProjectInfoService.openDialog(user,project);
   }
 }

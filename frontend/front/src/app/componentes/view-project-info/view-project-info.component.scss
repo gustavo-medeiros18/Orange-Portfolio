@@ -33,6 +33,18 @@ h5 {
     gap: calc(0.33 * 80%);
 }
 
+.profile-info {
+    display: flex;
+    padding: var(--none, 0rem);
+    align-items: center;
+    gap: var(--1, 0.5rem);
+}
+
+.profile-img {
+    width: var(--5, 2.5rem);
+    height: var(--5, 2.5rem);
+    border-radius: 20px;
+}
 
 .subtitle-1 {
     text-decoration: none;
