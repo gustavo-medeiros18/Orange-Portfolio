@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import userRouter from "./routers/user.router";
 import projectRouter from "./routers/project.router";
-import { multerMiddleware } from "./middlewares/uploader";
+import { multerMiddleware } from "./middlewares/fileParser";
 
 dotenv.config();
 
