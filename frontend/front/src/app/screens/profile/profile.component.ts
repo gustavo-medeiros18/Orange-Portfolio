@@ -1,8 +1,10 @@
+import { ProfileService } from "./services/profile.service";
 import { FormBuilder } from "@angular/forms";
 import { IProject } from "../../models/iProject";
 import { Component, OnInit } from "@angular/core";
 import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs";
 import { ModalActionService } from "src/app/componentes/modal-action/services/modal-action.service";
+import { DiscoverService } from "../discover/service/discover.service";
 
 @Component({
   selector: "app-profile",
@@ -26,10 +28,12 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private discoverService: DiscoverService,
     private modalActionService: ModalActionService
   ) {}
 
   ngOnInit(): void {
+    this.getAllProjects();
     this.searchForm
       .get("search")
       ?.valueChanges.pipe(
@@ -52,5 +56,16 @@ export class ProfileComponent implements OnInit {
 
   openDialog(name: string) {
     this.modalActionService.openDialog(name);
+  }
+
+  getAllProjects() {
+    this.discoverService.getProjectsDiscover().subscribe({
+      next: (projects: IProject[]) => {
+        this.projects = projects;
+      },
+      error: (error) => {
+        console.error("Erro ao recuperar projetos:", error);
+      },
+    });
   }
 }
