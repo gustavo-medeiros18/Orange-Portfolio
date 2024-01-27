@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { DeleteConfirmationService } from './services/delete-confirmation.service';
 
 @Component({
   selector: 'app-delete-confirmation',
@@ -8,5 +10,7 @@ import { Component } from '@angular/core';
 export class DeleteConfirmationComponent {
 
   constructor() {}
-  
+
+
+
 }
