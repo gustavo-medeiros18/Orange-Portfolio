@@ -1,8 +1,7 @@
-import { ProfileService } from "./services/profile.service";
 import { FormBuilder } from "@angular/forms";
-import { IProject, ProjecEventEnum } from "../../models/iProject";
+import { IProject } from "../../models/iProject";
 import { Component, OnInit } from "@angular/core";
-import { debounceTime, distinctUntilChanged, filter, map, switchMap } from "rxjs";
+import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs";
 import { ModalActionService } from "src/app/componentes/modal-action/services/modal-action.service";
 
 @Component({
@@ -19,13 +18,6 @@ export class ProfileComponent implements OnInit {
   //controle de mensagem de pesquisa
   searchResultEmpty: boolean = false;
 
-  //controle de dados do usuário
-  user = {
-    name: "Camila Soares",
-    locale: "Brasil",
-    profileImg: "assets/imgs/img_profile_orange_portfolio.png",
-  };
-
   //controle de dados pesquisados
   searchProjects: IProject[] = [];
 
@@ -34,12 +26,10 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private profileService: ProfileService,
     private modalActionService: ModalActionService
   ) {}
 
   ngOnInit(): void {
-    this.getAllProjects();
     this.searchForm
       .get("search")
       ?.valueChanges.pipe(
@@ -62,16 +52,5 @@ export class ProfileComponent implements OnInit {
 
   openDialog(name: string) {
     this.modalActionService.openDialog(name);
-  }
-
-  getAllProjects() {
-    this.profileService.getProjectsProfile().subscribe({
-      next: (projects: IProject[]) => {
-        this.projects = projects;
-      },
-      error: (error) => {
-        console.error("Erro ao recuperar projetos:", error);
-      },
-    });
   }
 }
