@@ -33,6 +33,18 @@ class ProjectService {
     return rows as Project[];
   }
 
+  public static async getProjectById(projectId: number): Promise<Project | undefined> {
+    const [rows] = await connection.query<RowDataPacket[]>("SELECT * FROM projects WHERE id = ?", [
+      projectId,
+    ]);
+
+    if (rows.length === 1) {
+      return rows[0] as Project;
+    }
+
+    return undefined;
+  }
+
   public static async updateProject(
     id: number,
     updatedProject: Project
