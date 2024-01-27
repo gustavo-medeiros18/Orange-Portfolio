@@ -34,6 +34,19 @@ class UserService {
 
     return result.affectedRows > 0;
   }
+
+  public static async updateUser(id: number, updatedUser: User): Promise<User | undefined> {
+    const [result] = await connection.query<ResultSetHeader>("UPDATE users SET ? WHERE id = ?", [
+      updatedUser,
+      id,
+    ]);
+
+    if (result.affectedRows === 1) {
+      return { ...updatedUser, id } as User;
+    }
+
+    return undefined;
+  }
 }
 
 export default UserService;

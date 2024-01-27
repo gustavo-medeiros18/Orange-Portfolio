@@ -1,0 +1,25 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+  <h5 class="title">Junte-se à comunidade de inovação, inspiração e descobertas, transformando experiências em conexões
+    inesquecíveis</h5>
+
+  <div class="projects">
+    <form action="">
+      <mat-form-field class="input" appearance="outline">
+        <mat-label>Buscar tags</mat-label>
+        <input type="text" formControlName="search" matInput>
+      </mat-form-field>
+    </form>
+    <div class="list-projects">
+      <ng-container *ngIf="searchResultEmpty; else hasResults">
+        <div>Sem resultados.</div>
+      </ng-container>
+      <ng-template #hasResults>
+        <div *ngIf="searchProjects.length || projects">
+          <app-display-project *ngIf="searchProjects.length || projects" class="projects-list"
+            [projects]="searchProjects.length ? searchProjects : projects" [userImg]="userImg"></app-display-project>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

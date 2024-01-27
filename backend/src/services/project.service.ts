@@ -13,7 +13,13 @@ class ProjectService {
   }
 
   public static async getAllProjects(): Promise<Project[]> {
-    const [rows] = await connection.query<RowDataPacket[]>("SELECT * FROM projects");
+    const sqlStatement =
+      "SELECT p.id, p.title, p.tags, p.link, p.description, p.img_url, u.name " +
+      "AS first_name, u.last_name AS last_name FROM projects p " +
+      "INNER JOIN " +
+      "users u ON p.id_user = u.id";
+
+    const [rows] = await connection.query<RowDataPacket[]>(sqlStatement);
 
     return rows as Project[];
   }

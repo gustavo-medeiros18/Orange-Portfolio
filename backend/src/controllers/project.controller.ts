@@ -1,7 +1,7 @@
 import ProjectService from "../services/project.service";
 import { Request, Response } from "express";
-import multer from "multer";
 import { Project } from "../models/project.model";
+import { uploadFile } from "../utils/fileUploadUtils";
 
 class ProjectController {
   public static async createProject(req: Request, res: Response) {
@@ -19,7 +19,9 @@ class ProjectController {
         .status(422)
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
-    newProject.img_url = req.file!.path;
+
+    const downloadURL = await uploadFile(req.file!);
+    newProject.img_url = downloadURL;
 
     const createdProject = await ProjectService.createProject(newProject);
 

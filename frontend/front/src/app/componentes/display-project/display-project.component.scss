@@ -10,19 +10,6 @@
   height: 1.5rem !important;
 }
 
-.button-container {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
-  margin: 0.5rem;
-}
-
-.radios-btn {
-  z-index: inherit;
-  background-color: var(--Secondary-70, #fc9);
-}
-
 p {
   margin-left: 0.2rem;
   font-size: 1rem !important;
@@ -41,12 +28,6 @@ p {
   flex-wrap: nowrap;
 }
 
-.chips {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-}
 
 @media screen and (min-width: 992px) {
   .project-card {
