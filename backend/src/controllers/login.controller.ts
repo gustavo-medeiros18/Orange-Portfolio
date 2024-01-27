@@ -1,18 +1,20 @@
 import { Request, Response } from "express";
 import LoginService from "../services/login.service";
-import { Login } from "../models/login.model";
+import { comparePasswords } from "../utils/bcryptUtils";
 
 class LoginController {
   public static async loginUser(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
 
-      console.log(email, password);
+      const user = await LoginService.authenticateLogin(email, password);
 
-      const userLogin = await LoginService.authenticateLogin(email, password);
+      if (user) {
+        const isAValidPassword = await comparePasswords(password, user.password);
 
-      if (userLogin) {
-        res.json({ message: "Login bem-sucedido.", userLogin });
+        if (isAValidPassword) {
+          return res.json({ message: "Login bem-sucedido.", user });
+        }
       } else {
         res.status(401).json({ message: "Credenciais inválidas." });
       }
