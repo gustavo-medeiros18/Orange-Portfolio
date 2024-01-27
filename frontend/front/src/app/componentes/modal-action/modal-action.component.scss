@@ -1,83 +1,117 @@
 h5 {
-    flex-shrink: 0;
-    align-self: stretch;
-    color: var(--Neutral-Colors-Neutral-110, #515255);
-    line-height: 1.5rem;
+  flex-shrink: 0;
+  align-self: stretch;
+  color: var(--Neutral-Colors-Neutral-110, #515255);
+  line-height: 1.5rem;
 }
 
 .subtitle-1 {
-    align-self: stretch;
-    color: var(--Neutral-Colors-Neutral-110, #515255);
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1rem;
-    letter-spacing: 0.00938rem;
+  text-decoration: none;
+  align-self: stretch;
+  color: var(--Neutral-Colors-Neutral-110, #515255);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1rem;
+  letter-spacing: 0.00938rem;
+}
+
+.hidden-input {
+  display: none;
 }
 
 #description-field {
-    display: flex;
-    height: 6.5rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--none, 0rem);
+  display: flex;
+  height: 6.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--none, 0rem);
+}
 
+.add-project {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-18 {
+  align-self: center;
+  width: 2.875rem;
+  height: 2.875rem;
+  font-size: 2.857rem;
+  margin-bottom: 1rem;
+}
+.empty-projects {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24.3125rem;
+  height: 19rem;
+  padding: var(--none, 4.25rem) var(--none, 1.3125rem);
+  border-radius: var(--borderRadius, 0.25rem);
+  background: var(--color-principal-70, #e6e9f2);
+}
+
+.button-container {
+  padding: 0 !important;
+}
+.project-cover {
+  width: 24.3125rem;
+  border-radius: 0.25rem;
+  object-fit: cover;
 }
 
 .div-finish-modal {
-    display: flex;
-    padding: var(--none, 0rem);
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--2, 1rem);
+  display: flex;
+  padding: var(--none, 0rem);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--2, 1rem);
 }
-
-.upload-img {
-    height: 19rem;
-    flex-shrink: 0;
-    border-radius:  0.25rem;
+.projects button {
+  cursor: pointer;
+  border: none;
+  border-radius: 0.25rem;
 }
 
 #button-save {
-    color: #FCFDFF;
-    display: flex;
-    margin-right: 1rem;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  color: #fcfdff;
+  display: flex;
+  margin-right: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-    border-radius: var(--borderRadius, 0.25rem);
-    background: var(--Color-Brand-Secundria-Secondary-100, #F52);
-    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.20), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  border-radius: var(--borderRadius, 0.25rem);
+  background: var(--Color-Brand-Secundria-Secondary-100, #f52);
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 
 #button-cancel {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-    border-radius: var(--borderRadius, 0.25rem);
-    background: var(--action-disabledBackground, rgba(0, 0, 0, 0.12));
+  border-radius: var(--borderRadius, 0.25rem);
+  background: var(--action-disabledBackground, rgba(0, 0, 0, 0.12));
 
-    color: var(--action-disabled, rgba(0, 0, 0, 0.38));
-    font-feature-settings: 'clig' off, 'liga' off;
+  color: var(--action-disabled, rgba(0, 0, 0, 0.38));
+  font-feature-settings: "clig" off, "liga" off;
 
-    font-family: Roboto;
-    font-size: 0.9375rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 1.625rem; 
-    letter-spacing: 0.02875rem;
-    text-transform: uppercase;
+  font-family: Roboto;
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.625rem;
+  letter-spacing: 0.02875rem;
+  text-transform: uppercase;
 }
 
-
-
 @media screen and (min-width: 992px) {
-    .container {
-        display: flex;
-        flex-direction: row-reverse;
-        gap: 3rem;
-    }
+  .container {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 3rem;
+  }
 }

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { LoginService } from './services/login.service';
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
+import { LoginService } from "./services/login.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
   // Formulário do Angular
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   visibility: boolean = false;
 
   // Senha, inicialmente oculta
-  password: string = 'password';
+  password: string = "password";
 
   // Variável de controle para o estado de carregamento
   loading: boolean = false;
@@ -25,23 +25,23 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     // Inicialização do formulário
     this.form = this.formBuilder.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required]],
     });
   }
 
   // Função para retornar a mensagem de erro do formulário
   formErrorMessage() {
-    return 'Field required';
+    return "Field required";
   }
 
   // Função para alternar a visibilidade da senha
   onClick() {
     this.visibility = !this.visibility;
-    if (this.password === 'text') {
-      this.password = 'password';
-    } else if (this.password === 'password') {
-      this.password = 'text';
+    if (this.password === "text") {
+      this.password = "password";
+    } else if (this.password === "password") {
+      this.password = "text";
     }
   }
 
@@ -55,17 +55,15 @@ export class LoginComponent implements OnInit {
       this.loading = false;
     }, 2000);
 
-    if(this.form.invalid) this.onError();
-    this.loginService.authenticate(this.form).subscribe(
-      {
-        next: () => {
-          this.onSuccess();
-        },
-        error: (error) => {
-          this.onError();
-        }
-      }
-    );
+    if (this.form.invalid) this.onError();
+    this.loginService.authenticate(this.form).subscribe({
+      next: () => {
+        this.onSuccess();
+      },
+      error: (error) => {
+        this.onError();
+      },
+    });
   }
 
   onSuccess() {

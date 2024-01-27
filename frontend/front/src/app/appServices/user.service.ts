@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { IUserRegister } from "../models/iUserRegister";
 import { environment } from "src/environments/environment.development";
 import { IUserLogin } from "../models/iUserLogin";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -13,10 +14,10 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) {}
 
-  save(record: IUserRegister) {
+  save(record: IUserRegister): Observable<IUserRegister> {
     const apiUrl = new URL(environment.apiRegister, this.API).toString();
     const requestBody: string = JSON.stringify(record);
-    this.httpClient.post<IUserRegister>(apiUrl, requestBody, { headers: this.headers }).subscribe();
+    return this.httpClient.post<IUserRegister>(apiUrl, requestBody, { headers: this.headers });
   }
 
   authenticate(record: IUserLogin) {

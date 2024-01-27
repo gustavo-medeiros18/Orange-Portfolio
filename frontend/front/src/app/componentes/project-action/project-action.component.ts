@@ -1,6 +1,7 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject,OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { IModalAction } from "../models/imodalAction";
+import { ModalActionService } from "../modal-action/services/modal-action.service";
 
 @Component({
   selector: "app-project-action",
@@ -16,6 +17,7 @@ export class ProjectActionComponent implements OnInit {
   ngOnInit() {
     this.handleData(this.modal.action, this.modal.result);
   }
+
 
   handleData(action: string, result: string) {
     switch (action) {
