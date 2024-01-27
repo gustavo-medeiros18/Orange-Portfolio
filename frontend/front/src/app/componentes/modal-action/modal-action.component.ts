@@ -28,10 +28,9 @@ export class ModalActionComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    if (this.modal.name === "Editar Projeto") {
-      this.project = this.modalService.currentProject.data;
-    } else if (this.modal.name === "Adicionar Projeto"){
-      this.project = null;
+    const currentProject = this.modalService.currentProject;
+    if (currentProject){
+      this.project = currentProject.data;
     }
     this.selectedImage = this.project?.img;
     this.form = this.formBuilder.group({
@@ -40,6 +39,7 @@ export class ModalActionComponent implements OnInit{
       link: [this.project? this.project.link: "", [Validators.required]],
       description: [this.project? this.project.description: "", [Validators.required]],
     });
+    this.modalService.clearProjectInfo(); // retorna ao estado inicial (inputs vazios)
   }
 
 

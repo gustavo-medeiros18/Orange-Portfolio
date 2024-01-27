@@ -14,7 +14,7 @@ export class ModalActionService {
 
   private updateProject: Observable<IProjectEvent<ProjecEventEnum,IProject>> = this.emitter.asObservable();
 
-  currentProject!: IProjectEvent<ProjecEventEnum,IProject>;
+  currentProject: IProjectEvent<ProjecEventEnum,IProject> | null = null;
 
   constructor(private dialog: MatDialog, private projectService: ProjectService) {
     this.updateProject.subscribe({
@@ -33,8 +33,8 @@ export class ModalActionService {
     this.emitter.next({ ...action });
   }
 
-  completeEmitter(): void {
-   this.emitter.complete();
+  clearProjectInfo(): void {
+    this.currentProject = null;
   }
 
   pathProjectModal(params: IProject): Promise<boolean> {
