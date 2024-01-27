@@ -28,7 +28,8 @@ export class ProjectService {
 
   patchProject(params: IProject): Observable<boolean> {
     const apiUrl = new URL(environment.apiPatchProjects, this.API).toString();
-    this.httpClient.patch<IProject>(apiUrl, { headers: this.headers });
+    const requestBody: string = JSON.stringify(params);
+    this.httpClient.patch<IProject>(apiUrl, requestBody, { headers: this.headers });
     return of();
   }
 
