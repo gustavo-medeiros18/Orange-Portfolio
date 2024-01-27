@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './screens/login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RegisterComponent } from './screens/register/register.component';
@@ -22,11 +22,12 @@ import { ProjectCardComponent } from './componentes/project-card/project-card.co
 import { MatChipsModule } from '@angular/material/chips';
 import { ModalActionComponent } from './componentes/modal-action/modal-action.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
 import { ProjectActionComponent } from './componentes/project-action/project-action.component';
 import { DeleteConfirmationComponent } from './componentes/delete-confirmation/delete-confirmation.component';
 import { ViewProjectInfoComponent } from './componentes/view-project-info/view-project-info.component';
+import { DiscoverComponent } from './screens/discover/discover.component';
+import { DisplayProjectComponent } from './componentes/display-project/display-project.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,9 @@ import { ViewProjectInfoComponent } from './componentes/view-project-info/view-p
     ModalActionComponent,
     ProjectActionComponent,
     DeleteConfirmationComponent,
-    ViewProjectInfoComponent
+    ViewProjectInfoComponent,
+    DiscoverComponent,
+    DisplayProjectComponent
   ],
   imports: [
     BrowserModule,
