@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ModalActionService } from "./services/modal-action.service";
 import { ProjectActionService } from "../project-action/services/project-action.service";
 import { IProject} from "src/app/models/iProject";
-import { IModal } from "./models/imodal";
+import { IModal } from "../models/imodal";
 
 @Component({
   selector: "app-modal-action",
