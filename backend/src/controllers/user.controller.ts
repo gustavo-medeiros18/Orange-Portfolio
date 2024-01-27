@@ -56,6 +56,8 @@ class UserController {
     const updatedUserData: User = req.body;
 
     try {
+      updatedUserData.password = await hashPassword(updatedUserData.password);
+
       const updatedUser = await UserService.updateUser(userId, updatedUserData);
 
       if (!updatedUser) {
