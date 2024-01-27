@@ -38,7 +38,7 @@ export class ProjectCardComponent implements OnInit {
     this.modalDeleteService.openDialog();
     this.modalDeleteService.confirm().subscribe((confirm) => {
       if (confirm) {
-        this.alertService.openDialog("deletar", "seccess");
+        this.alertService.openDialog("deletar", "success");
       }
     });
   }
