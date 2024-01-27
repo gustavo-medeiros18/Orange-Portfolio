@@ -6,6 +6,19 @@ h5 {
     color: var(--Neutral-Colors-Neutral-120, #303133);
 }
 
+#username {
+    color: var(--Neutral-Colors-Neutral-120, #303133);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+#project-title {
+    color: var(--Neutral-Colors-Neutral-120, #303133);
+    text-align: center;
+}
+
 .dialog-title {
     display: flex;
     justify-content: space-between;

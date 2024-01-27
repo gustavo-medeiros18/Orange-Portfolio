@@ -1,6 +1,6 @@
 import { Component, Inject,OnInit } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { IModalAction } from "../models/imodalAction";
+import { IModalAction } from "../models/iModalAction";
 import { ModalActionService } from "../modal-action/services/modal-action.service";
 
 @Component({

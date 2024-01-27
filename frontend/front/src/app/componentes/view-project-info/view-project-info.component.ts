@@ -1,6 +1,7 @@
-import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, Inject} from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IProject } from 'src/app/models/iProject';
+import { IModal } from '../models/iModal';
 
 @Component({
   selector: 'app-view-project-info',
@@ -9,5 +10,5 @@ import { IProject } from 'src/app/models/iProject';
 })
 export class ViewProjectInfoComponent {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public modal: IProject){}
+  constructor(@Inject(MAT_DIALOG_DATA) public modal: {user: IModal, project: IProject}){}
 }
