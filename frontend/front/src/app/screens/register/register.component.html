@@ -25,27 +25,27 @@
             <mat-form-field class="input" id="nameField" appearance="outline">
               <mat-label>Nome</mat-label>
               <input matInput formControlName = "name">
-              <mat-error *ngIf="form.get('name')?.invalid">{{formErrorMessage()}}</mat-error>
+              <mat-error *ngIf="form.get('name')?.invalid">{{formErrorMessage('name')}}</mat-error>
             </mat-form-field>
             <mat-form-field class="input" id="lastNameField" appearance="outline">
               <mat-label>Sobrenome</mat-label>
               <input matInput formControlName = "lastName">
-              <mat-error *ngIf="form.get('lastName')?.invalid">{{formErrorMessage()}}</mat-error>
+              <mat-error *ngIf="form.get('lastName')?.invalid">{{formErrorMessage('lastName')}}</mat-error>
             </mat-form-field>
           </div>
           <mat-form-field class="input" appearance="outline">
             <mat-label>Email address</mat-label>
             <input matInput formControlName = "email">
-            <mat-error *ngIf="form.get('email')?.invalid">{{formErrorMessage()}}</mat-error>
+            <mat-error *ngIf="form.get('email')?.invalid">{{formErrorMessage('email')}}</mat-error>
           </mat-form-field>
           <mat-form-field class="input" appearance="outline">
             <mat-label>Password</mat-label>
             <input type={{password}} matInput formControlName = "password">
-            <mat-error *ngIf="form.get('password')?.invalid">{{formErrorMessage()}}</mat-error>
+            <mat-error *ngIf="form.get('password')?.invalid">{{formErrorMessage('password')}}</mat-error>
             <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
             <mat-icon (click)="onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
           </mat-form-field>
-          <button (click)="singUp()" class="btn-primary" mat-raised-button color="primary">
+          <button (click)="signUp()" class="btn-primary" mat-raised-button color="primary">
             <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
               [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
             <span *ngIf="!loading">CADASTRAR</span></button>

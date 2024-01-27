@@ -24,6 +24,9 @@ import { ModalActionComponent } from './componentes/modal-action/modal-action.co
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
+import { ProjectActionComponent } from './componentes/project-action/project-action.component';
+import { DeleteConfirmationComponent } from './componentes/delete-confirmation/delete-confirmation.component';
+import { ViewProjectInfoComponent } from './componentes/view-project-info/view-project-info.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import {MatMenuModule} from '@angular/material/menu';
     ProfileComponent,
     NavBarComponent,
     ProjectCardComponent,
-    ModalActionComponent
+    ModalActionComponent,
+    ProjectActionComponent,
+    DeleteConfirmationComponent,
+    ViewProjectInfoComponent
   ],
   imports: [
     BrowserModule,

@@ -1,40 +1,58 @@
 <h5 mat-dialog-title>{{modal.name}}</h5>
 <mat-dialog-content class="mat-typography">
-  <div class = "container">
-  <div class="div-form">
-    <form [formGroup]="form">
-      <div class="sub-fomulario">
-        <mat-form-field class="input" id="nameField" appearance="outline">
-          <mat-label>Título</mat-label>
-          <input matInput />
+  <div class="container">
+    <div class="div-form">
+      <form [formGroup]="form">
+        <div class="sub-fomulario">
+          <mat-form-field class="input" id="nameField" appearance="outline">
+            <mat-label>Título</mat-label>
+            <input matInput formControlName="title" />
+            <mat-error *ngIf="form.get('title')?.invalid">{{formErrorMessage()}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="input" id="lastNameField" appearance="outline">
+            <mat-label>Tags</mat-label>
+            <input matInput formControlName="tags" />
+            <mat-error *ngIf="form.get('tags')?.invalid">{{formErrorMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <mat-form-field class="input" appearance="outline">
+          <mat-label>Link</mat-label>
+          <input matInput formControlName="link" />
+          <mat-error *ngIf="form.get('link')?.invalid">{{formErrorMessage()}}</mat-error>
         </mat-form-field>
-        <mat-form-field class="input" id="lastNameField" appearance="outline">
-          <mat-label>Tags</mat-label>
-          <input matInput />
+        <mat-form-field id="description-field" class="input" appearance="outline">
+          <mat-label>Descrição</mat-label>
+          <input matInput formControlName="description" />
+          <mat-error *ngIf="form.get('description')?.invalid">{{formErrorMessage()}}</mat-error>
         </mat-form-field>
+      </form>
+    </div>
+    <!-- carregar componente de upload-->
+    <div class="upload-img">
+      <p class="subtitle-1">Selecione o conteúdo que você deseja fazer upload</p>
+      <div class="projects">
+        <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/png"
+          class="hidden-input" />
+        <button (click)="triggerFile(fileInput)">
+          <div *ngIf="!selectedImage" class="empty-projects">
+            <span class="add-project">
+              <mat-icon class="mat-18">collections</mat-icon>
+              <p>Adicione seu primeiro projeto</p>
+              <label>Compartilhe seu talento com milhares de pessoas</label>
+            </span>
+          </div>
+          <img *ngIf="selectedImage" class="project-cover" [src]="selectedImage" alt="Imagem selecionada" />
+        </button>
       </div>
-      <mat-form-field class="input" appearance="outline">
-        <mat-label>Link</mat-label>
-        <input matInput />
-      </mat-form-field>
-      <mat-form-field id="description-field" class="input" appearance="outline">
-        <mat-label>Descrição</mat-label>
-        <input matInput />
-      </mat-form-field>
-    </form>
+    </div>
   </div>
-  <!-- carregar componente de upload-->
-  <div class = "upload-img">
-    <p class="subtitle-1">Selecione o conteúdo que você deseja fazer upload</p>
+  <div class="div-finish-modal">
+    <a type="button" class=" subtitle-1"> Visualizar publicação</a>
+    <mat-dialog-actions class="button-container">
+      <button id="button-save" mat-button mat-dialog-close>SALVAR</button>
+      <button id="button-cancel" mat-button [mat-dialog-close]="true" cdkFocusInitial>
+        CANCELAR
+      </button>
+    </mat-dialog-actions>
   </div>
-</div>
-<div class="div-finish-modal">
-  <span class="subtitle-1"> Visualizar publicação</span>
-  <mat-dialog-actions align="end">
-    <button id="button-save" mat-button mat-dialog-close>SALVAR</button>
-    <button id="button-cancel" mat-button [mat-dialog-close]="true" cdkFocusInitial>
-      CANCELAR
-    </button>
-  </mat-dialog-actions>
-</div>
 </mat-dialog-content>

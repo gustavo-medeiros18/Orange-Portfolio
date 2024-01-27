@@ -21,6 +21,7 @@ export class ProfileService {
           description: "teste, teste, teste",
           img: "assets/imgs/img_landingpage_orange_portfolio.svg",
           releaseDate: "12/10",
+          id: 3,
         },
         {
           title: "teste1",
@@ -29,6 +30,7 @@ export class ProfileService {
           description: "teste, teste, teste",
           img: "assets/imgs/img_landingpage_orange_portfolio.svg",
           releaseDate: "12/10",
+          id: 3,
         },
         {
           title: "teste2",
@@ -37,6 +39,7 @@ export class ProfileService {
           description: "teste, teste, teste",
           img: "assets/imgs/img_landingpage_orange_portfolio.svg",
           releaseDate: "12/10",
+          id: 3,
         },
       ];
 

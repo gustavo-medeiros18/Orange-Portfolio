@@ -1,9 +1,9 @@
 import { ProfileService } from "./services/profile.service";
 import { FormBuilder } from "@angular/forms";
-import { IProject } from "../../models/iProject";
+import { IProject, ProjecEventEnum } from "../../models/iProject";
 import { Component, OnInit } from "@angular/core";
 import { debounceTime, distinctUntilChanged, filter, map, switchMap } from "rxjs";
-import { ModalActionService } from "src/app/componentes/modal-action/modal-action.service";
+import { ModalActionService } from "src/app/componentes/modal-action/services/modal-action.service";
 
 @Component({
   selector: "app-profile",
@@ -46,7 +46,6 @@ export class ProfileComponent implements OnInit {
         map((value) => value!.trim()),
         debounceTime(300),
         distinctUntilChanged(),
-        //tap((value => console.log(value)))),
         switchMap(async (value) => {
           this.handleSearch(value);
         })
@@ -55,11 +54,9 @@ export class ProfileComponent implements OnInit {
   }
 
   handleSearch(value: string) {
-    this.searchProjects = this.projects.filter(
-      (project) => {
-        return project.tags && project.tags.some((tag) => tag.startsWith(value))
-      }
-    );
+    this.searchProjects = this.projects.filter((project) => {
+      return project.tags && project.tags.some((tag) => tag.startsWith(value));
+    });
     this.searchResultEmpty = this.searchProjects.length === 0;
   }
 
