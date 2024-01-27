@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
+import { EmailValidator, FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { RegisterService } from "./services/register.service";
 
 @Component({
@@ -28,13 +28,20 @@ export class RegisterComponent {
     this.form = this.formBuilder.group({
       name: ["", [Validators.required]],
       lastName: ["", [Validators.required]],
-      email: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required]],
     });
   }
 
-  formErrorMessage() {
-    return "Field required";
+  formErrorMessage(fieldName: string) {
+    const field = this.form.get(fieldName);
+    if (field?.hasError('required')) {
+      return "Field required"; 
+    }
+    if (field?.hasError('email')){
+      return "Endereço de email inválido";
+    }
+    return;
   }
 
   onClick() {
@@ -47,7 +54,7 @@ export class RegisterComponent {
   }
 
   // Função de simulação de login assíncrono
-  singUp() {
+  signUp() {
     this.loading = true;
 
     // Simula uma operação assíncrona (por exemplo, uma requisição HTTP)
@@ -58,7 +65,8 @@ export class RegisterComponent {
 
     if (this.form.invalid) this.onError();
     this.registerService.save(this.form).subscribe({
-      next: () => {
+      next: (data) => {
+        console.log(data);
         this.onSuccess();
       },
       error: (error) => {
