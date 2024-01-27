@@ -46,6 +46,37 @@ class ProjectController {
     return res.status(200).json(projects);
   }
 
+  public static async updateProject(req: Request, res: Response) {
+    const projectId = parseInt(req.params.id);
+    const updatedProject: Project = req.body;
+
+    console.log(updatedProject.title);
+
+    if (
+      !updatedProject ||
+      !updatedProject.title ||
+      !updatedProject.description ||
+      !updatedProject.tags ||
+      !updatedProject.link ||
+      !req.file
+    ) {
+      return res
+        .status(422)
+        .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
+    }
+
+    const downloadURL = await uploadFile(req.file!);
+    updatedProject.img_url = downloadURL;
+
+    const updated = await ProjectService.updateProject(projectId, updatedProject);
+
+    if (!updated) {
+      return res.status(404).json({ message: "Projeto não encontrado." });
+    }
+
+    return res.status(200).json(updated);
+  }
+
   public static async deleteProject(req: Request, res: Response) {
     const projectId = parseInt(req.params.id);
 
