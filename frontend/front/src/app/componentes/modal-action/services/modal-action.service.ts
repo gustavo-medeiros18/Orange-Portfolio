@@ -37,6 +37,19 @@ export class ModalActionService {
     this.currentProject = null;
   }
 
+  createProjectModal(params: IProject): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.projectService.createproject(params).subscribe({
+        next: (value) => {
+          resolve(true);
+        },
+        error: (error) => {
+          reject(error);
+        },
+      });
+    });
+  }
+
   pathProjectModal(params: IProject): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       this.projectService.patchProject(params).subscribe({

@@ -78,7 +78,7 @@ export class ModalActionComponent implements OnInit{
       return;
     }
 
-    const result = this.modalService.createProject(this.form.value);
+    const result = this.modalService.createProjectModal(this.form.value);
 
     if (!result) {
       this.alertService.openDialog("editar", "error");
