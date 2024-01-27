@@ -1,10 +1,9 @@
 import { RowDataPacket } from "mysql2";
 import { User } from "../models/user.model";
 import connection from "../database/config";
-import { comparePasswords } from "../utils/bcryptUtils";
 
 class LoginService {
-  public static async authenticateLogin(email: string, password: string) {
+  public static async authenticateLogin(email: string) {
     try {
       const [rows] = await connection.query<RowDataPacket[]>(
         "SELECT * FROM users WHERE email = ?",
