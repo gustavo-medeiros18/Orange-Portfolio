@@ -38,6 +38,18 @@ class UserController {
     }
     return res.status(201).json(createdUser);
   }
+
+  public static async deleteUser(req: Request, res: Response) {
+    const userId = parseInt(req.params.id, 10);
+
+    const result = await UserService.deleteUser(userId);
+
+    if (result) {
+      return res.json({ message: "Usuário deletado com sucesso." });
+    } else {
+      return res.status(404).json({ message: "Usuário não encontrado." });
+    }
+  }
 }
 
 export default UserController;
