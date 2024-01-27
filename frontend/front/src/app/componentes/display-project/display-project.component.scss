@@ -1,0 +1,36 @@
+.project-card {
+  width: 19.5rem;
+  position: relative;
+  box-shadow: none !important;
+}
+
+.project-header-image {
+  background-size: cover;
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+}
+
+p {
+  margin-left: 0.2rem;
+  font-size: 1rem !important;
+}
+
+.card-infos {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.data-user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+
+@media screen and (min-width: 992px) {
+  .project-card {
+    width: 24.3125rem;
+  }
+}
