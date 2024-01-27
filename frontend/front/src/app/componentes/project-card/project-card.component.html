@@ -20,7 +20,8 @@
         <div class="data-user">
           <div mat-card-avatar class="project-header-image" style="background-image: url({{userImg}})">
           </div>
-          <p> {{userName}} &nbsp;&bull; {{project.releaseDate}}</p>
+          <p> {{project.firstName ? project.firstName! + ' ' + project.lastName! : userName}} &nbsp;&bull;
+            {{project.releaseDate}}</p>
         </div>
         <div class="chips">
           <mat-card-actions *ngFor="let item of project.tags">

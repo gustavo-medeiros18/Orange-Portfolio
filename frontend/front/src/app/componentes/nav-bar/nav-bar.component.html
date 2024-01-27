@@ -1,52 +1,52 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-            <button class="button-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu button" fxHide.gt-sm>
-                <mat-icon>menu</mat-icon>
-            </button>
-          <mat-menu class = "mat-menu" #menu="matMenu">
-            <div class = "info-user" >
-                <div class = "info-user-text">
-                    <span id = "username-info" >Username</span>
-                    <span id = "username-email-info">username@gmail.com</span>   
-                </div>
-            </div>
-            <div class = "divider">
-                <div class = "divider-row"></div>
-            </div>
-            <div class = "sections">
-                <button mat-menu-item>
-                    <span class = "sections-text">Meus projetos</span>
-                </button>
-                <button mat-menu-item>
-                    <span class = "sections-text">Descobrir</span>
-                </button>
-                <div class = "divider">
-                    <div class = "divider-row"></div>
-                </div>
-                <button mat-menu-item>
-                    <mat-icon>exit_to_app</mat-icon> <!--ligeiramente diferente do icone do design... mudar?-->
-                    <span class = "sections-text">Sair</span>
-                </button>
-            </div>
-          </mat-menu>
-        <div class="right-side">
-            <div class = "div-logo">
-                <a routerLink="." >
-                    <mat-icon id = "icon-logo" svgIcon="Logo Orange Juice">menu</mat-icon>
-                  </a>
-            </div>
-            <div class = "sections" fxShow.gt-sm fxHide.lt-md>
-                <a id = "my-projects" routerLink = ".">Meus Projetos</a>
-                <a id = "discover" routerLink = ".">Descobrir</a>    
-            </div>
+  <mat-toolbar-row>
+    <button class="button-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu button" fxHide.gt-sm>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu class="mat-menu" #menu="matMenu">
+      <div class="info-user">
+        <div class="info-user-text">
+          <span id="username-info">Username</span>
+          <span id="username-email-info">username@gmail.com</span>
         </div>
-        <div class = "div-icons">
-            <a class = "div-icon" mat-icon-button routerLink=".">
-                <mat-icon id = "icon-profile" svgIcon="Circle">menu</mat-icon>
-              </a>
-              <a class = "div-icon" mat-icon-button routerLink=".">
-                <mat-icon id = "icon-notification" svgIcon="Icon Notification">menu</mat-icon>
-              </a>
+      </div>
+      <div class="divider">
+        <div class="divider-row"></div>
+      </div>
+      <div class="sections">
+        <button mat-menu-item>
+          <span class="sections-text" routerLink="/profile">Meus projetos</span>
+        </button>
+        <button mat-menu-item>
+          <span class="sections-text" routerLink="/discover">Descobrir</span>
+        </button>
+        <div class="divider">
+          <div class="divider-row"></div>
         </div>
-    </mat-toolbar-row>
+        <button mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon> <!--ligeiramente diferente do icone do design... mudar?-->
+          <span class="sections-text">Sair</span>
+        </button>
+      </div>
+    </mat-menu>
+    <div class="right-side">
+      <div class="div-logo">
+        <a routerLink="/profile">
+          <mat-icon id="icon-logo" svgIcon="Logo Orange Juice">menu</mat-icon>
+        </a>
+      </div>
+      <div class="sections" fxShow.gt-sm fxHide.lt-md>
+        <a id="my-projects" routerLink="/profile">Meus Projetos</a>
+        <a id="discover" routerLink="/discover">Descobrir</a>
+      </div>
+    </div>
+    <div class="div-icons">
+      <a class="div-icon" mat-icon-button routerLink=".">
+        <mat-icon id="icon-profile" svgIcon="Circle">menu</mat-icon>
+      </a>
+      <a class="div-icon" mat-icon-button routerLink=".">
+        <mat-icon id="icon-notification" svgIcon="Icon Notification">menu</mat-icon>
+      </a>
+    </div>
+  </mat-toolbar-row>
 </mat-toolbar>
