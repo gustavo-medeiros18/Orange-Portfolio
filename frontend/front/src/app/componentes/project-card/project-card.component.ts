@@ -3,6 +3,7 @@ import { IProject, ProjecEventEnum } from "src/app/models/iProject";
 import { ModalActionService } from "../modal-action/services/modal-action.service";
 import { DeleteConfirmationService } from "../delete-confirmation/services/delete-confirmation.service";
 import { ProjectService } from "src/app/appServices/project.service";
+import { ProjectActionService } from "../project-action/services/project-action.service";
 
 @Component({
   selector: "app-project-card",
@@ -16,7 +17,8 @@ export class ProjectCardComponent implements OnInit {
 
   constructor(
     private modalActionService: ModalActionService,
-    private modalDeleteService: DeleteConfirmationService
+    private modalDeleteService: DeleteConfirmationService,
+    private alertService: ProjectActionService
   ) {}
   ngOnInit(): void {}
 
@@ -36,9 +38,7 @@ export class ProjectCardComponent implements OnInit {
     this.modalDeleteService.openDialog();
     this.modalDeleteService.confirm().subscribe((confirm) => {
       if (confirm) {
-        console.log("deleta");
-      } else {
-        console.log("não deleta");
+        this.alertService.openDialog("deletar", "seccess");
       }
     });
   }
