@@ -2,6 +2,7 @@ import ProjectService from "../services/project.service";
 import { Request, Response } from "express";
 import { Project } from "../models/project.model";
 import { uploadFile } from "../utils/fileUploadUtils";
+import UserService from "../services/user.service";
 
 class ProjectController {
   public static async createProject(req: Request, res: Response) {
@@ -50,7 +51,8 @@ class ProjectController {
     const projectId = parseInt(req.params.id);
     const updatedProject: Project = req.body;
 
-    console.log(updatedProject.title);
+    const userExists = await UserService.getUserById(updatedProject.id_user);
+    const projectExists = await ProjectService.getProjectById(projectId);
 
     if (
       !updatedProject ||
@@ -58,7 +60,9 @@ class ProjectController {
       !updatedProject.description ||
       !updatedProject.tags ||
       !updatedProject.link ||
-      !req.file
+      !req.file ||
+      !userExists ||
+      !projectExists
     ) {
       return res
         .status(422)
