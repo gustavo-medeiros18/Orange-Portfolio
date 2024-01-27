@@ -1,3 +1,4 @@
 node_modules
 mysql-data
 uploads
+.env
