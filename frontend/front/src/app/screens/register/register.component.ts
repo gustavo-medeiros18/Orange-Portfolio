@@ -36,7 +36,7 @@ export class RegisterComponent {
   formErrorMessage(fieldName: string) {
     const field = this.form.get(fieldName);
     if (field?.hasError('required')) {
-      return "Field required"; 
+      return "Este campo é necessário"; 
     }
     if (field?.hasError('email')){
       return "Endereço de email inválido";

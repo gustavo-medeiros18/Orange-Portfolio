@@ -27,8 +27,8 @@
       </form>
     </div>
     <div class="projects">
-      <a type="button" (click)="openDialog('Adicionar Projeto')">
-        <div class="empty-projects" *ngIf="!projects.length; else hasProjects">
+      <a type="button">
+        <div class="empty-projects" *ngIf="!projects.length; else hasProjects" (click)="openDialog('Adicionar Projeto')">
           <a type="button" class="add-project">
             <mat-icon class="mat-18">collections</mat-icon>
             <p>Adicione seu primeiro projeto</p>
