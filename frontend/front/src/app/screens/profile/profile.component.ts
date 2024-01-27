@@ -1,10 +1,9 @@
 import { ProfileService } from "./services/profile.service";
 import { FormBuilder } from "@angular/forms";
-import { IProject } from "../../models/iProject";
+import { IProject, ProjecEventEnum } from "../../models/iProject";
 import { Component, OnInit } from "@angular/core";
-import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs";
+import { debounceTime, distinctUntilChanged, filter, map, switchMap } from "rxjs";
 import { ModalActionService } from "src/app/componentes/modal-action/services/modal-action.service";
-import { DiscoverService } from "../discover/service/discover.service";
 
 @Component({
   selector: "app-profile",
@@ -20,6 +19,13 @@ export class ProfileComponent implements OnInit {
   //controle de mensagem de pesquisa
   searchResultEmpty: boolean = false;
 
+  //controle de dados do usuário
+  user = {
+    name: "Camila Soares",
+    locale: "Brasil",
+    profileImg: "assets/imgs/img_profile_orange_portfolio.png",
+  };
+
   //controle de dados pesquisados
   searchProjects: IProject[] = [];
 
@@ -28,7 +34,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private discoverService: DiscoverService,
+    private profileService: ProfileService,
     private modalActionService: ModalActionService
   ) {}
 
@@ -59,7 +65,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getAllProjects() {
-    this.discoverService.getProjectsDiscover().subscribe({
+    this.profileService.getProjectsProfile().subscribe({
       next: (projects: IProject[]) => {
         this.projects = projects;
       },

@@ -41,9 +41,9 @@
         <div *ngIf="searchResultEmpty; else hasResults">Sem resultados.</div>
         <ng-template #hasResults>
           <div *ngIf="searchProjects.length || projects">
-            <app-project-card *ngIf="searchProjects.length || projects" class="projects-list" [userName]="'teste'"
+            <app-project-card *ngIf="searchProjects.length || projects" class="projects-list" [userName]="user.name"
               [projects]="searchProjects.length ? searchProjects : projects"
-              [userImg]="'assets/imgs/img_profile_orange_portfolio.png'"></app-project-card>
+              [userImg]="user.profileImg"></app-project-card>
           </div>
         </ng-template>
       </ng-template>

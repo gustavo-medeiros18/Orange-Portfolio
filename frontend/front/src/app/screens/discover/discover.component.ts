@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs";
 import { ProfileService } from "../profile/services/profile.service";
+import { DiscoverService } from "./service/discover.service";
 
 @Component({
   selector: "app-discover",
@@ -16,7 +17,7 @@ export class DiscoverComponent implements OnInit {
 
   //controle de mensagem de pesquisa
   searchResultEmpty: boolean = false;
-  
+
   //controle de dados pesquisados
   searchProjects: IProject[] = [];
 
@@ -24,7 +25,7 @@ export class DiscoverComponent implements OnInit {
   projects: IProject[] = [];
 
   constructor(private formBuilder: FormBuilder,
-    private profileService: ProfileService) {}
+    private discoverService: DiscoverService) {}
 
   ngOnInit(): void {
     this.getAllProjects();
@@ -42,7 +43,7 @@ export class DiscoverComponent implements OnInit {
   }
 
   getAllProjects() {
-    this.profileService.getProjectsProfile().subscribe({
+    this.discoverService.getProjectsDiscover().subscribe({
       next: (projects: IProject[]) => {
         this.projects = projects;
       },
