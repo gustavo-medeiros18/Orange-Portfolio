@@ -1,6 +1,6 @@
 <div class="container-card" *ngFor="let project of projects">
   <mat-card class="project-card">
-    <div class="button-container">
+    <div *ngIf="!project.firstName" class="button-container">
       <button class="radios-btn" mat-icon-button [matMenuTriggerFor]="beforeMenu"
         aria-label="Example icon-button with a menu" (click)="$event.stopPropagation()">
         <mat-icon class="icon">edit</mat-icon>
@@ -24,7 +24,7 @@
             {{project.releaseDate}}</p>
         </div>
         <div class="chips">
-          <mat-card-actions *ngFor="let item of project.tags">
+          <mat-card-actions ngIf="!project.firstName" *ngFor="let item of project.tags">
             <mat-chip>{{item}}</mat-chip>
           </mat-card-actions>
         </div>
