@@ -3,22 +3,13 @@ import { Project } from "../models/project.model";
 import { RowDataPacket } from "mysql2";
 
 class ProjectService {
-  public static async createProject(project: Project): Promise<any> {
-    const sqlStatement =
-      "INSERT INTO projects" +
-      "(title, tags, link, description, img_url, id_user) " +
-      "VALUES (?, ?, ?, ?, ?, ?)";
+  public static async createProject(newProject: Project): Promise<any> {
+    const sqlStatement = "INSERT INTO projects SET ?";
 
-    const [rows] = await connection.query<RowDataPacket[]>(sqlStatement, [
-      project.title,
-      project.tags,
-      project.link,
-      project.description,
-      project.img_url,
-      project.id_user,
-    ]);
+    const [result] = await connection.query(sqlStatement, [newProject]);
+    const id = (result as any).insertId;
 
-    return rows;
+    return { ...newProject, id };
   }
 
   public static async getAllProjects(): Promise<Project[]> {
