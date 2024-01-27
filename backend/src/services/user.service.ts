@@ -1,5 +1,5 @@
 import connection from "../database/config";
-import { RowDataPacket } from "mysql2";
+import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { User } from "../models/user.model";
 
 class UserService {
@@ -25,6 +25,14 @@ class UserService {
     const [result] = await connection.query("INSERT INTO users SET ?", [newUser]);
     const id = (result as any).insertId;
     return { ...newUser, id } as User;
+  }
+
+  public static async deleteUserById(userId: number): Promise<boolean> {
+    const [result] = await connection.query<ResultSetHeader>("DELETE FROM users WHERE id = ?", [
+      userId,
+    ]);
+
+    return result.affectedRows > 0;
   }
 }
 

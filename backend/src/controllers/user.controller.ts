@@ -20,7 +20,7 @@ class UserController {
     if (user) {
       res.json(user);
     } else {
-      res.status(404).json({ message: "User not found" });
+      res.status(404).json({ message: "Usuário não encontrado." });
     }
   }
 
@@ -37,6 +37,18 @@ class UserController {
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
     return res.status(201).json(createdUser);
+  }
+
+  public static async deleteUser(req: Request, res: Response) {
+    const userId = parseInt(req.params.id, 10);
+
+    const result = await UserService.deleteUserById(userId);
+
+    if (result) {
+      return res.status(204).json({ message: "Usuário deletado com sucesso." });
+    } else {
+      return res.status(404).json({ message: "Usuário não encontrado." });
+    }
   }
 }
 
