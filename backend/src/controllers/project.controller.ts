@@ -1,25 +1,10 @@
 import ProjectService from "../services/project.service";
 import { Request, Response } from "express";
-import { initializeApp } from "firebase/app";
-import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
-import multer from "multer";
 import { Project } from "../models/project.model";
-import { firebaseConfig } from "../config/firebase.config";
+import { uploadFile } from "../utils/fileUploadUtils";
 
 class ProjectController {
   public static async createProject(req: Request, res: Response) {
-    const app = initializeApp(firebaseConfig);
-
-    const storage = getStorage(app);
-    const storageRef = ref(storage, `image-${Date.now()}`);
-
-    const metadata = {
-      contentType: req.file!.mimetype,
-    };
-
-    const snapshot = await uploadBytesResumable(storageRef, req.file!.buffer, metadata);
-    const downloadURL = await getDownloadURL(snapshot.ref);
-
     const newProject: Project = req.body;
 
     if (
@@ -34,7 +19,10 @@ class ProjectController {
         .status(422)
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
+
+    const downloadURL = await uploadFile(req.file!);
     newProject.img_url = downloadURL;
+
     const createdProject = await ProjectService.createProject(newProject);
 
     return res.status(201).json(createdProject);
