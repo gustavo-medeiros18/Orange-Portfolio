@@ -42,10 +42,10 @@ class UserController {
   public static async deleteUser(req: Request, res: Response) {
     const userId = parseInt(req.params.id, 10);
 
-    const result = await UserService.deleteUser(userId);
+    const result = await UserService.deleteUserById(userId);
 
     if (result) {
-      return res.json({ message: "Usuário deletado com sucesso." });
+      return res.status(204).json({ message: "Usuário deletado com sucesso." });
     } else {
       return res.status(404).json({ message: "Usuário não encontrado." });
     }
