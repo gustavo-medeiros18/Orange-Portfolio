@@ -1,6 +1,6 @@
 import connection from "../database/config";
 import { Project } from "../models/project.model";
-import { RowDataPacket } from "mysql2";
+import { ResultSetHeader, RowDataPacket } from "mysql2";
 
 class ProjectService {
   public static async createProject(newProject: Project): Promise<any> {
@@ -31,6 +31,12 @@ class ProjectService {
     );
 
     return rows as Project[];
+  }
+
+  public static async deleteProjectById(projectId: number): Promise<boolean> {
+    const [result] = await connection.query<ResultSetHeader>("DELETE FROM projects WHERE id = ?", [projectId]);
+
+    return result.affectedRows > 0;
   }
 }
 
