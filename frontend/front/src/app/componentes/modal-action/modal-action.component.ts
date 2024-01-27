@@ -30,9 +30,8 @@ export class ModalActionComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log({ antesDeSub: this.project });
     this.listenerModalEvent();
-    console.log({ DeSub: this.project });
+    this.selectedImage = this.project?.img;
     this.form = this.formBuilder.group({
       title: [this.project ? this.project.title : "", [Validators.required]],
       tags: [this.project ? this.project.tags : "", [Validators.required]],
