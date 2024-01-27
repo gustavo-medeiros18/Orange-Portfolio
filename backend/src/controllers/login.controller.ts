@@ -7,7 +7,9 @@ class LoginController {
     try {
       const { email, password } = req.body;
 
-      const userLogin: Login = await LoginService.authenticateLogin(email, password);
+      console.log(email, password);
+
+      const userLogin = await LoginService.authenticateLogin(email, password);
 
       if (userLogin) {
         res.json({ message: "Login bem-sucedido.", userLogin });
