@@ -1,4 +1,3 @@
-
 export interface IProject {
   title: string;
   tags?: string[];
@@ -7,6 +6,8 @@ export interface IProject {
   img?: string;
   releaseDate: string;
   id: number;
+  firstName?: string;
+  lastName?: string;
 }
 
 export interface IProjectEvent<T, K> {
@@ -15,5 +16,5 @@ export interface IProjectEvent<T, K> {
 }
 
 export enum ProjecEventEnum {
-  ADD_PROJECT = 'ADD_PROJECT'
+  ADD_PROJECT = "ADD_PROJECT",
 }
