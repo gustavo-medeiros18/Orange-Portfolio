@@ -1,10 +1,10 @@
-<div class = "container">
-    <div class="div-info">
-        <h5>Deseja excluir?</h5>
-        <span>Se você prosseguir irá excluir o projeto do seu portfólio</span>
-        <div class = "div-buttons">
-            <button class = "btn-primary" id = "button-save" mat-button>EXCLUIR</button>
-            <button class = "btn-secondary" id = "button-cancel" mat-button>CANCELAR</button>      
-        </div> 
+<div class="container">
+  <div class="div-info">
+    <h5>Deseja excluir?</h5>
+    <span>Se você prosseguir irá excluir o projeto do seu portfólio</span>
+    <div class="div-buttons">
+      <button class="btn-primary" id="button-save" mat-button>EXCLUIR</button>
+      <button class="btn-secondary" id="button-cancel" [mat-dialog-close]="true" mat-button>CANCELAR</button>
     </div>
+  </div>
 </div>
