@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
 import { ProjectActionComponent } from './componentes/project-action/project-action.component';
 import { DeleteConfirmationComponent } from './componentes/delete-confirmation/delete-confirmation.component';
+import { ViewProjectInfoComponent } from './componentes/view-project-info/view-project-info.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DeleteConfirmationComponent } from './componentes/delete-confirmation/d
     ProjectCardComponent,
     ModalActionComponent,
     ProjectActionComponent,
-    DeleteConfirmationComponent
+    DeleteConfirmationComponent,
+    ViewProjectInfoComponent
   ],
   imports: [
     BrowserModule,
