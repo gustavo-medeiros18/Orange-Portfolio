@@ -9,8 +9,17 @@ import { DeleteConfirmationService } from './services/delete-confirmation.servic
 })
 export class DeleteConfirmationComponent {
 
-  constructor() {}
+  constructor(private deleteConfirmationService: DeleteConfirmationService
+    ,private dialogRef: MatDialogRef<DeleteConfirmationComponent>) {}
 
 
+    onConfirm() {
+      this.deleteConfirmationService.confirmModal(true);
+      this.dialogRef.close(true);
+    }
 
+    onCancel() {
+      this.deleteConfirmationService.confirmModal(false);
+      this.dialogRef.close(true);
+    }
 }
