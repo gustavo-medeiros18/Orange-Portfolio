@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { DeleteConfirmationService } from './services/delete-confirmation.service';
 
 @Component({
   selector: 'app-delete-confirmation',
@@ -7,6 +9,17 @@ import { Component } from '@angular/core';
 })
 export class DeleteConfirmationComponent {
 
-  constructor() {}
-  
+  constructor(private deleteConfirmationService: DeleteConfirmationService
+    ,private dialogRef: MatDialogRef<DeleteConfirmationComponent>) {}
+
+
+    onConfirm() {
+      this.deleteConfirmationService.confirmModal(true);
+      this.dialogRef.close(true);
+    }
+
+    onCancel() {
+      this.deleteConfirmationService.confirmModal(false);
+      this.dialogRef.close(true);
+    }
 }

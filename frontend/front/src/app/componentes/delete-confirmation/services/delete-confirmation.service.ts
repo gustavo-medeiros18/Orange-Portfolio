@@ -1,13 +1,25 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteConfirmationComponent } from '../delete-confirmation.component';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeleteConfirmationService {
 
+  private confirmSubject = new Subject<boolean>();
+
   constructor(private dialog: MatDialog) {}
+
+
+  confirm(): Observable<boolean> {
+    return this.confirmSubject.asObservable();
+  }
+
+  confirmModal(confirm: boolean) {
+    this.confirmSubject.next(confirm);
+  }
 
   openDialog() {
     const isMobile = window.innerWidth <= 992;

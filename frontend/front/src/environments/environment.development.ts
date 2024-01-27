@@ -5,4 +5,5 @@ export const environment = {
   apiAuthenticate: "login",
   apiProjects: "projects",
   apiPatchProjects: "projects",
+  apiDeleteProjects: "projects",
 };

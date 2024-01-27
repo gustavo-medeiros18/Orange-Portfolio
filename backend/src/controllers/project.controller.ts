@@ -45,6 +45,18 @@ class ProjectController {
 
     return res.status(200).json(projects);
   }
+
+  public static async deleteProject(req: Request, res: Response) {
+    const projectId = parseInt(req.params.id);
+
+    const result = await ProjectService.deleteProjectById(projectId);
+
+    if (result) {
+      return res.status(204).json({ message: "Projeto deletado com sucesso." });
+    } else {
+      return res.status(404).json({ message: "Projeto não encontrado." });
+    }
+  }
 }
 
 export default ProjectController;

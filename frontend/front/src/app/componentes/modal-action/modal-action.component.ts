@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ModalActionService } from "./services/modal-action.service";
 import { ProjectActionService } from "../project-action/services/project-action.service";
-import { IProject } from "src/app/models/iProject";
+import { IProject  } from "src/app/models/iProject";
 import { IModal } from "../models/iModal";
 import { ViewProjectInfoService } from "../view-project-info/services/view-project-info.service";
 
@@ -12,6 +13,7 @@ import { ViewProjectInfoService } from "../view-project-info/services/view-proje
   templateUrl: "./modal-action.component.html",
   styleUrls: ["./modal-action.component.scss"],
 })
+export class ModalActionComponent implements OnInit {
 export class ModalActionComponent implements OnInit {
   form!: FormGroup;
 
@@ -61,6 +63,31 @@ export class ModalActionComponent implements OnInit {
       };
       reader.readAsDataURL(selectedFile);
     }
+  }
+
+  handleOnConfirm() {
+    //this.project?.id ? this.updateProject() : this.createProject();
+    this.alertService.openDialog("editar", "success");
+  }
+  createProject() {
+    if (this.form.invalid) {
+      this.hasError = "Preencha todos os campos";
+      return;
+    }
+
+    if (!this.selectedImage) {
+      this.hasError = "Adicione uma imagem de capa ao seu projeto";
+      return;
+    }
+
+    const result = this.modalService.createProjectModal(this.form.value);
+
+    if (!result) {
+      this.alertService.openDialog("adicionar", "error");
+      return;
+    }
+
+    this.alertService.openDialog("adicionar", "success");
   }
 
   addProject(form: FormGroup){
