@@ -44,6 +44,10 @@ export class ModalActionComponent implements OnInit, OnDestroy {
     this.modalService.completeEmitter();
   }
 
+  formErrorMessage() {
+    return "Este campos é necessário";
+  }
+
   private listenerModalEvent(): void {
     this.subscription.add(
       this.modalService.onComponentEvent
