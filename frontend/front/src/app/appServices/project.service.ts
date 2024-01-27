@@ -13,6 +13,13 @@ export class ProjectService {
 
   constructor(private httpClient: HttpClient) {}
 
+  createProject(params: IProject): Observable<boolean> {
+    const apiUrl = new URL(environment.apiDeleteProjects, this.API).toString();
+    const requestBody: string = JSON.stringify(params);
+    this.httpClient.post<IProject>(apiUrl, requestBody, { headers: this.headers });
+    return of();
+  }
+
   getProjects(): Observable<IProject[]> {
     const apiUrl = new URL(environment.apiProjects, this.API).toString();
     this.httpClient.get<IProject[]>(apiUrl, { headers: this.headers });
