@@ -3,29 +3,31 @@ import { MatDialog } from "@angular/material/dialog";
 import { ModalActionComponent } from "../modal-action.component";
 import { IProject, IProjectEvent, ProjecEventEnum } from "src/app/models/iProject";
 import { ProjectService } from "src/app/appServices/project.service";
-import { Subject,Observable} from 'rxjs';
+import { Subject, Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class ModalActionService {
+  private emitter: Subject<IProjectEvent<ProjecEventEnum, IProject>> = new Subject<
+    IProjectEvent<ProjecEventEnum, IProject>
+  >();
 
-  private emitter: Subject<IProjectEvent<ProjecEventEnum, IProject>> = new Subject<IProjectEvent<ProjecEventEnum, IProject>>;
+  private updateProject: Observable<IProjectEvent<ProjecEventEnum, IProject>> =
+    this.emitter.asObservable();
 
-  private updateProject: Observable<IProjectEvent<ProjecEventEnum,IProject>> = this.emitter.asObservable();
-
-  currentProject: IProjectEvent<ProjecEventEnum,IProject> | null = null;
+  currentProject: IProjectEvent<ProjecEventEnum, IProject> | null = null;
 
   constructor(private dialog: MatDialog, private projectService: ProjectService) {
     this.updateProject.subscribe({
-      next: (project) => this.currentProject = project
-    })
+      next: (project) => (this.currentProject = project),
+    });
   }
 
   openDialog(name: string) {
     const dialogRef = this.dialog.open(ModalActionComponent, {
       position: { top: "9.25rem" },
-      data: {name: name},
+      data: { name: name },
     });
   }
 
@@ -39,7 +41,7 @@ export class ModalActionService {
 
   createProjectModal(params: IProject): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      this.projectService.createproject(params).subscribe({
+      this.projectService.createProject(params).subscribe({
         next: (value) => {
           resolve(true);
         },
