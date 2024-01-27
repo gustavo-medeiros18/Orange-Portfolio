@@ -4,6 +4,6 @@ export interface Project {
   tags: string;
   link: string;
   description: string;
-  file: string;
+  img_url: string;
   id_user: number;
 }
