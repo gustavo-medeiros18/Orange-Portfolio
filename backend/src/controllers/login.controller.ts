@@ -1,14 +1,16 @@
 import { Request, Response } from "express";
+import LoginService from "../services/login.service";
+import { Login } from "../models/login.model";
 
 class LoginController {
   public static async loginUser(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
 
-      const user = await LoginService.authenticateLogin(email, password);
+      const userLogin: Login = await LoginService.authenticateLogin(email, password);
 
-      if (user) {
-        res.json({ message: "Login bem-sucedido.", user });
+      if (userLogin) {
+        res.json({ message: "Login bem-sucedido.", userLogin });
       } else {
         res.status(401).json({ message: "Credenciais inválidas." });
       }
