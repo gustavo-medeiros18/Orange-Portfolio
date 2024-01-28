@@ -2,7 +2,6 @@ import { IProject } from "src/app/models/iProject";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs";
-import { ProfileService } from "../profile/services/profile.service";
 import { DiscoverService } from "./service/discover.service";
 
 @Component({
@@ -25,12 +24,15 @@ export class DiscoverComponent implements OnInit {
 
   //Array para projetos
   projects: IProject[] = [];
+  
+  tags: string[] = [];
 
   constructor(private formBuilder: FormBuilder,
     private discoverService: DiscoverService) {}
 
   ngOnInit(): void {
     this.getAllProjects();
+    console.log(this.getAllProjects())
     this.searchForm
       .get("search")
       ?.valueChanges.pipe(
@@ -61,4 +63,5 @@ export class DiscoverComponent implements OnInit {
     });
     this.searchResultEmpty = this.searchProjects.length === 0;
   }
+
 }

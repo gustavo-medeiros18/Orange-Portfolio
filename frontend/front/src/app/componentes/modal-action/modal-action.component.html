@@ -47,9 +47,10 @@
     </div>
   </div>
   <div class="div-finish-modal">
-    <a type="button" class=" subtitle-1"> Visualizar publicação</a>
+    <a type="button" (click)="viewProject(this.form)" class=" subtitle-1"> Visualizar publicação</a>
     <mat-dialog-actions class="button-container">
-      <button id="button-save" mat-button (click)="handleOnConfirm()" mat-dialog-close>SALVAR</button>
+      <button *ngIf="modal.name === 'Adicionar Projeto'" class="button-save" (click)="addProject(this.form)" mat-button mat-dialog-close>SALVAR</button>
+      <button *ngIf="modal.name === 'Editar Projeto'" class="button-save" (click)="editProject(this.form)" mat-button (click)="handleOnConfirm()" mat-dialog-close>SALVAR</button>
       <button id="button-cancel" mat-button [mat-dialog-close]="true" cdkFocusInitial>
         CANCELAR
       </button>

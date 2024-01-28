@@ -9,6 +9,11 @@
           <p> {{project.firstName! + ' ' + project.lastName!}} &nbsp;&bull;
             {{project.releaseDate}}</p>
         </div>
+        <div class="chips">
+          <mat-card-actions *ngFor="let item of project.tags">
+            <mat-chip>{{item}}</mat-chip>
+          </mat-card-actions>
+        </div>
       </div>
     </mat-card-header>
   </mat-card>
