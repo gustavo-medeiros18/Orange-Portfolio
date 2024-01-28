@@ -1,6 +1,8 @@
 import jwt, { SignOptions } from "jsonwebtoken";
 import dotenv from "dotenv";
 
+dotenv.config();
+
 const secretKey = process.env.JWT_SECRET || "senhasecreta";
 
 const CONFIG: SignOptions = {

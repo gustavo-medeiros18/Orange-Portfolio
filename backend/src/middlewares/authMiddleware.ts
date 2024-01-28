@@ -6,7 +6,7 @@ export const authenticateMiddleware = (req: Request, res: Response, next: NextFu
 
   if (token) {
     try {
-      const decodedToken = verifyToken(token);
+      verifyToken(token);
 
       next();
     } catch (error) {
