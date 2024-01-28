@@ -10,9 +10,9 @@ export class ProfileService {
   constructor(private projectService: ProjectService) {}
 
   getProjectsProfile(): Observable<IProject[]> {
-    return this.projectService.getProjects();
+     this.projectService.getProjects();
 
-    /*return new Observable((observer: Observer<IProject[]>) => {
+    return new Observable((observer: Observer<IProject[]>) => {
       const projects: IProject[] = [
         {
           title: "teste",
@@ -63,6 +63,6 @@ export class ProfileService {
       observer.next(projects);
 
       observer.complete();
-    });*/
+    });
   }
 }

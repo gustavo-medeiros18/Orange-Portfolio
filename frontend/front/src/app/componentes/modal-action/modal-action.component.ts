@@ -26,7 +26,6 @@ export class ModalActionComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public modal: IModal,
     private modalService: ModalActionService,
-    private alertService: ProjectActionService,
     private viewProjectInfoService: ViewProjectInfoService,
     private projectActionService: ProjectActionService,
     private formBuilder: NonNullableFormBuilder
@@ -48,7 +47,7 @@ export class ModalActionComponent implements OnInit {
   }
 
   formErrorMessage() {
-    return "Este campos é necessário";
+    return "Este campo é necessário";
   }
 
   triggerFile(fileInput: HTMLInputElement) {
@@ -64,52 +63,6 @@ export class ModalActionComponent implements OnInit {
       };
       reader.readAsDataURL(selectedFile);
     }
-  }
-
-  handleOnConfirm() {
-    //this.project?.id ? this.updateProject() : this.createProject();
-    this.alertService.openDialog("editar", "success");
-  }
-  createProject() {
-    if (this.form.invalid) {
-      this.hasError = "Preencha todos os campos";
-      return;
-    }
-
-    if (!this.selectedImage) {
-      this.hasError = "Adicione uma imagem de capa ao seu projeto";
-      return;
-    }
-
-    const result = this.modalService.createProjectModal(this.form.value);
-
-    if (!result) {
-      this.alertService.openDialog("adicionar", "error");
-      return;
-    }
-
-    this.alertService.openDialog("adicionar", "success");
-  }
-
-  updateProject() {
-    if (this.form.invalid) {
-      this.hasError = "Preencha todos os campos";
-      return;
-    }
-
-    if (!this.selectedImage) {
-      this.hasError = "Adicione uma imagem de capa ao seu projeto";
-      return;
-    }
-
-    const result = this.modalService.pathProjectModal(this.form.value);
-
-    if (!result) {
-      this.alertService.openDialog("editar", "error");
-      return;
-    }
-
-    this.alertService.openDialog("editar", "success");
   }
 
   addProject(form: FormGroup){

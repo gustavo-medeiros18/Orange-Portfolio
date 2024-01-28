@@ -28,23 +28,25 @@ export class ProjectCardComponent implements OnInit {
   }
 
   editItem(item: IProject) {
+    const action: string = "Editar Projeto";
     this.modalActionService.dispatch({
       type: ProjecEventEnum.ADD_PROJECT,
       data: item,
     });
-    this.modalActionService.openDialog("Editar Projeto");
+    this.modalActionService.openDialog(action);
   }
 
   deleteProject(id: number) {
+    const action: string = "deletar";
     this.modalDeleteService.openDialog();
-    this.modalDeleteService.confirm().subscribe((confirm) => {
+    this.modalDeleteService.getConfirmation().subscribe((confirm) => {
       if (confirm) {
         this.projectCardService.deleteProjectCard(id).subscribe({
           next: () => {
-            this.projectActionService.openDialog("deletar", "success");
+            this.projectActionService.openDialog(action, "success");
           },
           error: () => {
-            this.projectActionService.openDialog("deletar", "error");
+            this.projectActionService.openDialog(action, "error");
           },
         })
       }

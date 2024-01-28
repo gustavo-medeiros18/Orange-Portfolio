@@ -10,7 +10,7 @@ export class ProjectCardService {
   constructor(private projectService: ProjectService) { }
 
   deleteProjectCard(id: number) {
-  return this.projectService.deleteProject(id);
+    return this.projectService.deleteProject(id);
   }
   
 }
