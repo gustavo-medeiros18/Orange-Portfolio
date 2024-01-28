@@ -22,6 +22,13 @@ class ProjectController {
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
 
+    // Simula como as tags vão vir do front
+    const tagsTest = newProject.tags.split(" ");
+
+    // Salva o array de tags como uma só string
+    // separada por vírgula
+    newProject.tags = tagsTest.join(", ");
+
     const userExists = await UserService.getUserById(newProject.idUser);
     if (!userExists)
       return res.status(404).json({ message: "Solicitação inválida. Usuário não encontrado." });
@@ -76,6 +83,13 @@ class ProjectController {
         .status(422)
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
+
+    // Simula como as tags vão vir do front
+    const tagsTest = updatedProject.tags.split(" ");
+
+    // Salva o array de tags como uma só string
+    // separada por vírgula
+    updatedProject.tags = tagsTest.join(", ");
 
     const downloadURL = await uploadFile(req.file!);
     updatedProject.imgUrl = downloadURL;
