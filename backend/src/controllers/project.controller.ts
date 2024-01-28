@@ -25,8 +25,8 @@ class ProjectController {
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
 
-    const downloadURL = await uploadFile(req.file);
-    newProject.img_url = downloadURL;
+    const downloadURL = await uploadFile(req.file!);
+    newProject.imgUrl = downloadURL;
 
     const createdProject = await ProjectService.createProject(newProject);
 
@@ -55,7 +55,7 @@ class ProjectController {
     const projectId = parseInt(req.params.id);
     const updatedProject: Project = req.body;
 
-    const userExists = await UserService.getUserById(updatedProject.id_user);
+    const userExists = await UserService.getUserById(updatedProject.idUser);
     const projectExists = await ProjectService.getProjectById(projectId);
 
     if (!userExists)
@@ -77,7 +77,7 @@ class ProjectController {
     }
 
     const downloadURL = await uploadFile(req.file!);
-    updatedProject.img_url = downloadURL;
+    updatedProject.imgUrl = downloadURL;
 
     const updated = await ProjectService.updateProject(projectId, updatedProject);
 
