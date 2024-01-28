@@ -37,7 +37,9 @@ class UserController {
         .status(400)
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
-    return res.status(201).json(createdUser);
+    const { password, ...dtoUser } = newUser;
+
+    return res.status(201).json(dtoUser);
   }
 
   public static async deleteUser(req: Request, res: Response) {
