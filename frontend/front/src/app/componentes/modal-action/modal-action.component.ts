@@ -3,7 +3,7 @@ import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ModalActionService } from "./services/modal-action.service";
 import { ProjectActionService } from "../project-action/services/project-action.service";
-import { IProject  } from "src/app/models/iProject";
+import { IProject } from "src/app/models/iProject";
 import { IModal } from "../models/iModal";
 import { ViewProjectInfoService } from "../view-project-info/services/view-project-info.service";
 
@@ -12,7 +12,6 @@ import { ViewProjectInfoService } from "../view-project-info/services/view-proje
   templateUrl: "./modal-action.component.html",
   styleUrls: ["./modal-action.component.scss"],
 })
-
 export class ModalActionComponent implements OnInit {
   form!: FormGroup;
 
@@ -23,11 +22,13 @@ export class ModalActionComponent implements OnInit {
 
   selectedImage: string | undefined;
 
+  formData = new FormData();
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public modal: IModal,
     private modalService: ModalActionService,
-    private viewProjectInfoService: ViewProjectInfoService,
     private projectActionService: ProjectActionService,
+    private viewProjectInfoService: ViewProjectInfoService,
     private formBuilder: NonNullableFormBuilder
   ) {}
 
@@ -36,7 +37,7 @@ export class ModalActionComponent implements OnInit {
     if (currentProject) {
       this.project = currentProject.data;
     }
-    this.selectedImage = this.project?.imgUrl;
+    this.selectedImage = this.project?.imgUrl as string;
     this.form = this.formBuilder.group({
       title: [this.project ? this.project.title : "", [Validators.required]],
       tags: [this.project ? this.project.tags?.toString() : "", [Validators.required]],
@@ -57,6 +58,7 @@ export class ModalActionComponent implements OnInit {
   onFileSelected(event: any) {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
+      this.formData.append("file", selectedFile);
       const reader = new FileReader();
       reader.onload = () => {
         this.selectedImage = reader.result as string;
@@ -65,31 +67,45 @@ export class ModalActionComponent implements OnInit {
     }
   }
 
-  addProject(form: FormGroup){
+  addProject() {
     const action: string = "Adicionar";
-    this.modalService.createProjectModal(form.value).subscribe({
+    const project: IProject = {
+      title: this.form.value.title,
+      tags: this.form.value.tags.split(","),
+      link: this.form.value.link,
+      description: this.form.value.description,
+      img: this.formData,
+    };
+    this.modalService.createProjectModal(project).subscribe({
       next: () => {
-        this.projectActionService.openDialog(action,"success");
+        this.projectActionService.openDialog(action, "success");
       },
       error: (error) => {
-        this.projectActionService.openDialog(action,"error");
+        this.projectActionService.openDialog(action, "error");
       },
     });
   }
 
-  pathProject(form: FormGroup){
+  editProject() {
     const action: string = "Editar";
-    this.modalService.pathProjectModal(form.value).subscribe({
+    const project: IProject = {
+      title: this.form.value.title,
+      tags: this.form.value.tags.split(","),
+      link: this.form.value.link,
+      description: this.form.value.description,
+      img: this.formData,
+    };
+    this.modalService.pathProjectModal(project).subscribe({
       next: () => {
-        this.projectActionService.openDialog(action,"success");
+        this.projectActionService.openDialog(action, "success");
       },
       error: (error) => {
-        this.projectActionService.openDialog(action,"error");
+        this.projectActionService.openDialog(action, "error");
       },
     });
   }
 
-  viewProject(){
+  viewProject() {
     const user: IModal = {
       name: "Camila",
       lastName: "Soares",
@@ -106,6 +122,6 @@ export class ModalActionComponent implements OnInit {
       id: 1,
       img: this.selectedImage
     };
-    this.viewProjectInfoService.openDialog(user,project);
+    this.viewProjectInfoService.openDialog(user, project);
   }
 }
