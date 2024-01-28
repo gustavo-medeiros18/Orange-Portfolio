@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { EmailValidator, FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { RegisterService } from "./services/register.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-register",
@@ -21,7 +22,8 @@ export class RegisterComponent {
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -77,6 +79,8 @@ export class RegisterComponent {
   onSuccess() {
     this.successAlert = true;
     this.errorAlert = false;
+    // timeout?
+    this.router.navigateByUrl('/login');
   }
 
   onError() {

@@ -23,10 +23,10 @@ export class UserService {
   authenticate(record: IUserLogin) {
     const apiUrl = new URL(environment.apiAuthenticate, this.API).toString();
     const requestBody: string = JSON.stringify(record);
-    this.httpClient.post<IUserLogin>(apiUrl,requestBody,{headers: this.headers});
+    return this.httpClient.post<IUserLogin>(apiUrl,requestBody,{headers: this.headers});
     //  implementar Logica de autenticacao
-    return new Observable((observer) => {
+    /*return new Observable((observer) => {
       observer.next();
-    });
+    });*/
   }
 }

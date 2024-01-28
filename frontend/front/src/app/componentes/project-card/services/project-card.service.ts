@@ -9,8 +9,8 @@ export class ProjectCardService {
 
   constructor(private projectService: ProjectService) { }
 
-  onDelete(id: number) {
-    this.projectService.deleteProject(id);
-    return of();
+  deleteProjectCard(id: number) {
+  return this.projectService.deleteProject(id);
   }
+  
 }

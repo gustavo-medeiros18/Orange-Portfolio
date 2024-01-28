@@ -28,6 +28,7 @@ export class ModalActionComponent implements OnInit {
     private modalService: ModalActionService,
     private alertService: ProjectActionService,
     private viewProjectInfoService: ViewProjectInfoService,
+    private projectActionService: ProjectActionService,
     private formBuilder: NonNullableFormBuilder
   ) {}
 
@@ -112,13 +113,27 @@ export class ModalActionComponent implements OnInit {
   }
 
   addProject(form: FormGroup){
-    //call to API
-    // call project-action
+    const action: string = "Adicionar";
+    this.modalService.createProjectModal(form.value).subscribe({
+      next: () => {
+        this.projectActionService.openDialog(action,"success");
+      },
+      error: (error) => {
+        this.projectActionService.openDialog(action,"error");
+      },
+    });
   }
 
-  editProject(form: FormGroup){
-    // call to API
-    // call project-action
+  pathProject(form: FormGroup){
+    const action: string = "Editar";
+    this.modalService.pathProjectModal(form.value).subscribe({
+      next: () => {
+        this.projectActionService.openDialog(action,"success");
+      },
+      error: (error) => {
+        this.projectActionService.openDialog(action,"error");
+      },
+    });
   }
 
   viewProject(form: FormGroup){
@@ -129,7 +144,7 @@ export class ModalActionComponent implements OnInit {
       profileImg: "assets/imgs/img_profile_orange_portfolio.png",
     };
     const projectForm = this.form.value;
-    const project: IProject = {
+    const project  = {
       title: projectForm.title,
       tags: projectForm.tags.split(","),
       link: projectForm.link,

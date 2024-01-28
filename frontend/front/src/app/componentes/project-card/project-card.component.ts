@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from "@angular/core";
 import { IProject, ProjecEventEnum } from "src/app/models/iProject";
 import { ModalActionService } from "../modal-action/services/modal-action.service";
 import { DeleteConfirmationService } from "../delete-confirmation/services/delete-confirmation.service";
-import { ProjectService } from "src/app/appServices/project.service";
 import { ProjectActionService } from "../project-action/services/project-action.service";
+import { ProjectCardService } from "./services/project-card.service";
 
 @Component({
   selector: "app-project-card",
@@ -18,7 +18,8 @@ export class ProjectCardComponent implements OnInit {
   constructor(
     private modalActionService: ModalActionService,
     private modalDeleteService: DeleteConfirmationService,
-    private alertService: ProjectActionService
+    private projectActionService: ProjectActionService,
+    private projectCardService: ProjectCardService
   ) {}
   ngOnInit(): void {}
 
@@ -38,7 +39,14 @@ export class ProjectCardComponent implements OnInit {
     this.modalDeleteService.openDialog();
     this.modalDeleteService.confirm().subscribe((confirm) => {
       if (confirm) {
-        this.alertService.openDialog("deletar", "success");
+        this.projectCardService.deleteProjectCard(id).subscribe({
+          next: () => {
+            this.projectActionService.openDialog("deletar", "success");
+          },
+          error: () => {
+            this.projectActionService.openDialog("deletar", "error");
+          },
+        })
       }
     });
   }
