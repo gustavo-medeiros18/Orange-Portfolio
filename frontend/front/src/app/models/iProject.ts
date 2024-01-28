@@ -3,9 +3,9 @@ export interface IProject {
   tags?: string[];
   link?: string;
   description: string;
-  img?: string;
-  releaseDate: string;
-  id: number;
+  img?: string | FormData;
+  releaseDate?: string;
+  id?: number;
   firstName?: string;
   lastName?: string;
 }
