@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 import { ProjectActionService } from "./componentes/project-action/services/project-action.service";
 import { DeleteConfirmationService } from "./componentes/delete-confirmation/services/delete-confirmation.service";
-import { ViewProjectInfoService } from "./componentes/view-project-info/services/view-project-info.service";
 
 @Component({
   selector: "app-root",

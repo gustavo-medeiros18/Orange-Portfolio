@@ -1,5 +1,4 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { Component, Inject, OnInit } from "@angular/core";
 import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ModalActionService } from "./services/modal-action.service";
@@ -13,7 +12,7 @@ import { ViewProjectInfoService } from "../view-project-info/services/view-proje
   templateUrl: "./modal-action.component.html",
   styleUrls: ["./modal-action.component.scss"],
 })
-export class ModalActionComponent implements OnInit {
+
 export class ModalActionComponent implements OnInit {
   form!: FormGroup;
 
@@ -27,6 +26,7 @@ export class ModalActionComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public modal: IModal,
     private modalService: ModalActionService,
+    private alertService: ProjectActionService,
     private viewProjectInfoService: ViewProjectInfoService,
     private formBuilder: NonNullableFormBuilder
   ) {}
@@ -39,7 +39,7 @@ export class ModalActionComponent implements OnInit {
     this.selectedImage = this.project?.img;
     this.form = this.formBuilder.group({
       title: [this.project ? this.project.title : "", [Validators.required]],
-      tags: [this.project ? this.project.tags : "", [Validators.required]],
+      tags: [this.project ? this.project.tags?.toString() : "", [Validators.required]],
       link: [this.project ? this.project.link : "", [Validators.required]],
       description: [this.project ? this.project.description : "", [Validators.required]],
     });
@@ -90,53 +90,15 @@ export class ModalActionComponent implements OnInit {
     this.alertService.openDialog("adicionar", "success");
   }
 
-  addProject(form: FormGroup){
-    const user: IModal = {
-      name: "Camila",
-      lastName: "Soares",
-      email: "camilasoares123@gmail.com",
-      profileImg: "assets/imgs/img_profile_orange_portfolio.png",
-    };
-    const projectForm = this.form.value;
-    const project: IProject = {
-      title: projectForm.title,
-      tags: projectForm.tags.split(","),
-      link: projectForm.link,
-      description: projectForm.description,
-      releaseDate: "2024-01-27",
-      id: 1,
-      img: this.selectedImage
-    };
-    this.viewProjectInfoService.openDialog(user,project);
-    //call to API
-    // call project-action
-  }
-
-  editProject(form: FormGroup){
-    const user: IModal = {
-      name: "Camila",
-      lastName: "Soares",
-      email: "camilasoares123@gmail.com",
-      profileImg: "assets/imgs/img_profile_orange_portfolio.png",
-    };
-    const projectForm = this.form.value;
-    const project: IProject = {
-      title: projectForm.title,
-      tags: projectForm.tags.split(","),
-      link: projectForm.link,
-      description: projectForm.description,
-      releaseDate: "2024-01-27",
-      id: 1,
-      img: this.selectedImage
-    };
-    this.viewProjectInfoService.openDialog(user,project);
-    // call to API
-    // call project-action
-  }
-
-  /*updateProject() {
+  updateProject() {
     if (this.form.invalid) {
       this.hasError = "Preencha todos os campos";
+      return;
+    }
+
+    if (!this.selectedImage) {
+      this.hasError = "Adicione uma imagem de capa ao seu projeto";
+      return;
     }
 
     const result = this.modalService.pathProjectModal(this.form.value);
@@ -147,5 +109,36 @@ export class ModalActionComponent implements OnInit {
     }
 
     this.alertService.openDialog("editar", "success");
-  }*/
+  }
+
+  addProject(form: FormGroup){
+    //call to API
+    // call project-action
+  }
+
+  editProject(form: FormGroup){
+    // call to API
+    // call project-action
+  }
+
+  viewProject(form: FormGroup){
+    const user: IModal = {
+      name: "Camila",
+      lastName: "Soares",
+      email: "camilasoares123@gmail.com",
+      profileImg: "assets/imgs/img_profile_orange_portfolio.png",
+    };
+    const projectForm = this.form.value;
+    console.log(typeof projectForm.tags);
+    const project: IProject = {
+      title: projectForm.title,
+      tags: projectForm.tags.split(","),
+      link: projectForm.link,
+      description: projectForm.description,
+      releaseDate: "2024-01-27",
+      id: 1,
+      img: this.selectedImage
+    };
+    this.viewProjectInfoService.openDialog(user,project);
+  }
 }

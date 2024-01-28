@@ -10,7 +10,7 @@
     <span id = "username" >{{ modal.user.name }} {{ modal.user.lastName }}</span>
   </div>
   <h5 id = "project-title">{{modal.project.title}}</h5>
-  <mat-chip-set>
+  <mat-chip-set *ngIf="modal.project.tags && !(modal.project.tags.length === 1 && modal.project.tags[0] == '')">
     <mat-chip *ngFor="let tag of modal.project.tags">{{tag}}</mat-chip>
   </mat-chip-set>
 </div>
@@ -22,7 +22,7 @@
           <mat-icon class="mat-18">collections</mat-icon>
         </span>
       </div>
-      <img  [src]="modal.project.img" class="project-cover" alt="Imagem selecionada"/>
+      <img [src]="modal.project.img" class="project-cover" alt="Imagem selecionada"/>
   </div>
 </div>
 <div class = "project-description">
