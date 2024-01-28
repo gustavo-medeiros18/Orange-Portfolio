@@ -8,22 +8,23 @@ class ProjectController {
   public static async createProject(req: Request, res: Response) {
     const newProject: Project = req.body;
 
-    const userExists = await UserService.getUserById(newProject.id_user);
-    if (!userExists)
-      return res.status(404).json({ message: "Solicitação inválida. Usuário não encontrado." });
-
     if (
       !newProject ||
       !newProject.title ||
       !newProject.description ||
       !newProject.tags ||
       !newProject.link ||
-      !req.file
+      !req.file ||
+      !newProject.idUser
     ) {
       return res
         .status(422)
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
+
+    const userExists = await UserService.getUserById(newProject.idUser);
+    if (!userExists)
+      return res.status(404).json({ message: "Solicitação inválida. Usuário não encontrado." });
 
     const downloadURL = await uploadFile(req.file!);
     newProject.imgUrl = downloadURL;
