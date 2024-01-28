@@ -24,7 +24,7 @@ class ProjectService {
     const [rows] = await connection.query<RowDataPacket[]>(sqlStatement);
 
     rows.forEach((row) => {
-      row.tags = row.tags.split(" ");
+      row.tags = row.tags.split(", ");
     });
 
     return rows as Project[];
@@ -37,7 +37,7 @@ class ProjectService {
     );
 
     rows.forEach((row) => {
-      row.tags = row.tags.split(" ");
+      row.tags = row.tags.split(", ");
     });
 
     return rows as Project[];
