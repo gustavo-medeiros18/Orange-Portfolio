@@ -2,6 +2,7 @@ import ProjectService from "../services/project.service";
 import { Request, Response } from "express";
 import { Project } from "../models/project.model";
 import { uploadFile } from "../utils/fileUploadUtils";
+import UserService from "../services/user.service";
 
 class ProjectController {
   public static async createProject(req: Request, res: Response) {
@@ -21,7 +22,7 @@ class ProjectController {
     }
 
     const downloadURL = await uploadFile(req.file!);
-    newProject.img_url = downloadURL;
+    newProject.imgUrl = downloadURL;
 
     const createdProject = await ProjectService.createProject(newProject);
 
@@ -44,6 +45,40 @@ class ProjectController {
       return res.status(404).json({ message: "Esse usuário não tem projetos" });
 
     return res.status(200).json(projects);
+  }
+
+  public static async updateProject(req: Request, res: Response) {
+    const projectId = parseInt(req.params.id);
+    const updatedProject: Project = req.body;
+
+    const userExists = await UserService.getUserById(updatedProject.idUser);
+    const projectExists = await ProjectService.getProjectById(projectId);
+
+    if (
+      !updatedProject ||
+      !updatedProject.title ||
+      !updatedProject.description ||
+      !updatedProject.tags ||
+      !updatedProject.link ||
+      !req.file ||
+      !userExists ||
+      !projectExists
+    ) {
+      return res
+        .status(422)
+        .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
+    }
+
+    const downloadURL = await uploadFile(req.file!);
+    updatedProject.imgUrl = downloadURL;
+
+    const updated = await ProjectService.updateProject(projectId, updatedProject);
+
+    if (!updated) {
+      return res.status(404).json({ message: "Projeto não encontrado." });
+    }
+
+    return res.status(200).json(updated);
   }
 
   public static async deleteProject(req: Request, res: Response) {

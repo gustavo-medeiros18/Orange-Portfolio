@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 import { ProjectActionService } from "./componentes/project-action/services/project-action.service";
 import { DeleteConfirmationService } from "./componentes/delete-confirmation/services/delete-confirmation.service";
-import { ViewProjectInfoService } from "./componentes/view-project-info/services/view-project-info.service";
 
 @Component({
   selector: "app-root",
@@ -10,9 +9,17 @@ import { ViewProjectInfoService } from "./componentes/view-project-info/services
 })
 export class AppComponent {
   title = "front";
-  constructor(private viewProjectInfoService: ViewProjectInfoService) {}
 
-  openDialogViewProject(data: string) {
-    this.viewProjectInfoService.openDialog(data);
+  constructor(
+    private projectActionService: ProjectActionService,
+    private deleteConfirmationService: DeleteConfirmationService,
+  ) {}
+
+  openDialog(action: string, result: string) {
+    this.projectActionService.openDialog(action, result);
+  }
+
+  openDialogDelete() {
+    this.deleteConfirmationService.openDialog();
   }
 }
