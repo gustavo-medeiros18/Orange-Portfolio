@@ -37,7 +37,7 @@ export class ModalActionComponent implements OnInit {
     if (currentProject) {
       this.project = currentProject.data;
     }
-    this.selectedImage = this.project?.img;
+    this.selectedImage = this.project?.img as string;
     this.form = this.formBuilder.group({
       title: [this.project ? this.project.title : "", [Validators.required]],
       tags: [this.project ? this.project.tags?.toString() : "", [Validators.required]],
