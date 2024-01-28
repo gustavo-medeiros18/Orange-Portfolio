@@ -25,9 +25,5 @@ export class UserService {
     const apiUrl = new URL(environment.apiAuthenticate, this.API).toString();
     const requestBody: string = JSON.stringify(record);
     return this.httpClient.post<IUserLogin>(apiUrl,requestBody,{headers: this.headers});
-    //  implementar Logica de autenticacao
-    /*return new Observable((observer) => {
-      observer.next();
-    });*/
   }
 }
