@@ -13,6 +13,21 @@ export class ProjectService {
 
   constructor(private httpClient: HttpClient) {}
 
+  fillProject(projectData: IProject): IProject{
+    const project: IProject = {
+      id: projectData.id,
+      title: projectData.title,
+      tags: projectData.tags,
+      link: projectData.link,
+      description: projectData.description,
+      img: projectData.img,
+      firstName: projectData.firstName,
+      lastName: projectData.lastName,
+      releaseDate: projectData.releaseDate
+    }
+    return project;
+  }
+
   createProject(params: IProject): Observable<IProject> {
     const apiUrl = new URL(environment.apiProjects, this.API).toString();
     const requestBody: string = JSON.stringify(params);
