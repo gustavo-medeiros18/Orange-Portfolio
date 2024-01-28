@@ -58,15 +58,18 @@ class ProjectController {
     const userExists = await UserService.getUserById(updatedProject.id_user);
     const projectExists = await ProjectService.getProjectById(projectId);
 
+    if (!userExists)
+      return res.status(404).json({ message: "Solicitação inválida. Usuário não encontrado." });
+    if (!projectExists)
+      return res.status(404).json({ message: "Solicitação inválida. Projeto não encontrado." });
+
     if (
       !updatedProject ||
       !updatedProject.title ||
       !updatedProject.description ||
       !updatedProject.tags ||
       !updatedProject.link ||
-      !req.file ||
-      !userExists ||
-      !projectExists
+      !req.file
     ) {
       return res
         .status(422)
@@ -77,10 +80,6 @@ class ProjectController {
     updatedProject.img_url = downloadURL;
 
     const updated = await ProjectService.updateProject(projectId, updatedProject);
-
-    if (!updated) {
-      return res.status(404).json({ message: "Projeto não encontrado." });
-    }
 
     return res.status(200).json(updated);
   }
