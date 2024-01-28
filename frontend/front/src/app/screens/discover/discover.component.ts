@@ -48,12 +48,26 @@ export class DiscoverComponent implements OnInit {
   getAllProjects() {
     this.discoverService.getProjectsDiscover().subscribe({
       next: (projects: IProject[]) => {
-        this.projects = projects;
+        projects.forEach(projectData => {
+          const project: IProject = {
+            id: projectData.id,
+            title: projectData.title,
+            tags: projectData.tags,
+            link: projectData.link,
+            description: projectData.description,
+            img: projectData.img,
+            firstName: projectData.firstName,
+            lastName: projectData.lastName,
+            releaseDate: projectData.releaseDate
+          }
+          this.projects.push(project);
+        })
       },
       error: (error) => {
         console.error("Erro ao recuperar projetos:", error);
       },
     });
+    console.log(this.projects);
   }
 
   handleSearch(value: string) {

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, Observer } from "rxjs";
+import { Observable } from "rxjs";
 import { ProjectService } from "src/app/appServices/project.service";
 import { IProject } from "src/app/models/iProject";
 
@@ -10,9 +10,8 @@ export class DiscoverService {
   constructor(private projectService: ProjectService) {}
 
   getProjectsDiscover(): Observable<IProject[]> {
-    this.projectService.getProjects();
-
-    return new Observable((observer: Observer<IProject[]>) => {
+  return this.projectService.getProjects();
+    /*return new Observable((observer: Observer<IProject[]>) => {
       const projects: IProject[] = [
         {
           title: "teste",
@@ -63,6 +62,6 @@ export class DiscoverService {
       observer.next(projects);
 
       observer.complete();
-    });
+    });*/
   }
 }
