@@ -66,8 +66,8 @@ class UserController {
       if (!updatedUser) {
         return res.status(404).json({ message: "Usuário não encontrado." });
       }
-
-      return res.status(200).json(updatedUser);
+      const { password, ...dtoUser } = updatedUser;
+      return res.status(200).json(dtoUser);
     } catch (error) {
       console.error("Erro ao atualizar usuário:", error);
       return res.status(500).json({ message: "Erro interno ao atualizar usuário." });
