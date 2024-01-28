@@ -33,8 +33,37 @@ class ProjectService {
     return rows as Project[];
   }
 
+  public static async getProjectById(projectId: number): Promise<Project | undefined> {
+    const [rows] = await connection.query<RowDataPacket[]>("SELECT * FROM projects WHERE id = ?", [
+      projectId,
+    ]);
+
+    if (rows.length === 1) {
+      return rows[0] as Project;
+    }
+
+    return undefined;
+  }
+
+  public static async updateProject(
+    id: number,
+    updatedProject: Project
+  ): Promise<Project | undefined> {
+    const sqlStatement = "UPDATE projects SET ? WHERE id = ?";
+
+    const [result] = await connection.query<ResultSetHeader>(sqlStatement, [updatedProject, id]);
+
+    if (result.affectedRows === 1) {
+      return { ...updatedProject, id } as Project;
+    }
+
+    return undefined;
+  }
+
   public static async deleteProjectById(projectId: number): Promise<boolean> {
-    const [result] = await connection.query<ResultSetHeader>("DELETE FROM projects WHERE id = ?", [projectId]);
+    const [result] = await connection.query<ResultSetHeader>("DELETE FROM projects WHERE id = ?", [
+      projectId,
+    ]);
 
     return result.affectedRows > 0;
   }
