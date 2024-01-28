@@ -18,7 +18,8 @@ class UserController {
     const user = await UserService.getUserById(id);
 
     if (user) {
-      res.json(user);
+      const { password, ...dtoUser } = user;
+      res.json(dtoUser);
     } else {
       res.status(404).json({ message: "Usuário não encontrado." });
     }
