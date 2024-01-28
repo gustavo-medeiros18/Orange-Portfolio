@@ -56,23 +56,22 @@ export class RegisterComponent {
   // Função de simulação de login assíncrono
   signUp() {
     this.loading = true;
-
     // Simula uma operação assíncrona (por exemplo, uma requisição HTTP)
     // Deve ser alterado quando implementar o service de autenticação!
-    setTimeout(() => {
+    if (this.form.invalid) {
+      this.onError();
       this.loading = false;
-    }, 2000);
-
-    if (this.form.invalid) this.onError();
+      return;
+    }
     this.registerService.save(this.form).subscribe({
-      next: (data) => {
-        console.log(data);
+      next: () => {
         this.onSuccess();
       },
       error: (error) => {
         this.onError();
       },
     });
+    this.loading = false;
   }
 
   onSuccess() {
