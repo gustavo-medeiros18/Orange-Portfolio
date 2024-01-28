@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { UserService } from "src/app/appServices/user.service";
+import { FormGroup } from "@angular/forms";
 
 @Injectable({
   providedIn: "root",
@@ -7,7 +8,7 @@ import { UserService } from "src/app/appServices/user.service";
 export class LoginService {
   constructor(private userService: UserService) {}
 
-  authenticate(params: FormData) {
-    return this.userService.authenticate(params);
+  authenticate(form: FormGroup) {
+    return this.userService.authenticate(form.value);
   }
 }

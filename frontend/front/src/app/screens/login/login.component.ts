@@ -22,8 +22,14 @@ export class LoginComponent implements OnInit {
   // Variável de controle para o estado de carregamento
   loading: boolean = false;
 
-  constructor(private formBuilder: NonNullableFormBuilder, private loginService: LoginService,
-    private modalActionService: ModalActionService, private router: Router) {}
+  hasError: string = "";
+
+  constructor(
+    private formBuilder: NonNullableFormBuilder,
+    private loginService: LoginService,
+    private modalActionService: ModalActionService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     // Inicialização do formulário
@@ -51,26 +57,28 @@ export class LoginComponent implements OnInit {
   // Função de simulação de login assíncrono
   login() {
     this.loading = true;
-    const data = new FormData();
-    data.append('email', this.form.value.email);
-    data.append('password', this.form.value.password);
-    if (this.form.invalid) this.onError();
-    this.loginService.authenticate(data).subscribe({
+    if (this.form.invalid) this.onError(true);
+    this.loginService.authenticate(this.form).subscribe({
       next: () => {
+        this.loading = false;
         this.onSuccess();
       },
       error: (error) => {
-        this.onError();
+        this.loading = false;
+        this.onError(false);
       },
     });
-    this.loading = false;
   }
 
   onSuccess() {
-    this.router.navigateByUrl('/profile');
+    this.router.navigateByUrl("/profile");
   }
 
-  onError() {
-    // implementar
+  onError(isForms: boolean) {
+    if (isForms) {
+      this.hasError = "Preencha todos os campos";
+    } else {
+      this.hasError = "Credenciais inválidas";
+    }
   }
 }

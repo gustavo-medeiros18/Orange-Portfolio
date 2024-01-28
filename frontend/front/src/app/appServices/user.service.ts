@@ -20,8 +20,9 @@ export class UserService {
     return this.httpClient.post<IUserRegister>(apiUrl, requestBody, { headers: this.headers });
   }
 
-  authenticate(params: FormData) {
+  authenticate(record: IUserLogin) {
     const apiUrl = new URL(environment.apiAuthenticate, this.API).toString();
-    return this.httpClient.post<IUserLogin>(apiUrl, params, { headers: this.headers });
+    const requestBody: string = JSON.stringify(record);
+    return this.httpClient.post<IUserLogin>(apiUrl,requestBody,{headers: this.headers});
   }
 }
