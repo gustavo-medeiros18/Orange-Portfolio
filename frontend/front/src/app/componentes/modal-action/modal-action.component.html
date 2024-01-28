@@ -29,10 +29,10 @@
     </div>
     <!-- carregar componente de upload-->
     <div class="upload-img">
-      <p class="subtitle-1">Selecione o conteúdo que você deseja fazer upload</p>
+      <p class="subtitle-2">Selecione o conteúdo que você deseja fazer upload</p>
       <div class="projects">
-        <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/png"
-          class="hidden-input" />
+        <input  #fileInput type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/png"
+          class="hidden-input"/>
         <button (click)="triggerFile(fileInput)">
           <div *ngIf="!selectedImage" class="empty-projects">
             <span class="add-project">
@@ -47,13 +47,13 @@
     </div>
   </div>
   <div class="div-finish-modal">
-    <a type="button" (click)="viewProject()" class=" subtitle-1"> Visualizar publicação</a>
+    <a type="button" (click)="viewProject()" class="subtitle-1"> Visualizar publicação</a>
     <mat-dialog-actions class="button-container">
-      <button *ngIf="modal.name === 'Adicionar Projeto'" class="button-save" (click)="addProject()" mat-button mat-dialog-close>SALVAR</button>
-      <button *ngIf="modal.name === 'Editar Projeto'" class="button-save" (click)="editProject()" mat-button mat-dialog-close>SALVAR</button>
-      <button id="button-cancel" mat-button [mat-dialog-close]="true" cdkFocusInitial>
+      <button *ngIf="modal.name === 'Adicionar Projeto'" class="button-save" (click)="addProject()" mat-button mat-dialog-close [disabled]="isButtonDisabled()">SALVAR</button>
+      <button *ngIf="modal.name === 'Editar Projeto'"  class="button-save" (click)="editProject()" mat-button mat-dialog-close [disabled]="isButtonDisabled()">SALVAR</button>
+      <button id="button-cancel" mat-button mat-dialog-close cdkFocusInitial>
         CANCELAR
       </button>
-    </mat-dialog-actions>
+    </mat-dialog-actions> 
   </div>
 </mat-dialog-content>

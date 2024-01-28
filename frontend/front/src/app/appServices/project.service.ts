@@ -28,10 +28,9 @@ export class ProjectService {
     return project;
   }
 
-  createProject(params: IProject): Observable<IProject> {
+  createProject(params: FormData): Observable<IProject> {
     const apiUrl = new URL(environment.apiProjects, this.API).toString();
-    const requestBody: string = JSON.stringify(params);
-    return this.httpClient.post<IProject>(apiUrl, requestBody, { headers: this.headers });
+    return this.httpClient.post<IProject>(apiUrl,params, { headers: this.headers });
     /*return new Observable((observer) => {
       observer.next();
     });*/
@@ -45,10 +44,9 @@ export class ProjectService {
     });*/
   }
 
-  patchProject(params: IProject): Observable<IProject> {
-    const apiUrl = new URL(environment.getApiProjectId(params.id!), this.API).toString();
-    const requestBody: string = JSON.stringify(params);
-    return this.httpClient.patch<IProject>(apiUrl, requestBody, { headers: this.headers });
+  patchProject(params: FormData,id :number): Observable<IProject> {
+    const apiUrl = new URL(environment.getApiProjectId(id), this.API).toString();
+    return this.httpClient.patch<IProject>(apiUrl,params, { headers: this.headers });
     /*return new Observable((observer) => {
       observer.next();
     });*/

@@ -69,14 +69,11 @@ export class ModalActionComponent implements OnInit {
 
   addProject() {
     const action: string = "Adicionar";
-    const project: IProject = {
-      title: this.form.value.title,
-      tags: this.form.value.tags.split(","),
-      link: this.form.value.link,
-      description: this.form.value.description,
-      imgUrl: this.formData,
-    };
-    this.modalService.createProjectModal(project).subscribe({
+    this.formData.append('title', this.form.value.title);
+    this.formData.append('tags', this.form.value.tags);
+    this.formData.append('link', this.form.value.link);
+    this.formData.append('description', this.form.value.description);
+    this.modalService.createProjectModal(this.formData).subscribe({
       next: () => {
         this.projectActionService.openDialog(action, "success");
       },
@@ -88,15 +85,11 @@ export class ModalActionComponent implements OnInit {
 
   editProject() {
     const action: string = "Editar";
-    const project: IProject = {
-      id: this.project?.id,
-      title: this.form.value.title,
-      tags: this.form.value.tags.split(","),
-      link: this.form.value.link,
-      description: this.form.value.description,
-      imgUrl: this.formData,
-    };
-    this.modalService.pathProjectModal(project).subscribe({
+    this.formData.append('title', this.form.value.title);
+    this.formData.append('tags', this.form.value.tags);
+    this.formData.append('link', this.form.value.link);
+    this.formData.append('description', this.form.value.description);
+    this.modalService.pathProjectModal(this.formData,this.project?.id!).subscribe({
       next: () => {
         this.projectActionService.openDialog(action, "success");
       },
@@ -124,5 +117,9 @@ export class ModalActionComponent implements OnInit {
       img: this.selectedImage
     };
     this.viewProjectInfoService.openDialog(user, project);
+  }
+
+  isButtonDisabled(): boolean{
+    return this.form.invalid;
   }
 }
