@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import userRouter from "./routers/user.router";
 import projectRouter from "./routers/project.router";
 import { multerMiddleware } from "./middlewares/fileParser";
+import loginRouter from "./routers/login.router";
 
 dotenv.config();
 
@@ -15,3 +16,4 @@ app.listen(process.env.PORT, () => console.log(`Express rodando na porta ${proce
 
 app.use(userRouter);
 app.use(projectRouter);
+app.use(loginRouter);
