@@ -80,7 +80,6 @@ h5 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--color-principal-70, #e6e9f2);
 }
 
 .projects {
@@ -101,6 +100,8 @@ h5 {
 .project-cover {
     border-radius: 0.25rem;
     object-fit: cover;
+    height: 100%;
+    width: 100%;
 }
 
 .project-description {
