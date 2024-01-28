@@ -1,18 +1,18 @@
 <div class="container-card" *ngFor="let project of projects">
   <mat-card class="project-card">
-    <div class="button-container">
+    <div *ngIf="edit" class="button-container">
       <button class="radios-btn" mat-icon-button [matMenuTriggerFor]="beforeMenu"
         aria-label="Example icon-button with a menu" (click)="$event.stopPropagation()">
         <mat-icon class="icon">edit</mat-icon>
       </button>
-      <mat-menu #beforeMenu="matMenu" xPosition="before">
-        <button (click)="editItem(project)" mat-menu-item>
-          <span>Editar</span>
-        </button>
-        <button mat-menu-item (click)="deleteProject(project.id!)">
-          <span>Excluir</span>
-        </button>
-      </mat-menu>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <button (click)="editItem(project)" mat-menu-item>
+            <span>Editar</span>
+          </button>
+          <button mat-menu-item (click)="deleteProject(project.id!)">
+            <span>Excluir</span>
+          </button> 
+        </mat-menu>
     </div>
     <img mat-card-image src="{{project.img}}" alt="{{project.title}}">
     <mat-card-header>
@@ -23,7 +23,7 @@
           <p> {{project.firstName ? project.firstName! + ' ' + project.lastName! : userName}} &nbsp;&bull;
             {{project.releaseDate}}</p>
         </div>
-        <div class="chips">
+        <div *ngIf="edit" class="chips">
           <mat-card-actions *ngFor="let item of project.tags">
             <mat-chip>{{item}}</mat-chip>
           </mat-card-actions>

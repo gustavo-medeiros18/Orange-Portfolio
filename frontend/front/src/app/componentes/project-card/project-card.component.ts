@@ -14,6 +14,7 @@ export class ProjectCardComponent implements OnInit {
   @Input() projects: IProject[] = [];
   @Input() userName: string = "";
   @Input() userImg: string = "";
+  @Input() edit: boolean = false;
 
   constructor(
     private modalActionService: ModalActionService,

@@ -27,7 +27,6 @@ import { ProjectActionComponent } from './componentes/project-action/project-act
 import { DeleteConfirmationComponent } from './componentes/delete-confirmation/delete-confirmation.component';
 import { ViewProjectInfoComponent } from './componentes/view-project-info/view-project-info.component';
 import { DiscoverComponent } from './screens/discover/discover.component';
-import { DisplayProjectComponent } from './componentes/display-project/display-project.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +41,6 @@ import { DisplayProjectComponent } from './componentes/display-project/display-p
     DeleteConfirmationComponent,
     ViewProjectInfoComponent,
     DiscoverComponent,
-    DisplayProjectComponent
   ],
   imports: [
     BrowserModule,
