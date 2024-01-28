@@ -74,7 +74,7 @@ export class ModalActionComponent implements OnInit {
       tags: this.form.value.tags.split(","),
       link: this.form.value.link,
       description: this.form.value.description,
-      img: this.formData,
+      imgUrl: this.formData,
     };
     this.modalService.createProjectModal(project).subscribe({
       next: () => {
@@ -89,11 +89,12 @@ export class ModalActionComponent implements OnInit {
   editProject() {
     const action: string = "Editar";
     const project: IProject = {
+      id: this.project?.id,
       title: this.form.value.title,
       tags: this.form.value.tags.split(","),
       link: this.form.value.link,
       description: this.form.value.description,
-      img: this.formData,
+      imgUrl: this.formData,
     };
     this.modalService.pathProjectModal(project).subscribe({
       next: () => {
