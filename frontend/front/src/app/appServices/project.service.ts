@@ -20,7 +20,7 @@ export class ProjectService {
       tags: projectData.tags,
       link: projectData.link,
       description: projectData.description,
-      img: projectData.img,
+      imgUrl: projectData.imgUrl,
       firstName: projectData.firstName,
       lastName: projectData.lastName,
       releaseDate: projectData.releaseDate

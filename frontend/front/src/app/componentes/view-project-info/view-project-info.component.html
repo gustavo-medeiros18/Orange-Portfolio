@@ -17,12 +17,12 @@
 <!-- carregar componente de upload-->
 <div class="upload-img">
   <div class="projects">
-      <div *ngIf="!modal.project.img" class="empty-projects">
+      <div *ngIf="!modal.project.imgUrl" class="empty-projects">
         <span class="add-project">
           <mat-icon class="mat-18">collections</mat-icon>
         </span>
       </div>
-      <img [src]="modal.project.img" class="project-cover" alt="Imagem selecionada"/>
+      <img [src]="modal.project.imgUrl" class="project-cover" alt="Imagem selecionada"/>
   </div>
 </div>
 <div class = "project-description">

@@ -3,7 +3,7 @@ export interface IProject {
   tags?: string[];
   link?: string;
   description: string;
-  img?: string;
+  imgUrl?: string;
   releaseDate: string;
   id: number;
   firstName?: string;
