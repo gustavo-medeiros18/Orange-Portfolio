@@ -32,7 +32,6 @@ export class DiscoverComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProjects();
-    console.log(this.getAllProjects())
     this.searchForm
       .get("search")
       ?.valueChanges.pipe(

@@ -60,10 +60,8 @@ export class DiscoverService {
         },
       ];
 
-      // Emitir os projetos para o observer
       observer.next(projects);
 
-      // Notificar que a emissão de valores está completa
       observer.complete();
     });
   }

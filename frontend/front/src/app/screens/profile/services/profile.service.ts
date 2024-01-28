@@ -10,9 +10,9 @@ export class ProfileService {
   constructor(private projectService: ProjectService) {}
 
   getProjectsProfile(): Observable<IProject[]> {
-    this.projectService.getProjects();
+    return this.projectService.getProjects();
 
-    return new Observable((observer: Observer<IProject[]>) => {
+    /*return new Observable((observer: Observer<IProject[]>) => {
       const projects: IProject[] = [
         {
           title: "teste",
@@ -60,11 +60,9 @@ export class ProfileService {
         },
       ];
 
-      // Emitir os projetos para o observer
       observer.next(projects);
 
-      // Notificar que a emissão de valores está completa
       observer.complete();
-    });
+    });*/
   }
 }
