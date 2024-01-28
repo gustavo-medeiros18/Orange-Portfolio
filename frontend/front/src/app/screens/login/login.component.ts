@@ -51,8 +51,11 @@ export class LoginComponent implements OnInit {
   // Função de simulação de login assíncrono
   login() {
     this.loading = true;
+    const data = new FormData();
+    data.append('email', this.form.value.email);
+    data.append('password', this.form.value.password);
     if (this.form.invalid) this.onError();
-    this.loginService.authenticate(this.form).subscribe({
+    this.loginService.authenticate(data).subscribe({
       next: () => {
         this.onSuccess();
       },
