@@ -3,7 +3,8 @@ export const environment = {
   baseUrl: "http://localhost:3000/",
   apiRegister: "register",
   apiAuthenticate: "login",
+  apiUsers: "users",
   apiProjects: "projects",
-  apiPatchProjects: "projects",
-  apiDeleteProjects: "projects",
+  getApiUserId: (id: number) => `users/${id}`,
+  getApiProjectId: (id: number) => `projects/${id}`
 };

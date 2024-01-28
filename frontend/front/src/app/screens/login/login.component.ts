@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { LoginService } from "./services/login.service";
+import { ModalActionService } from "src/app/componentes/modal-action/services/modal-action.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -20,7 +22,8 @@ export class LoginComponent implements OnInit {
   // Variável de controle para o estado de carregamento
   loading: boolean = false;
 
-  constructor(private formBuilder: NonNullableFormBuilder, private loginService: LoginService) {}
+  constructor(private formBuilder: NonNullableFormBuilder, private loginService: LoginService,
+    private modalActionService: ModalActionService, private router: Router) {}
 
   ngOnInit() {
     // Inicialização do formulário
@@ -61,7 +64,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSuccess() {
-    // implementar
+    this.router.navigateByUrl('/profile');
   }
 
   onError() {

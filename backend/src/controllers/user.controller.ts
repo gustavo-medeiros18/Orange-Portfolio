@@ -26,7 +26,6 @@ class UserController {
 
   public static async createUser(req: Request, res: Response) {
     const newUser: User = req.body;
-
     newUser.password = await hashPassword(newUser.password);
 
     const createdUser = await UserService.createUser(newUser);

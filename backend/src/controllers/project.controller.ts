@@ -7,7 +7,6 @@ import UserService from "../services/user.service";
 class ProjectController {
   public static async createProject(req: Request, res: Response) {
     const newProject: Project = req.body;
-
     if (
       !newProject ||
       !newProject.title ||
@@ -20,7 +19,6 @@ class ProjectController {
         .status(422)
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
-
     const downloadURL = await uploadFile(req.file!);
     newProject.img_url = downloadURL;
 

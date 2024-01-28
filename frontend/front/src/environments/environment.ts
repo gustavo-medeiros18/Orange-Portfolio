@@ -1,9 +1,10 @@
 export const environment = {
-  production: true,
+  production: false,
   baseUrl: "",
   apiRegister: "register",
   apiAuthenticate: "login",
+  apiUsers: "users",
   apiProjects: "projects",
-  apiPatchProjects: "projects",
-  apiDeleteProjects: "projects",
+  getApiUserId: (id: string) => `users/${id}`,
+  getApiProjectId: (id: string) => `projects/${id}`
 };
