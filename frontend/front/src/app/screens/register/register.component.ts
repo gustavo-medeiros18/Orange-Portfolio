@@ -65,7 +65,7 @@ export class RegisterComponent {
       this.loading = false;
       return;
     }
-    this.registerService.save(this.form).subscribe({
+    this.registerService.save(this.form.value).subscribe({
       next: () => {
         this.loading = false;
         this.onSuccess();
@@ -75,7 +75,6 @@ export class RegisterComponent {
         this.onError();
       },
     });
-    this.loading = false;
   }
 
   onSuccess() {

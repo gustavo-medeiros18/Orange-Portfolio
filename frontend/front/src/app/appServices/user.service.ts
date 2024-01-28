@@ -15,10 +15,10 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) {}
 
-  save(record: FormGroup): Observable<IUserRegister> {
-    const apiUrl = new URL(environment.apiRegister, this.API).toString();
+  save(record: IUserRegister): Observable<IUserRegister> {
+    const apiUrl = new URL(environment.apiUsers, this.API).toString();
     const requestBody: string = JSON.stringify(record);
-    return this.httpClient.post<IUserRegister>(apiUrl, record, { headers: this.headers });
+    return this.httpClient.post<IUserRegister>(apiUrl,requestBody, { headers: this.headers });
   }
 
   authenticate(record: IUserLogin) {

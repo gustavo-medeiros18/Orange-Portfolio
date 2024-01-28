@@ -6,6 +6,7 @@ import UserService from "../services/user.service";
 
 class ProjectController {
   public static async createProject(req: Request, res: Response) {
+    console.log("opa");
     const newProject: Project = req.body;
     if (
       !newProject ||
