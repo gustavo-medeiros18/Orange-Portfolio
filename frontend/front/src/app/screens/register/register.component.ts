@@ -80,8 +80,9 @@ export class RegisterComponent {
   onSuccess() {
     this.successAlert = true;
     this.errorAlert = false;
-    // timeout?
-    this.router.navigateByUrl("/login");
+    setTimeout(() => {
+      this.router.navigateByUrl("/login");
+    },1500);
   }
 
   onError() {
