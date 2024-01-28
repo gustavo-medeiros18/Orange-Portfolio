@@ -13,9 +13,9 @@ export class ViewProjectInfoService {
 
   openDialog(user: IModal, project: IProject) {
     const dialogRef = this.dialog.open(ViewProjectInfoComponent, {
-      data: {user, project},
+      data: {user, project},  
       width: "100rem",
-      height: "45rem",
+      height: "50rem",
       position: { 
         top: "8.37rem",
         bottom: "1.7rem" 

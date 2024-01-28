@@ -11,4 +11,8 @@ import { IModal } from '../models/iModal';
 export class ViewProjectInfoComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) public modal: {user: IModal, project: IProject}){}
+
+  goTo(link: string){
+    window.open(link,"_blank");
+  }
 }

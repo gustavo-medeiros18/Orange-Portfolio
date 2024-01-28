@@ -6,6 +6,17 @@ h5 {
     color: var(--Neutral-Colors-Neutral-120, #303133);
 }
 
+a {
+    color: var(--Support-Colors-Info-info-80, #608AE1);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0.875rem;
+    letter-spacing: 0.01563rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 #username {
     color: var(--Neutral-Colors-Neutral-120, #303133);
     font-size: 1rem;
