@@ -4,6 +4,7 @@ import { IUserRegister } from "../models/iUserRegister";
 import { environment } from "src/environments/environment.development";
 import { IUserLogin } from "../models/iUserLogin";
 import { Observable, of } from "rxjs";
+import { FormGroup } from "@angular/forms";
 
 @Injectable({
   providedIn: "root",
@@ -14,10 +15,10 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) {}
 
-  save(record: IUserRegister): Observable<IUserRegister> {
+  save(record: FormGroup): Observable<IUserRegister> {
     const apiUrl = new URL(environment.apiRegister, this.API).toString();
     const requestBody: string = JSON.stringify(record);
-    return this.httpClient.post<IUserRegister>(apiUrl, requestBody, { headers: this.headers });
+    return this.httpClient.post<IUserRegister>(apiUrl, record, { headers: this.headers });
   }
 
   authenticate(record: IUserLogin) {

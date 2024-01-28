@@ -10,7 +10,7 @@ import { IUserRegister } from "src/app/models/iUserRegister";
 export class RegisterService {
   constructor(private userService: UserService) {}
 
-  save(form: FormGroup): Observable<IUserRegister> {
-    return this.userService.save(form.value);
+  save(params: FormGroup): Observable<IUserRegister> {
+    return this.userService.save(params);
   }
 }

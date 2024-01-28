@@ -37,10 +37,10 @@ export class RegisterComponent {
 
   formErrorMessage(fieldName: string) {
     const field = this.form.get(fieldName);
-    if (field?.hasError('required')) {
-      return "Este campo é necessário"; 
+    if (field?.hasError("required")) {
+      return "Este campo é necessário";
     }
-    if (field?.hasError('email')){
+    if (field?.hasError("email")) {
       return "Endereço de email inválido";
     }
     return;
@@ -67,9 +67,11 @@ export class RegisterComponent {
     }
     this.registerService.save(this.form).subscribe({
       next: () => {
+        this.loading = false;
         this.onSuccess();
       },
       error: (error) => {
+        this.loading = false;
         this.onError();
       },
     });
@@ -80,7 +82,7 @@ export class RegisterComponent {
     this.successAlert = true;
     this.errorAlert = false;
     // timeout?
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl("/login");
   }
 
   onError() {

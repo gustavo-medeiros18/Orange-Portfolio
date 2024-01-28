@@ -69,10 +69,10 @@ export class ModalActionComponent implements OnInit {
 
   addProject() {
     const action: string = "Adicionar";
-    this.formData.append('title', this.form.value.title);
-    this.formData.append('tags', this.form.value.tags);
-    this.formData.append('link', this.form.value.link);
-    this.formData.append('description', this.form.value.description);
+    this.formData.append("title", this.form.value.title);
+    this.formData.append("tags", this.form.value.tags);
+    this.formData.append("link", this.form.value.link);
+    this.formData.append("description", this.form.value.description);
     this.modalService.createProjectModal(this.formData).subscribe({
       next: () => {
         this.projectActionService.openDialog(action, "success");
@@ -85,11 +85,11 @@ export class ModalActionComponent implements OnInit {
 
   editProject() {
     const action: string = "Editar";
-    this.formData.append('title', this.form.value.title);
-    this.formData.append('tags', this.form.value.tags);
-    this.formData.append('link', this.form.value.link);
-    this.formData.append('description', this.form.value.description);
-    this.modalService.pathProjectModal(this.formData,this.project?.id!).subscribe({
+    this.formData.append("title", this.form.value.title);
+    this.formData.append("tags", this.form.value.tags);
+    this.formData.append("link", this.form.value.link);
+    this.formData.append("description", this.form.value.description);
+    this.modalService.pathProjectModal(this.formData, this.project?.id!).subscribe({
       next: () => {
         this.projectActionService.openDialog(action, "success");
       },
@@ -107,19 +107,19 @@ export class ModalActionComponent implements OnInit {
       profileImg: "assets/imgs/img_profile_orange_portfolio.png",
     };
     const projectForm = this.form.value;
-    const project  = {
+    const project = {
       title: projectForm.title,
       tags: projectForm.tags.split(","),
       link: projectForm.link,
       description: projectForm.description,
       releaseDate: "2024-01-27",
       id: 1,
-      img: this.selectedImage
+      img: this.selectedImage,
     };
     this.viewProjectInfoService.openDialog(user, project);
   }
 
-  isButtonDisabled(): boolean{
+  isButtonDisabled(): boolean {
     return this.form.invalid;
   }
 }
