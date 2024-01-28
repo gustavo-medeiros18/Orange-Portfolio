@@ -14,8 +14,10 @@ class ProjectService {
 
   public static async getAllProjects(): Promise<Project[]> {
     const sqlStatement =
-      "SELECT p.id, p.title, p.tags, p.link, p.description, p.imgUrl, u.name " +
-      "AS firstName, u.lastName AS lastName FROM projects p " +
+      "SELECT " +
+      "p.id, p.title, p.tags, p.link, p.description, p.imgUrl, p.createdAt, u.name " +
+      "AS firstName, u.lastName " +
+      "FROM projects p " +
       "INNER JOIN " +
       "users u ON p.idUser = u.id";
 
