@@ -48,13 +48,6 @@ export class LoginComponent implements OnInit {
   // Função de simulação de login assíncrono
   login() {
     this.loading = true;
-
-    // Simula uma operação assíncrona (por exemplo, uma requisição HTTP)
-    // Deve ser alterado quando implementar o service de autenticação!
-    setTimeout(() => {
-      this.loading = false;
-    }, 2000);
-
     if (this.form.invalid) this.onError();
     this.loginService.authenticate(this.form).subscribe({
       next: () => {
@@ -64,6 +57,7 @@ export class LoginComponent implements OnInit {
         this.onError();
       },
     });
+    this.loading = false;
   }
 
   onSuccess() {

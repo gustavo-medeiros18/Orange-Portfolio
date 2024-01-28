@@ -129,7 +129,6 @@ export class ModalActionComponent implements OnInit {
       profileImg: "assets/imgs/img_profile_orange_portfolio.png",
     };
     const projectForm = this.form.value;
-    console.log(typeof projectForm.tags);
     const project: IProject = {
       title: projectForm.title,
       tags: projectForm.tags.split(","),
