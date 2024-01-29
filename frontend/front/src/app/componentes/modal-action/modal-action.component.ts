@@ -3,7 +3,7 @@ import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ModalActionService } from "./services/modal-action.service";
 import { ProjectActionService } from "../project-action/services/project-action.service";
-import { IProject  } from "src/app/models/iProject";
+import { IProject } from "src/app/models/iProject";
 import { IModal } from "../models/iModal";
 import { ViewProjectInfoService } from "../view-project-info/services/view-project-info.service";
 
@@ -12,7 +12,6 @@ import { ViewProjectInfoService } from "../view-project-info/services/view-proje
   templateUrl: "./modal-action.component.html",
   styleUrls: ["./modal-action.component.scss"],
 })
-
 export class ModalActionComponent implements OnInit {
   form!: FormGroup;
 
@@ -111,17 +110,17 @@ export class ModalActionComponent implements OnInit {
     this.alertService.openDialog("editar", "success");
   }
 
-  addProject(form: FormGroup){
+  addProject(form: FormGroup) {
     //call to API
     // call project-action
   }
 
-  editProject(form: FormGroup){
+  editProject(form: FormGroup) {
     // call to API
     // call project-action
   }
 
-  viewProject(form: FormGroup){
+  viewProject(form: FormGroup) {
     const user: IModal = {
       name: "Camila",
       lastName: "Soares",
@@ -135,9 +134,8 @@ export class ModalActionComponent implements OnInit {
       link: projectForm.link,
       description: projectForm.description,
       releaseDate: "2024-01-27",
-      id: 1,
-      img: this.selectedImage
+      img: this.selectedImage,
     };
-    this.viewProjectInfoService.openDialog(user,project);
+    this.viewProjectInfoService.openDialog(user, project);
   }
 }

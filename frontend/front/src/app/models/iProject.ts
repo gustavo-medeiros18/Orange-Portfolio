@@ -5,7 +5,7 @@ export interface IProject {
   description: string;
   img?: string;
   releaseDate: string;
-  id: number;
+  id?: number;
   firstName?: string;
   lastName?: string;
 }
