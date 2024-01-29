@@ -16,7 +16,7 @@ export class ProjectService {
     const project: IProject = {
       id: projectData.id,
       title: projectData.title,
-      tags: projectData.tags.split(","),
+      tags: projectData.tags,
       link: projectData.link,
       description: projectData.description,
       imgUrl: projectData.imgUrl,

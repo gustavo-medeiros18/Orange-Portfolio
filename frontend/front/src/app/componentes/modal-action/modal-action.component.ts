@@ -80,7 +80,7 @@ export class ModalActionComponent implements OnInit {
   addProject() {
     const action: string = "adicionar";
     this.formData.append("title", this.form.value.title);
-    this.formData.append("tags",JSON.stringify(this.tags));
+    this.formData.append("tags",this.tags.join(", "));
     this.formData.append("link", this.form.value.link);
     this.formData.append("description", this.form.value.description);
     // adicionar id do usuario após autenticação
@@ -98,7 +98,7 @@ export class ModalActionComponent implements OnInit {
   editProject() {
     const action: string = "editar";
     this.formData.append("title", this.form.value.title);
-    this.formData.append("tags",JSON.stringify(this.tags));
+    this.formData.append("tags",this.tags.join(", "));
     this.formData.append("link", this.form.value.link);
     this.formData.append("description", this.form.value.description);
     this.modalService.pathProjectModal(this.formData, this.project?.id!).subscribe({
