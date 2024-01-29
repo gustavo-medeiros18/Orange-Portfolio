@@ -119,7 +119,6 @@ export class ModalActionComponent implements OnInit {
       link: projectForm.link,
       description: projectForm.description,
       releaseDate: "2024-01-27",
-      id: 1,
       img: this.selectedImage,
     };
     this.viewProjectInfoService.openDialog(user, project);
