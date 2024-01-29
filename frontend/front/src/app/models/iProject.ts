@@ -1,6 +1,6 @@
 export interface IProject {
   title: string;
-  tags?: string[];
+  tags: string[];
   link?: string;
   description: string;
   imgUrl?: string | FormData;

@@ -24,8 +24,8 @@
             {{project.releaseDate}}</p>
         </div>
         <div *ngIf="edit" class="chips">
-          <mat-card-actions *ngFor="let item of project.tags">
-            <mat-chip>{{item}}</mat-chip>
+          <mat-card-actions *ngFor="let tag of project.tags">
+            <mat-chip>{{tag}}</mat-chip>
           </mat-card-actions>
         </div>
       </div>

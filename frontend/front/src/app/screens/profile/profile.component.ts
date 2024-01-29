@@ -68,7 +68,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.getProjectsProfile().subscribe({
       next: (projects: IProject[]) => {
         projects.forEach(projectData => {
-          const project = this.profileService.fillProjectProfile(projectData);
+          const project: IProject = this.profileService.fillProjectProfile(projectData);
           this.projects.push(project);
         })
       },

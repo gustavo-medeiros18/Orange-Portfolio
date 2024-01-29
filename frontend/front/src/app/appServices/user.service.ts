@@ -11,19 +11,18 @@ import { FormGroup } from "@angular/forms";
 })
 export class UserService {
   private readonly API = environment.baseUrl;
-  private headers = new HttpHeaders().set("Content-Type", "application/json; charset=utf-8");
 
   constructor(private httpClient: HttpClient) {}
 
   save(record: IUserRegister): Observable<IUserRegister> {
     const apiUrl = new URL(environment.apiUsers, this.API).toString();
     const requestBody: string = JSON.stringify(record);
-    return this.httpClient.post<IUserRegister>(apiUrl,requestBody, { headers: this.headers });
+    return this.httpClient.post<IUserRegister>(apiUrl,requestBody);
   }
 
   authenticate(record: IUserLogin) {
     const apiUrl = new URL(environment.apiAuthenticate, this.API).toString();
     const requestBody: string = JSON.stringify(record);
-    return this.httpClient.post<IUserLogin>(apiUrl,requestBody,{headers: this.headers});
+    return this.httpClient.post<IUserLogin>(apiUrl,requestBody);
   }
 }

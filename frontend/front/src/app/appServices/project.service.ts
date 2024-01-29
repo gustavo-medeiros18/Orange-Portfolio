@@ -9,15 +9,14 @@ import { IProject } from "../models/iProject";
 })
 export class ProjectService {
   private readonly API = environment.baseUrl;
-  private headers = new HttpHeaders().set("Content-Type", "application/json; charset=utf-8");
 
   constructor(private httpClient: HttpClient) {}
 
-  fillProject(projectData: IProject): IProject{
+  fillProject(projectData: any): IProject{
     const project: IProject = {
       id: projectData.id,
       title: projectData.title,
-      tags: projectData.tags,
+      tags: projectData.tags.split(","),
       link: projectData.link,
       description: projectData.description,
       imgUrl: projectData.imgUrl,
@@ -30,7 +29,7 @@ export class ProjectService {
 
   createProject(params: FormData): Observable<IProject> {
     const apiUrl = new URL(environment.apiProjects, this.API).toString();
-    return this.httpClient.post<IProject>(apiUrl,params, { headers: this.headers });
+    return this.httpClient.post<IProject>(apiUrl,params);
     /*return new Observable((observer) => {
       observer.next();
     });*/
@@ -38,7 +37,7 @@ export class ProjectService {
 
   getProjects(): Observable<IProject[]> {
     const apiUrl = new URL(environment.apiProjects, this.API).toString();
-    return this.httpClient.get<IProject[]>(apiUrl, { headers: this.headers });
+    return this.httpClient.get<IProject[]>(apiUrl);
     /*return new Observable((observer) => {
       observer.next();
     });*/
@@ -46,7 +45,7 @@ export class ProjectService {
 
   patchProject(params: FormData,id :number): Observable<IProject> {
     const apiUrl = new URL(environment.getApiProjectId(id), this.API).toString();
-    return this.httpClient.patch<IProject>(apiUrl,params, { headers: this.headers });
+    return this.httpClient.patch<IProject>(apiUrl,params);
     /*return new Observable((observer) => {
       observer.next();
     });*/
@@ -54,7 +53,7 @@ export class ProjectService {
 
   deleteProject(id: number): Observable<IProject> {
     const apiUrl = new URL(environment.getApiProjectId(id), this.API).toString();
-    return this.httpClient.delete<IProject>(apiUrl, { headers: this.headers });
+    return this.httpClient.delete<IProject>(apiUrl);
     /*return new Observable((observer) => {
       observer.next();
     });*/

@@ -9,10 +9,18 @@
             <input matInput formControlName="title" />
             <mat-error *ngIf="form.get('title')?.invalid">{{formErrorMessage()}}</mat-error>
           </mat-form-field>
-          <mat-form-field class="input" id="lastNameField" appearance="outline">
-            <mat-label>Tags</mat-label>
-            <input matInput formControlName="tags" />
-            <mat-error *ngIf="form.get('tags')?.invalid">{{formErrorMessage()}}</mat-error>
+          <mat-form-field class="input" appearance="outline">
+            <mat-chip-grid  #chipGrid aria-label="Enter Tags" [formControl]="formControl">
+              <mat-chip  *ngFor="let tag of tags" (removed)="removeTag(tag)">
+                  {{ tag }}
+                <button matChipRemove aria-label="'remove ' + tag">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip>
+            </mat-chip-grid>
+            <input  matInput formControlName="tags" placeholder="Tags"
+                   [matChipInputFor]="chipGrid"
+                   (matChipInputTokenEnd)="addTag($event)"/>
           </mat-form-field>
         </div>
         <mat-form-field class="input" appearance="outline">
