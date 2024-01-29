@@ -14,12 +14,18 @@ class ProjectController {
       !newProject.description ||
       !newProject.tags ||
       !newProject.link ||
-      !req.file
+      !req.file ||
+      !newProject.idUser
     ) {
       return res
         .status(422)
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
+
+    const userExists = await UserService.getUserById(newProject.idUser);
+    if (!userExists)
+      return res.status(404).json({ message: "Solicitação inválida. Usuário não encontrado." });
+
     const downloadURL = await uploadFile(req.file!);
     newProject.imgUrl = downloadURL;
 
@@ -53,15 +59,18 @@ class ProjectController {
     const userExists = await UserService.getUserById(updatedProject.idUser);
     const projectExists = await ProjectService.getProjectById(projectId);
 
+    if (!userExists)
+      return res.status(404).json({ message: "Solicitação inválida. Usuário não encontrado." });
+    if (!projectExists)
+      return res.status(404).json({ message: "Solicitação inválida. Projeto não encontrado." });
+
     if (
       !updatedProject ||
       !updatedProject.title ||
       !updatedProject.description ||
       !updatedProject.tags ||
       !updatedProject.link ||
-      !req.file ||
-      !userExists ||
-      !projectExists
+      !req.file
     ) {
       return res
         .status(422)
@@ -72,10 +81,6 @@ class ProjectController {
     updatedProject.imgUrl = downloadURL;
 
     const updated = await ProjectService.updateProject(projectId, updatedProject);
-
-    if (!updated) {
-      return res.status(404).json({ message: "Projeto não encontrado." });
-    }
 
     return res.status(200).json(updated);
   }
