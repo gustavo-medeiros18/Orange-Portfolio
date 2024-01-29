@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, inject } from "@angular/core";
+import { Component, Inject, OnInit, ViewChild, inject } from "@angular/core";
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ModalActionService } from "./services/modal-action.service";
@@ -16,10 +16,10 @@ import { MatChipInputEvent } from "@angular/material/chips";
 })
 export class ModalActionComponent implements OnInit {
   //tag system
-  tags: string[] = [];
-  formControl = new FormControl(['angular']);
+  tags: string[]  = [];
+  formControl = new FormControl("",[Validators.required])
   announcer = inject(LiveAnnouncer);
-
+  isFieldClicked: boolean = false;
 
   form!: FormGroup;
 
@@ -37,12 +37,13 @@ export class ModalActionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // logic to edit project
     const currentProject = this.modalService.currentProject;
     if (currentProject) {
       this.project = currentProject.data;
     }
     this.selectedImage = this.project?.imgUrl as string;
-    this.project?.tags.forEach((tag) => this.tags.push(tag));
+    this.project?.tags.forEach((tag) => this.tags.push(tag));  
     this.form = this.formBuilder.group({
       title: [this.project ? this.project.title : "", [Validators.required]],
       tags: "",
@@ -56,21 +57,22 @@ export class ModalActionComponent implements OnInit {
     return "Este campo é necessário";
   }
 
+
   triggerFile(fileInput: HTMLInputElement) {
     fileInput.click();
   }
 
   onFileSelected(event: any) {
     const selectedFile = event.target.files[0];
-    
+
     if (selectedFile) {
       if (this.formData.has("imgUrl")) {
         this.formData.delete("imgUrl");
       }
 
-      this.formData.append("imgUrl",selectedFile);
+      this.formData.append("imgUrl", selectedFile);
       const reader = new FileReader();
-      reader.onload = () => { 
+      reader.onload = () => {
         this.selectedImage = reader.result as string;
       };
       reader.readAsDataURL(selectedFile);
@@ -80,11 +82,11 @@ export class ModalActionComponent implements OnInit {
   addProject() {
     const action: string = "adicionar";
     this.formData.append("title", this.form.value.title);
-    this.formData.append("tags",this.tags.join(", "));
+    this.appendTags(this.tags);
     this.formData.append("link", this.form.value.link);
     this.formData.append("description", this.form.value.description);
     // adicionar id do usuario após autenticação
-    this.formData.append("idUser","10");
+    this.formData.append("idUser", "10");
     this.modalService.createProjectModal(this.formData).subscribe({
       next: () => {
         this.projectActionService.openDialog(action, "success");
@@ -98,7 +100,7 @@ export class ModalActionComponent implements OnInit {
   editProject() {
     const action: string = "editar";
     this.formData.append("title", this.form.value.title);
-    this.formData.append("tags",this.tags.join(", "));
+    this.appendTags(this.tags)
     this.formData.append("link", this.form.value.link);
     this.formData.append("description", this.form.value.description);
     this.modalService.pathProjectModal(this.formData, this.project?.id!).subscribe({
@@ -124,7 +126,7 @@ export class ModalActionComponent implements OnInit {
       tags: this.tags,
       link: projectForm.link,
       description: projectForm.description,
-      releaseDate: "2024-01-27",
+      createdAt: projectForm.createdAt,
       id: 1,
       img: this.selectedImage,
     };
@@ -132,20 +134,19 @@ export class ModalActionComponent implements OnInit {
   }
 
   isButtonDisabled(): boolean {
-    //console.log(this.form.value);
-    return this.form.invalid;
+    return (this.form.invalid || this.formControl.invalid);
   }
 
   //tag system
 
   addTag(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
+    const value = (event.value || "").trim();
     if (value) {
       this.tags.push(value);
     }
     event.chipInput!.clear();
+    if (this.tags.length === 0) this.emptyFormTags();
   }
-
 
   removeTag(tag: string) {
     const index = this.tags.indexOf(tag);
@@ -154,5 +155,20 @@ export class ModalActionComponent implements OnInit {
 
       this.announcer.announce(`removed ${tag}`);
     }
+    if (this.tags.length === 0) this.emptyFormTags();
   }
+
+  emptyFormTags(){
+    this.formControl.setErrors({ 'required': true });
+    this.formControl.markAsTouched();
+  }
+
+  appendTags(tags: string[]){
+    if (tags.length > 1) {
+      this.formData.append("tags", tags.join(", "));
+    } else if (tags.length === 1){
+      this.formData.append("tags", tags.toString());
+    }
+  }
+
 }

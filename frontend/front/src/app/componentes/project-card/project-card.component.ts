@@ -28,7 +28,7 @@ export class ProjectCardComponent implements OnInit {
     this.modalActionService.openDialog(name);
   }
 
-  editItem(item: IProject) {
+  editProject(item: IProject) {
     const action: string = "Editar Projeto";
     this.modalActionService.dispatch({
       type: ProjecEventEnum.ADD_PROJECT,
@@ -52,5 +52,13 @@ export class ProjectCardComponent implements OnInit {
         })
       }
     });
+  }
+
+
+  formatData(createdAt: string){
+    const data = new Date(createdAt);
+    const month = (data.getMonth() + 1).toString().padStart(2, '0');
+    const day = data.getDate().toString().padStart(2, '0');
+    return `${month}/${day}`;
   }
 }

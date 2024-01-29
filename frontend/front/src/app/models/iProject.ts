@@ -4,7 +4,7 @@ export interface IProject {
   link?: string;
   description: string;
   imgUrl?: string | FormData;
-  releaseDate?: string;
+  createdAt: string;
   id?: number;
   firstName?: string;
   lastName?: string;

@@ -6,7 +6,7 @@
         <mat-icon class="icon">edit</mat-icon>
       </button>
         <mat-menu #beforeMenu="matMenu" xPosition="before">
-          <button (click)="editItem(project)" mat-menu-item>
+          <button (click)="editProject(project)" mat-menu-item>
             <span>Editar</span>
           </button>
           <button mat-menu-item (click)="deleteProject(project.id!)">
@@ -21,7 +21,7 @@
           <div mat-card-avatar class="project-header-image" style="background-image: url({{userImg}})">
           </div>
           <p> {{project.firstName ? project.firstName! + ' ' + project.lastName! : userName}} &nbsp;&bull;
-            {{project.releaseDate}}</p>
+            {{formatData(project.createdAt)}}</p>
         </div>
         <div *ngIf="edit" class="chips">
           <mat-card-actions *ngFor="let tag of project.tags">

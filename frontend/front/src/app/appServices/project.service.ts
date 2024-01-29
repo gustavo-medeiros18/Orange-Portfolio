@@ -22,7 +22,7 @@ export class ProjectService {
       imgUrl: projectData.imgUrl,
       firstName: projectData.firstName,
       lastName: projectData.lastName,
-      releaseDate: projectData.releaseDate
+      createdAt: projectData.createdAt
     }
     return project;
   }
