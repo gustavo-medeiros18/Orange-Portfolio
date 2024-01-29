@@ -24,7 +24,7 @@
                    (matChipInputTokenEnd)="addTag($event)"
                    (focus)="isFieldClicked = true"
                    (blur)="isFieldClicked = false"/>
-                   <mat-error *ngIf="formControl.invalid">{{formErrorMessage()}}</mat-error>
+                   <mat-error *ngIf= "tags.length === 0">{{formErrorMessage()}}</mat-error>
           </mat-form-field>
         </div>
         <mat-form-field class="input" appearance="outline">

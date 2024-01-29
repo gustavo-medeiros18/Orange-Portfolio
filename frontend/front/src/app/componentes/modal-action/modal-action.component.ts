@@ -37,7 +37,7 @@ export class ModalActionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // logic to edit project
+    // Logica para preencher informaçoes do projeto ao editá-lo
     const currentProject = this.modalService.currentProject;
     if (currentProject) {
       this.project = currentProject.data;
@@ -103,7 +103,10 @@ export class ModalActionComponent implements OnInit {
     this.appendTags(this.tags)
     this.formData.append("link", this.form.value.link);
     this.formData.append("description", this.form.value.description);
-    this.modalService.pathProjectModal(this.formData, this.project?.id!).subscribe({
+    // adicionar id do usuario após autenticação
+    this.formData.append("idUser", "10");
+
+    this.modalService.putProjectModal(this.formData, this.project?.id!).subscribe({
       next: () => {
         this.projectActionService.openDialog(action, "success");
       },
@@ -134,7 +137,7 @@ export class ModalActionComponent implements OnInit {
   }
 
   isButtonDisabled(): boolean {
-    return (this.form.invalid || this.formControl.invalid);
+    return (this.form.invalid || this.tags.length === 0);
   }
 
   //tag system
