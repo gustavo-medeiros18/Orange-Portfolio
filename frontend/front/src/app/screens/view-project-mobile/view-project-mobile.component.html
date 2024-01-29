@@ -1,0 +1,15 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+
+  <div class="container-data">
+    <h5 class="title">{{project?.title}}</h5>
+    <app-project-card class="projects-list" [userName]="user.name" [projects]="[project!]"
+      [userImg]="user.profileImg"></app-project-card>
+    <app-project-card></app-project-card>
+    <div class="project-description">
+      <p>{{project?.description}}<br><br></p>
+      <p> Download <br> <a href={{project?.link}}>{{project?.link}}</a>
+      </p>
+    </div>
+  </div>
+</div>
