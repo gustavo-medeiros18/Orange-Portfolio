@@ -6,7 +6,7 @@ import { ViewProjectMobileComponent } from "../view-project-mobile/view-project-
 const routes: Routes = [
   { path: "", component: DiscoverComponent },
 
-  { path: "discover/:id", component: ViewProjectMobileComponent },
+  { path: "project/:id", component: ViewProjectMobileComponent },
 ];
 @NgModule({
   imports: [RouterModule.forChild(routes)],

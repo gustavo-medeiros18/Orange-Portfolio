@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ViewProjectMobileService } from './services/view-project-mobile.service';
+import { IProject } from 'src/app/models/iProject';
 
 
 @Component({
@@ -7,8 +9,14 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './view-project-mobile.component.html',
   styleUrls: ['./view-project-mobile.component.scss']
 })
-export class ViewProjectMobileComponent {
+export class ViewProjectMobileComponent implements OnInit {
+  project!: IProject | null;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private viewProjectMobileService : ViewProjectMobileService) { }
+  ngOnInit(): void {
+
+  }
+
+
 
 }
