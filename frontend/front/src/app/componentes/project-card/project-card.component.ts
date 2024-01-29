@@ -4,6 +4,9 @@ import { ModalActionService } from "../modal-action/services/modal-action.servic
 import { DeleteConfirmationService } from "../delete-confirmation/services/delete-confirmation.service";
 import { ProjectActionService } from "../project-action/services/project-action.service";
 import { ProjectCardService } from "./services/project-card.service";
+import { ViewProjectMobileService } from "src/app/screens/view-project-mobile/services/view-project-mobile.service";
+import { ViewProjectInfoService } from "../view-project-info/services/view-project-info.service";
+import { IModal } from "../models/iModal";
 
 @Component({
   selector: "app-project-card",
@@ -20,12 +23,33 @@ export class ProjectCardComponent implements OnInit {
     private modalActionService: ModalActionService,
     private modalDeleteService: DeleteConfirmationService,
     private projectActionService: ProjectActionService,
-    private projectCardService: ProjectCardService
+    private projectCardService: ProjectCardService,
+    private viewProjectMobileService: ViewProjectMobileService,
+    private viewProjectInfoService: ViewProjectInfoService
   ) {}
   ngOnInit(): void {}
 
   openDialog(name: string) {
     this.modalActionService.openDialog(name);
+  }
+
+  selectProject(item: IProject) {
+    const isMobile = window.innerWidth < 600;
+    if (isMobile) {
+      this.viewProjectMobileService.dispatch({
+        type: ProjecEventEnum.ADD_PROJECT,
+        data: item,
+      });
+      this.viewProjectMobileService.openPage();
+    } else {
+      const user: IModal = {
+        name: item.firstName!,
+        lastName: item.lastName!,
+        email: "camilasoares123@gmail.com",
+        profileImg: "assets/imgs/img_profile_orange_portfolio.png",
+      };
+      this.viewProjectInfoService.openDialog(user, item);
+    }
   }
 
   editProject(item: IProject) {
