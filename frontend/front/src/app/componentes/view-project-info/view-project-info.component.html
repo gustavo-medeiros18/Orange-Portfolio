@@ -1,32 +1,52 @@
-<div class = "container">
-<div mat-dialog-title class="dialog-title">
-  <button mat-icon-button aria-label="close dialog" mat-dialog-close>
-    <mat-icon>close</mat-icon>
-  </button>
-</div>
-<div class="main-info">
-  <div class = "profile-info">
-    <img class = "profile-img" src="assets/imgs/img_profile_orange_portfolio.png" alt="Profile Icon">
-    <span id = "username" >{{ modal.user.name }} {{ modal.user.lastName }}</span>
+<div *ngIf="!modal.isMobile" class="container">
+  <div mat-dialog-title class="dialog-title">
+    <button mat-icon-button aria-label="close dialog" mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
-  <h5 id = "project-title">{{modal.project.title}}</h5>
-  <mat-chip-set *ngIf="modal.project.tags && !(modal.project.tags.length === 1 && modal.project.tags[0] == '')">
-    <mat-chip *ngFor="let tag of modal.project.tags">{{tag}}</mat-chip>
-  </mat-chip-set>
-</div>
-<!-- carregar componente de upload-->
-<div class="upload-img">
-  <div class="projects">
+  <div class="main-info">
+    <div class="profile-info">
+      <img class="profile-img" src="assets/imgs/img_profile_orange_portfolio.png" alt="Profile Icon">
+      <span id="username">{{ modal.user.name }} {{ modal.user.lastName }}</span>
+    </div>
+    <h5 id="project-title">{{modal.project.title}}</h5>
+    <mat-chip-set *ngIf="modal.project.tags && !(modal.project.tags.length === 1 && modal.project.tags[0] == '')">
+      <mat-chip *ngFor="let tag of modal.project.tags">{{tag}}</mat-chip>
+    </mat-chip-set>
+  </div>
+  <!-- carregar componente de upload-->
+  <div class="upload-img">
+    <div class="projects">
       <div *ngIf="!modal.project.img" class="empty-projects">
         <span class="add-project">
           <mat-icon class="mat-18">collections</mat-icon>
         </span>
       </div>
-      <img [src]="modal.project.img" class="project-cover" alt="Imagem selecionada"/>
+      <img [src]="modal.project.img" class="project-cover" alt="Imagem selecionada" />
+    </div>
+  </div>
+  <div class="project-description">
+    <p>{{modal.project.description}}<br><br></p>
+    <p *ngIf="modal.project.link"> Download <br> <a (click)="goTo(modal.project.link)"
+        target="_blank">{{modal.project.link}}</a></p>
   </div>
 </div>
-<div class = "project-description">
-  <p>{{modal.project.description}}<br><br></p>
-  <p *ngIf="modal.project.link"> Download <br> <a (click)="goTo(modal.project.link)" target="_blank">{{modal.project.link}}</a></p>
+
+<div *ngIf="modal.isMobile" class="container-mobile">
+  <div mat-dialog-title class="dialog-title">
+  <button mat-icon-button aria-label="close dialog" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
 </div>
+  <div class="container-data">
+
+    <app-project-card class="projects-list" [userName]="user.name" [projects]="[modal.project]"
+      [userImg]="user.profileImg"></app-project-card>
+    <app-project-card></app-project-card>
+    <div class="project-description">
+      <p>{{modal.project.description}}<br><br></p>
+      <p *ngIf="modal.project.link"> Download <br> <a (click)="goTo(modal.project.link)"
+          target="_blank">{{modal.project.link}}</a></p>
+    </div>
+  </div>
 </div>
