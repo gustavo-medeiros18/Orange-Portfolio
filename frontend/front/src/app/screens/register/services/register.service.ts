@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { FormGroup } from "@angular/forms";
 import { Observable, of } from "rxjs";
 import { UserService } from "src/app/appServices/user.service";
 import { IUserRegister } from "src/app/models/iUserRegister";
@@ -10,7 +9,7 @@ import { IUserRegister } from "src/app/models/iUserRegister";
 export class RegisterService {
   constructor(private userService: UserService) {}
 
-  save(form: FormGroup): Observable<IUserRegister> {
-    return this.userService.save(form.value);
+  save(params: IUserRegister): Observable<IUserRegister> {
+    return this.userService.save(params);
   }
 }

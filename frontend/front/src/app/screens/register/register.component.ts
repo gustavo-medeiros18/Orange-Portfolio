@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
-import { EmailValidator, FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
+import {FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { RegisterService } from "./services/register.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-register",
@@ -21,7 +22,8 @@ export class RegisterComponent {
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
-    private registerService: RegisterService
+    private registerService: RegisterService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -35,10 +37,10 @@ export class RegisterComponent {
 
   formErrorMessage(fieldName: string) {
     const field = this.form.get(fieldName);
-    if (field?.hasError('required')) {
-      return "Este campo é necessário"; 
+    if (field?.hasError("required")) {
+      return "Este campo é necessário";
     }
-    if (field?.hasError('email')){
+    if (field?.hasError("email")) {
       return "Endereço de email inválido";
     }
     return;
@@ -56,20 +58,20 @@ export class RegisterComponent {
   // Função de simulação de login assíncrono
   signUp() {
     this.loading = true;
-
     // Simula uma operação assíncrona (por exemplo, uma requisição HTTP)
     // Deve ser alterado quando implementar o service de autenticação!
-    setTimeout(() => {
+    if (this.form.invalid) {
+      this.onError();
       this.loading = false;
-    }, 2000);
-
-    if (this.form.invalid) this.onError();
-    this.registerService.save(this.form).subscribe({
-      next: (data) => {
-        console.log(data);
+      return;
+    }
+    this.registerService.save(this.form.value).subscribe({
+      next: () => {
+        this.loading = false;
         this.onSuccess();
       },
       error: (error) => {
+        this.loading = false;
         this.onError();
       },
     });
@@ -78,6 +80,9 @@ export class RegisterComponent {
   onSuccess() {
     this.successAlert = true;
     this.errorAlert = false;
+    setTimeout(() => {
+      this.router.navigateByUrl("/login");
+    },1500);
   }
 
   onError() {

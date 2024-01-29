@@ -32,7 +32,6 @@ export class DiscoverComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProjects();
-    console.log(this.getAllProjects())
     this.searchForm
       .get("search")
       ?.valueChanges.pipe(
@@ -49,7 +48,10 @@ export class DiscoverComponent implements OnInit {
   getAllProjects() {
     this.discoverService.getProjectsDiscover().subscribe({
       next: (projects: IProject[]) => {
-        this.projects = projects;
+        projects.forEach(projectData => {
+          const project = this.discoverService.fillProjectDiscover(projectData);
+          this.projects.push(project);
+        })
       },
       error: (error) => {
         console.error("Erro ao recuperar projetos:", error);

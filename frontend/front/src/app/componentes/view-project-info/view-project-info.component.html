@@ -7,7 +7,8 @@
   <div class="main-info">
     <div class="profile-info">
       <img class="profile-img" src="assets/imgs/img_profile_orange_portfolio.png" alt="Profile Icon">
-      <span id="username">{{ modal.user.name }} {{ modal.user.lastName }}</span>
+      <span id="username">{{ modal.user.name }} {{ modal.user.lastName }}<br> <span id = "date">{{currentDate()}}</span>
+    </span>
     </div>
     <h5 id="project-title">{{modal.project.title}}</h5>
     <mat-chip-set *ngIf="modal.project.tags && !(modal.project.tags.length === 1 && modal.project.tags[0] == '')">
@@ -17,12 +18,12 @@
   <!-- carregar componente de upload-->
   <div class="upload-img">
     <div class="projects">
-      <div *ngIf="!modal.project.img" class="empty-projects">
+      <div *ngIf="!modal.project.imgUrl" class="empty-projects">
         <span class="add-project">
           <mat-icon class="mat-18">collections</mat-icon>
         </span>
       </div>
-      <img [src]="modal.project.img" class="project-cover" alt="Imagem selecionada" />
+      <img [src]="modal.project.imgUrl" class="project-cover" alt="Imagem selecionada" />
     </div>
   </div>
   <div class="project-description">
@@ -39,10 +40,9 @@
   </button>
 </div>
   <div class="container-data">
-
+    <h5>{{modal.project.title}}</h5>
     <app-project-card class="projects-list" [userName]="user.name" [projects]="[modal.project]"
-      [userImg]="user.profileImg"></app-project-card>
-    <app-project-card></app-project-card>
+      [userImg]="user.profileImg" [edit]="false"></app-project-card>
     <div class="project-description">
       <p>{{modal.project.description}}<br><br></p>
       <p *ngIf="modal.project.link"> Download <br> <a (click)="goTo(modal.project.link)"

@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { LoginService } from "./services/login.service";
+import { ModalActionService } from "src/app/componentes/modal-action/services/modal-action.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -20,7 +22,14 @@ export class LoginComponent implements OnInit {
   // Variável de controle para o estado de carregamento
   loading: boolean = false;
 
-  constructor(private formBuilder: NonNullableFormBuilder, private loginService: LoginService) {}
+  hasError: string = "";
+
+  constructor(
+    private formBuilder: NonNullableFormBuilder,
+    private loginService: LoginService,
+    private modalActionService: ModalActionService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     // Inicialização do formulário
@@ -48,23 +57,28 @@ export class LoginComponent implements OnInit {
   // Função de simulação de login assíncrono
   login() {
     this.loading = true;
-    if (this.form.invalid) this.onError();
+    if (this.form.invalid) this.onError(true);
     this.loginService.authenticate(this.form).subscribe({
       next: () => {
+        this.loading = false;
         this.onSuccess();
       },
       error: (error) => {
-        this.onError();
+        this.loading = false;
+        this.onError(false);
       },
     });
-    this.loading = false;
   }
 
   onSuccess() {
-    // implementar
+    this.router.navigateByUrl("/profile");
   }
 
-  onError() {
-    // implementar
+  onError(isForms: boolean) {
+    if (isForms) {
+      this.hasError = "Preencha todos os campos";
+    } else {
+      this.hasError = "Credenciais inválidas";
+    }
   }
 }
