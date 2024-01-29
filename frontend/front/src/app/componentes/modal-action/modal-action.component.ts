@@ -22,10 +22,12 @@ export class ModalActionComponent implements OnInit {
 
   selectedImage: string | undefined;
 
+  formData = new FormData();
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public modal: IModal,
     private modalService: ModalActionService,
-    private alertService: ProjectActionService,
+    private projectActionService: ProjectActionService,
     private viewProjectInfoService: ViewProjectInfoService,
     private formBuilder: NonNullableFormBuilder
   ) {}
@@ -35,7 +37,7 @@ export class ModalActionComponent implements OnInit {
     if (currentProject) {
       this.project = currentProject.data;
     }
-    this.selectedImage = this.project?.img;
+    this.selectedImage = this.project?.img as string;
     this.form = this.formBuilder.group({
       title: [this.project ? this.project.title : "", [Validators.required]],
       tags: [this.project ? this.project.tags?.toString() : "", [Validators.required]],
@@ -56,6 +58,7 @@ export class ModalActionComponent implements OnInit {
   onFileSelected(event: any) {
     const selectedFile = event.target.files[0];
     if (selectedFile) {
+      this.formData.append("file", selectedFile);
       const reader = new FileReader();
       reader.onload = () => {
         this.selectedImage = reader.result as string;
@@ -64,63 +67,45 @@ export class ModalActionComponent implements OnInit {
     }
   }
 
-  handleOnConfirm() {
-    //this.project?.id ? this.updateProject() : this.createProject();
-    this.alertService.openDialog("editar", "success");
-  }
-  createProject() {
-    if (this.form.invalid) {
-      this.hasError = "Preencha todos os campos";
-      return;
-    }
-
-    if (!this.selectedImage) {
-      this.hasError = "Adicione uma imagem de capa ao seu projeto";
-      return;
-    }
-
-    const result = this.modalService.createProjectModal(this.form.value);
-
-    if (!result) {
-      this.alertService.openDialog("adicionar", "error");
-      return;
-    }
-
-    this.alertService.openDialog("adicionar", "success");
+  addProject() {
+    const action: string = "Adicionar";
+    const project: IProject = {
+      title: this.form.value.title,
+      tags: this.form.value.tags.split(","),
+      link: this.form.value.link,
+      description: this.form.value.description,
+      img: this.formData,
+    };
+    this.modalService.createProjectModal(project).subscribe({
+      next: () => {
+        this.projectActionService.openDialog(action, "success");
+      },
+      error: (error) => {
+        this.projectActionService.openDialog(action, "error");
+      },
+    });
   }
 
-  updateProject() {
-    if (this.form.invalid) {
-      this.hasError = "Preencha todos os campos";
-      return;
-    }
-
-    if (!this.selectedImage) {
-      this.hasError = "Adicione uma imagem de capa ao seu projeto";
-      return;
-    }
-
-    const result = this.modalService.pathProjectModal(this.form.value);
-
-    if (!result) {
-      this.alertService.openDialog("editar", "error");
-      return;
-    }
-
-    this.alertService.openDialog("editar", "success");
+  editProject() {
+    const action: string = "Editar";
+    const project: IProject = {
+      title: this.form.value.title,
+      tags: this.form.value.tags.split(","),
+      link: this.form.value.link,
+      description: this.form.value.description,
+      img: this.formData,
+    };
+    this.modalService.pathProjectModal(project).subscribe({
+      next: () => {
+        this.projectActionService.openDialog(action, "success");
+      },
+      error: (error) => {
+        this.projectActionService.openDialog(action, "error");
+      },
+    });
   }
 
-  addProject(form: FormGroup) {
-    //call to API
-    // call project-action
-  }
-
-  editProject(form: FormGroup) {
-    // call to API
-    // call project-action
-  }
-
-  viewProject(form: FormGroup) {
+  viewProject() {
     const user: IModal = {
       name: "Camila",
       lastName: "Soares",
@@ -134,6 +119,8 @@ export class ModalActionComponent implements OnInit {
       link: projectForm.link,
       description: projectForm.description,
       releaseDate: "2024-01-27",
+      img: this.selectedImage,
+      id: 1,
       img: this.selectedImage,
     };
     this.viewProjectInfoService.openDialog(user, project);

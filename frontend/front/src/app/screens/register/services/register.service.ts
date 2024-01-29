@@ -12,6 +12,5 @@ export class RegisterService {
 
   save(form: FormGroup): Observable<IUserRegister> {
     return this.userService.save(form.value);
-    //return of(); // modificar posteriormente para retornar o que vier do userService
   }
 }

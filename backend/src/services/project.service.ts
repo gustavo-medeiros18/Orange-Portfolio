@@ -14,21 +14,31 @@ class ProjectService {
 
   public static async getAllProjects(): Promise<Project[]> {
     const sqlStatement =
-      "SELECT p.id, p.title, p.tags, p.link, p.description, p.img_url, u.name " +
-      "AS first_name, u.last_name AS last_name FROM projects p " +
+      "SELECT " +
+      "p.id, p.title, p.tags, p.link, p.description, p.imgUrl, p.createdAt, u.name " +
+      "AS firstName, u.lastName " +
+      "FROM projects p " +
       "INNER JOIN " +
-      "users u ON p.id_user = u.id";
+      "users u ON p.idUser = u.id";
 
     const [rows] = await connection.query<RowDataPacket[]>(sqlStatement);
+
+    rows.forEach((row) => {
+      row.tags = row.tags.split(", ");
+    });
 
     return rows as Project[];
   }
 
   public static async getAllProjectsByUserId(userId: number): Promise<Project[]> {
     const [rows] = await connection.query<RowDataPacket[]>(
-      "SELECT * FROM projects WHERE id_user = ?",
+      "SELECT * FROM projects WHERE idUser = ?",
       [userId]
     );
+
+    rows.forEach((row) => {
+      row.tags = row.tags.split(", ");
+    });
 
     return rows as Project[];
   }
