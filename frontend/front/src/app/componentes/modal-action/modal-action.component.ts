@@ -124,14 +124,13 @@ export class ModalActionComponent implements OnInit {
       profileImg: "assets/imgs/img_profile_orange_portfolio.png",
     };
     const projectForm = this.form.value;
-    const project = {
+    const project: IProject = {
       title: projectForm.title,
       tags: this.tags,
       link: projectForm.link,
       description: projectForm.description,
       createdAt: projectForm.createdAt,
-      id: 1,
-      img: this.selectedImage,
+      imgUrl: this.selectedImage,
     };
     this.viewProjectInfoService.openDialog(user, project);
   }

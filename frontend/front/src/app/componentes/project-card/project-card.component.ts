@@ -18,6 +18,7 @@ export class ProjectCardComponent implements OnInit {
   @Input() userName: string = "";
   @Input() userImg: string = "";
   @Input() edit: boolean = false;
+  @Input() tags: boolean = true;
 
   constructor(
     private modalActionService: ModalActionService,
@@ -82,7 +83,7 @@ export class ProjectCardComponent implements OnInit {
   formatData(createdAt: string){
     const data = new Date(createdAt);
     const month = (data.getMonth() + 1).toString().padStart(2, '0');
-    const day = data.getDate().toString().padStart(2, '0');
-    return `${month}/${day}`;
+    const year = data.getFullYear().toString().slice(-2);
+    return `${month}/${year}`;
   }
 }

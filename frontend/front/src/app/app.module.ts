@@ -42,7 +42,6 @@ import { ViewProjectMobileComponent } from './screens/view-project-mobile/view-p
     DeleteConfirmationComponent,
     ViewProjectInfoComponent,
     DiscoverComponent,
-    DisplayProjectComponent,
     ViewProjectMobileComponent
   ],
   imports: [

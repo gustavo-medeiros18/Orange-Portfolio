@@ -30,6 +30,14 @@ a {
   cursor: pointer;
 }
 
+#date {
+  color: var(--Neutral-Colors-Neutral-110, #515255);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 #username {
   color: var(--Neutral-Colors-Neutral-120, #303133);
   font-size: 1rem;
