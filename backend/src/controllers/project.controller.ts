@@ -70,16 +70,17 @@ class ProjectController {
       !updatedProject.title ||
       !updatedProject.description ||
       !updatedProject.tags ||
-      !updatedProject.link ||
-      !req.file
+      !updatedProject.link
     ) {
       return res
         .status(422)
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
 
-    const downloadURL = await uploadFile(req.file!);
-    updatedProject.imgUrl = downloadURL;
+    if (req.file) {
+      const downloadURL = await uploadFile(req.file);
+      updatedProject.imgUrl = downloadURL;
+    }
 
     const updated = await ProjectService.updateProject(projectId, updatedProject);
 
