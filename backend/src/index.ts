@@ -16,6 +16,6 @@ app.use(multerMiddleware);
 
 app.listen(3000, () => console.log(`Express rodando na porta ${process.env.PORT}`));
 
+app.use(loginRouter);
 app.use(userRouter);
 app.use(projectRouter);
-app.use(loginRouter);

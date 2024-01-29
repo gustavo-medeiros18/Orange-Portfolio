@@ -4,10 +4,11 @@ import { authenticateMiddleware } from "../middlewares/authMiddleware";
 
 const userRouter = Router();
 
-userRouter.get("/users", UserController.getAllUsers);
-userRouter.get("/users/:id", authenticateMiddleware, UserController.getUserById);
 userRouter.post("/users", UserController.createUser);
-userRouter.delete("/users/:id", UserController.deleteUser);
-userRouter.put("/users/:id", UserController.updateUser);
+
+userRouter.get("/users", authenticateMiddleware, UserController.getAllUsers);
+userRouter.get("/users/:id", authenticateMiddleware, UserController.getUserById);
+userRouter.delete("/users/:id", authenticateMiddleware, UserController.deleteUser);
+userRouter.put("/users/:id", authenticateMiddleware, UserController.updateUser);
 
 export default userRouter;

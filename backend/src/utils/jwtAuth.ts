@@ -15,6 +15,12 @@ export const generateToken = (payload: any): string => {
   return token;
 };
 
-export const verifyToken = (token: string): any => {
-  return jwt.verify(token, secretKey);
+export const verifyToken = (token: string, expectedUserId?: number): any => {
+  const decodedToken: any = jwt.verify(token, secretKey);
+
+  if (expectedUserId && decodedToken.id !== expectedUserId) {
+    throw new Error("Token inválido para este usuário.");
+  }
+
+  return decodedToken;
 };

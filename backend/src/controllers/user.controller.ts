@@ -36,7 +36,7 @@ class UserController {
         .status(400)
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
-    const { password, ...dtoUser } = newUser;
+    const { password, ...dtoUser } = createdUser;
 
     return res.status(201).json(dtoUser);
   }
