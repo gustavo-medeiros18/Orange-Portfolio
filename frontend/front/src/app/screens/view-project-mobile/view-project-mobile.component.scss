@@ -3,11 +3,6 @@
   margin-bottom: 5.18rem;
 }
 
-.container-mobile {
-  margin-top: 0.5rem;
-  margin-bottom: 5.18rem;
-}
-
 .container-data {
   display: flex;
   justify-content: center;
@@ -15,8 +10,9 @@
   flex-direction: column;
 }
 
-h5 {
-  color: var(--Neutral-Colors-Neutral-120, #303133);
+.title {
+  margin-top: 4.75rem;
+  margin-bottom: 2rem;
 }
 
 a {
@@ -28,119 +24,4 @@ a {
   letter-spacing: 0.01563rem;
   text-decoration: none;
   cursor: pointer;
-}
-
-#username {
-  color: var(--Neutral-Colors-Neutral-120, #303133);
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-
-#project-title {
-  color: var(--Neutral-Colors-Neutral-120, #303133);
-  text-align: center;
-  margin: 0 !important;
-}
-
-.dialog-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.main-info {
-  width: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  gap: calc(0.33 * 80%);
-}
-
-.profile-info {
-  display: flex;
-  padding: var(--none, 0rem);
-  align-items: center;
-  gap: var(--1, 0.5rem);
-}
-
-.profile-img {
-  width: var(--5, 2.5rem);
-  height: var(--5, 2.5rem);
-  border-radius: 20px;
-}
-
-.subtitle-1 {
-  text-decoration: none;
-  align-self: stretch;
-  color: var(--Neutral-Colors-Neutral-110, #515255);
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1rem;
-  letter-spacing: 0.00938rem;
-}
-
-.hidden-input {
-  display: none;
-}
-
-.add-project {
-  display: flex;
-  flex-direction: column;
-}
-
-.mat-18 {
-  align-self: center;
-  width: 2.875rem;
-  height: 2.875rem;
-  font-size: 2.857rem;
-  margin-bottom: 1rem;
-}
-
-.upload-img {
-  margin-top: 2.055rem;
-  margin-bottom: 4.01rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.projects {
-  width: 80%;
-}
-
-.empty-projects {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 36.5625rem;
-  padding: var(--none, 4.25rem) var(--none, 1.3125rem);
-  border-radius: var(--borderRadius, 0.25rem);
-  background: var(--color-principal-70, #e6e9f2);
-}
-
-.project-cover {
-  border-radius: 0.25rem;
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
-}
-
-.project-description {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 80%;
-  margin: 0 auto;
-  // description text
-  color: var(--Neutral-Colors-Neutral-120, #303133);
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1rem;
-  letter-spacing: 0.03125rem;
 }
