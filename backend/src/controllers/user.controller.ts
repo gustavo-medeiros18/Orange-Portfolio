@@ -28,18 +28,22 @@ class UserController {
   public static async createUser(req: Request, res: Response) {
     const newUser: User = req.body;
 
-    newUser.password = await hashPassword(newUser.password);
+    try {
+      newUser.password = await hashPassword(newUser.password);
 
-    const createdUser = await UserService.createUser(newUser);
+      const createdUser = await UserService.createUser(newUser);
 
-    if (!newUser || !newUser.name || !newUser.email) {
-      return res
-        .status(400)
-        .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
+      const { password, ...dtoUser } = createdUser;
+
+      return res.status(201).json(dtoUser);
+    } catch (error: any) {
+      if (error.code === "ER_DUP_ENTRY") {
+        return res.status(400).json({ message: "Este e-mail já está em uso." });
+      } else {
+        console.error("Erro ao criar usuário:", error);
+        return res.status(500).json({ message: "Erro interno ao criar usuário." });
+      }
     }
-    const { password, ...dtoUser } = createdUser;
-
-    return res.status(201).json(dtoUser);
   }
 
   public static async deleteUser(req: Request, res: Response) {
