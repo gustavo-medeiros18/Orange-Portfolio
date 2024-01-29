@@ -18,7 +18,8 @@ class UserController {
     const user = await UserService.getUserById(id);
 
     if (user) {
-      res.json(user);
+      const { password, ...dtoUser } = user;
+      res.json(dtoUser);
     } else {
       res.status(404).json({ message: "Usuário não encontrado." });
     }
@@ -36,7 +37,9 @@ class UserController {
         .status(400)
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
-    return res.status(201).json(createdUser);
+    const { password, ...dtoUser } = newUser;
+
+    return res.status(201).json(dtoUser);
   }
 
   public static async deleteUser(req: Request, res: Response) {
@@ -65,8 +68,8 @@ class UserController {
       if (!updatedUser) {
         return res.status(404).json({ message: "Usuário não encontrado." });
       }
-
-      return res.status(200).json(updatedUser);
+      const { password, ...dtoUser } = updatedUser;
+      return res.status(200).json(dtoUser);
     } catch (error) {
       console.error("Erro ao atualizar usuário:", error);
       return res.status(500).json({ message: "Erro interno ao atualizar usuário." });
