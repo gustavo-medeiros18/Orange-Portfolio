@@ -62,10 +62,12 @@ export class ModalActionComponent implements OnInit {
 
   onFileSelected(event: any) {
     const selectedFile = event.target.files[0];
+    
     if (selectedFile) {
       if (this.formData.has("imgUrl")) {
         this.formData.delete("imgUrl");
       }
+
       this.formData.append("imgUrl",selectedFile);
       const reader = new FileReader();
       reader.onload = () => { 
