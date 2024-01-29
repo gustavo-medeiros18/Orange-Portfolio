@@ -6,15 +6,14 @@ import UserService from "../services/user.service";
 
 class ProjectController {
   public static async createProject(req: Request, res: Response) {
+    console.log("opa");
     const newProject: Project = req.body;
-
     if (
       !newProject ||
       !newProject.title ||
       !newProject.description ||
       !newProject.tags ||
       !newProject.link ||
-      !req.file ||
       !newProject.idUser
     ) {
       return res
@@ -26,8 +25,10 @@ class ProjectController {
     if (!userExists)
       return res.status(404).json({ message: "Solicitação inválida. Usuário não encontrado." });
 
-    const downloadURL = await uploadFile(req.file!);
-    newProject.imgUrl = downloadURL;
+    if (req.file) {
+      const downloadURL = await uploadFile(req.file!);
+      newProject.imgUrl = downloadURL;
+    }
 
     const createdProject = await ProjectService.createProject(newProject);
 
@@ -69,16 +70,17 @@ class ProjectController {
       !updatedProject.title ||
       !updatedProject.description ||
       !updatedProject.tags ||
-      !updatedProject.link ||
-      !req.file
+      !updatedProject.link
     ) {
       return res
         .status(422)
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
 
-    const downloadURL = await uploadFile(req.file!);
-    updatedProject.imgUrl = downloadURL;
+    if (req.file) {
+      const downloadURL = await uploadFile(req.file);
+      updatedProject.imgUrl = downloadURL;
+    }
 
     const updated = await ProjectService.updateProject(projectId, updatedProject);
 

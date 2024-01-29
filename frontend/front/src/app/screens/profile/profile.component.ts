@@ -67,7 +67,10 @@ export class ProfileComponent implements OnInit {
   getAllProjects() {
     this.profileService.getProjectsProfile().subscribe({
       next: (projects: IProject[]) => {
-        this.projects = projects;
+        projects.forEach(projectData => {
+          const project: IProject = this.profileService.fillProjectProfile(projectData);
+          this.projects.push(project);
+        })
       },
       error: (error) => {
         console.error("Erro ao recuperar projetos:", error);

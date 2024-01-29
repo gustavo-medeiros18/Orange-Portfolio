@@ -9,33 +9,57 @@ import { IProject } from "../models/iProject";
 })
 export class ProjectService {
   private readonly API = environment.baseUrl;
-  private headers = new HttpHeaders().set("Content-Type", "application/json; charset=utf-8");
 
   constructor(private httpClient: HttpClient) {}
 
-  createProject(params: IProject): Observable<boolean> {
-    const apiUrl = new URL(environment.apiDeleteProjects, this.API).toString();
-    const requestBody: string = JSON.stringify(params);
-    this.httpClient.post<IProject>(apiUrl, requestBody, { headers: this.headers });
-    return of();
+  fillProject(projectData: any): IProject{
+    const project: IProject = {
+      id: projectData.id,
+      title: projectData.title,
+      tags: projectData.tags,
+      link: projectData.link,
+      description: projectData.description,
+      imgUrl: projectData.imgUrl,
+      firstName: projectData.firstName,
+      lastName: projectData.lastName,
+      createdAt: projectData.createdAt
+    }
+    return project;
+  }
+
+  createProject(params: FormData): Observable<IProject> {
+    const formDataObject: any = {};
+    params.forEach((value, key) => {
+    formDataObject[key] = value;
+    });
+    const apiUrl = new URL(environment.apiProjects, this.API).toString();
+    return this.httpClient.post<IProject>(apiUrl,params);
+    /*return new Observable((observer) => {
+      observer.next();
+    });*/
   }
 
   getProjects(): Observable<IProject[]> {
     const apiUrl = new URL(environment.apiProjects, this.API).toString();
-    this.httpClient.get<IProject[]>(apiUrl, { headers: this.headers });
-    return of();
+    return this.httpClient.get<IProject[]>(apiUrl);
+    /*return new Observable((observer) => {
+      observer.next();
+    });*/
   }
 
-  patchProject(params: IProject): Observable<boolean> {
-    const apiUrl = new URL(environment.apiPatchProjects, this.API).toString();
-    const requestBody: string = JSON.stringify(params);
-    this.httpClient.patch<IProject>(apiUrl, requestBody, { headers: this.headers });
-    return of();
+  putProject(params: FormData,id :number): Observable<IProject> {
+    const apiUrl = new URL(environment.getApiProjectId(id), this.API).toString();
+    return this.httpClient.put<IProject>(apiUrl,params);
+    /*return new Observable((observer) => {
+      observer.next();
+    });*/
   }
 
-  deleteProject(id: number): Observable<boolean> {
-    const apiUrl = new URL(environment.apiDeleteProjects, this.API).toString();
-    this.httpClient.delete<IProject>(apiUrl, { headers: this.headers });
-    return of();
+  deleteProject(id: number): Observable<IProject> {
+    const apiUrl = new URL(environment.getApiProjectId(id), this.API).toString();
+    return this.httpClient.delete<IProject>(apiUrl);
+    /*return new Observable((observer) => {
+      observer.next();
+    });*/
   }
 }

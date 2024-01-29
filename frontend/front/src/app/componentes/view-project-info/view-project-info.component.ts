@@ -19,7 +19,16 @@ export class ViewProjectInfoComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public modal: { user: IModal; project: IProject; isMobile: boolean }
-  ) {}
+  ) {
+    modal.project.createdAt = new Date().toString();
+  }
+
+  currentDate(){
+      const data = new Date();
+      const month = (data.getMonth() + 1).toString().padStart(2, '0');
+      const year = data.getFullYear().toString().slice(-2);
+      return `${month}/${year}`;
+  }
 
   goTo(link: string) {
     window.open(link, "_blank");

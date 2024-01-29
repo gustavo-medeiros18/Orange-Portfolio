@@ -4,7 +4,7 @@ import { authenticateMiddleware } from "../middlewares/authMiddleware";
 
 const projectRouter = Router();
 
-projectRouter.use(authenticateMiddleware);
+//projectRouter.use(authenticateMiddleware);
 
 projectRouter.get("/projects", ProjectController.getAllProjects);
 projectRouter.get("/projects/user/:userId", ProjectController.getAllProjectsByUserId);
