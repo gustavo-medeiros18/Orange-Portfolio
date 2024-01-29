@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { ViewProjectMobileComponent } from "./screens/view-project-mobile/view-project-mobile.component";
 
 const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "login" },
@@ -20,8 +21,11 @@ const routes: Routes = [
   },
   {
     path: "discover",
-    loadChildren: () => import("./screens/discover/discover-routing.module").then((m) => m.DiscoverRoutingModule),
+    loadChildren: () =>
+      import("./screens/discover/discover-routing.module").then((m) => m.DiscoverRoutingModule),
   },
+
+  { path: "project", component: ViewProjectMobileComponent },
 ];
 
 @NgModule({

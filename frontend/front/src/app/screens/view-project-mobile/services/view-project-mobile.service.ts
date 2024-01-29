@@ -16,8 +16,7 @@ export class ViewProjectMobileService {
   currentProject: IProjectEvent<ProjecEventEnum, IProject> | null = null;
   constructor(private router: Router) { }
 
-
-  navigateToProjectComponent(): void {
+  openPage() {
     this.router.navigate(['/project']);
   }
 

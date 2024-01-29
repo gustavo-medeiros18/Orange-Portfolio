@@ -10,6 +10,12 @@ import { IProject } from "src/app/models/iProject";
 export class ViewProjectMobileComponent implements OnInit {
   project!: IProject | null;
 
+  user = {
+    name: "Camila Soares",
+    locale: "Brasil",
+    profileImg: "assets/imgs/img_profile_orange_portfolio.png",
+  };
+  
   constructor(private viewProjectMobileService: ViewProjectMobileService) {}
   ngOnInit(): void {
     const currentProject = this.viewProjectMobileService.currentProject;
