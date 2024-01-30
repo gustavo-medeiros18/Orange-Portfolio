@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.img-width {
+  width: 19.5rem;
+}
+
+.text-container {
+  text-align: center;
+  width: 19.5rem;
+}
+
+@media screen and (min-width: 992px) {
+  .img-width {
+    width: 52.5rem;
+    height: 41.8125rem;
+  }
+
+  .text-container {
+    width: 52.5rem;
+  }
+}
