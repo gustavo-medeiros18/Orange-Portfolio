@@ -1,6 +1,8 @@
 import { Component, HostListener, ViewChild } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { LoginAppService } from 'src/app/appServices/login-app.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,7 +11,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class NavBarComponent {
 
-  constructor(private matIconRegistry: MatIconRegistry, private  domSanitizer: DomSanitizer){
+  constructor(private matIconRegistry: MatIconRegistry, private  domSanitizer: DomSanitizer, 
+    private loginAppService: LoginAppService){
     this.matIconRegistry.addSvgIcon(
       "Logo Orange Juice",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../../assets/logos/logoOrange.svg")
@@ -24,4 +27,7 @@ export class NavBarComponent {
     );
   }
 
+  signOut(){
+    this.loginAppService.signOut();
+  }
 }

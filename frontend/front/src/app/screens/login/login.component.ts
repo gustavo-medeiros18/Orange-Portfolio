@@ -23,12 +23,12 @@ export class LoginComponent implements OnInit {
   loading: boolean = false;
 
   hasError: string = "";
-
+  
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private loginService: LoginService,
     private modalActionService: ModalActionService,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit() {
