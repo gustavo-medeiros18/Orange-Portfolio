@@ -15,13 +15,11 @@ export class UserService {
 
   save(record: IUserRegister): Observable<IUserRegister> {
     const apiUrl = new URL(environment.apiUsers, this.API).toString();
-    const requestBody: string = JSON.stringify(record);
-    return this.httpClient.post<IUserRegister>(apiUrl,requestBody);
+    return this.httpClient.post<IUserRegister>(apiUrl,record);
   }
 
   authenticate(record: IUserLogin) {
     const apiUrl = new URL(environment.apiAuthenticate, this.API).toString();
-    const requestBody: string = JSON.stringify(record);
-    return this.httpClient.post<IUserLogin>(apiUrl,requestBody);
+    return this.httpClient.post<IUserLogin>(apiUrl,record);
   }
 }
