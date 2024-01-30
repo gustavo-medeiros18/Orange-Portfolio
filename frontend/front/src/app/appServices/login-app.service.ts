@@ -79,8 +79,8 @@ export class LoginAppService {
       console.error('Erro ao decodificar ou verificar a expiração do token:', error);
       return true;
     }
-
   }
+
   isUserLoggedIn() {
     const token = this.getAuthorizationToken("token");
     return !this.isTokenExpired(token);
