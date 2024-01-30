@@ -14,7 +14,7 @@ app.use(cors()); // Use o middleware cors
 app.use(express.json());
 app.use(multerMiddleware);
 
-app.listen(process.env.PORT, () => console.log(`Express rodando na porta ${process.env.PORT}`));
+app.listen(3000, () => console.log(`Express rodando na porta ${process.env.PORT}`));
 
 app.use(loginRouter);
 app.use(userRouter);

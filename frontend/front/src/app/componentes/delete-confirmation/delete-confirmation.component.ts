@@ -14,12 +14,10 @@ export class DeleteConfirmationComponent {
 
 
     onConfirm() {
-      this.deleteConfirmationService.confirmModal(true);
-      this.dialogRef.close(true);
+      this.deleteConfirmationService.confirm(true);
     }
 
     onCancel() {
-      this.deleteConfirmationService.confirmModal(false);
-      this.dialogRef.close(true);
+      this.deleteConfirmationService.confirm(false);
     }
 }

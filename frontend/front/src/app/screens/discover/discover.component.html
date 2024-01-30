@@ -4,7 +4,7 @@
     inesquecíveis</h5>
 
   <div class="projects">
-    <form action="">
+    <form [formGroup]="searchForm" action="">
       <mat-form-field class="input" appearance="outline">
         <mat-label>Buscar tags</mat-label>
         <input type="text" formControlName="search" matInput>
@@ -16,8 +16,8 @@
       </ng-container>
       <ng-template #hasResults>
         <div *ngIf="searchProjects.length || projects">
-          <app-display-project *ngIf="searchProjects.length || projects" class="projects-list"
-            [projects]="searchProjects.length ? searchProjects : projects" [userImg]="userImg"></app-display-project>
+          <app-project-card *ngIf="searchProjects.length || projects" class="projects-list"
+            [projects]="searchProjects.length ? searchProjects : projects" [userImg]="userImg"></app-project-card>
         </div>
       </ng-template>
     </div>
