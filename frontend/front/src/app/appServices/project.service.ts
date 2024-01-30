@@ -28,10 +28,6 @@ export class ProjectService {
   }
 
   createProject(params: FormData): Observable<IProject> {
-    const formDataObject: any = {};
-    params.forEach((value, key) => {
-    formDataObject[key] = value;
-    });
     const apiUrl = new URL(environment.apiProjects, this.API).toString();
     return this.httpClient.post<IProject>(apiUrl,params);
     /*return new Observable((observer) => {
@@ -45,6 +41,12 @@ export class ProjectService {
     /*return new Observable((observer) => {
       observer.next();
     });*/
+  }
+
+  getProjectsById(id: number): Observable<IProject[]>{
+    const apiUrl = new URL(environment.getApiProjectUserId(id), this.API).toString();
+    console.log(apiUrl);
+    return this.httpClient.get<IProject[]>(apiUrl);
   }
 
   putProject(params: FormData,id :number): Observable<IProject> {

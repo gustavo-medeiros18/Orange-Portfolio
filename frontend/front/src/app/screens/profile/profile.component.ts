@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
     name: "Camila Soares",
     locale: "Brasil",
     profileImg: "assets/imgs/img_profile_orange_portfolio.png",
+    id: 11
   };
 
   //controle de dados pesquisados
@@ -39,7 +40,7 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAllProjects();
+    this.getProjectsById(this.user.id);
     this.searchForm
       .get("search")
       ?.valueChanges.pipe(
@@ -64,8 +65,8 @@ export class ProfileComponent implements OnInit {
     this.modalActionService.openDialog(name);
   }
 
-  getAllProjects() {
-    this.profileService.getProjectsProfile().subscribe({
+  getProjectsById(id: number) {
+    this.profileService.getProjectsByIdProfile(id).subscribe({
       next: (projects: IProject[]) => {
         projects.forEach(projectData => {
           const project: IProject = this.profileService.fillProjectProfile(projectData);
