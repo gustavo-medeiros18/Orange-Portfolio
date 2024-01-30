@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { ViewProjectMobileComponent } from "./screens/view-project-mobile/view-project-mobile.component";
+import { NotFoundComponent } from "./screens/not-found/not-found.component";
 
 const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "login" },
@@ -26,6 +27,8 @@ const routes: Routes = [
   },
 
   { path: "project", component: ViewProjectMobileComponent },
+
+  { path: "**", component: NotFoundComponent },
 ];
 
 @NgModule({
