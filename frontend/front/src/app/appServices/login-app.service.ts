@@ -18,17 +18,17 @@ export class LoginAppService {
   authUser(data: IUserLogin): Observable<boolean> {
     return new Observable<boolean>((observer) => {
       this.userService.authenticate(data).subscribe({
-          next: (result: LoginResponse) => {
-              window.localStorage.setItem('token', this.encrypt(result.token));
-              observer.next(true);
-              observer.complete();
-          },
-          error: (error) => {
-              observer.next(false);
-              observer.complete();
-          },
+        next: (result: LoginResponse) => {
+          window.localStorage.setItem("token", this.encrypt(result.token));
+          observer.next(true);
+          observer.complete();
+        },
+        error: (error) => {
+          observer.next(false);
+          observer.complete();
+        },
       });
-  });
+    });
   }
 
   signOut = () => {
