@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { environment } from "src/environments/environment.development";
 import * as CryptoJS from "crypto-js";
 import { UserService } from "./user.service";
-import { IUserLogin } from "../models/iUserLogin";
+import { IUserLogin, LoginResponse } from "../models/iUserLogin";
 
 @Injectable({
   providedIn: "root",
@@ -15,15 +15,20 @@ export class LoginAppService {
 
   constructor(private httpClient: HttpClient, private userService: UserService) {}
 
-  authUser(data: IUserLogin) {
-    this.userService.authenticate(data).subscribe({
-      next: (result) => {
-        console.log(result);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+  authUser(data: IUserLogin): Observable<boolean> {
+    return new Observable<boolean>((observer) => {
+      this.userService.authenticate(data).subscribe({
+          next: (result: LoginResponse) => {
+              window.localStorage.setItem('token', this.encrypt(result.token));
+              observer.next(true);
+              observer.complete();
+          },
+          error: (error) => {
+              observer.next(false);
+              observer.complete();
+          },
+      });
+  });
   }
 
   signOut = () => {

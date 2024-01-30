@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: NonNullableFormBuilder,
     private loginService: LoginService,
     private modalActionService: ModalActionService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -61,17 +61,21 @@ export class LoginComponent implements OnInit {
       this.onError(true);
       return;
     }
-    this.loginService.authenticate(this.form)
-    // .subscribe({
-    //   next: () => {
-    //     this.loading = false;
-    //     this.onSuccess();
-    //   },
-    //   error: (error) => {
-    //     this.loading = false;
-    //     this.onError(false);
-    //   },
-    // });
+    this.loginService.authenticate(this.form).subscribe({
+      next: (result: boolean) => {
+        if (result) {
+          this.loading = false;
+          this.onSuccess();
+        } else {
+          this.loading = false;
+          this.onError(false);
+        }
+      },
+      error: (error) => {
+        this.loading = false;
+        this.onError(false);
+      },
+    });
   }
 
   onSuccess() {
