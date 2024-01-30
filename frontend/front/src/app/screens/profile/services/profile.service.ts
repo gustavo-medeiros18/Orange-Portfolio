@@ -9,8 +9,8 @@ import { IProject } from "src/app/models/iProject";
 export class ProfileService {
   constructor(private projectService: ProjectService) {}
 
-  getProjectsProfile(): Observable<IProject[]> {
-    return this.projectService.getProjects();
+  getProjectsByIdProfile(id: number): Observable<IProject[]> {
+    return this.projectService.getProjectsById(id);
   }
 
   fillProjectProfile(projectData: IProject): IProject{

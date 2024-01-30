@@ -28,6 +28,7 @@ import { DeleteConfirmationComponent } from "./componentes/delete-confirmation/d
 import { ViewProjectInfoComponent } from "./componentes/view-project-info/view-project-info.component";
 import { DiscoverComponent } from "./screens/discover/discover.component";
 import { ViewProjectMobileComponent } from './screens/view-project-mobile/view-project-mobile.component';
+import { NotFoundComponent } from './screens/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ViewProjectMobileComponent } from './screens/view-project-mobile/view-p
     DeleteConfirmationComponent,
     ViewProjectInfoComponent,
     DiscoverComponent,
-    ViewProjectMobileComponent
+    ViewProjectMobileComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

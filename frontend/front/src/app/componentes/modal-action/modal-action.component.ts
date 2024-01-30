@@ -86,7 +86,7 @@ export class ModalActionComponent implements OnInit {
     this.formData.append("link", this.form.value.link);
     this.formData.append("description", this.form.value.description);
     // adicionar id do usuario após autenticação
-    this.formData.append("idUser", "10");
+    this.formData.append("idUser", "11");
     this.modalService.createProjectModal(this.formData).subscribe({
       next: () => {
         this.projectActionService.openDialog(action, "success");

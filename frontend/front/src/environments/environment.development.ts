@@ -5,5 +5,6 @@ export const environment = {
   apiUsers: "users",
   apiProjects: "projects",
   getApiUserId: (id: number) => `users/${id}`,
-  getApiProjectId: (id: number) => `projects/${id}`
+  getApiProjectId: (id: number) => `projects/${id}`,
+  getApiProjectUserId: (id:number) => `projects/user/${id}`
 };
