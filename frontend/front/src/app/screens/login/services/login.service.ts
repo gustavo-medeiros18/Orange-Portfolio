@@ -9,9 +9,11 @@ import { LoginAppService } from "src/app/appServices/login-app.service";
 })
 export class LoginService {
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService,
+    private authService: LoginAppService) {}
 
   authenticate(form: FormGroup) {
-    return this.userService.authenticate(form.value);
+    return this.authService.authUser(form.value);
+    //return this.userService.authenticate(form.value);
   }
 }

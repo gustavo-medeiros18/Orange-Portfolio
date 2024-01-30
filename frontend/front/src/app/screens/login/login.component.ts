@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   loading: boolean = false;
 
   hasError: string = "";
-  
+
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private loginService: LoginService,
@@ -57,17 +57,21 @@ export class LoginComponent implements OnInit {
   // Função de simulação de login assíncrono
   login() {
     this.loading = true;
-    if (this.form.invalid) this.onError(true);
-    this.loginService.authenticate(this.form).subscribe({
-      next: () => {
-        this.loading = false;
-        this.onSuccess();
-      },
-      error: (error) => {
-        this.loading = false;
-        this.onError(false);
-      },
-    });
+    if (this.form.invalid) {
+      this.onError(true);
+      return;
+    }
+    this.loginService.authenticate(this.form)
+    // .subscribe({
+    //   next: () => {
+    //     this.loading = false;
+    //     this.onSuccess();
+    //   },
+    //   error: (error) => {
+    //     this.loading = false;
+    //     this.onError(false);
+    //   },
+    // });
   }
 
   onSuccess() {

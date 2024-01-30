@@ -3,6 +3,8 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment.development";
 import * as CryptoJS from "crypto-js";
+import { UserService } from "./user.service";
+import { IUserLogin } from "../models/iUserLogin";
 
 @Injectable({
   providedIn: "root",
@@ -11,7 +13,18 @@ export class LoginAppService {
   private readonly API = environment.baseUrl;
   criptKey: string = environment.apiKey;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private userService: UserService) {}
+
+  authUser(data: IUserLogin) {
+    this.userService.authenticate(data).subscribe({
+      next: (result) => {
+        console.log(result);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
 
   signOut = () => {
     localStorage.removeItem("token");
