@@ -3,6 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { ViewProjectMobileComponent } from "./screens/view-project-mobile/view-project-mobile.component";
 import { NotFoundComponent } from "./screens/not-found/not-found.component";
 import { GuardGuard } from "./guard/auth.guard";
+import { LoginGuard } from "./guard/login.guard";
 
 const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "login" },
@@ -10,11 +11,13 @@ const routes: Routes = [
     path: "login",
     loadChildren: () =>
       import("./screens/login/login-routing.module").then((m) => m.LoginRoutingModule),
+    canActivate: [LoginGuard],
   },
   {
     path: "register",
     loadChildren: () =>
       import("./screens/register/register-routing.module").then((m) => m.RegisterRoutingModule),
+    canActivate: [LoginGuard],
   },
   {
     path: "profile",

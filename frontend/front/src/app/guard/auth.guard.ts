@@ -1,14 +1,11 @@
 import {
   ActivatedRouteSnapshot,
   CanActivate,
-  CanActivateFn,
   Router,
   RouterStateSnapshot,
-  UrlTree,
 } from "@angular/router";
 import { Injectable } from "@angular/core";
 import { LoginAppService } from "../appServices/login-app.service";
-import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
