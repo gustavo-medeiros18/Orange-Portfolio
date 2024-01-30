@@ -4,7 +4,6 @@ import { IUserRegister } from "../models/iUserRegister";
 import { environment } from "src/environments/environment.development";
 import { IUserLogin } from "../models/iUserLogin";
 import { Observable, of } from "rxjs";
-import { FormGroup } from "@angular/forms";
 
 @Injectable({
   providedIn: "root",

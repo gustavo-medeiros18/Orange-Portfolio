@@ -4,6 +4,7 @@ export const environment = {
   apiAuthenticate: "login",
   apiUsers: "users",
   apiProjects: "projects",
+  apiLoginGoogle: "loginGoogle",
   getApiUserId: (id: number) => `users/${id}`,
   getApiProjectId: (id: number) => `projects/${id}`,
   getApiProjectUserId: (id:number) => `projects/user/${id}`
