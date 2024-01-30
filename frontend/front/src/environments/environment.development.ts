@@ -8,4 +8,5 @@ export const environment = {
   getApiUserId: (id: number) => `users/${id}`,
   getApiProjectId: (id: number) => `projects/${id}`,
   getApiProjectUserId: (id:number) => `projects/user/${id}`,
+  apiKey: 'orangeportfolio',
 };
