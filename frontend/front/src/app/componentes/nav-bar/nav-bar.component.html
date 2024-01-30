@@ -23,7 +23,7 @@
         <div class="divider">
           <div class="divider-row"></div>
         </div>
-        <button (click) ="signOut()" mat-menu-item>
+        <button (click)="signOut()" mat-menu-item>
           <mat-icon>exit_to_app</mat-icon> <!--ligeiramente diferente do icone do design... mudar?-->
           <span class="sections-text">Sair</span>
         </button>
@@ -41,9 +41,29 @@
       </div>
     </div>
     <div class="div-icons">
-      <a class="div-icon" mat-icon-button routerLink=".">
+      <a class="div-icon" mat-icon-button *ngIf="isMobile">
         <mat-icon id="icon-profile" svgIcon="Circle">menu</mat-icon>
       </a>
+      <a class="div-icon" mat-icon-button *ngIf="!isMobile" [matMenuTriggerFor]="menu2">
+        <mat-icon id="icon-profile" svgIcon="Circle">menu</mat-icon>
+      </a>
+      <mat-menu class="mat-menu" #menu2="matMenu">
+        <div class="info-user">
+          <div class="info-user-text">
+            <span id="username-info">Username</span>
+            <span id="username-email-info">username@gmail.com</span>
+          </div>
+        </div>
+        <div class="divider">
+          <div class="divider-row"></div>
+        </div>
+        <div class="sections">
+          <button (click)="signOut()" mat-menu-item>
+            <mat-icon>exit_to_app</mat-icon> <!--ligeiramente diferente do icone do design... mudar?-->
+            <span class="sections-text">Sair</span>
+          </button>
+        </div>
+      </mat-menu>
       <a class="div-icon" mat-icon-button routerLink=".">
         <mat-icon id="icon-notification" svgIcon="Icon Notification">menu</mat-icon>
       </a>

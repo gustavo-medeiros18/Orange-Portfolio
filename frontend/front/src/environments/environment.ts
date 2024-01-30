@@ -7,5 +7,6 @@ export const environment = {
   apiLoginGoogle: "loginGoogle",
   getApiUserId: (id: number) => `users/${id}`,
   getApiProjectId: (id: number) => `projects/${id}`,
-  getApiProjectUserId: (id:number) => `projects/user/${id}`
+  getApiProjectUserId: (id:number) => `projects/user/${id}`,
+  apiKey: 'orangeportfolio',
 };

@@ -23,12 +23,12 @@ export class LoginComponent implements OnInit {
   loading: boolean = false;
 
   hasError: string = "";
-  
+
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private loginService: LoginService,
     private modalActionService: ModalActionService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -57,11 +57,19 @@ export class LoginComponent implements OnInit {
   // Função de simulação de login assíncrono
   login() {
     this.loading = true;
-    if (this.form.invalid) this.onError(true);
+    if (this.form.invalid) {
+      this.onError(true);
+      return;
+    }
     this.loginService.authenticate(this.form).subscribe({
-      next: () => {
-        this.loading = false;
-        this.onSuccess();
+      next: (result: boolean) => {
+        if (result) {
+          this.loading = false;
+          this.onSuccess();
+        } else {
+          this.loading = false;
+          this.onError(false);
+        }
       },
       error: (error) => {
         this.loading = false;
