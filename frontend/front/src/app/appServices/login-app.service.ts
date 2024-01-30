@@ -56,12 +56,33 @@ export class LoginAppService {
     return localItem;
   }
 
-  isUserLoggedIn() {
-    const token = this.getAuthorizationToken("token");
-    if (!token) {
-      return false;
+  isTokenExpired(token: string) {
+    //se não tiver token retorna true, considerando como expirado
+    if(!token) {
+      return true;
     }
 
-    return true;
+    try {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      const expirationTimeInSeconds = payload.exp;
+
+      const expirationTimeInMillis = expirationTimeInSeconds * 1000;
+
+      const now = Date.now();
+      if (now >= expirationTimeInMillis) {
+        return true;
+      } else {
+          return false;
+      }
+    }
+    catch (error) {
+      console.error('Erro ao decodificar ou verificar a expiração do token:', error);
+      return true;
+    }
+
+  }
+  isUserLoggedIn() {
+    const token = this.getAuthorizationToken("token");
+    return !this.isTokenExpired(token);
   }
 }
