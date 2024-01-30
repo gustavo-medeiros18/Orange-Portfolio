@@ -21,6 +21,11 @@ export class LoginAppService {
     return this.httpClient.post(environment.apiLoginGoogle, requestBody);
   }
 
+  getAuthorizationToken(item: string) {
+    const localItem = this.decrypt(window.localStorage.getItem(item) ?? '');
+    return localItem;
+  }
+
   isUserLoggedIn() {
     const token = this.getAuthorizationToken("token");
     if(!token) {
