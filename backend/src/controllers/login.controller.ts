@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 const client = new OAuth2Client({
   clientId: "102685364306-m0ssdqq50ier1aqn5eulgr4eto0qidev.apps.googleusercontent.com",
   clientSecret: "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",
-  redirectUri: "http://localhost:3000/auth/google",
+  redirectUri: "https://hackathon-orange.onrender.com/auth/google",
 });
 
 class LoginController {
