@@ -50,28 +50,41 @@ class LoginController {
 
       // formata as informações do usuário através do ticket
       const payload: any = ticket.getPayload();
-  
-      const user = await LoginService.authenticateLogin(payload.email);
+
+      let user = await LoginService.authenticateLogin(payload.email);
+      let userInfo;
       if (user) {
-        let token = generateToken(user);
-        res.status(200).json({ message: "Login bem-sucedido.", token, user });
+        // usuario ja cadastrado no banco
+        userInfo = {
+          name: user.name,
+          lastName: user.lastName,
+          email: user.email,
+          country: user.country,
+        };
+        let token = generateToken(userInfo);
+        res.status(200).json({ message: "Login bem-sucedido.", token, userInfo });
       } else {
-        const userInfo = {
-          id: payload.sub,
+        // usuario ainda nao foi cadastrado
+        user = {
           name: payload.given_name,
           lastName: payload.family_name,
           email: payload.email,
           password: Math.random().toString(36).slice(-10), //gera senha aleatória (não é usada na autenticação com o google)
           country: "",
         };
-        UserService.createUser(userInfo);
+        UserService.createUser(user);
+        userInfo = {
+          name: user.name,
+          lastName: user.lastName,
+          email: user.email,
+          country: user.country,
+        };
         let token = generateToken(userInfo);
         res.status(200).json({ message: "Login bem-sucedido.", token, userInfo });
       }
-  } catch (error) {
+    } catch (error) {
       res.status(500).send("Erro ao autenticar com o Google");
     }
   }
-
 }
 export default LoginController;
