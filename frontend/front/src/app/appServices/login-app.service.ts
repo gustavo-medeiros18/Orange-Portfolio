@@ -2,7 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment.development";
-import * as CryptoJS from "crypto-js";
 import { UserService } from "./user.service";
 import { IUserLogin, LoginResponse } from "../models/iUserLogin";
 
@@ -20,7 +19,7 @@ export class LoginAppService {
       this.userService.authenticate(data).subscribe({
         next: (result: LoginResponse) => {
           sessionStorage.setItem("userInfo",JSON.stringify(result.dtoUser));
-          sessionStorage.setItem("token", this.encrypt(result.token));
+          sessionStorage.setItem("token", result.token);
           observer.next(true);
           observer.complete();
         },
@@ -37,15 +36,6 @@ export class LoginAppService {
     sessionStorage.removeItem("token");
   };
 
-  // Método para criptografar texto usando a chave
-  private encrypt(txt: string): string {
-    return CryptoJS.AES.encrypt(txt, this.criptKey).toString();
-  }
-
-  // Método para descriptografar texto usando a chave
-  private decrypt(txtToDecrypt: string): string {
-    return CryptoJS.AES.decrypt(txtToDecrypt, this.criptKey).toString(CryptoJS.enc.Utf8);
-  }
 
   loginWithGoogle(credentials: string): Observable<any> {
     const apiUrl = new URL(environment.apiLoginGoogle, this.API);
@@ -54,7 +44,7 @@ export class LoginAppService {
   }
 
   getAuthorizationToken(item: string) {
-    const localItem = this.decrypt(window.sessionStorage.getItem(item) ?? "");
+    const localItem =  window.sessionStorage.getItem(item) ?? "";
     return localItem;
   }
 
