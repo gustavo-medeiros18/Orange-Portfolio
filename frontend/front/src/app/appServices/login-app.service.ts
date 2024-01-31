@@ -19,8 +19,8 @@ export class LoginAppService {
     return new Observable<boolean>((observer) => {
       this.userService.authenticate(data).subscribe({
         next: (result: LoginResponse) => {
-          window.sessionStorage.setItem("userInfo",JSON.stringify(result.dtoUser));
-          window.sessionStorage.setItem("token", this.encrypt(result.token));
+          sessionStorage.setItem("userInfo",JSON.stringify(result.dtoUser));
+          sessionStorage.setItem("token", this.encrypt(result.token));
           observer.next(true);
           observer.complete();
         },
@@ -84,7 +84,11 @@ export class LoginAppService {
   }
 
   isUserLoggedIn() {
-    const token = this.getAuthorizationToken("token");
-    return !this.isTokenExpired(token);
+    //const token = this.getAuthorizationToken("token");
+    const token = sessionStorage.getItem("token");
+    if (token){
+      return !this.isTokenExpired(token);   
+    }
+    return false;
   }
 }
