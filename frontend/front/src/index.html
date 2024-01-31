@@ -34,7 +34,7 @@
           .then((response) => response.json())
           .then((data) => {
             const userInfo = data.userInfo;
-            const tokenCryp = CryptoJS.AES.encrypt(data.token, this.criptKey).toString();
+            const tokenCryp = CryptoJS.AES.encrypt(data.token, criptKey).toString();
             sessionStorage.setItem("token", tokenCryp);
             sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
             window.location.reload();
