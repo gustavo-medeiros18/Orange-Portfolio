@@ -24,7 +24,7 @@
           <div class="divider-row"></div>
         </div>
         <button (click)="signOut()" mat-menu-item>
-          <mat-icon>exit_to_app</mat-icon> <!--ligeiramente diferente do icone do design... mudar?-->
+          <mat-icon>exit_to_app</mat-icon> 
           <span class="sections-text">Sair</span>
         </button>
       </div>
@@ -41,32 +41,38 @@
       </div>
     </div>
     <div class="div-icons">
-      <a class="div-icon" mat-icon-button *ngIf="isMobile">
-        <mat-icon id="icon-profile" svgIcon="Circle">menu</mat-icon>
+      <a class="div-profile-img" *ngIf = "isMobile">
+        <img class="profile-img" src="{{ user.iconUrl }}" alt="{{ user.name }}">
       </a>
-      <a class="div-icon" mat-icon-button *ngIf="!isMobile" [matMenuTriggerFor]="menu2">
-        <mat-icon id="icon-profile" svgIcon="Circle">menu</mat-icon>
+      <a class="div-profile-img" *ngIf = "!isMobile" [matMenuTriggerFor]="menu2">
+        <img class="profile-img" src="{{ user.iconUrl }}" alt="{{ user.name }}">
       </a>
       <mat-menu class="mat-menu" #menu2="matMenu">
         <div class="info-user">
           <div class="info-user-text">
-            <span id="username-info">Username</span>
-            <span id="username-email-info">username@gmail.com</span>
+            <span id="username-info">{{user.name}}</span>
+            <span id="username-email-info">{{user.email}}</span>
           </div>
         </div>
         <div class="divider">
           <div class="divider-row"></div>
         </div>
         <div class="sections">
+          <a href="/profile/info" mat-menu-item>
+            <mat-icon>person</mat-icon>
+            <span class="sections-text">Meu perfil</span>
+          </a>
           <button (click)="signOut()" mat-menu-item>
-            <mat-icon>exit_to_app</mat-icon> <!--ligeiramente diferente do icone do design... mudar?-->
+            <mat-icon>exit_to_app</mat-icon> 
             <span class="sections-text">Sair</span>
           </button>
         </div>
       </mat-menu>
-      <a class="div-icon" mat-icon-button routerLink=".">
-        <mat-icon id="icon-notification" svgIcon="Icon Notification">menu</mat-icon>
-      </a>
+      <div class = "div-icon-notification">
+        <a class="div-icon" mat-icon-button routerLink=".">
+          <mat-icon id="icon-notification" svgIcon="Icon Notification">menu</mat-icon>
+        </a>
+      </div>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

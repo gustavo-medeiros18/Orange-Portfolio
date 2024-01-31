@@ -30,6 +30,11 @@ mat-toolbar {
     padding-top: 0.5rem;
 }
 
+.profile-img {
+    border-radius: 4rem;
+    height: 2.5rem;
+}
+
 .div-icon-notification {
     padding-right: 0.5rem;
 }
@@ -162,6 +167,10 @@ mat-toolbar {
 
     .div-icon-notification {
         padding-right: 1rem;
+    }
+
+    .profile-img {
+        cursor: pointer;
     }
 
     .div-logo {
