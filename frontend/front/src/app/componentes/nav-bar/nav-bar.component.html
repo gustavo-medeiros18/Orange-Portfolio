@@ -41,12 +41,16 @@
       </div>
     </div>
     <div class="div-icons">
-      <a class="div-icon" mat-icon-button routerLink=".">
-        <mat-icon id="icon-profile" svgIcon="Circle">{{user.iconUrl}}</mat-icon>
-      </a>
-      <a class="div-icon" mat-icon-button routerLink=".">
-        <mat-icon id="icon-notification" svgIcon="Icon Notification">menu</mat-icon>
-      </a>
+      <div class = "div-profile-img">
+        <a href="profile/info">
+          <img class="profile-img" src="{{ user.iconUrl }}" alt="{{ user.name }}">
+        </a>
+      </div>
+      <div class = "div-icon-notification">
+        <a class="div-icon" mat-icon-button routerLink=".">
+          <mat-icon id="icon-notification" svgIcon="Icon Notification">menu</mat-icon>
+        </a>
+      </div>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

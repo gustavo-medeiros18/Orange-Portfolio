@@ -10,9 +10,38 @@ mat-toolbar {
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.20), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
-.icon-profile {
-    border-radius: 100px;
-  }
+.div-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4.625rem;
+    padding-top: 0.6rem;
+}
+
+.div-icons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 20rem;
+}
+
+.div-profile-img {
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+}
+
+.div-icon-notification {
+    padding-right: 0.5rem;
+}
+
+.profile-img {
+    border-radius: 4rem;
+    height: 2.5rem;
+}
+
+#icon-notification  {
+    transform: scale(1.7);
+}
 
 .right-side {
     width: 100%;
@@ -24,7 +53,7 @@ mat-toolbar {
 
 #icon-logo {
     width: 5.1875rem;
-    height: 1.9375rem;
+    height: 3rem;
 }
 
 #my-projects {
@@ -125,9 +154,17 @@ mat-toolbar {
     flex: 1 0 0;
 }
 
-@media (max-width: 992px) {
+@media (min-width: 992px) {
     mat-toolbar-row {
         margin: 0;
         padding: 0;
+    }
+
+    .div-icon-notification {
+        padding-right: 1rem;
+    }
+
+    .div-logo {
+        padding-left: 1.88rem;
     }
 }
