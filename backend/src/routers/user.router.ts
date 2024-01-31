@@ -10,5 +10,6 @@ userRouter.get("/users", UserController.getAllUsers);
 userRouter.get("/users/:id", authenticateMiddleware, UserController.getUserById);
 userRouter.delete("/users/:id", authenticateMiddleware, UserController.deleteUser);
 userRouter.put("/users/:id", authenticateMiddleware, UserController.updateUser);
+userRouter.patch("/users/password", authenticateMiddleware, UserController.updatePassword);
 
 export default userRouter;
