@@ -43,7 +43,7 @@ class ProjectController {
   }
 
   public static async getAllProjectsByUserId(req: Request, res: Response) {
-    const userId = req.params.id;
+    const userId = req.params.userId;
     const projects = await ProjectService.getAllProjectsByUserId(userId);
 
     if (projects.length == 0)
@@ -88,7 +88,6 @@ class ProjectController {
 
   public static async deleteProject(req: Request, res: Response) {
     const projectId = req.params.id;
-
     const result = await ProjectService.deleteProjectById(projectId);
 
     if (result) {

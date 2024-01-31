@@ -18,7 +18,6 @@ export class ViewProjectMobileComponent implements OnInit {
     this.user.iconUrl = this.user.iconUrl ? this.user.iconUrl : "assets/imgs/img_profile_orange_portfolio.png";
     const currentProject = this.viewProjectMobileService.currentProject;
     if (currentProject) {
-      console.log(currentProject);
       this.project = currentProject.data;
     }
     this.viewProjectMobileService.clearProjectInfo();

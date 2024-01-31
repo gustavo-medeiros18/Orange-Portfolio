@@ -4,6 +4,7 @@ import { ModalActionComponent } from "../modal-action.component";
 import { IProject, IProjectEvent, ProjecEventEnum } from "src/app/models/iProject";
 import { ProjectService } from "src/app/appServices/project.service";
 import { Subject, Observable } from "rxjs";
+import { HttpParams } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
