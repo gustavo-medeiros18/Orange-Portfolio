@@ -80,13 +80,13 @@ export class ModalActionComponent implements OnInit {
   }
 
   addProject() {
+    const idUser = JSON.parse(sessionStorage.getItem("userInfo") || "").id;
     const action: string = "adicionar";
     this.formData.append("title", this.form.value.title);
     this.appendTags(this.tags);
     this.formData.append("link", this.form.value.link);
     this.formData.append("description", this.form.value.description);
-    // adicionar id do usuario após autenticação
-    this.formData.append("idUser", "11");
+    this.formData.append("idUser",idUser);
     this.modalService.createProjectModal(this.formData).subscribe({
       next: () => {
         this.projectActionService.openDialog(action, "success");
@@ -98,13 +98,13 @@ export class ModalActionComponent implements OnInit {
   }
 
   editProject() {
+    const idUser = JSON.parse(sessionStorage.getItem("userInfo") || "").id;
     const action: string = "editar";
     this.formData.append("title", this.form.value.title);
     this.appendTags(this.tags)
     this.formData.append("link", this.form.value.link);
     this.formData.append("description", this.form.value.description);
-    // adicionar id do usuario após autenticação
-    this.formData.append("idUser", "10");
+    this.formData.append("idUser", idUser);
 
     this.modalService.putProjectModal(this.formData, this.project?.id!).subscribe({
       next: () => {
