@@ -5,12 +5,14 @@ import { Request, Response } from "express";
 
 class UserController {
   public static async getAllUsers(_req: Request, res: Response) {
-    const user = await UserService.getAllUsers();
+    const users = await UserService.getAllUsers();
 
-    if (!user) {
+    if (!users) {
       return res.status(500);
     }
-    return res.status(200).json(user);
+    const { password, ...dtoUser } = users[0];
+
+    return res.status(200).json(dtoUser);
   }
 
   public static async getUserById(req: Request, res: Response) {
@@ -30,7 +32,6 @@ class UserController {
 
     try {
       newUser.password = await hashPassword(newUser.password);
-
 
       const createdUser = await UserService.createUser(newUser);
 
