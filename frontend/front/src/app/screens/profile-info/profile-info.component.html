@@ -1,0 +1,79 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="container">
+  <h5>Editar perfil</h5>
+  <div class="profile">
+    <div>
+      <img class="profile-img" src="" alt="">
+    </div>
+    <div class="user-data">
+      <h5>
+        <!-- {{user.name}} {{user.lastName}} -->
+      </h5>
+      <div class="create-project">
+        <button mat-raised-button class="btn-secondary">SELECIONAR NOVA FOTO
+          DE PERFIL</button>
+        <span>*para confirmar a alteração da foto de perfil, clique em atualizar informações!</span>
+      </div>
+    </div>
+  </div>
+  <form action="">
+    <div class="sub-form">
+      <mat-form-field class="input" appearance="outline">
+        <mat-label>Nome</mat-label>
+        <input type="text" matInput>
+        <mat-error *ngIf="form.get('nome')?.invalid">{{formErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="input" appearance="outline">
+        <mat-label>Sobrenome</mat-label>
+        <input type="text" matInput>
+        <mat-error *ngIf="form.get('sobrenome')?.invalid">{{formErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="input" appearance="outline">
+      <mat-label>E-mail</mat-label>
+      <input type="email" matInput>
+      <mat-error *ngIf="form.get('email')?.invalid">{{formErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="input" appearance="outline">
+      <mat-label>País</mat-label>
+      <input type="text" matInput>
+      <mat-error *ngIf="form.get('pais')?.invalid">{{formErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <div class="div-btn-signin">
+      <button [disabled]="loading" (click)="login()" mat-raised-button class="btn-primary">
+        <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
+          [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
+        <span *ngIf="!loading">ATUALIZAR INFORMAÇÕES</span></button>
+    </div>
+  </form>
+
+  <div class="password-conteiner">
+    <p>Alterar senha</p>
+    <form action="">
+      <mat-form-field class="input" appearance="outline">
+        <mat-label>Senha antiga</mat-label>
+        <input type={{password}} matInput formControlName="password">
+        <mat-error *ngIf="form.get('password')?.invalid">{{formErrorMessage()}}</mat-error>
+        <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
+        <mat-icon (click)="onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="input" appearance="outline">
+        <mat-label>Nova senha</mat-label>
+        <input type={{password}} matInput formControlName="password">
+        <mat-error *ngIf="form.get('password')?.invalid">{{formErrorMessage()}}</mat-error>
+        <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
+        <mat-icon (click)="onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
+      </mat-form-field>
+      <div class="div-btn-signin">
+        <p *ngIf="hasError" class="error-message">{{ hasError }}</p>
+        <button [disabled]="loading" (click)="login()" mat-raised-button class="btn-primary">
+          <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
+            [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
+          <span *ngIf="!loading">ATUALIZAR senha</span></button>
+      </div>
+    </form>
+  </div>
+
+</div>
