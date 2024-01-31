@@ -2,11 +2,11 @@
   <h5>Editar perfil</h5>
   <div class="profile">
     <div>
-      <img class="profile-img" src="" alt="">
+      <img class="profile-img" src="assets\imgs\img_profile_orange_portfolio.png" alt="">
     </div>
     <div class="user-data">
       <h5>
-        <!-- {{user.name}} {{user.lastName}} -->
+        Willian Costa
       </h5>
       <div class="create-project">
         <button mat-raised-button class="btn-secondary">SELECIONAR NOVA FOTO
@@ -54,15 +54,15 @@
         <mat-label>Senha antiga</mat-label>
         <input type={{password}} matInput formControlName="oldPassword">
         <mat-error *ngIf="formPassword.get('password')?.invalid">{{formErrorMessage('password')}}</mat-error>
-        <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
-        <mat-icon (click)="onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
+        <mat-icon (click)="onClick('old')" *ngIf="!visibilityOld" matSuffix>visibility</mat-icon>
+        <mat-icon (click)="onClick('old')" *ngIf="visibilityOld" matSuffix>visibility_off</mat-icon>
       </mat-form-field>
       <mat-form-field class="input" appearance="outline">
         <mat-label>Nova senha</mat-label>
         <input type={{password}} matInput formControlName="newPassword">
         <mat-error *ngIf="formPassword.get('password')?.invalid">{{formErrorMessage('password')}}</mat-error>
-        <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
-        <mat-icon (click)="onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
+        <mat-icon (click)="onClick('new')" *ngIf="!visibilityNew" matSuffix>visibility</mat-icon>
+        <mat-icon (click)="onClick('new')" *ngIf="visibilityNew" matSuffix>visibility_off</mat-icon>
       </mat-form-field>
       <div class="div-btn-signin">
         <p *ngIf="hasError" class="error-message">{{ hasError }}</p>

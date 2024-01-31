@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { Component } from "@angular/core";
+import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 
 @Component({
-  selector: 'app-profile-info',
-  templateUrl: './profile-info.component.html',
-  styleUrls: ['./profile-info.component.scss']
+  selector: "app-profile-info",
+  templateUrl: "./profile-info.component.html",
+  styleUrls: ["./profile-info.component.scss"],
 })
 export class ProfileInfoComponent {
-  visibility: boolean = false;
+  visibilityNew: boolean = false;
+  visibilityOld: boolean = false;
   password: string = "password";
 
   formProfile!: FormGroup;
@@ -15,11 +16,9 @@ export class ProfileInfoComponent {
   formPassword!: FormGroup;
 
   loading: boolean = false;
-  hasError: string = ""
+  hasError: string = "";
 
-  constructor(
-    private formBuilder: NonNullableFormBuilder,
-  ) {}
+  constructor(private formBuilder: NonNullableFormBuilder) {}
 
   ngOnInit() {
     this.formProfile = this.formBuilder.group({
@@ -45,12 +44,21 @@ export class ProfileInfoComponent {
     return;
   }
 
-  onClick() {
-    this.visibility = !this.visibility;
-    if (this.password === "text") {
-      this.password = "password";
-    } else if (this.password === "password") {
-      this.password = "text";
+  onClick(iten: string) {
+    if (iten == "new") {
+      this.visibilityNew = !this.visibilityNew;
+      if (this.password === "text") {
+        this.password = "password";
+      } else if (this.password === "password") {
+        this.password = "text";
+      }
+    } else {
+      this.visibilityOld = !this.visibilityOld;
+      if (this.password === "text") {
+        this.password = "password";
+      } else if (this.password === "password") {
+        this.password = "text";
+      }
     }
   }
 }
