@@ -19,7 +19,8 @@ export class LoginAppService {
     return new Observable<boolean>((observer) => {
       this.userService.authenticate(data).subscribe({
         next: (result: LoginResponse) => {
-          window.localStorage.setItem("token", this.encrypt(result.token));
+          sessionStorage.setItem("userInfo",JSON.stringify(result.dtoUser));
+          sessionStorage.setItem("token", this.encrypt(result.token));
           observer.next(true);
           observer.complete();
         },
@@ -32,7 +33,8 @@ export class LoginAppService {
   }
 
   signOut = () => {
-    localStorage.removeItem("token");
+    sessionStorage.removeItem("userInfo");
+    sessionStorage.removeItem("token");
   };
 
   // Método para criptografar texto usando a chave
@@ -52,7 +54,7 @@ export class LoginAppService {
   }
 
   getAuthorizationToken(item: string) {
-    const localItem = this.decrypt(window.localStorage.getItem(item) ?? "");
+    const localItem = this.decrypt(window.sessionStorage.getItem(item) ?? "");
     return localItem;
   }
 
@@ -82,7 +84,11 @@ export class LoginAppService {
   }
 
   isUserLoggedIn() {
-    const token = this.getAuthorizationToken("token");
-    return !this.isTokenExpired(token);
+    //const token = this.getAuthorizationToken("token");
+    const token = sessionStorage.getItem("token");
+    if (token){
+      return !this.isTokenExpired(token);   
+    }
+    return false;
   }
 }

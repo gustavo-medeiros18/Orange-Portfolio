@@ -1,7 +1,6 @@
 import { Component, HostListener, ViewChild } from "@angular/core";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
-import { RouterModule } from "@angular/router";
 import { LoginAppService } from "src/app/appServices/login-app.service";
 
 @Component({
@@ -33,7 +32,7 @@ export class NavBarComponent {
 
   signOut() {
     sessionStorage.removeItem("userInfo");
-    sessionStorage.removeItem("authToken");
+    sessionStorage.removeItem("token");
     location.reload();
   }
 

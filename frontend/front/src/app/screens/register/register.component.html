@@ -48,7 +48,7 @@
           <button (click)="signUp()" class="btn-primary" mat-raised-button color="primary">
             <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
               [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
-            <span *ngIf="!loading">CADASTRAR</span></button>
+            <span *ngIf="!loading" (click)="signUp()">CADASTRAR</span></button>
         </form>
       </div>
     </div>
