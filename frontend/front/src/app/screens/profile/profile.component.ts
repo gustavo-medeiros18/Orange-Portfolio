@@ -16,16 +16,11 @@ export class ProfileComponent implements OnInit {
     search: [""],
   });
 
+  // usuario logado
+  user: any;
+
   //controle de mensagem de pesquisa
   searchResultEmpty: boolean = false;
-
-  //controle de dados do usuário
-  user = {
-    name: "Camila Soares",
-    locale: "Brasil",
-    profileImg: "assets/imgs/img_profile_orange_portfolio.png",
-    id: 11
-  };
 
   //controle de dados pesquisados
   searchProjects: IProject[] = [];
@@ -40,6 +35,9 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // carregando dados do usuario
+    this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
+    this.user.profileImg =  "assets/imgs/img_profile_orange_portfolio.png",
     this.getProjectsById(this.user.id);
     this.searchForm
       .get("search")
