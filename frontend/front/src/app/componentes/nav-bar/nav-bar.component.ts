@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent {
 
+  user: any;
+
   constructor(private matIconRegistry: MatIconRegistry, private  domSanitizer: DomSanitizer, private router: Router){
     this.matIconRegistry.addSvgIcon(
       "Logo Orange Juice",
@@ -23,10 +25,13 @@ export class NavBarComponent {
       "Icon Notification",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../../assets/logos/iconNotification.svg")
     );
+    this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
+    this.user.iconUrl = this.user.iconUrl ? this.user.iconUrl : "assets/imgs/img_profile_orange_portfolio.png";
   }
 
   signOut(){
-    sessionStorage.removeItem("loggedInUser");
+    sessionStorage.removeItem("userInfo");
+    sessionStorage.removeItem("authToken");
     // redirecionar
   }
 }

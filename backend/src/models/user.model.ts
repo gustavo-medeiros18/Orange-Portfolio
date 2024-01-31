@@ -5,4 +5,5 @@ export interface User {
   country: string;
   email: string;
   password: string;
+  iconUrl: string;
 }
