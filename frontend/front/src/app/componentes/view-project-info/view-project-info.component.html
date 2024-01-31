@@ -42,7 +42,7 @@
   <div class="container-data">
     <h5>{{modal.project.title}}</h5>
     <app-project-card class="projects-list" [userName]="user.name" [projects]="[modal.project]"
-      [userImg]="user.profileImg" [edit]="false"></app-project-card>
+      [userImg]="user.iconUrl" [edit]="false"></app-project-card>
     <div class="project-description">
       <p>{{modal.project.description}}<br><br></p>
       <p *ngIf="modal.project.link"> Download <br> <a (click)="goTo(modal.project.link)"

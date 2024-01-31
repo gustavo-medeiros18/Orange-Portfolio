@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     // carregando dados do usuario
     this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
-    this.user.profileImg =  "assets/imgs/img_profile_orange_portfolio.png",
+    this.user.iconUrl = this.user.iconUrl ? this.user.iconUrl : "assets/imgs/img_profile_orange_portfolio.png";
     this.getProjectsById(this.user.id);
     this.searchForm
       .get("search")

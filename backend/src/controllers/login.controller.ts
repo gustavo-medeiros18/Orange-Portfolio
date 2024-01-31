@@ -60,6 +60,7 @@ class LoginController {
           lastName: user.lastName,
           email: user.email,
           country: user.country,
+          iconUrl: user.iconUrl,
         };
         let token = generateToken(userInfo);
         res.status(200).json({ message: "Login bem-sucedido.", token, userInfo });
@@ -71,6 +72,7 @@ class LoginController {
           email: payload.email,
           password: Math.random().toString(36).slice(-10), //gera senha aleatória (não é usada na autenticação com o google)
           country: "",
+          iconUrl: "",
         };
         UserService.createUser(user);
         userInfo = {
@@ -78,6 +80,7 @@ class LoginController {
           lastName: user.lastName,
           email: user.email,
           country: user.country,
+          iconUrl: user.iconUrl,
         };
         let token = generateToken(userInfo);
         res.status(200).json({ message: "Login bem-sucedido.", token, userInfo });

@@ -31,7 +31,6 @@ class UserController {
     try {
       newUser.password = await hashPassword(newUser.password);
 
-
       const createdUser = await UserService.createUser(newUser);
 
       const { password, ...dtoUser } = createdUser;
