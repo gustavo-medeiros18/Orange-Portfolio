@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
 import { ProjectService } from 'src/app/appServices/project.service';
 
 @Injectable({
@@ -9,7 +8,7 @@ export class ProjectCardService {
 
   constructor(private projectService: ProjectService) { }
 
-  deleteProjectCard(id: number) {
+  deleteProjectCard(id: string) {
     return this.projectService.deleteProject(id);
   }
   

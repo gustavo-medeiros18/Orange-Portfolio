@@ -6,7 +6,6 @@ import UserService from "../services/user.service";
 
 class ProjectController {
   public static async createProject(req: Request, res: Response) {
-    console.log("opa");
     const newProject: Project = req.body;
     if (
       !newProject ||
@@ -44,7 +43,7 @@ class ProjectController {
   }
 
   public static async getAllProjectsByUserId(req: Request, res: Response) {
-    const userId = parseInt(req.params.userId);
+    const userId = req.params.userId;
     const projects = await ProjectService.getAllProjectsByUserId(userId);
 
     if (projects.length == 0)
@@ -54,7 +53,7 @@ class ProjectController {
   }
 
   public static async updateProject(req: Request, res: Response) {
-    const projectId = parseInt(req.params.id);
+    const projectId = req.params.id;
     const updatedProject: Project = req.body;
 
     const userExists = await UserService.getUserById(updatedProject.idUser);
@@ -88,8 +87,7 @@ class ProjectController {
   }
 
   public static async deleteProject(req: Request, res: Response) {
-    const projectId = parseInt(req.params.id);
-
+    const projectId = req.params.id;
     const result = await ProjectService.deleteProjectById(projectId);
 
     if (result) {

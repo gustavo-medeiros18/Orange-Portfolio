@@ -2,11 +2,11 @@
 <div class="container">
   <div class="profile">
     <div>
-      <img class="profile-img" src={{user.profileImg}} alt={{user.name}}>
+      <img class="profile-img" src={{user.iconUrl}} alt={{user.name}}>
     </div>
     <div class="user-data">
       <h5>
-        {{user.name}}
+        {{user.name}} {{user.lastName}}
       </h5>
       <p>{{user.locale}}</p>
       <div class="create-project">
@@ -43,7 +43,7 @@
           <div *ngIf="searchProjects.length || projects">
             <app-project-card *ngIf="searchProjects.length || projects" class="projects-list" [userName]="user.name"
               [projects]="searchProjects.length ? searchProjects : projects"
-              [userImg]="user.profileImg" [edit]="true"></app-project-card>
+              [userImg]="user.iconUrl" [edit]="true"></app-project-card>
           </div>
         </ng-template>
       </ng-template>

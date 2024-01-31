@@ -2,6 +2,7 @@ import { User } from "../models/user.model";
 import UserService from "../services/user.service";
 import { hashPassword } from "../utils/bcryptUtils";
 import { Request, Response } from "express";
+import { uploadFile } from "../utils/fileUploadUtils";
 
 class UserController {
   public static async getAllUsers(_req: Request, res: Response) {
@@ -14,7 +15,7 @@ class UserController {
   }
 
   public static async getUserById(req: Request, res: Response) {
-    const id = parseInt(req.params.id, 10);
+    const id = req.params.id;
     const user = await UserService.getUserById(id);
 
     if (user) {
@@ -30,7 +31,6 @@ class UserController {
 
     try {
       newUser.password = await hashPassword(newUser.password);
-
 
       const createdUser = await UserService.createUser(newUser);
 
@@ -48,7 +48,7 @@ class UserController {
   }
 
   public static async deleteUser(req: Request, res: Response) {
-    const userId = parseInt(req.params.id, 10);
+    const userId = req.params.id;
 
     const result = await UserService.deleteUserById(userId);
 
@@ -60,12 +60,17 @@ class UserController {
   }
 
   public static async updateUser(req: Request, res: Response) {
-    const userId = parseInt(req.params.id, 10);
+    const userId = req.params.id;
     const updatedUserData: User = req.body;
 
     try {
       if (updatedUserData.password) {
         updatedUserData.password = await hashPassword(updatedUserData.password);
+      }
+
+      if (req.file) {
+        const downloadURL = await uploadFile(req.file!);
+        updatedUserData.iconUrl = downloadURL;
       }
 
       const updatedUser = await UserService.updateUser(userId, updatedUserData);

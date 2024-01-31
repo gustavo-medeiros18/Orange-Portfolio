@@ -4,12 +4,7 @@
   </div>
   <div class="form-container">
     <h5 class="title-login">Entre no Orange Portfólio</h5>
-    <div class="div-singin-google">
-      <a class="div-btn-google" routerLink=".">
-        <img src="assets/button-icons/logoGoogle.svg" alt="Logo do Google" class="google-logo">
-        <span class="btntexto">Entrar com o google</span>
-      </a>
-    </div>
+    <app-login-google></app-login-google>
     <div class="div-form">
       <form [formGroup]="form">
         <p class="msg-login">Faça login com e-mail</p>

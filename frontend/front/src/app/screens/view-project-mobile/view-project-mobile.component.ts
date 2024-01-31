@@ -10,17 +10,14 @@ import { IProject } from "src/app/models/iProject";
 export class ViewProjectMobileComponent implements OnInit {
   project!: IProject | null;
 
-  user = {
-    name: "Camila Soares",
-    locale: "Brasil",
-    profileImg: "assets/imgs/img_profile_orange_portfolio.png",
-  };
+  user: any;
 
   constructor(private viewProjectMobileService: ViewProjectMobileService) {}
   ngOnInit(): void {
+    this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
+    this.user.iconUrl = this.user.iconUrl ? this.user.iconUrl : "assets/imgs/img_profile_orange_portfolio.png";
     const currentProject = this.viewProjectMobileService.currentProject;
     if (currentProject) {
-      console.log(currentProject);
       this.project = currentProject.data;
     }
     this.viewProjectMobileService.clearProjectInfo();
