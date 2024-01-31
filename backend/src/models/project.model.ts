@@ -1,9 +1,9 @@
 export interface Project {
-  id?: number;
+  id?: string;
   title: string;
   tags: string;
   link: string;
   description: string;
   imgUrl: string;
-  idUser: number;
+  idUser: string;
 }

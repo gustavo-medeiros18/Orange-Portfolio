@@ -15,7 +15,7 @@ class UserController {
   }
 
   public static async getUserById(req: Request, res: Response) {
-    const id = parseInt(req.params.id, 10);
+    const id = req.params.id;
     const user = await UserService.getUserById(id);
 
     if (user) {
@@ -48,7 +48,7 @@ class UserController {
   }
 
   public static async deleteUser(req: Request, res: Response) {
-    const userId = parseInt(req.params.id, 10);
+    const userId = req.params.id;
 
     const result = await UserService.deleteUserById(userId);
 
@@ -60,7 +60,7 @@ class UserController {
   }
 
   public static async updateUser(req: Request, res: Response) {
-    const userId = parseInt(req.params.id, 10);
+    const userId = req.params.id;
     const updatedUserData: User = req.body;
 
     try {

@@ -63,7 +63,7 @@ export class ProfileComponent implements OnInit {
     this.modalActionService.openDialog(name);
   }
 
-  getProjectsById(id: number) {
+  getProjectsById(id: string) {
     this.profileService.getProjectsByIdProfile(id).subscribe({
       next: (projects: IProject[]) => {
         projects.forEach(projectData => {

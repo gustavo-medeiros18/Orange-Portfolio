@@ -15,7 +15,7 @@ export const generateToken = (payload: any): string => {
   return token;
 };
 
-export const verifyToken = (token: string, expectedUserId?: number): any => {
+export const verifyToken = (token: string, expectedUserId?: string): any => {
   const decodedToken: any = jwt.verify(token, secretKey);
 
   if (expectedUserId && decodedToken.id !== expectedUserId) {

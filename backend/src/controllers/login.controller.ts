@@ -4,6 +4,7 @@ import { comparePasswords } from "../utils/bcryptUtils";
 import { generateToken } from "../utils/jwtAuth";
 import { OAuth2Client } from "google-auth-library";
 import UserService from "../services/user.service";
+import { v4 as uuidv4 } from "uuid";
 
 const client = new OAuth2Client({
   clientId: "102685364306-m0ssdqq50ier1aqn5eulgr4eto0qidev.apps.googleusercontent.com",
@@ -56,6 +57,7 @@ class LoginController {
       if (user) {
         // usuario ja cadastrado no banco
         userInfo = {
+          id: user.id,
           name: user.name,
           lastName: user.lastName,
           email: user.email,
@@ -74,8 +76,9 @@ class LoginController {
           country: "",
           iconUrl: "",
         };
-        UserService.createUser(user);
+        user = await UserService.createUser(user);
         userInfo = {
+          id: user.id,
           name: user.name,
           lastName: user.lastName,
           email: user.email,

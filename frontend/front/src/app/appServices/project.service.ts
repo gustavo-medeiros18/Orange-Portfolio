@@ -43,13 +43,13 @@ export class ProjectService {
     });*/
   }
 
-  getProjectsById(id: number): Observable<IProject[]>{
+  getProjectsById(id: string): Observable<IProject[]>{
     const apiUrl = new URL(environment.getApiProjectUserId(id), this.API).toString();
     console.log(apiUrl);
     return this.httpClient.get<IProject[]>(apiUrl);
   }
 
-  putProject(params: FormData,id :number): Observable<IProject> {
+  putProject(params: FormData,id: string): Observable<IProject> {
     const apiUrl = new URL(environment.getApiProjectId(id), this.API).toString();
     return this.httpClient.put<IProject>(apiUrl,params);
     /*return new Observable((observer) => {
@@ -57,7 +57,7 @@ export class ProjectService {
     });*/
   }
 
-  deleteProject(id: number): Observable<IProject> {
+  deleteProject(id: string): Observable<IProject> {
     const apiUrl = new URL(environment.getApiProjectId(id), this.API).toString();
     return this.httpClient.delete<IProject>(apiUrl);
     /*return new Observable((observer) => {
