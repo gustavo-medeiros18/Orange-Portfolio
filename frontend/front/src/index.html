@@ -14,7 +14,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <script src="https://accounts.google.com/gsi/client" async></script>
     <script>
-      
+      import * as CryptoJS from "crypto-js";
+      const criptKey = environment.apiKey;
+
       function login(response) {
         const googleToken = response["credential"];
         sendTokenToBackend(googleToken);
@@ -32,7 +34,7 @@
           .then((response) => response.json())
           .then((data) => {
             const userInfo = data.userInfo;
-            const tokenCryp = CryptoJS.AES.encrypt(txt, this.criptKey).toString();
+            const tokenCryp = CryptoJS.AES.encrypt(data.token, this.criptKey).toString();
             sessionStorage.setItem("token", tokenCryp);
             sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
             window.location.reload();
