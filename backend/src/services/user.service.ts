@@ -1,7 +1,7 @@
 import connection from "../database/config";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { User } from "../models/user.model";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 class UserService {
   public static async getAllUsers(): Promise<User[]> {
@@ -28,7 +28,7 @@ class UserService {
     const [result] = await connection.query("INSERT INTO users SET ?", [newUser]);
     return { ...newUser, id } as User;
   }
-  
+
   public static async deleteUserById(userId: string): Promise<boolean> {
     const [result] = await connection.query<ResultSetHeader>("DELETE FROM users WHERE id = ?", [
       userId,
@@ -48,6 +48,13 @@ class UserService {
     }
 
     return undefined;
+  }
+
+  public static async updatePassword(userId: string, newPassword: string) {
+    await connection.query<ResultSetHeader>("UPDATE users SET password = ? WHERE id = ?", [
+      newPassword,
+      userId,
+    ]);
   }
 }
 

@@ -1,6 +1,6 @@
 import { User } from "../models/user.model";
 import UserService from "../services/user.service";
-import { hashPassword } from "../utils/bcryptUtils";
+import { comparePasswords, hashPassword } from "../utils/bcryptUtils";
 import { Request, Response } from "express";
 import { uploadFile } from "../utils/fileUploadUtils";
 
@@ -85,6 +85,41 @@ class UserController {
     } catch (error) {
       console.error("Erro ao atualizar usuário:", error);
       return res.status(500).json({ message: "Erro interno ao atualizar usuário." });
+    }
+  }
+
+  public static async updatePassword(req: Request, res: Response) {
+    const userId = req.params.id;
+
+    const { oldPassword, newPassword } = req.body;
+
+    try {
+      const existingUser = await UserService.getUserById(userId);
+
+      if (!existingUser) {
+        return res.status(404).json({ message: "Usuário não encontrado." });
+      }
+
+      const isPasswordValid = await comparePasswords(oldPassword, existingUser.password);
+
+      if (!isPasswordValid) {
+        return res.status(401).json({ message: "Senha antiga incorreta." });
+      }
+
+      if (oldPassword === newPassword) {
+        return res
+          .status(401)
+          .json({ message: "A nova senha deve ser diferente da senha antiga." });
+      }
+
+      const updatedPassword = await hashPassword(newPassword);
+
+      await UserService.updatePassword(userId, updatedPassword);
+
+      return res.status(200).json({ message: "Senha atualizada com sucesso." });
+    } catch (error) {
+      console.error("Erro ao atualizar senha:", error);
+      return res.status(500).json({ message: "Erro interno ao atualizar senha." });
     }
   }
 }
