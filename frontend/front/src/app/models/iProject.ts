@@ -5,7 +5,7 @@ export interface IProject {
   description: string;
   imgUrl?: string | FormData;
   createdAt: string;
-  id?: number;
+  id?: string;
   firstName?: string;
   lastName?: string;
 }

@@ -9,7 +9,7 @@ import { IProject } from "src/app/models/iProject";
 export class ProfileService {
   constructor(private projectService: ProjectService) {}
 
-  getProjectsByIdProfile(id: number): Observable<IProject[]> {
+  getProjectsByIdProfile(id: string): Observable<IProject[]> {
     return this.projectService.getProjectsById(id);
   }
 

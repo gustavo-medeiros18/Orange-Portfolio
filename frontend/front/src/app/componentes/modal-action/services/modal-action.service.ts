@@ -4,6 +4,7 @@ import { ModalActionComponent } from "../modal-action.component";
 import { IProject, IProjectEvent, ProjecEventEnum } from "src/app/models/iProject";
 import { ProjectService } from "src/app/appServices/project.service";
 import { Subject, Observable } from "rxjs";
+import { HttpParams } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
@@ -43,7 +44,7 @@ export class ModalActionService {
     return this.projectService.createProject(params);
   }
 
-  putProjectModal(params: FormData, id: number): Observable<IProject> {
+  putProjectModal(params: FormData, id: string): Observable<IProject> {
     return this.projectService.putProject(params,id);
   }
 }

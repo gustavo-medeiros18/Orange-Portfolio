@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { environment } from "src/environments/environment.development";
@@ -12,7 +12,7 @@ export class ProjectService {
 
   constructor(private httpClient: HttpClient) {}
 
-  fillProject(projectData: any): IProject{
+  fillProject(projectData: any): IProject {
     const project: IProject = {
       id: projectData.id,
       title: projectData.title,
@@ -22,14 +22,14 @@ export class ProjectService {
       imgUrl: projectData.imgUrl,
       firstName: projectData.firstName,
       lastName: projectData.lastName,
-      createdAt: projectData.createdAt
-    }
+      createdAt: projectData.createdAt,
+    };
     return project;
   }
 
   createProject(params: FormData): Observable<IProject> {
     const apiUrl = new URL(environment.apiProjects, this.API).toString();
-    return this.httpClient.post<IProject>(apiUrl,params);
+    return this.httpClient.post<IProject>(apiUrl, params);
     /*return new Observable((observer) => {
       observer.next();
     });*/
@@ -43,21 +43,20 @@ export class ProjectService {
     });*/
   }
 
-  getProjectsById(id: number): Observable<IProject[]>{
+  getProjectsById(id: string): Observable<IProject[]> {
     const apiUrl = new URL(environment.getApiProjectUserId(id), this.API).toString();
-    console.log(apiUrl);
     return this.httpClient.get<IProject[]>(apiUrl);
   }
 
-  putProject(params: FormData,id :number): Observable<IProject> {
+  putProject(params: FormData, id: string): Observable<IProject> {
     const apiUrl = new URL(environment.getApiProjectId(id), this.API).toString();
-    return this.httpClient.put<IProject>(apiUrl,params);
+    return this.httpClient.put<IProject>(apiUrl, params);
     /*return new Observable((observer) => {
       observer.next();
     });*/
   }
 
-  deleteProject(id: number): Observable<IProject> {
+  deleteProject(id: string): Observable<IProject> {
     const apiUrl = new URL(environment.getApiProjectId(id), this.API).toString();
     return this.httpClient.delete<IProject>(apiUrl);
     /*return new Observable((observer) => {

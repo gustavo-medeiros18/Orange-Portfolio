@@ -27,9 +27,9 @@ import { ProjectActionComponent } from "./componentes/project-action/project-act
 import { DeleteConfirmationComponent } from "./componentes/delete-confirmation/delete-confirmation.component";
 import { ViewProjectInfoComponent } from "./componentes/view-project-info/view-project-info.component";
 import { DiscoverComponent } from "./screens/discover/discover.component";
-import { ViewProjectMobileComponent } from './screens/view-project-mobile/view-project-mobile.component';
-import { NotFoundComponent } from './screens/not-found/not-found.component';
-import { LoginGoogleComponent } from './componentes/login-google/login-google.component';
+import { ViewProjectMobileComponent } from "./screens/view-project-mobile/view-project-mobile.component";
+import { NotFoundComponent } from "./screens/not-found/not-found.component";
+import { LoginGoogleComponent } from "./componentes/login-google/login-google.component";
 
 @NgModule({
   declarations: [
@@ -46,7 +46,7 @@ import { LoginGoogleComponent } from './componentes/login-google/login-google.co
     DiscoverComponent,
     ViewProjectMobileComponent,
     LoginGoogleComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

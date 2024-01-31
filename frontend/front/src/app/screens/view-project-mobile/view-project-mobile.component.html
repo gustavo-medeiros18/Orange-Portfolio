@@ -4,7 +4,7 @@
   <div class="container-data">
     <h5 class="title">{{project?.title}}</h5>
     <app-project-card class="projects-list" [userName]="user.name" [projects]="[project!]"
-      [userImg]="user.profileImg"></app-project-card>
+      [userImg]="user.iconUrl"></app-project-card>
     <app-project-card></app-project-card>
     <div class="project-description">
       <p>{{project?.description}}<br><br></p>
