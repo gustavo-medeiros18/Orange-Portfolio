@@ -34,7 +34,7 @@
             const userInfo = data.userInfo;
             sessionStorage.setItem("token", data.token);
             sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
-            window.location.href = "http://localhost:4200/profile";
+            window.location.href = "https://hackathon-orange-juice-2024-alpha.vercel.app/profile";
           })
           .catch((error) => {
             console.error("Erro ao enviar token para o backend:", error);
