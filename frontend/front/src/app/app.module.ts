@@ -30,6 +30,7 @@ import { DiscoverComponent } from "./screens/discover/discover.component";
 import { ViewProjectMobileComponent } from "./screens/view-project-mobile/view-project-mobile.component";
 import { NotFoundComponent } from "./screens/not-found/not-found.component";
 import { LoginGoogleComponent } from "./componentes/login-google/login-google.component";
+import { ProfileInfoComponent } from './screens/profile-info/profile-info.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { LoginGoogleComponent } from "./componentes/login-google/login-google.co
     ViewProjectMobileComponent,
     LoginGoogleComponent,
     NotFoundComponent,
+    ProfileInfoComponent,
   ],
   imports: [
     BrowserModule,

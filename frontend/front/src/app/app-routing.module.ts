@@ -25,6 +25,11 @@ const routes: Routes = [
     loadChildren: () =>
       import("./screens/discover/discover-routing.module").then((m) => m.DiscoverRoutingModule),
   },
+  {
+    path: "profile/info",
+    loadChildren: () =>
+      import("./screens/profile-info/profile-info-routing.module").then((m) => m.ProfileInfoRoutingModule),
+  },
 
   { path: "project", component: ViewProjectMobileComponent },
 
