@@ -10,7 +10,8 @@ import { LoginAppService } from "src/app/appServices/login-app.service";
   styleUrls: ["./nav-bar.component.scss"],
 })
 export class NavBarComponent {
-  isMobile: boolean;
+  isMobile!: boolean;
+  user:any;
 
   constructor(private matIconRegistry: MatIconRegistry, private  domSanitizer: DomSanitizer,
     private loginAppService: LoginAppService){
@@ -26,7 +27,7 @@ export class NavBarComponent {
       "Icon Notification",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../../assets/logos/iconNotification.svg")
     );
-    this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
+    this.user = JSON.parse(sessionStorage.getItem("userInfo") ?? "");
     this.user.iconUrl = this.user.iconUrl ? this.user.iconUrl : "assets/imgs/img_profile_orange_portfolio.png";
   }
 
