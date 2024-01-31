@@ -43,7 +43,7 @@ export class ModalActionService {
     return this.projectService.createProject(params);
   }
 
-  putProjectModal(params: FormData, id: number): Observable<IProject> {
+  putProjectModal(params: FormData, id: string): Observable<IProject> {
     return this.projectService.putProject(params,id);
   }
 }
