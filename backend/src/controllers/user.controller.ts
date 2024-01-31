@@ -10,9 +10,9 @@ class UserController {
     if (!users) {
       return res.status(500);
     }
-    const { password, ...dtoUser } = users[0];
+    const usersWithoutPasswords = users.map(({ password, ...dtoUser }) => dtoUser);
 
-    return res.status(200).json(dtoUser);
+    return res.status(200).json(usersWithoutPasswords);
   }
 
   public static async getUserById(req: Request, res: Response) {
