@@ -84,11 +84,7 @@ export class LoginAppService {
   }
 
   isUserLoggedIn() {
-    //const token = this.getAuthorizationToken("token");
-    const token = sessionStorage.getItem("token");
-    if (token){
-      return !this.isTokenExpired(token);   
-    }
-    return false;
+    const token = this.getAuthorizationToken("token");
+    return !this.isTokenExpired(token);   
   }
 }

@@ -32,9 +32,10 @@
           .then((response) => response.json())
           .then((data) => {
             const userInfo = data.userInfo;
-            sessionStorage.setItem("token", data.token);
+            const tokenCryp = CryptoJS.AES.encrypt(txt, this.criptKey).toString();
+            sessionStorage.setItem("token", tokenCryp);
             sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
-            window.location.href = "https://hackathon-orange-juice-2024-alpha.vercel.app/profile";
+            window.location.reload();
           })
           .catch((error) => {
             console.error("Erro ao enviar token para o backend:", error);
