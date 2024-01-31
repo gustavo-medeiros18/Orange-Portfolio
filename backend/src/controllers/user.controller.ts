@@ -2,6 +2,7 @@ import { User } from "../models/user.model";
 import UserService from "../services/user.service";
 import { hashPassword } from "../utils/bcryptUtils";
 import { Request, Response } from "express";
+import { uploadFile } from "../utils/fileUploadUtils";
 
 class UserController {
   public static async getAllUsers(_req: Request, res: Response) {
@@ -65,6 +66,11 @@ class UserController {
     try {
       if (updatedUserData.password) {
         updatedUserData.password = await hashPassword(updatedUserData.password);
+      }
+
+      if (req.file) {
+        const downloadURL = await uploadFile(req.file!);
+        updatedUserData.iconUrl = downloadURL;
       }
 
       const updatedUser = await UserService.updateUser(userId, updatedUserData);
