@@ -6,12 +6,14 @@ import { uploadFile } from "../utils/fileUploadUtils";
 
 class UserController {
   public static async getAllUsers(_req: Request, res: Response) {
-    const user = await UserService.getAllUsers();
+    const users = await UserService.getAllUsers();
 
-    if (!user) {
+    if (!users) {
       return res.status(500);
     }
-    return res.status(200).json(user);
+    const usersWithoutPasswords = users.map(({ password, ...dtoUser }) => dtoUser);
+
+    return res.status(200).json(usersWithoutPasswords);
   }
 
   public static async getUserById(req: Request, res: Response) {
