@@ -7,7 +7,7 @@
     </div>
     <div class="user-data">
       <h5>
-        Willian Costa
+        {{user.name}} {{user.lastName}}
       </h5>
       <div class="create-project">
         <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/png"
