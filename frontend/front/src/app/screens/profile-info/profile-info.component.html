@@ -55,14 +55,16 @@
         <mat-form-field class="input" appearance="outline">
           <mat-label>Senha antiga</mat-label>
           <input type={{password}} matInput formControlName="oldPassword">
-          <mat-error *ngIf="formPassword.get('oldPassword')?.invalid">{{formErrorMessage('oldPassword')}}</mat-error>
+          <mat-error
+            *ngIf="formPassword.get('oldPassword')?.invalid">{{formErrorMessagePassword('oldPassword')}}</mat-error>
           <mat-icon (click)="onClick('old')" *ngIf="!visibilityOld" matSuffix>visibility</mat-icon>
           <mat-icon (click)="onClick('old')" *ngIf="visibilityOld" matSuffix>visibility_off</mat-icon>
         </mat-form-field>
         <mat-form-field class="input" appearance="outline">
           <mat-label>Nova senha</mat-label>
           <input type={{password}} matInput formControlName="newPassword">
-          <mat-error *ngIf="formPassword.get('newPassword')?.invalid">{{formErrorMessage('newPassword')}}</mat-error>
+          <mat-error
+            *ngIf="formPassword.get('newPassword')?.invalid">{{formErrorMessagePassword('newPassword')}}</mat-error>
           <mat-icon (click)="onClick('new')" *ngIf="!visibilityNew" matSuffix>visibility</mat-icon>
           <mat-icon (click)="onClick('new')" *ngIf="visibilityNew" matSuffix>visibility_off</mat-icon>
         </mat-form-field>

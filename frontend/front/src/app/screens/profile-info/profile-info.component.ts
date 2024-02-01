@@ -44,6 +44,14 @@ export class ProfileInfoComponent {
     return;
   }
 
+  formErrorMessagePassword(fieldName: string) {
+    const field = this.formPassword.get(fieldName);
+    if (field?.hasError("required")) {
+      return "Este campo é necessário";
+    }
+    return;
+  }
+
   onClick(iten: string) {
     if (iten == "new") {
       this.visibilityNew = !this.visibilityNew;
