@@ -2,14 +2,18 @@
   <h5 class="title">Editar perfil</h5>
   <div class="profile">
     <div>
-      <img class="profile-img" src="assets\imgs\img_profile_orange_portfolio.png" alt="">
+      <img class="profile-img" *ngIf="selectedImage"
+        [src]="selectedImage || 'assets\imgs\img_profile_orange_portfolio.png'" alt="">
+      <img class="profile-img" *ngIf="!selectedImage" src="assets\imgs\img_profile_orange_portfolio.png" alt="">
     </div>
     <div class="user-data">
       <h5>
         Willian Costa
       </h5>
       <div class="create-project">
-        <button mat-raised-button class="btn-secondary">SELECIONAR NOVA FOTO
+        <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/png"
+          class="hidden-input" />
+        <button mat-raised-button (click)="triggerFile(fileInput)" class="btn-secondary">SELECIONAR NOVA FOTO
           DE PERFIL</button>
         <span>*para confirmar a alteração da foto de perfil, clique em atualizar informações!</span>
       </div>

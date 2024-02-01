@@ -7,6 +7,10 @@
   margin-bottom: 2rem;
 }
 
+.hidden-input {
+  display: none;
+}
+
 .title {
   text-align: right;
   display: flex;
@@ -26,6 +30,8 @@
 
 .profile-img {
   border-radius: 100px;
+  max-width: 7.625rem;
+  max-height: 7.625rem;
 }
 
 .user-data {

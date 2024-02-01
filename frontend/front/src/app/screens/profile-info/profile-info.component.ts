@@ -18,6 +18,9 @@ export class ProfileInfoComponent {
   loading: boolean = false;
   hasError: string = "";
 
+  selectedImage: string | undefined;
+  formData = new FormData();
+
   constructor(private formBuilder: NonNullableFormBuilder) {}
 
   ngOnInit() {
@@ -50,6 +53,27 @@ export class ProfileInfoComponent {
       return "Este campo é necessário";
     }
     return;
+  }
+
+  triggerFile(fileInput: HTMLInputElement) {
+    fileInput.click();
+  }
+
+  onFileSelected(event: any) {
+    const selectedFile = event.target.files[0];
+
+    if (selectedFile) {
+      if (this.formData.has("imgUrl")) {
+        this.formData.delete("imgUrl");
+      }
+
+      this.formData.append("imgUrl", selectedFile);
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.selectedImage = reader.result as string;
+      };
+      reader.readAsDataURL(selectedFile);
+    }
   }
 
   onClick(iten: string) {
