@@ -119,6 +119,9 @@ export class ProfileInfoComponent implements OnInit {
     this.profileInfoService.updateProfileService(this.formDataProfile,id).subscribe({
       next: (data) =>  {
         // atualiza os dados do usuário 
+        if (!data.iconUrl) {
+          data.iconUrl = JSON.parse(sessionStorage.getItem("userInfo") || "").iconUrl;
+        }
         sessionStorage.setItem("userInfo", JSON.stringify(data));
         // comunica o resultado
         this.profileActionService.openDialog(action,"success");
