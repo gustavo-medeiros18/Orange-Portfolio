@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  baseUrl: "http://localhost:3000/",
+  baseUrl: "https://hackathon-orange.onrender.com/",
   apiAuthenticate: "login",
   apiUsers: "users",
   apiProjects: "projects",

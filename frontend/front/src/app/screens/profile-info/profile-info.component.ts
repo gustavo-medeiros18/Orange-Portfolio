@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { ProfileInfoService } from "./services/profile-info.service";
 import { ProfileActionService } from "src/app/componentes/profile-action/services/profile-action.service";
+import { createPassword, noWhitespaceValidator } from "../../Validators/validators";
 
 @Component({
   selector: "app-profile-info",
@@ -11,7 +12,8 @@ import { ProfileActionService } from "src/app/componentes/profile-action/service
 export class ProfileInfoComponent implements OnInit {
   visibilityNew: boolean = false;
   visibilityCurrent: boolean = false;
-  password: string = "password";
+  currentPassword: string = "password";
+  newPassword: string = "password"
 
   formProfile!: FormGroup;
   formCountry: FormGroup = this.formBuilder.group({
@@ -21,6 +23,7 @@ export class ProfileInfoComponent implements OnInit {
   formPassword!: FormGroup;
 
   loading: boolean = false;
+  loadingPassword: boolean = false;
   hasError: string = "";
 
   selectedImage: string | undefined;
@@ -44,8 +47,8 @@ export class ProfileInfoComponent implements OnInit {
     this.clearFormDatas(this.formDataProfile, this.formDataPassword,this.formCountry);
 
     this.formProfile = this.formBuilder.group({
-      name: [this.user.name ? this.user.name : "", [Validators.required]],
-      lastName: [this.user.lastName ? this.user.lastName : "", [Validators.required]],
+      name: [this.user.name ? this.user.name : "", [Validators.required, noWhitespaceValidator(), Validators.minLength(3)]],
+      lastName: [this.user.lastName ? this.user.lastName : "", [Validators.required, noWhitespaceValidator(), Validators.minLength(3)]],
       email: [this.user.email ? this.user.email : "", [Validators.required, Validators.email]],
     });
 
@@ -56,8 +59,8 @@ export class ProfileInfoComponent implements OnInit {
     });
 
     this.formPassword = this.formBuilder.group({
-      currentPassword: ["", [Validators.required]],
-      newPassword: ["", [Validators.required]],
+      currentPassword: ["", [Validators.required,Validators.minLength(8), createPassword()]],
+      newPassword: ["", [Validators.required, Validators.minLength(8), createPassword()]],
     });
   }
 
@@ -77,6 +80,12 @@ export class ProfileInfoComponent implements OnInit {
     if (field?.hasError("email")) {
       return "Endereço de email inválido";
     }
+    if (field?.hasError("whitespace")) {
+      return "O campo Título não pode conter apenas espaços em branco.";
+    }
+    if (field?.hasError("minlength")) {
+      return `O campo Título está muito curto`;
+    }
     return;
   }
 
@@ -84,6 +93,9 @@ export class ProfileInfoComponent implements OnInit {
     const field = this.formPassword.get(fieldName);
     if (field?.hasError("required")) {
       return "Este campo é necessário";
+    }
+    if (field?.hasError("invalidPassword") || field?.hasError("minLength")) {
+      return "A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números";
     }
     return;
   }
@@ -112,35 +124,38 @@ export class ProfileInfoComponent implements OnInit {
   onClick(iten: string) {
     if (iten == "new") {
       this.visibilityNew = !this.visibilityNew;
-      if (this.password === "text") {
-        this.password = "password";
-      } else if (this.password === "password") {
-        this.password = "text";
+      if (this.newPassword === "text") {
+        this.newPassword = "password";
+      } else if (this.newPassword === "password") {
+        this.newPassword = "text";
       }
     } else {
       this.visibilityCurrent = !this.visibilityCurrent;
-      if (this.password === "text") {
-        this.password = "password";
-      } else if (this.password === "password") {
-        this.password = "text";
+      if (this.currentPassword === "text") {
+        this.currentPassword = "password";
+      } else if (this.currentPassword === "password") {
+        this.currentPassword = "text";
       }
     }
   }
 
   updateProfile() {
+    this.loading = true;
     const id = this.user.id;
     const action = "profile";
-    this.formDataProfile.append("name", this.formProfile.value.name);
-    this.formDataProfile.append("lastName", this.formProfile.value.lastName);
-    this.formDataProfile.append("email", this.formProfile.value.email);
-    this.formDataProfile.append("country", this.country);
-    this.profileInfoService.updateProfileService(this.formDataProfile, id).subscribe({
-      next: (data) => {
+    this.formDataProfile.append("name",this.formProfile.value.name);
+    this.formDataProfile.append("lastName",this.formProfile.value.lastName);
+    this.formDataProfile.append("email",this.formProfile.value.email);
+    this.formDataProfile.append("country",this.formProfile.value.country);
+    this.profileInfoService.updateProfileService(this.formDataProfile,id).subscribe({
+      next: (data) =>  {
+        // atualiza os dados do usuário
         sessionStorage.setItem("userInfo", JSON.stringify(data));
         // comunica o resultado
         this.profileActionService.openDialog(action, "success");
       },
       error: (error) => {
+        this.loading = false;
         this.profileActionService.openDialog(action, "error");
       },
     });
@@ -148,16 +163,19 @@ export class ProfileInfoComponent implements OnInit {
   }
 
   updatePassword() {
+    this.loadingPassword = true;
     const id = this.user.id;
     const action = "password";
     this.formDataPassword.append("currentPassword", this.formPassword.value.currentPassword);
     this.formDataPassword.append("newPassword", this.formPassword.value.newPassword);
     this.profileInfoService.updatePasswordService(id, this.formDataPassword).subscribe({
       next: () => {
+        this.loadingPassword = false;
         // comunica o resultado
         this.profileActionService.openDialog(action, "success");
       },
       error: (error) => {
+        this.loadingPassword = false;
         console.log(error);
         this.profileActionService.openDialog(action, "error");
       },

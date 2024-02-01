@@ -9,6 +9,19 @@
   display: none;
 }
 
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.sub-form {
+  display: flex;
+  gap: 1.3rem;
+  flex-direction: column;
+}
 
 .div-form {
   display: flex;
@@ -16,8 +29,21 @@
   justify-content: center;
   flex-direction: column;
   margin: 8%;
+  gap: 1rem;
 }
 
+.password {
+  color: var(--color-neutral-100, #818388);
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.msg-register {
+  color: var(--Neutral-Colors-Neutral-110, #515255);
+  text-decoration: none;
+  align-self: flex-start;
+}
 .on-sign-up-success {
   display: flex;
   justify-content: flex-start;
@@ -25,7 +51,7 @@
   padding: 0.375rem 1rem;
   align-items: center;
   border-radius: 0.25rem;
-  background: #2E7D32;
+  background: #2e7d32;
   margin-bottom: 6.75rem;
 }
 
@@ -35,7 +61,7 @@
   width: 20rem;
   padding: 0.375rem 1rem;
   border-radius: 0.25rem;
-  background: #D00;
+  background: #d00;
   margin-bottom: 6.75rem;
 }
 
@@ -50,7 +76,6 @@
   align-items: flex-start;
   padding: 0.4375rem 0.75rem 0.4375rem var(--none, 0rem);
 }
-
 
 .on-sign-up-success-text {
   display: flex;
@@ -73,16 +98,15 @@
 .on-sign-up-text span {
   align-self: stretch;
 
-  color: #FFF;
-  font-feature-settings: 'clig' off, 'liga' off;
+  color: #fff;
+  font-feature-settings: "clig" off, "liga" off;
   font-family: Roboto;
   font-size: 1rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 150%; 
+  line-height: 150%;
   letter-spacing: 0.00938rem;
 }
-
 
 @media screen and (min-width: 992px) {
   .container {
@@ -102,6 +126,7 @@
 
   .sub-form {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     gap: 1+0.25rem;
   }
@@ -119,6 +144,6 @@
   .on-sign-up-error {
     position: absolute;
     top: 4.81rem;
-    margin-bottom: 0rem;  
+    margin-bottom: 0rem;
   }
 }
