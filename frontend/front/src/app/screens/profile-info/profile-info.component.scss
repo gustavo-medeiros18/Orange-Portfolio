@@ -11,6 +11,14 @@
   display: none;
 }
 
+.password {
+  margin-bottom: 0.5rem;
+  color: var(--color-neutral-100, #818388);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
 .title {
   text-align: right;
   display: flex;

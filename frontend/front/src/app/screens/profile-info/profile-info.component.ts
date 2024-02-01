@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { ProfileInfoService } from "./services/profile-info.service";
 import { ProfileActionService } from "src/app/componentes/profile-action/services/profile-action.service";
+import { createPassword } from "../Validators/validators";
 
 @Component({
   selector: "app-profile-info",
@@ -41,8 +42,8 @@ export class ProfileInfoComponent implements OnInit {
       country: [this.user.country? this.user.country: ""],
     });
     this.formPassword = this.formBuilder.group({
-      currentPassword: ["", [Validators.required]],
-      newPassword: ["", [Validators.required]],
+      currentPassword: ["", [Validators.required,Validators.minLength(8), createPassword()]],
+      newPassword: ["", [Validators.required, Validators.minLength(8), createPassword()]],
     });
   }
 
@@ -66,6 +67,9 @@ export class ProfileInfoComponent implements OnInit {
     const field = this.formPassword.get(fieldName);
     if (field?.hasError("required")) {
       return "Este campo é necessário";
+    }
+    if (field?.hasError("invalidPassword") || field?.hasError("minLength")) {
+      return "A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números";
     }
     return;
   }
@@ -118,7 +122,7 @@ export class ProfileInfoComponent implements OnInit {
     this.formDataProfile.append("country",this.formProfile.value.country);
     this.profileInfoService.updateProfileService(this.formDataProfile,id).subscribe({
       next: (data) =>  {
-        // atualiza os dados do usuário 
+        // atualiza os dados do usuário
         sessionStorage.setItem("userInfo", JSON.stringify(data));
         // comunica o resultado
         this.profileActionService.openDialog(action,"success");

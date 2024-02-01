@@ -70,6 +70,7 @@
           <mat-icon (click)="onClick('new')" *ngIf="!visibilityNew" matSuffix>visibility</mat-icon>
           <mat-icon (click)="onClick('new')" *ngIf="visibilityNew" matSuffix>visibility_off</mat-icon>
         </mat-form-field>
+        <span class="password">A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números</span>
         <div class="div-btn-signin">
           <p *ngIf="hasError" class="error-message">{{ hasError }}</p>
           <button (click)="updatePassword()" [disabled]="loading" mat-raised-button class="btn-primary">
