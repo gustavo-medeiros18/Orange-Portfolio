@@ -34,9 +34,13 @@ export class ProfileComponent implements OnInit {
     private modalActionService: ModalActionService
   ) {
     this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
+    this.modalActionService.notification.subscribe(() => {
+      this.ngOnInit();
+    })
   }
 
   ngOnInit(): void {
+    this.projects = [];
     // carregando dados do usuario
     this.getProjectsById(this.user.id);
     this.searchForm

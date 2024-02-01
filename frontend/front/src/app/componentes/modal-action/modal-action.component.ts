@@ -90,6 +90,7 @@ export class ModalActionComponent implements OnInit {
     this.modalService.createProjectModal(this.formData).subscribe({
       next: () => {
         this.projectActionService.openDialog(action, "success");
+        this.modalService.emit();
       },
       error: (error) => {
         this.projectActionService.openDialog(action, "error");
@@ -109,6 +110,7 @@ export class ModalActionComponent implements OnInit {
     this.modalService.putProjectModal(this.formData, this.project?.id!).subscribe({
       next: () => {
         this.projectActionService.openDialog(action, "success");
+        this.modalService.emit();
       },
       error: (error) => {
         this.projectActionService.openDialog(action, "error");

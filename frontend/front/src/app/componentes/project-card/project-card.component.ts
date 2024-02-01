@@ -62,6 +62,7 @@ export class ProjectCardComponent implements OnInit {
         this.projectCardService.deleteProjectCard(id).subscribe({
           next: () => {
             this.projectActionService.openDialog(action, "success");
+            this.modalActionService.emit();
           },
           error: () => {
             this.projectActionService.openDialog(action, "error");

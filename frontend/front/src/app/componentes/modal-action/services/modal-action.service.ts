@@ -4,7 +4,6 @@ import { ModalActionComponent } from "../modal-action.component";
 import { IProject, IProjectEvent, ProjecEventEnum } from "src/app/models/iProject";
 import { ProjectService } from "src/app/appServices/project.service";
 import { Subject, Observable } from "rxjs";
-import { HttpParams } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
@@ -19,10 +18,19 @@ export class ModalActionService {
 
   currentProject: IProjectEvent<ProjecEventEnum, IProject> | null = null;
 
+  private notificationSubject: Subject<void> = new Subject<void>();
+  
+  notification: Observable<void> = this.notificationSubject.asObservable();
+
+
   constructor(private dialog: MatDialog, private projectService: ProjectService) {
     this.updateProject.subscribe({
       next: (project) => (this.currentProject = project),
     });
+  }
+
+  emit(){
+    this.notificationSubject.next();
   }
 
   openDialog(name: string) {
@@ -47,4 +55,5 @@ export class ModalActionService {
   putProjectModal(params: FormData, id: string): Observable<IProject> {
     return this.projectService.putProject(params,id);
   }
+
 }
