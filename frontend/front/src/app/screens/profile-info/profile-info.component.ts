@@ -33,6 +33,7 @@ export class ProfileInfoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.clearFormDatas(this.formDataProfile, this.formDataPassword);
     this.formProfile = this.formBuilder.group({
       name: [this.user.name? this.user.name : "" , [Validators.required]],
       lastName: [this.user.lastName? this.user.lastName: "", [Validators.required]],
@@ -43,6 +44,11 @@ export class ProfileInfoComponent implements OnInit {
       currentPassword: ["", [Validators.required]],
       newPassword: ["", [Validators.required]],
     });
+  }
+
+  clearFormDatas(formDataProfile: FormData,formDataPassword: FormData){
+    this.formDataProfile = new FormData();
+    this.formDataPassword = new FormData();
   }
 
   formErrorMessage(fieldName: string) {
@@ -122,6 +128,7 @@ export class ProfileInfoComponent implements OnInit {
         this.profileActionService.openDialog(action,"error")
       }
     });
+    this.ngOnInit();
   }
 
   updatePassword(){
@@ -139,5 +146,6 @@ export class ProfileInfoComponent implements OnInit {
         this.profileActionService.openDialog(action,"error")
       }
     });
+    this.ngOnInit();
   }
 }

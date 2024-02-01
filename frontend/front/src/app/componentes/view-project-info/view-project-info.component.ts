@@ -16,7 +16,6 @@ export class ViewProjectInfoComponent {
     @Inject(MAT_DIALOG_DATA) public modal: {project: IProject; isMobile: boolean }
   ) {
     modal.project.createdAt = new Date().toString();
-    console.log(modal.project);
   }
 
   currentDate(){
