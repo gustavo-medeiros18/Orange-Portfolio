@@ -1,7 +1,7 @@
 import connection from "../database/config";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { User } from "../models/user.model";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 class UserService {
   public static async getAllUsers(): Promise<User[]> {
@@ -22,13 +22,21 @@ class UserService {
     return undefined;
   }
 
+  public static async getUserPasswordById(id: string): Promise<string> {
+    const [rows] = await connection.query<RowDataPacket[]>(
+      "SELECT password FROM users WHERE id = ?",
+      [id]
+    );
+    return (rows[0] as { password: string }).password;
+  }
+
   public static async createUser(newUser: User): Promise<User> {
     const id = uuidv4();
     newUser.id = id;
     const [result] = await connection.query("INSERT INTO users SET ?", [newUser]);
     return { ...newUser, id } as User;
   }
-  
+
   public static async deleteUserById(userId: string): Promise<boolean> {
     const [result] = await connection.query<ResultSetHeader>("DELETE FROM users WHERE id = ?", [
       userId,
@@ -45,6 +53,19 @@ class UserService {
 
     if (result.affectedRows === 1) {
       return { ...updatedUser, id } as User;
+    }
+
+    return undefined;
+  }
+
+  public static async updateUserPassword(id: string, newPassword: string): Promise<User | undefined> {
+    const [rows] = await connection.query<RowDataPacket[]>(
+      "UPDATE users SET password = ? WHERE id = ?",
+      [newPassword, id]
+    );
+
+    if (rows.length === 1) {
+      return rows[0] as User;
     }
 
     return undefined;
