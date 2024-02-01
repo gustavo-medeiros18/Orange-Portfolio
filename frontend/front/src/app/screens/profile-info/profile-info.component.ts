@@ -20,6 +20,7 @@ export class ProfileInfoComponent implements OnInit {
   formPassword!: FormGroup;
 
   loading: boolean = false;
+  loadingPassword: boolean = false;
   hasError: string = "";
 
   selectedImage: string | undefined;
@@ -115,6 +116,7 @@ export class ProfileInfoComponent implements OnInit {
   }
 
   updateProfile() {
+    this.loading = true;
     const id = this.user.id;
     const action = "profile";
     this.formDataProfile.append("name",this.formProfile.value.name);
@@ -123,12 +125,14 @@ export class ProfileInfoComponent implements OnInit {
     this.formDataProfile.append("country",this.formProfile.value.country);
     this.profileInfoService.updateProfileService(this.formDataProfile,id).subscribe({
       next: (data) =>  {
+        this.loading = false;
         // atualiza os dados do usuário
         sessionStorage.setItem("userInfo", JSON.stringify(data));
         // comunica o resultado
         this.profileActionService.openDialog(action,"success");
       },
       error: (error) => {
+        this.loading = false;
         console.log(error);
         this.profileActionService.openDialog(action,"error")
       }
@@ -137,16 +141,19 @@ export class ProfileInfoComponent implements OnInit {
   }
 
   updatePassword(){
+    this.loadingPassword = true;
     const id = this.user.id;
     const action = "password";
     this.formDataPassword.append("currentPassword",this.formPassword.value.currentPassword);
     this.formDataPassword.append("newPassword", this.formPassword.value.newPassword);
     this.profileInfoService.updatePasswordService(id, this.formDataPassword).subscribe({
       next: () => {
+        this.loadingPassword = false;
         // comunica o resultado
         this.profileActionService.openDialog(action,"success");
       },
       error: (error) => {
+        this.loadingPassword = false;
         console.log(error);
         this.profileActionService.openDialog(action,"error")
       }

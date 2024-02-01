@@ -2,8 +2,11 @@
   <h5 class="title">Editar perfil</h5>
   <div class="profile">
     <div>
-      <img class="profile-img" *ngIf="selectedImage" [src]="selectedImage || (user.iconUrl ? user.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png')" alt="Profile icon">
-      <img class="profile-img" *ngIf="!selectedImage" [src]="user.iconUrl ? user.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png'" alt="Profile Icon">
+      <img class="profile-img" *ngIf="selectedImage"
+        [src]="selectedImage || (user.iconUrl ? user.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png')"
+        alt="Profile icon">
+      <img class="profile-img" *ngIf="!selectedImage"
+        [src]="user.iconUrl ? user.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png'" alt="Profile Icon">
     </div>
     <div class="user-data">
       <h5>
@@ -70,13 +73,14 @@
           <mat-icon (click)="onClick('new')" *ngIf="!visibilityNew" matSuffix>visibility</mat-icon>
           <mat-icon (click)="onClick('new')" *ngIf="visibilityNew" matSuffix>visibility_off</mat-icon>
         </mat-form-field>
-        <span class="password">A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números</span>
+        <span class="password">A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e
+          números</span>
         <div class="div-btn-signin">
           <p *ngIf="hasError" class="error-message">{{ hasError }}</p>
-          <button (click)="updatePassword()" [disabled]="loading" mat-raised-button class="btn-primary">
-            <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
-              [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
-            <span *ngIf="!loading">ATUALIZAR SENHA</span></button>
+          <button (click)="updatePassword()" [disabled]="loadingPassword" mat-raised-button class="btn-primary">
+            <mat-progress-spinner *ngIf="loadingPassword" diameter="24" mode="indeterminate"
+              [color]="loadingPassword ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
+            <span *ngIf="!loadingPassword">ATUALIZAR SENHA</span></button>
         </div>
       </form>
     </div>
