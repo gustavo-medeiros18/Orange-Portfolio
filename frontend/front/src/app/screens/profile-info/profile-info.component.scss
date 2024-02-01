@@ -11,8 +11,19 @@
   display: none;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.sub-form {
+  display: flex;
+  gap: 1.3rem;
+  flex-direction: column;
+}
 .password {
-  margin-bottom: 0.5rem;
+  margin-top: 1rem;
   color: var(--color-neutral-100, #818388);
   font-size: 1rem;
   font-style: normal;

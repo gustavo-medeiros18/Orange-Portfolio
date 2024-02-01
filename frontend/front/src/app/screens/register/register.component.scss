@@ -9,6 +9,20 @@
   display: none;
 }
 
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.sub-form {
+  display: flex;
+  gap: 1.3rem;
+  flex-direction: column;
+}
+
 .div-form {
   display: flex;
   align-items: center;
@@ -112,6 +126,7 @@
 
   .sub-form {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     gap: 1+0.25rem;
   }
