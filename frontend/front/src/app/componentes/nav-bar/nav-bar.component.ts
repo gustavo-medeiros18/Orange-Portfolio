@@ -10,10 +10,14 @@ import { LoginAppService } from "src/app/appServices/login-app.service";
 })
 export class NavBarComponent {
   isMobile!: boolean;
-  user:any;
+  user: any;
 
-  constructor(private matIconRegistry: MatIconRegistry, private  domSanitizer: DomSanitizer,
-    private loginAppService: LoginAppService){
+  constructor(
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+    private loginAppService: LoginAppService
+  ) {
+    this.isMobile = window.innerWidth < 600;
     this.matIconRegistry.addSvgIcon(
       "Logo Orange Juice",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../../assets/logos/logoOrange.svg")
@@ -27,7 +31,9 @@ export class NavBarComponent {
       this.domSanitizer.bypassSecurityTrustResourceUrl("../../assets/logos/iconNotification.svg")
     );
     this.user = JSON.parse(sessionStorage.getItem("userInfo") ?? "");
-    this.user.iconUrl = this.user.iconUrl ? this.user.iconUrl : "assets/imgs/img_profile_orange_portfolio.png";
+    this.user.iconUrl = this.user.iconUrl
+      ? this.user.iconUrl
+      : "assets/imgs/img_profile_orange_portfolio.png";
   }
 
   signOut() {

@@ -12,10 +12,9 @@ const app = express();
 
 app.use(cors()); // Use o middleware cors
 app.use(express.json());
-app.use(multerMiddleware);
 app.use(express.urlencoded({ extended: true }));
 app.listen(3000, () => console.log(`Express rodando na porta ${process.env.PORT}`));
-
+app.use(multerMiddleware);
 app.use(loginRouter);
 app.use(userRouter);
 app.use(projectRouter);

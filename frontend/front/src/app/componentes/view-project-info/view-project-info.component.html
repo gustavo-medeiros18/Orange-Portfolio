@@ -6,7 +6,7 @@
   </div>
   <div class="main-info">
     <div class="profile-info">
-      <img class="profile-img" [src]="modal.project.userIcon ? modal.project.userIcon : 'assets/imgs/img_profile_orange_portfolio.png'" alt="Profile Icon">
+      <img class="profile-img" [src]="modal.project.iconUrl ? modal.project.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png'" alt="Profile Icon">
       <span id="username">{{ modal.project.userName}} {{ modal.project.lastName }}<br> <span id = "date">{{currentDate()}}</span>
     </span>
     </div>

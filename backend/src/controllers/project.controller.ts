@@ -24,21 +24,22 @@ class ProjectController {
     if (!userExists)
       return res.status(404).json({ message: "Solicitação inválida. Usuário não encontrado." });
 
-    if (req.file) {
-      const downloadURL = await uploadFile(req.file!);
-      newProject.imgUrl = downloadURL;
+    if (req.files) {
+      let downloadUrl;
+      if ("imgUrl" in req.files) {
+        downloadUrl = await uploadFile(req.files["imgUrl"][0]);
+      }
+      newProject.imgUrl = downloadUrl ? downloadUrl : "";
     }
-
     const createdProject = await ProjectService.createProject(newProject);
-
     return res.status(201).json(createdProject);
   }
 
-  public static async getAllProjects(_req: Request, res: Response) {
+  public static async getAllProjects(req: Request, res: Response) {
     const projects = await ProjectService.getAllProjects();
 
     if (!projects) return res.status(500);
-
+    console.log(projects);
     return res.status(200).json(projects);
   }
 
@@ -48,7 +49,6 @@ class ProjectController {
 
     if (projects.length == 0)
       return res.status(404).json({ message: "Esse usuário não tem projetos" });
-
     return res.status(200).json(projects);
   }
 
@@ -75,7 +75,6 @@ class ProjectController {
         .status(422)
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
-
     if (req.file) {
       const downloadURL = await uploadFile(req.file);
       updatedProject.imgUrl = downloadURL;

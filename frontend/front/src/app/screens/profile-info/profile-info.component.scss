@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.title {
+  text-align: right;
+  display: flex;
+  justify-content: flex-start;
+  width: 90%;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.profile-img {
+  border-radius: 100px;
+  max-width: 7.625rem;
+  max-height: 7.625rem;
+}
+
+.user-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-project {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.create-project span {
+  width: 80%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  gap: 2.5rem;
+}
+
+@media screen and (min-width: 992px) {
+  .profile {
+    flex-direction: row;
+    gap: 2.62rem;
+  }
+
+  .user-data {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .create-project {
+    align-items: flex-start;
+  }
+
+  .form-container {
+    margin-top: 5rem;
+    width: 60%;
+  }
+
+  .sub-form {
+    display: flex;
+    justify-content: space-between;
+    gap: 1+0.25rem;
+  }
+
+  .btn-primary {
+    width: 17.875rem;
+  }
+}

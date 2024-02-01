@@ -1,7 +1,7 @@
 import connection from "../database/config";
 import { Project } from "../models/project.model";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 class ProjectService {
   public static async createProject(newProject: Project): Promise<any> {
@@ -15,8 +15,8 @@ class ProjectService {
   public static async getAllProjects(): Promise<Project[]> {
     const sqlStatement =
       "SELECT " +
-      "p.id, p.title, p.tags, p.link, p.description, p.imgUrl, p.createdAt, u.name " +
-      "AS firstName, u.lastName " +
+      "p.id, p.title, p.tags, p.link, p.description, p.imgUrl, p.createdAt, " +
+      "u.name AS userName, u.lastName, u.iconUrl " +
       "FROM projects p " +
       "INNER JOIN " +
       "users u ON p.idUser = u.id";
@@ -32,7 +32,14 @@ class ProjectService {
 
   public static async getAllProjectsByUserId(userId: string): Promise<Project[]> {
     const [rows] = await connection.query<RowDataPacket[]>(
-      "SELECT * FROM projects WHERE idUser = ?",
+      `
+        SELECT 
+            p.id, p.title, p.tags, p.link, p.description, p.imgUrl, p.createdAt,
+            u.name AS userName, u.lastName, u.iconUrl
+        FROM projects p
+        INNER JOIN users u ON p.idUser = u.id
+        WHERE u.id = ?
+    `,
       [userId]
     );
 
