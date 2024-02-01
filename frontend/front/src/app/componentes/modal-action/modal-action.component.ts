@@ -28,13 +28,17 @@ export class ModalActionComponent implements OnInit {
   selectedImage: string | undefined;
   formData = new FormData();
 
+  user: any;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public modal: IModal,
     private modalService: ModalActionService,
     private projectActionService: ProjectActionService,
     private viewProjectInfoService: ViewProjectInfoService,
     private formBuilder: NonNullableFormBuilder,
-  ) {}
+  ) {
+    this.user  = JSON.parse(sessionStorage.getItem("userInfo") || "");
+  }
 
   ngOnInit(): void {
     // Logica para preencher informaçoes do projeto ao editá-lo
@@ -80,7 +84,7 @@ export class ModalActionComponent implements OnInit {
   }
 
   addProject() {
-    const idUser = JSON.parse(sessionStorage.getItem("userInfo") || "").id;
+    const idUser = this.user.id;
     const action: string = "adicionar";
     this.formData.append("title", this.form.value.title);
     this.appendTags(this.tags);
@@ -99,7 +103,7 @@ export class ModalActionComponent implements OnInit {
   }
 
   editProject() {
-    const idUser = JSON.parse(sessionStorage.getItem("userInfo") || "").id;
+    const idUser = this.user.id;
     const action: string = "editar";
     this.formData.append("title", this.form.value.title);
     this.appendTags(this.tags)
@@ -121,6 +125,9 @@ export class ModalActionComponent implements OnInit {
   viewProject() {
     const projectForm = this.form.value;
     const project: IProject = {
+      userName: this.user.name,
+      lastName: this.user.lastName,
+      iconUrl: this.user.iconUrl,
       title: projectForm.title,
       tags: this.tags,
       link: projectForm.link,
