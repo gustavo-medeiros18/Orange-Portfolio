@@ -8,7 +8,9 @@
       <h5>
         {{user.name}} {{user.lastName}}
       </h5>
-      <p>{{user.country}}</p>
+      <div *ngIf="user.country !== 'undefined'">
+        <p>{{ user.country }}</p>
+      </div>
       <div class="create-project">
         <button mat-raised-button (click)="openDialog('Adicionar Projeto')" class="btn-secondary">ADICIONAR
           PROJETO</button>

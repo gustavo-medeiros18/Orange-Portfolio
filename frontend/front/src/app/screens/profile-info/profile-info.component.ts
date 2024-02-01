@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
+import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { ProfileInfoService } from "./services/profile-info.service";
 import { ProfileActionService } from "src/app/componentes/profile-action/services/profile-action.service";
 
@@ -34,12 +34,13 @@ export class ProfileInfoComponent implements OnInit {
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private profileInfoService: ProfileInfoService,
-    private profileActionService: ProfileActionService
+    private profileActionService: ProfileActionService,
   ) {
     this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
   }
 
   ngOnInit() {
+
     this.clearFormDatas(this.formDataProfile, this.formDataPassword,this.formCountry);
 
     this.formProfile = this.formBuilder.group({
@@ -140,7 +141,6 @@ export class ProfileInfoComponent implements OnInit {
         this.profileActionService.openDialog(action, "success");
       },
       error: (error) => {
-        console.log(error);
         this.profileActionService.openDialog(action, "error");
       },
     });
@@ -164,4 +164,5 @@ export class ProfileInfoComponent implements OnInit {
     });
     this.ngOnInit();
   }
+
 }
