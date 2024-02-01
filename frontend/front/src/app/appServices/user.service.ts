@@ -26,7 +26,7 @@ export class UserService {
   }
 
   updateProfile(record: IUserUpdate): Observable<IUserUpdate> {
-    const apiUrl = new URL(environment.apiUsers, this.API).toString();
+    const apiUrl = new URL(environment.getApiUserId(record.id), this.API).toString();
     return this.httpClient.put<IUserUpdate>(apiUrl, record);
   }
 

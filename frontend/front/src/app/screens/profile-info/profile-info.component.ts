@@ -102,17 +102,22 @@ export class ProfileInfoComponent implements OnInit {
   }
 
   updateProfile() {
+    const id = this.user.id;
     this.formDataProfile.append("name",this.formProfile.value.name);
     this.formDataProfile.append("lastName",this.formProfile.value.lastName);
     this.formDataProfile.append("email",this.formProfile.value.email);
     this.formDataProfile.append("country",this.formProfile.value.country);
-    this.profileInfoService.updateProfileService(this.formDataProfile).subscribe();
+    this.profileInfoService.updateProfileService(id,this.formDataProfile).subscribe({
+      next: (data) => console.log(data)
+    });
   }
 
   updatePassword(){
     const id = this.user.id;
     this.formDataPassword.append("currentPassword",this.formPassword.value.currentPassword);
     this.formDataPassword.append("newPassword", this.formPassword.value.newPassword);
-    this.profileInfoService.updatePasswordService(id, this.formDataPassword);
+    this.profileInfoService.updatePasswordService(id, this.formDataPassword).subscribe({
+      next: (data) => console.log(data)
+    });
   }
 }

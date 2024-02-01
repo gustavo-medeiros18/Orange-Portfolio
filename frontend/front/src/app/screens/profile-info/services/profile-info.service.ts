@@ -12,8 +12,9 @@ export class ProfileInfoService {
 
   constructor(private userService: UserService) { }
 
-  updateProfileService(formData: FormData): Observable<IUserUpdate> {
+  updateProfileService(id: string, formData: FormData): Observable<IUserUpdate> {
     const user: IUserUpdate = {
+      id: id,
       name: formData.get("name") as string,
       lastName: formData.get("lastName") as string,
       email: formData.get("email") as string,
