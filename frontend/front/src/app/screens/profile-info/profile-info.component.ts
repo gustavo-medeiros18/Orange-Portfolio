@@ -1,14 +1,15 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
+import { ProfileInfoService } from "./services/profile-info.service";
 
 @Component({
   selector: "app-profile-info",
   templateUrl: "./profile-info.component.html",
   styleUrls: ["./profile-info.component.scss"],
 })
-export class ProfileInfoComponent {
+export class ProfileInfoComponent implements OnInit {
   visibilityNew: boolean = false;
-  visibilityOld: boolean = false;
+  visibilityCurrent: boolean = false;
   password: string = "password";
 
   formProfile!: FormGroup;
@@ -19,19 +20,25 @@ export class ProfileInfoComponent {
   hasError: string = "";
 
   selectedImage: string | undefined;
-  formData = new FormData();
 
-  constructor(private formBuilder: NonNullableFormBuilder) {}
+  formDataProfile = new FormData();
+  formDataPassword = new FormData();
+
+  user: any;
+
+  constructor(private formBuilder: NonNullableFormBuilder, private profileInfoService: ProfileInfoService) {
+    this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
+  }
 
   ngOnInit() {
     this.formProfile = this.formBuilder.group({
-      name: ["", [Validators.required]],
-      lastName: ["", [Validators.required]],
-      email: ["", [Validators.required, Validators.email]],
-      country: ["", [Validators.required]],
+      name: [this.user.name? this.user.name : "" , [Validators.required]],
+      lastName: [this.user.lastName? this.user.lastName: "", [Validators.required]],
+      email: [this.user.email? this.user.email : "", [Validators.required, Validators.email]],
+      country: [this.user.country? this.user.country: ""],
     });
     this.formPassword = this.formBuilder.group({
-      oldPassword: ["", [Validators.required]],
+      currentPassword: ["", [Validators.required]],
       newPassword: ["", [Validators.required]],
     });
   }
@@ -63,11 +70,11 @@ export class ProfileInfoComponent {
     const selectedFile = event.target.files[0];
 
     if (selectedFile) {
-      if (this.formData.has("imgUrl")) {
-        this.formData.delete("imgUrl");
+      if (this.formDataProfile.has("imgUrl")) {
+        this.formDataProfile.delete("imgUrl");
       }
 
-      this.formData.append("imgUrl", selectedFile);
+      this.formDataProfile.append("imgUrl", selectedFile);
       const reader = new FileReader();
       reader.onload = () => {
         this.selectedImage = reader.result as string;
@@ -85,12 +92,27 @@ export class ProfileInfoComponent {
         this.password = "text";
       }
     } else {
-      this.visibilityOld = !this.visibilityOld;
+      this.visibilityCurrent = !this.visibilityCurrent;
       if (this.password === "text") {
         this.password = "password";
       } else if (this.password === "password") {
         this.password = "text";
       }
     }
+  }
+
+  updateProfile() {
+    this.formDataProfile.append("name",this.formProfile.value.name);
+    this.formDataProfile.append("lastName",this.formProfile.value.lastName);
+    this.formDataProfile.append("email",this.formProfile.value.email);
+    this.formDataProfile.append("country",this.formProfile.value.country);
+    this.profileInfoService.updateProfileService(this.formDataProfile).subscribe();
+  }
+
+  updatePassword(){
+    const id = this.user.id;
+    this.formDataPassword.append("currentPassword",this.formPassword.value.currentPassword);
+    this.formDataPassword.append("newPassword", this.formPassword.value.newPassword);
+    this.profileInfoService.updatePasswordService(id, this.formDataPassword);
   }
 }

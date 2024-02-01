@@ -2,9 +2,8 @@
   <h5 class="title">Editar perfil</h5>
   <div class="profile">
     <div>
-      <img class="profile-img" *ngIf="selectedImage"
-        [src]="selectedImage || 'assets\imgs\img_profile_orange_portfolio.png'" alt="">
-      <img class="profile-img" *ngIf="!selectedImage" src="assets\imgs\img_profile_orange_portfolio.png" alt="">
+      <img *ngIf="selectedImage" [src]="selectedImage || (user.iconUrl ? user.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png')" alt="Profile icon">
+      <img class="profile-img" *ngIf="!selectedImage" [src]="user.iconUrl ? user.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png'" alt="Profile Icon">
     </div>
     <div class="user-data">
       <h5>
@@ -43,10 +42,9 @@
       <mat-form-field class="input" appearance="outline">
         <mat-label>País</mat-label>
         <input type="text" matInput formControlName="country">
-        <mat-error *ngIf="formProfile.get('country')?.invalid">{{formErrorMessage('country')}}</mat-error>
       </mat-form-field>
       <div class="div-btn-signin">
-        <button [disabled]="loading" mat-raised-button class="btn-primary">
+        <button (click)="updateProfile()" [disabled]="loading" mat-raised-button class="btn-primary">
           <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
             [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
           <span *ngIf="!loading">ATUALIZAR INFORMAÇÕES</span></button>
@@ -58,11 +56,11 @@
       <form [formGroup]="formPassword" action="">
         <mat-form-field class="input" appearance="outline">
           <mat-label>Senha antiga</mat-label>
-          <input type={{password}} matInput formControlName="oldPassword">
+          <input type={{password}} matInput formControlName="currentPassword">
           <mat-error
-            *ngIf="formPassword.get('oldPassword')?.invalid">{{formErrorMessagePassword('oldPassword')}}</mat-error>
-          <mat-icon (click)="onClick('old')" *ngIf="!visibilityOld" matSuffix>visibility</mat-icon>
-          <mat-icon (click)="onClick('old')" *ngIf="visibilityOld" matSuffix>visibility_off</mat-icon>
+            *ngIf="formPassword.get('currentPassword')?.invalid">{{formErrorMessagePassword('currentPassword')}}</mat-error>
+          <mat-icon (click)="onClick('current')" *ngIf="!visibilityCurrent" matSuffix>visibility</mat-icon>
+          <mat-icon (click)="onClick('current')" *ngIf="visibilityCurrent" matSuffix>visibility_off</mat-icon>
         </mat-form-field>
         <mat-form-field class="input" appearance="outline">
           <mat-label>Nova senha</mat-label>
@@ -74,7 +72,7 @@
         </mat-form-field>
         <div class="div-btn-signin">
           <p *ngIf="hasError" class="error-message">{{ hasError }}</p>
-          <button [disabled]="loading" mat-raised-button class="btn-primary">
+          <button (click)="updatePassword()" [disabled]="loading" mat-raised-button class="btn-primary">
             <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
               [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
             <span *ngIf="!loading">ATUALIZAR SENHA</span></button>

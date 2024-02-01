@@ -75,6 +75,5 @@ export class ProfileComponent implements OnInit {
         console.error("Erro ao recuperar projetos:", error);
       },
     });
-    console.log(this.projects);
   }
 }
