@@ -75,6 +75,6 @@ export class LoginAppService {
 
   isUserLoggedIn() {
     const token = this.getAuthorizationToken("token");
-    return !this.isTokenExpired(token);   
+    return !this.isTokenExpired(token);
   }
 }
