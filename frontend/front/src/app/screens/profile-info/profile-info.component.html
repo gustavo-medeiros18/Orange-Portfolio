@@ -56,7 +56,7 @@
       <form [formGroup]="formPassword" action="">
         <mat-form-field class="input" appearance="outline">
           <mat-label>Senha antiga</mat-label>
-          <input type={{password}} matInput formControlName="currentPassword">
+          <input type={{currentPassword}} matInput formControlName="currentPassword">
           <mat-error
             *ngIf="formPassword.get('currentPassword')?.invalid">{{formErrorMessagePassword('currentPassword')}}</mat-error>
           <mat-icon (click)="onClick('current')" *ngIf="!visibilityCurrent" matSuffix>visibility</mat-icon>
@@ -64,7 +64,7 @@
         </mat-form-field>
         <mat-form-field class="input" appearance="outline">
           <mat-label>Nova senha</mat-label>
-          <input type={{password}} matInput formControlName="newPassword">
+          <input type={{newPassword}} matInput formControlName="newPassword">
           <mat-error
             *ngIf="formPassword.get('newPassword')?.invalid">{{formErrorMessagePassword('newPassword')}}</mat-error>
           <mat-icon (click)="onClick('new')" *ngIf="!visibilityNew" matSuffix>visibility</mat-icon>

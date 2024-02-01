@@ -12,7 +12,8 @@ import { createPassword } from "../Validators/validators";
 export class ProfileInfoComponent implements OnInit {
   visibilityNew: boolean = false;
   visibilityCurrent: boolean = false;
-  password: string = "password";
+  currentPassword: string = "password";
+  newPassword: string = "password"
 
   formProfile!: FormGroup;
 
@@ -98,17 +99,17 @@ export class ProfileInfoComponent implements OnInit {
   onClick(iten: string) {
     if (iten == "new") {
       this.visibilityNew = !this.visibilityNew;
-      if (this.password === "text") {
-        this.password = "password";
-      } else if (this.password === "password") {
-        this.password = "text";
+      if (this.newPassword === "text") {
+        this.newPassword = "password";
+      } else if (this.newPassword === "password") {
+        this.newPassword = "text";
       }
     } else {
       this.visibilityCurrent = !this.visibilityCurrent;
-      if (this.password === "text") {
-        this.password = "password";
-      } else if (this.password === "password") {
-        this.password = "text";
+      if (this.currentPassword === "text") {
+        this.currentPassword = "password";
+      } else if (this.currentPassword === "password") {
+        this.currentPassword = "text";
       }
     }
   }
