@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { ProfileInfoService } from "./services/profile-info.service";
 import { ProfileActionService } from "src/app/componentes/profile-action/services/profile-action.service";
-import { createPassword } from "../../Validators/validators";
+import { createPassword, noWhitespaceValidator } from "../../Validators/validators";
 
 @Component({
   selector: "app-profile-info",
@@ -38,8 +38,8 @@ export class ProfileInfoComponent implements OnInit {
   ngOnInit() {
     this.clearFormDatas(this.formDataProfile, this.formDataPassword);
     this.formProfile = this.formBuilder.group({
-      name: [this.user.name? this.user.name : "" , [Validators.required]],
-      lastName: [this.user.lastName? this.user.lastName: "", [Validators.required]],
+      name: [this.user.name? this.user.name : "" , [Validators.required, noWhitespaceValidator(), Validators.minLength(3)]],
+      lastName: [this.user.lastName? this.user.lastName: "", [Validators.required, noWhitespaceValidator(), Validators.minLength(3)]],
       email: [this.user.email? this.user.email : "", [Validators.required, Validators.email]],
       country: [this.user.country? this.user.country: ""],
     });
@@ -61,6 +61,12 @@ export class ProfileInfoComponent implements OnInit {
     }
     if (field?.hasError("email")) {
       return "Endereço de email inválido";
+    }
+    if (field?.hasError("whitespace")) {
+      return "O campo Título não pode conter apenas espaços em branco.";
+    }
+    if (field?.hasError("minlength")) {
+      return `O campo Título está muito curto`;
     }
     return;
   }
