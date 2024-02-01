@@ -7,6 +7,18 @@
   margin-bottom: 2rem;
 }
 
+::ng-deep mat-form-field {
+  width: 100%;
+}
+
+.custom-width {
+  width: 100%;
+}
+
+.country-div button{
+  width: 100%;
+}
+
 .hidden-input {
   display: none;
 }
