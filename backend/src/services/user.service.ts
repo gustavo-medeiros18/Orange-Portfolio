@@ -51,10 +51,16 @@ class UserService {
   }
 
   public static async updatePassword(userId: string, newPassword: string) {
-    await connection.query<ResultSetHeader>("UPDATE users SET password = ? WHERE id = ?", [
-      newPassword,
-      userId,
-    ]);
+    const [result] = await connection.query<ResultSetHeader>(
+      "UPDATE users SET password = ? WHERE id = ?",
+      [newPassword, userId]
+    );
+
+    if (result.affectedRows === 1) {
+      return { userId };
+    }
+
+    return undefined;
   }
 }
 
