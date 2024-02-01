@@ -4,4 +4,5 @@ export interface IUserUpdate {
     lastName: string;
     email: string;
     country: string;
+    iconUrl: string;
 }

@@ -1,13 +1,15 @@
+import { IProject } from "./../../models/iProject";
 import { Component, Inject, OnInit, ViewChild, inject } from "@angular/core";
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ModalActionService } from "./services/modal-action.service";
 import { ProjectActionService } from "../project-action/services/project-action.service";
-import { IProject } from "src/app/models/iProject";
+
 import { IModal } from "../models/iModal";
 import { ViewProjectInfoService } from "../view-project-info/services/view-project-info.service";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { MatChipInputEvent } from "@angular/material/chips";
+import { noWhitespaceValidator } from "../../Validators/validators";
 
 @Component({
   selector: "app-modal-action",
@@ -16,8 +18,8 @@ import { MatChipInputEvent } from "@angular/material/chips";
 })
 export class ModalActionComponent implements OnInit {
   //tag system
-  tags: string[]  = [];
-  formControl = new FormControl("",[Validators.required])
+  tags: string[] = [];
+  formControl = new FormControl("", [Validators.required]);
   announcer = inject(LiveAnnouncer);
   isFieldClicked: boolean = false;
 
@@ -27,6 +29,7 @@ export class ModalActionComponent implements OnInit {
   project!: IProject | null;
   selectedImage: string | undefined;
   formData = new FormData();
+  hasErrorImg: string = "";
 
   user: any;
 
@@ -35,9 +38,9 @@ export class ModalActionComponent implements OnInit {
     private modalService: ModalActionService,
     private projectActionService: ProjectActionService,
     private viewProjectInfoService: ViewProjectInfoService,
-    private formBuilder: NonNullableFormBuilder,
+    private formBuilder: NonNullableFormBuilder
   ) {
-    this.user  = JSON.parse(sessionStorage.getItem("userInfo") || "");
+    this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
   }
 
   ngOnInit(): void {
@@ -47,9 +50,12 @@ export class ModalActionComponent implements OnInit {
       this.project = currentProject.data;
     }
     this.selectedImage = this.project?.imgUrl as string;
-    this.project?.tags.forEach((tag) => this.tags.push(tag));  
+    this.project?.tags.forEach((tag) => this.tags.push(tag));
     this.form = this.formBuilder.group({
-      title: [this.project ? this.project.title : "", [Validators.required]],
+      title: [
+        this.project ? this.project.title : "",
+        [Validators.required, noWhitespaceValidator(), Validators.minLength(5)],
+      ],
       tags: "",
       link: [this.project ? this.project.link : "", [Validators.required]],
       description: [this.project ? this.project.description : "", [Validators.required]],
@@ -57,10 +63,19 @@ export class ModalActionComponent implements OnInit {
     this.modalService.clearProjectInfo(); // retorna ao estado inicial (inputs vazios)
   }
 
-  formErrorMessage() {
+  formErrorMessage(fieldName: string) {
+    const field = this.form.get(fieldName);
+    if (field?.hasError("required")) {
+      return "O campo Título é obrigatório.";
+    }
+    if (field?.hasError("whitespace")) {
+      return "O campo Título não pode conter apenas espaços em branco.";
+    }
+    if (field?.hasError("minlength")) {
+      return `O campo Título está muito curto`;
+    }
     return "Este campo é necessário";
   }
-
 
   triggerFile(fileInput: HTMLInputElement) {
     fileInput.click();
@@ -90,7 +105,7 @@ export class ModalActionComponent implements OnInit {
     this.appendTags(this.tags);
     this.formData.append("link", this.form.value.link);
     this.formData.append("description", this.form.value.description);
-    this.formData.append("idUser",idUser);
+    this.formData.append("idUser", idUser);
     this.modalService.createProjectModal(this.formData).subscribe({
       next: () => {
         this.projectActionService.openDialog(action, "success");
@@ -106,7 +121,7 @@ export class ModalActionComponent implements OnInit {
     const idUser = this.user.id;
     const action: string = "editar";
     this.formData.append("title", this.form.value.title);
-    this.appendTags(this.tags)
+    this.appendTags(this.tags);
     this.formData.append("link", this.form.value.link);
     this.formData.append("description", this.form.value.description);
     this.formData.append("idUser", idUser);
@@ -139,7 +154,7 @@ export class ModalActionComponent implements OnInit {
   }
 
   isButtonDisabled(): boolean {
-    return (this.form.invalid || this.tags.length === 0);
+    return this.form.invalid || this.tags.length === 0;
   }
 
   //tag system
@@ -163,17 +178,16 @@ export class ModalActionComponent implements OnInit {
     if (this.tags.length === 0) this.emptyFormTags();
   }
 
-  emptyFormTags(){
-    this.formControl.setErrors({ 'required': true });
+  emptyFormTags() {
+    this.formControl.setErrors({ required: true });
     this.formControl.markAsTouched();
   }
 
-  appendTags(tags: string[]){
+  appendTags(tags: string[]) {
     if (tags.length > 1) {
       this.formData.append("tags", tags.join(", "));
-    } else if (tags.length === 1){
+    } else if (tags.length === 1) {
       this.formData.append("tags", tags.toString());
     }
   }
-
 }

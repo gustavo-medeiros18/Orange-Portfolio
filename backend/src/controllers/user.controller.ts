@@ -82,20 +82,27 @@ class UserController {
 
       verifyToken(token as string, userId);
 
+      const currentUser = await UserService.getUserById(userId);  
+      if (!currentUser) return res.status(404).json({ message: "Usuário não encontrado." });
+
       if (updatedUserData.password) {
         updatedUserData.password = await hashPassword(updatedUserData.password);
       }
-
+      
       if (req.files) {
         let downloadUrl;
         if ("iconUrl" in req.files) {
           downloadUrl = await uploadFile(req.files["iconUrl"][0]);
+          updatedUserData.iconUrl = downloadUrl;
         }
-        updatedUserData.iconUrl = downloadUrl ? downloadUrl : "";
       }
+      
+      if (!updatedUserData.iconUrl) updatedUserData.iconUrl = currentUser.iconUrl;
+      if(!updatedUserData.country) updatedUserData.country = currentUser.country;
+
       const updatedUser = await UserService.updateUser(userId, updatedUserData);
       if (!updatedUser) {
-        return res.status(404).json({ message: "Usuário não encontrado." });
+        return res.status(500).json({ message: "Não foi possível atualizar o usuário."});
       }
       const { password, ...dtoUser } = updatedUser;
       return res.status(200).json(dtoUser);

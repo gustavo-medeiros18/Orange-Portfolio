@@ -24,11 +24,8 @@ class ProjectController {
     if (!userExists)
       return res.status(404).json({ message: "Solicitação inválida. Usuário não encontrado." });
 
-    if (req.files) {
-      let downloadUrl;
-      if ("imgUrl" in req.files) {
-        downloadUrl = await uploadFile(req.files["imgUrl"][0]);
-      }
+    if (req.files && "imgUrl" in req.files) {
+      let downloadUrl = await uploadFile(req.files["imgUrl"][0]);
       newProject.imgUrl = downloadUrl ? downloadUrl : "";
     }
     const createdProject = await ProjectService.createProject(newProject);
@@ -39,7 +36,6 @@ class ProjectController {
     const projects = await ProjectService.getAllProjects();
 
     if (!projects) return res.status(500);
-
     return res.status(200).json(projects);
   }
 

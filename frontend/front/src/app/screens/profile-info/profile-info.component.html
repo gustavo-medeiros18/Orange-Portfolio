@@ -1,14 +1,15 @@
+<app-nav-bar></app-nav-bar>
 <div class="container">
-  <h5 class="title">Editar perfil</h5>
   <div class="profile">
     <div>
-      <img class="profile-img" *ngIf="selectedImage" [src]="selectedImage || (user.iconUrl ? user.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png')" alt="Profile icon">
-      <img class="profile-img" *ngIf="!selectedImage" [src]="user.iconUrl ? user.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png'" alt="Profile Icon">
+      <img class="profile-img" *ngIf="selectedImage"
+        [src]="selectedImage || (user.iconUrl ? user.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png')"
+        alt="Profile icon">
+      <img class="profile-img" *ngIf="!selectedImage"
+        [src]="user.iconUrl ? user.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png'" alt="Profile Icon">
     </div>
     <div class="user-data">
-      <h5>
-        Willian Costa
-      </h5>
+      <h5>{{user.name}} {{user.lastName}} </h5>
       <div class="create-project">
         <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/png"
           class="hidden-input" />
@@ -20,7 +21,7 @@
   </div>
 
   <div class="form-container">
-    <form [formGroup]="formProfile" action="">
+    <form [formGroup]="formProfile" class="form" action="">
       <div class="sub-form">
         <mat-form-field class="input" appearance="outline">
           <mat-label>Nome</mat-label>
@@ -39,10 +40,13 @@
         <input type="email" matInput formControlName="email">
         <mat-error *ngIf="formProfile.get('email')?.invalid">{{formErrorMessage('email')}}</mat-error>
       </mat-form-field>
-      <mat-form-field class="input" appearance="outline">
-        <mat-label>País</mat-label>
-        <input type="text" matInput formControlName="country">
-      </mat-form-field>
+      <form [formGroup]="formCountry">
+        <mat-select-country appearance="outline"
+                            label="Country"
+                            formControlName="country"
+                            (onCountrySelected)="onCountrySelected()" >
+        </mat-select-country>
+      </form>
       <div class="div-btn-signin">
         <button (click)="updateProfile()" [disabled]="loading" mat-raised-button class="btn-primary">
           <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
@@ -53,18 +57,18 @@
 
     <div class="password-conteiner">
       <p>Alterar senha</p>
-      <form [formGroup]="formPassword" action="">
+      <form [formGroup]="formPassword" class="form" action="">
         <mat-form-field class="input" appearance="outline">
           <mat-label>Senha antiga</mat-label>
-          <input type={{password}} matInput formControlName="currentPassword">
-          <mat-error
-            *ngIf="formPassword.get('currentPassword')?.invalid">{{formErrorMessagePassword('currentPassword')}}</mat-error>
+          <input type={{currentPassword}} matInput formControlName="currentPassword">
           <mat-icon (click)="onClick('current')" *ngIf="!visibilityCurrent" matSuffix>visibility</mat-icon>
           <mat-icon (click)="onClick('current')" *ngIf="visibilityCurrent" matSuffix>visibility_off</mat-icon>
+          <mat-error
+            *ngIf="formPassword.get('currentPassword')?.invalid">{{formErrorMessagePassword('currentPassword')}}</mat-error>
         </mat-form-field>
         <mat-form-field class="input" appearance="outline">
           <mat-label>Nova senha</mat-label>
-          <input type={{password}} matInput formControlName="newPassword">
+          <input type={{newPassword}} matInput formControlName="newPassword">
           <mat-error
             *ngIf="formPassword.get('newPassword')?.invalid">{{formErrorMessagePassword('newPassword')}}</mat-error>
           <mat-icon (click)="onClick('new')" *ngIf="!visibilityNew" matSuffix>visibility</mat-icon>
@@ -72,12 +76,14 @@
         </mat-form-field>
         <div class="div-btn-signin">
           <p *ngIf="hasError" class="error-message">{{ hasError }}</p>
-          <button (click)="updatePassword()" [disabled]="loading" mat-raised-button class="btn-primary">
-            <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
-              [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
-            <span *ngIf="!loading">ATUALIZAR SENHA</span></button>
+          <button (click)="updatePassword()" [disabled]="loadingPassword" mat-raised-button class="btn-primary">
+            <mat-progress-spinner *ngIf="loadingPassword" diameter="24" mode="indeterminate"
+              [color]="loadingPassword ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
+            <span *ngIf="!loadingPassword">ATUALIZAR SENHA</span></button>
         </div>
       </form>
+      <span class="password">*A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e
+        números</span>
     </div>
   </div>
 </div>

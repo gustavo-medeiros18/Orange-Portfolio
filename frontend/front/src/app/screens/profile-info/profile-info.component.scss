@@ -7,8 +7,39 @@
   margin-bottom: 2rem;
 }
 
+::ng-deep mat-form-field {
+  width: 100%;
+}
+
+.custom-width {
+  width: 100%;
+}
+
+.country-div button{
+  width: 100%;
+}
+
 .hidden-input {
   display: none;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+.sub-form {
+  display: flex;
+  gap: 1.3rem;
+  flex-direction: column;
+}
+.password {
+  margin-top: 1rem;
+  color: var(--color-neutral-100, #818388);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
 }
 
 .title {
@@ -32,6 +63,8 @@
   border-radius: 100px;
   max-width: 7.625rem;
   max-height: 7.625rem;
+  min-width: 7.625rem;
+  min-height: 7.625rem;
 }
 
 .user-data {

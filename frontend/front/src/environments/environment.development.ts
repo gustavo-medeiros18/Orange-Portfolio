@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  baseUrl: "http://localhost:3000/",
+  baseUrl: "https://hackathon-orange-juice-2024-nine.vercel.app/",
   apiAuthenticate: "login",
   apiUsers: "users",
   apiProjects: "projects",
