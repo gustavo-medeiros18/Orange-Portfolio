@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { RegisterService } from "./services/register.service";
 import { Router } from "@angular/router";
+import { createPassword } from "../Validators/validators";
 
 @Component({
   selector: "app-register",
@@ -31,7 +32,7 @@ export class RegisterComponent {
       name: ["", [Validators.required]],
       lastName: ["", [Validators.required]],
       email: ["", [Validators.required, Validators.email]],
-      password: ["", [Validators.required]],
+      password: ["", [Validators.required, Validators.minLength(8), createPassword()]],
     });
   }
 
@@ -42,6 +43,9 @@ export class RegisterComponent {
     }
     if (field?.hasError("email")) {
       return "Endereço de email inválido";
+    }
+    if (field?.hasError("invalidPassword") || field?.hasError("minLength")) {
+      return "A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números";
     }
     return;
   }
