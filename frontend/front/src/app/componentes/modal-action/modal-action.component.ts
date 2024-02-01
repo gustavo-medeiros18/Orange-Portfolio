@@ -9,6 +9,7 @@ import { IModal } from "../models/iModal";
 import { ViewProjectInfoService } from "../view-project-info/services/view-project-info.service";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { MatChipInputEvent } from "@angular/material/chips";
+import { noWhitespaceValidator } from "../../Validators/validators";
 
 @Component({
   selector: "app-modal-action",
@@ -53,19 +54,13 @@ export class ModalActionComponent implements OnInit {
     this.form = this.formBuilder.group({
       title: [
         this.project ? this.project.title : "",
-        [Validators.required, this.noWhitespaceValidator, Validators.minLength(5)],
+        [Validators.required, noWhitespaceValidator(), Validators.minLength(5)],
       ],
       tags: "",
       link: [this.project ? this.project.link : "", [Validators.required]],
       description: [this.project ? this.project.description : "", [Validators.required]],
     });
     this.modalService.clearProjectInfo(); // retorna ao estado inicial (inputs vazios)
-  }
-
-  noWhitespaceValidator(control: FormControl): { [key: string]: any } | null {
-    const isWhitespace = (control.value || "").trim().length === 0;
-    const isValid = !isWhitespace;
-    return isValid ? null : { whitespace: true };
   }
 
   formErrorMessage(fieldName: string) {

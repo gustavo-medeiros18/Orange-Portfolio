@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { ProfileInfoService } from "./services/profile-info.service";
 import { ProfileActionService } from "src/app/componentes/profile-action/services/profile-action.service";
-import { createPassword } from "../Validators/validators";
+import { createPassword } from "../../Validators/validators";
 
 @Component({
   selector: "app-profile-info",

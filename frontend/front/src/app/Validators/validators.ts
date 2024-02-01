@@ -15,3 +15,10 @@ export function createPassword(): ValidatorFn {
 
   }
 }
+
+export function noWhitespaceValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const isWhitespace = (control.value || "").trim().length === 0;
+    return isWhitespace ? { whitespace: true } : null;
+  };
+}
