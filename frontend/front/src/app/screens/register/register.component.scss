@@ -15,16 +15,20 @@
   justify-content: center;
   flex-direction: column;
   margin: 8%;
+  gap: 1rem;
 }
 
 .password {
-  margin-bottom: 0.5rem;
-  span {
-    color: var(--color-neutral-100, #818388);
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 400;
-  }
+  color: var(--color-neutral-100, #818388);
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.msg-register {
+  color: var(--Neutral-Colors-Neutral-110, #515255);
+  text-decoration: none;
+  align-self: flex-start;
 }
 .on-sign-up-success {
   display: flex;

@@ -38,20 +38,20 @@
         <input matInput formControlName="email">
         <mat-error *ngIf="form.get('email')?.invalid">{{formErrorMessage('email')}}</mat-error>
       </mat-form-field>
-      <div class="password">
-        <mat-form-field class="input" appearance="outline">
-          <mat-label>Password</mat-label>
-          <input type={{password}} matInput formControlName="password">
-          <mat-error *ngIf="form.get('password')?.invalid">{{formErrorMessage('password')}}</mat-error>
-          <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
-          <mat-icon (click)="onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
-        </mat-form-field>
-        <span>A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números</span>
-      </div>
+      <mat-form-field class="input" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input type={{password}} matInput formControlName="password">
+        <mat-error *ngIf="form.get('password')?.invalid">{{formErrorMessage('password')}}</mat-error>
+        <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
+        <mat-icon (click)="onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
+      </mat-form-field>
       <button (click)="signUp()" class="btn-primary" mat-raised-button color="primary">
         <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
           [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
         <span *ngIf="!loading" (click)="signUp()">CADASTRAR</span></button>
     </form>
+    <a routerLink="/login" class="msg-register"> Entrar</a>
+    <span class="password">*A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e
+      números</span>
   </div>
 </div>
