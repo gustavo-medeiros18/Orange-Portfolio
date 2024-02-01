@@ -1,4 +1,5 @@
 import multer from "multer";
 
 const upload = multer({ storage: multer.memoryStorage() });
-export const multerMiddleware = upload.single("imgUrl");
+
+export const multerMiddlewareProject = upload.single("imgUrl");

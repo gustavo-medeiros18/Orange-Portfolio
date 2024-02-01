@@ -2,7 +2,7 @@
   <h5 class="title">Editar perfil</h5>
   <div class="profile">
     <div>
-      <img *ngIf="selectedImage" [src]="selectedImage || (user.iconUrl ? user.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png')" alt="Profile icon">
+      <img class="profile-img" *ngIf="selectedImage" [src]="selectedImage || (user.iconUrl ? user.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png')" alt="Profile icon">
       <img class="profile-img" *ngIf="!selectedImage" [src]="user.iconUrl ? user.iconUrl : 'assets/imgs/img_profile_orange_portfolio.png'" alt="Profile Icon">
     </div>
     <div class="user-data">

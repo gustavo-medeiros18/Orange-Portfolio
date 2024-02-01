@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import {FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
+import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { RegisterService } from "./services/register.service";
 import { Router } from "@angular/router";
 
@@ -82,7 +82,7 @@ export class RegisterComponent {
     this.errorAlert = false;
     setTimeout(() => {
       this.router.navigateByUrl("/login");
-    },1500);
+    }, 1500);
   }
 
   onError() {

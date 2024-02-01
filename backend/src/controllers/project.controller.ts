@@ -34,7 +34,7 @@ class ProjectController {
     return res.status(201).json(createdProject);
   }
 
-  public static async getAllProjects(_req: Request, res: Response) {
+  public static async getAllProjects(req: Request, res: Response) {
     const projects = await ProjectService.getAllProjects();
 
     if (!projects) return res.status(500);
@@ -75,7 +75,6 @@ class ProjectController {
         .status(422)
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
-
     if (req.file) {
       const downloadURL = await uploadFile(req.file);
       updatedProject.imgUrl = downloadURL;

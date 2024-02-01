@@ -47,8 +47,8 @@ class UserService {
 
   public static async updateUser(id: string, updatedUser: User): Promise<User | undefined> {
     const [result] = await connection.query<ResultSetHeader>("UPDATE users SET ? WHERE id = ?", [
-      updatedUser,
       id,
+      updatedUser
     ]);
 
     if (result.affectedRows === 1) {
@@ -58,17 +58,12 @@ class UserService {
     return undefined;
   }
 
-  public static async updateUserPassword(id: string, newPassword: string): Promise<User | undefined> {
-    const [rows] = await connection.query<RowDataPacket[]>(
+  public static async updateUserPassword(id: string, newPassword: string): Promise<boolean> {
+    const [result] = await connection.query<ResultSetHeader>(
       "UPDATE users SET password = ? WHERE id = ?",
       [newPassword, id]
     );
-
-    if (rows.length === 1) {
-      return rows[0] as User;
-    }
-
-    return undefined;
+    return result.affectedRows === 1;
   }
 }
 

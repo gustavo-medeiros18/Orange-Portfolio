@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { ProfileInfoService } from "./services/profile-info.service";
+import { ProfileActionService } from "src/app/componentes/profile-action/services/profile-action.service";
 
 @Component({
   selector: "app-profile-info",
@@ -26,7 +27,8 @@ export class ProfileInfoComponent implements OnInit {
 
   user: any;
 
-  constructor(private formBuilder: NonNullableFormBuilder, private profileInfoService: ProfileInfoService) {
+  constructor(private formBuilder: NonNullableFormBuilder, private profileInfoService: ProfileInfoService,
+    private profileActionService: ProfileActionService) {
     this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
   }
 
@@ -70,11 +72,11 @@ export class ProfileInfoComponent implements OnInit {
     const selectedFile = event.target.files[0];
 
     if (selectedFile) {
-      if (this.formDataProfile.has("imgUrl")) {
-        this.formDataProfile.delete("imgUrl");
+      if (this.formDataProfile.has("iconUrl")) {
+        this.formDataProfile.delete("iconUrl");
       }
 
-      this.formDataProfile.append("imgUrl", selectedFile);
+      this.formDataProfile.append("iconUrl", selectedFile);
       const reader = new FileReader();
       reader.onload = () => {
         this.selectedImage = reader.result as string;
@@ -103,21 +105,39 @@ export class ProfileInfoComponent implements OnInit {
 
   updateProfile() {
     const id = this.user.id;
+    const action = "profile";
     this.formDataProfile.append("name",this.formProfile.value.name);
     this.formDataProfile.append("lastName",this.formProfile.value.lastName);
     this.formDataProfile.append("email",this.formProfile.value.email);
     this.formDataProfile.append("country",this.formProfile.value.country);
-    this.profileInfoService.updateProfileService(id,this.formDataProfile).subscribe({
-      next: (data) => console.log(data)
+    this.profileInfoService.updateProfileService(this.formDataProfile,id).subscribe({
+      next: (data) =>  {
+        // atualiza os dados do usuário 
+        sessionStorage.setItem("userInfo", JSON.stringify(data));
+        // comunica o resultado
+        this.profileActionService.openDialog(action,"success");
+      },
+      error: (error) => {
+        console.log(error);
+        this.profileActionService.openDialog(action,"error")
+      }
     });
   }
 
   updatePassword(){
     const id = this.user.id;
+    const action = "password";
     this.formDataPassword.append("currentPassword",this.formPassword.value.currentPassword);
     this.formDataPassword.append("newPassword", this.formPassword.value.newPassword);
     this.profileInfoService.updatePasswordService(id, this.formDataPassword).subscribe({
-      next: (data) => console.log(data)
+      next: () => {
+        // comunica o resultado
+        this.profileActionService.openDialog(action,"success");
+      },
+      error: (error) => {
+        console.log(error);
+        this.profileActionService.openDialog(action,"error")
+      }
     });
   }
 }

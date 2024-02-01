@@ -65,7 +65,6 @@ class UserController {
   public static async updateUser(req: Request, res: Response) {
     const userId = req.params.id;
     const updatedUserData: User = req.body;
-
     try {
       if (updatedUserData.password) {
         updatedUserData.password = await hashPassword(updatedUserData.password);
@@ -75,9 +74,7 @@ class UserController {
         const downloadURL = await uploadFile(req.file!);
         updatedUserData.iconUrl = downloadURL;
       }
-
       const updatedUser = await UserService.updateUser(userId, updatedUserData);
-
       if (!updatedUser) {
         return res.status(404).json({ message: "Usuário não encontrado." });
       }
@@ -94,6 +91,7 @@ class UserController {
     const updatedUserData: UserPassword = req.body;
 
     const providedPassword = updatedUserData.currentPassword;
+    const providedNewPassword = updatedUserData.newPassword;
     try {
       if (providedPassword) {
         // verifica se a senha inserida é a mesma do banco
@@ -105,16 +103,21 @@ class UserController {
           providedPassword,
           realCurrentPasswordCrypt
         );
+        if (!isProvidedPasswordCorrect)
+          return res.status(400).json({ message: "A senha fornecida está incorreta" });
 
-        if (isProvidedPasswordCorrect) {
-          // atualiza com a nova senha
-          const updatedUser = await UserService.updateUserPassword(userId, providedPassword);
-          if (!updatedUser)
-            return res.status(400).json({ message: "A senha informada é inválida" });
+        // atualiza com a nova senha criptografada
+        const providedNewPasswordCrypt = await hashPassword(providedNewPassword);
 
-          const { password, ...dtoUser } = updatedUser;
-          return res.status(200).json(dtoUser);
+        const isPasswordUpdated = await UserService.updateUserPassword(
+          userId,
+          providedNewPasswordCrypt
+        );
+
+        if (!isPasswordUpdated) {
+          return res.status(400).json({ message: "A nova senha informada é inválida" });
         }
+        return res.status(200).json();
       }
     } catch (error) {
       console.error("Erro ao atualizar usuário:", error);

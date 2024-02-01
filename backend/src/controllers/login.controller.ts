@@ -4,7 +4,6 @@ import { comparePasswords } from "../utils/bcryptUtils";
 import { generateToken } from "../utils/jwtAuth";
 import { OAuth2Client } from "google-auth-library";
 import UserService from "../services/user.service";
-import { v4 as uuidv4 } from "uuid";
 
 const client = new OAuth2Client({
   clientId: "102685364306-m0ssdqq50ier1aqn5eulgr4eto0qidev.apps.googleusercontent.com",

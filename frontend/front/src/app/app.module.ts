@@ -30,8 +30,9 @@ import { DiscoverComponent } from "./screens/discover/discover.component";
 import { ViewProjectMobileComponent } from "./screens/view-project-mobile/view-project-mobile.component";
 import { NotFoundComponent } from "./screens/not-found/not-found.component";
 import { LoginGoogleComponent } from "./componentes/login-google/login-google.component";
-import { ProfileInfoComponent } from './screens/profile-info/profile-info.component';
-import { AuthorizationInterceptorService } from '../app/interceptors/authorization-interceptor.service'
+import { ProfileInfoComponent } from "./screens/profile-info/profile-info.component";
+import { AuthorizationInterceptorService } from "../app/interceptors/authorization-interceptor.service";
+import { ProfileActionComponent } from "./componentes/profile-action/profile-action.component";
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { AuthorizationInterceptorService } from '../app/interceptors/authorizati
     LoginGoogleComponent,
     NotFoundComponent,
     ProfileInfoComponent,
+    ProfileActionComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,10 +74,10 @@ import { AuthorizationInterceptorService } from '../app/interceptors/authorizati
   ],
   providers: [
     {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthorizationInterceptorService,
-    multi: true
-    }
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthorizationInterceptorService,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
