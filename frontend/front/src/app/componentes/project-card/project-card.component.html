@@ -18,9 +18,8 @@
     <mat-card-header>
       <div class="card-infos">
         <div class="data-user">
-          <div mat-card-avatar class="project-header-image" style="background-image: url({{userImg}})">
-          </div>
-          <p> {{project.firstName ? project.firstName! + ' ' + project.lastName! : userName}} &nbsp;&bull;
+          <div mat-card-avatar class="project-header-image" [ngStyle]="getBackgroundStyle(project)"></div>
+          <p> {{project.userName ? project.userName! + " " + project.lastName! : ""}} &nbsp;&bull;
             {{formatData(project.createdAt)}}</p>
         </div>
         <div *ngIf="edit || tags" class="chips">

@@ -20,9 +20,10 @@ export class ProjectService {
       link: projectData.link,
       description: projectData.description,
       imgUrl: projectData.imgUrl,
-      firstName: projectData.firstName,
+      userName: projectData.userName,
       lastName: projectData.lastName,
       createdAt: projectData.createdAt,
+      userIcon: projectData.userIcon
     };
     return project;
   }

@@ -32,12 +32,12 @@ export class ProfileComponent implements OnInit {
     private formBuilder: FormBuilder,
     private profileService: ProfileService,
     private modalActionService: ModalActionService
-  ) {}
+  ) {
+    this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
+  }
 
   ngOnInit(): void {
     // carregando dados do usuario
-    this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
-    this.user.iconUrl = this.user.iconUrl ? this.user.iconUrl : "assets/imgs/img_profile_orange_portfolio.png";
     this.getProjectsById(this.user.id);
     this.searchForm
       .get("search")
@@ -75,5 +75,6 @@ export class ProfileComponent implements OnInit {
         console.error("Erro ao recuperar projetos:", error);
       },
     });
+    console.log(this.projects);
   }
 }

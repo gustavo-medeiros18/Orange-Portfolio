@@ -17,7 +17,7 @@
       <ng-template #hasResults>
         <div *ngIf="searchProjects.length || projects">
           <app-project-card *ngIf="searchProjects.length || projects" class="projects-list"
-            [projects]="searchProjects.length ? searchProjects : projects" [userImg]="userImg"></app-project-card>
+            [projects]="searchProjects.length ? searchProjects : projects" ></app-project-card>
         </div>
       </ng-template>
     </div>

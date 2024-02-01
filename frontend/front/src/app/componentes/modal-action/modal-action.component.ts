@@ -117,12 +117,6 @@ export class ModalActionComponent implements OnInit {
   }
 
   viewProject() {
-    const user: IModal = {
-      name: "Camila",
-      lastName: "Soares",
-      email: "camilasoares123@gmail.com",
-      profileImg: "assets/imgs/img_profile_orange_portfolio.png",
-    };
     const projectForm = this.form.value;
     const project: IProject = {
       title: projectForm.title,
@@ -132,7 +126,7 @@ export class ModalActionComponent implements OnInit {
       createdAt: projectForm.createdAt,
       imgUrl: this.selectedImage,
     };
-    this.viewProjectInfoService.openDialog(user, project);
+    this.viewProjectInfoService.openDialog(project);
   }
 
   isButtonDisabled(): boolean {

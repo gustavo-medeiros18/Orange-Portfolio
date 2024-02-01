@@ -14,10 +14,8 @@ export class ViewProjectInfoComponent {
   isMobile: boolean = true;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public modal: { user: IModal; project: IProject; isMobile: boolean }
+    @Inject(MAT_DIALOG_DATA) public modal: {project: IProject; isMobile: boolean }
   ) {
-    this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
-    this.user.iconUrl = this.user.iconUrl ? this.user.iconUrl : "assets/imgs/img_profile_orange_portfolio.png";
     modal.project.createdAt = new Date().toString();
   }
 

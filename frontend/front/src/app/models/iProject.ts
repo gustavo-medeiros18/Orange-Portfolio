@@ -6,8 +6,9 @@ export interface IProject {
   imgUrl?: string | FormData;
   createdAt: string;
   id?: string;
-  firstName?: string;
+  userName?: string;
   lastName?: string;
+  userIcon?: string;
 }
 
 export interface IProjectEvent<T, K> {

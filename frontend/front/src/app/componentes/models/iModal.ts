@@ -1,6 +1,6 @@
 export interface IModal {
   name: string;
-  lastName: string;
-  email: string;
+  lastName?: string;
+  email?: string;
   profileImg: string;
 }

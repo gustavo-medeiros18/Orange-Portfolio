@@ -10,11 +10,11 @@ import { IModal } from "../../models/iModal";
 export class ViewProjectInfoService {
   constructor(private dialog: MatDialog) {}
 
-  openDialog(user: IModal, project: IProject) {
+  openDialog(project: IProject) {
     const isMobile = window.innerWidth < 600;
     if (isMobile) {
       this.dialog.open(ViewProjectInfoComponent, {
-        data: { user, project, isMobile },
+        data: {project, isMobile },
         maxWidth: "100vw",
         maxHeight: "100vh",
         width: "100%",
@@ -27,7 +27,7 @@ export class ViewProjectInfoService {
       });
     } else {
       this.dialog.open(ViewProjectInfoComponent, {
-        data: { user, project, isMobile },
+        data: { project, isMobile },
         width: "100%",
         height: "50rem",
         position: {
