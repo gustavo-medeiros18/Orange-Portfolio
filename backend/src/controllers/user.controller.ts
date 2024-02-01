@@ -70,9 +70,12 @@ class UserController {
         updatedUserData.password = await hashPassword(updatedUserData.password);
       }
 
-      if (req.file) {
-        const downloadURL = await uploadFile(req.file!);
-        updatedUserData.iconUrl = downloadURL;
+      if (req.files) {
+        let downloadUrl;
+        if ("iconUrl" in req.files) {
+          downloadUrl = await uploadFile(req.files["iconUrl"][0]);
+        }
+        updatedUserData.iconUrl = downloadUrl ? downloadUrl : "";
       }
       const updatedUser = await UserService.updateUser(userId, updatedUserData);
       if (!updatedUser) {

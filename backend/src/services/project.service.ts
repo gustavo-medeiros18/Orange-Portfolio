@@ -35,7 +35,7 @@ class ProjectService {
       `
         SELECT 
             p.id, p.title, p.tags, p.link, p.description, p.imgUrl, p.createdAt,
-            u.name AS userName, u.lastName, u.iconUrl as userIcon
+            u.name AS userName, u.lastName, u.iconUrl
         FROM projects p
         INNER JOIN users u ON p.idUser = u.id
         WHERE u.id = ?

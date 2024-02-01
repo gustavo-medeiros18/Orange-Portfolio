@@ -81,8 +81,8 @@ export class ProjectCardComponent implements OnInit {
 
   // caso o usuário não tenha ícone, mostra o ícone padrão
   getBackgroundStyle(project: IProject): { [key: string]: string } {
-    const backgroundImage = project.userIcon
-      ? `url(${project.userIcon})`
+    const backgroundImage = project.iconUrl
+      ? `url(${project.iconUrl})`
       : "url(assets/imgs/img_profile_orange_portfolio.png)";
     return { 'background-image': backgroundImage };
   }

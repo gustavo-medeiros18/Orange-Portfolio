@@ -8,7 +8,7 @@ export interface IProject {
   id?: string;
   userName?: string;
   lastName?: string;
-  userIcon?: string;
+  iconUrl?: string;
 }
 
 export interface IProjectEvent<T, K> {

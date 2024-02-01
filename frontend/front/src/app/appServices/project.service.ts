@@ -23,7 +23,7 @@ export class ProjectService {
       userName: projectData.userName,
       lastName: projectData.lastName,
       createdAt: projectData.createdAt,
-      userIcon: projectData.userIcon
+      iconUrl: projectData.iconUrl
     };
     return project;
   }

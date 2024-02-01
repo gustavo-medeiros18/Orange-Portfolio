@@ -6,4 +6,5 @@ export interface Project {
   description: string;
   imgUrl: string;
   idUser: string;
+  iconUrl: string;
 }
