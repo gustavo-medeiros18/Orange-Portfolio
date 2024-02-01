@@ -146,7 +146,7 @@ export class ProfileInfoComponent implements OnInit {
     this.formDataProfile.append("name",this.formProfile.value.name);
     this.formDataProfile.append("lastName",this.formProfile.value.lastName);
     this.formDataProfile.append("email",this.formProfile.value.email);
-    this.formDataProfile.append("country",this.formProfile.value.country);
+    this.formDataProfile.append("country", this.country);
     this.profileInfoService.updateProfileService(this.formDataProfile,id).subscribe({
       next: (data) =>  {
         // atualiza os dados do usuário
@@ -176,7 +176,6 @@ export class ProfileInfoComponent implements OnInit {
       },
       error: (error) => {
         this.loadingPassword = false;
-        console.log(error);
         this.profileActionService.openDialog(action, "error");
       },
     });

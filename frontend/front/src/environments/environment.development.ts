@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  baseUrl: "https://hackathon-orange.onrender.com/",
+  baseUrl: "https://hackathon-orange-juice-2024-nine.vercel.app/",
   apiAuthenticate: "login",
   apiUsers: "users",
   apiProjects: "projects",
