@@ -4,6 +4,7 @@ import { comparePasswords, hashPassword } from "../utils/bcryptUtils";
 import { Request, Response } from "express";
 import { uploadFile } from "../utils/fileUploadUtils";
 import { UserPassword } from "../models/userPassword.model";
+import { verifyToken } from "../utils/jwtAuth";
 
 class UserController {
   public static async getAllUsers(_req: Request, res: Response) {
@@ -19,13 +20,23 @@ class UserController {
 
   public static async getUserById(req: Request, res: Response) {
     const id = req.params.id;
-    const user = await UserService.getUserById(id);
+    const token = req.headers.authorization;
 
-    if (user) {
-      const { password, ...dtoUser } = user;
-      res.json(dtoUser);
-    } else {
-      res.status(404).json({ message: "Usuário não encontrado." });
+    try {
+      verifyToken(token as string, id);
+
+      const user = await UserService.getUserById(id);
+
+      if (user) {
+        const { password, ...dtoUser } = user;
+        res.json(dtoUser);
+      } else {
+        res.status(404).json({ message: "Usuário não encontrado." });
+      }
+    } catch (error: any) {
+      if (error.message === "Token inválido para este usuário.") {
+        return res.status(403).json({ message: "Usuário não autorizado." });
+      }
     }
   }
 
@@ -65,7 +76,12 @@ class UserController {
   public static async updateUser(req: Request, res: Response) {
     const userId = req.params.id;
     const updatedUserData: User = req.body;
+
     try {
+      const token = req.headers.authorization;
+
+      verifyToken(token as string, userId);
+
       if (updatedUserData.password) {
         updatedUserData.password = await hashPassword(updatedUserData.password);
       }
@@ -83,9 +99,12 @@ class UserController {
       }
       const { password, ...dtoUser } = updatedUser;
       return res.status(200).json(dtoUser);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Erro ao atualizar usuário:", error);
-      return res.status(500).json({ message: "Erro interno ao atualizar usuário." });
+
+      if (error.message === "Token inválido para este usuário.")
+        return res.status(403).json({ message: "Usuário não autorizado." });
+      else return res.status(500).json({ message: "Erro interno ao atualizar senha do usuário." });
     }
   }
 
@@ -95,7 +114,12 @@ class UserController {
 
     const providedPassword = updatedUserData.currentPassword;
     const providedNewPassword = updatedUserData.newPassword;
+
     try {
+      const token = req.headers.authorization;
+
+      verifyToken(token as string, userId);
+
       if (providedPassword) {
         // verifica se a senha inserida é a mesma do banco
         const realCurrentPasswordCrypt = await UserService.getUserPasswordById(userId);
@@ -122,9 +146,12 @@ class UserController {
         }
         return res.status(200).json();
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Erro ao atualizar usuário:", error);
-      return res.status(500).json({ message: "Erro interno ao atualizar senha do usuário." });
+
+      if (error.message === "Token inválido para este usuário.")
+        return res.status(403).json({ message: "Usuário não autorizado." });
+      else return res.status(500).json({ message: "Erro interno ao atualizar senha do usuário." });
     }
   }
 }
