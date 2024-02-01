@@ -7,6 +7,13 @@
   margin-bottom: 2rem;
 }
 
+.title {
+  text-align: right;
+  display: flex;
+  justify-content: flex-start;
+  width: 90%;
+}
+
 .profile {
   display: flex;
   flex-direction: column;
@@ -37,12 +44,39 @@
 }
 
 .create-project span {
-  width: 19.063rem;
+  width: 80%;
 }
 
 .form-container {
   display: flex;
   flex-direction: column;
-  width: 20rem;
+  width: 90%;
   gap: 2.5rem;
+}
+
+@media screen and (min-width: 992px) {
+  .profile {
+    flex-direction: row;
+    gap: 2.62rem;
+  }
+
+  .user-data {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .create-project {
+    align-items: flex-start;
+  }
+
+  .form-container {
+    margin-top: 5rem;
+    width: 60%;
+  }
+
+  .sub-form {
+    display: flex;
+    justify-content: space-between;
+    gap: 1+0.25rem;
+  }
 }
