@@ -13,7 +13,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { RegisterComponent } from "./screens/register/register.component";
 import { ProfileComponent } from "./screens/profile/profile.component";
 import { MatToolbarModule } from "@angular/material/toolbar";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { NavBarComponent } from "./componentes/nav-bar/nav-bar.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
@@ -31,6 +31,7 @@ import { ViewProjectMobileComponent } from "./screens/view-project-mobile/view-p
 import { NotFoundComponent } from "./screens/not-found/not-found.component";
 import { LoginGoogleComponent } from "./componentes/login-google/login-google.component";
 import { ProfileInfoComponent } from './screens/profile-info/profile-info.component';
+import { AuthorizationInterceptorService } from '../app/interceptors/authorization-interceptor.service'
 
 @NgModule({
   declarations: [
@@ -69,7 +70,13 @@ import { ProfileInfoComponent } from './screens/profile-info/profile-info.compon
     FormsModule,
     MatMenuModule,
   ],
-  providers: [],
+  providers: [
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthorizationInterceptorService,
+    multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
