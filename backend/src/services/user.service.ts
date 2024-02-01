@@ -47,8 +47,8 @@ class UserService {
 
   public static async updateUser(id: string, updatedUser: User): Promise<User | undefined> {
     const [result] = await connection.query<ResultSetHeader>("UPDATE users SET ? WHERE id = ?", [
-      id,
-      updatedUser
+      updatedUser,
+      id
     ]);
 
     if (result.affectedRows === 1) {
