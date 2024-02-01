@@ -43,6 +43,14 @@
         <mat-label>País</mat-label>
         <input type="text" matInput formControlName="country">
       </mat-form-field>
+      <form [formGroup]="formCountry">
+        <mat-select-country appearance="outline"
+                            label="Country"
+                            formControlName="country"
+                            (onCountrySelected)="onCountrySelected()">
+        </mat-select-country>
+      </form>
+      
       <div class="div-btn-signin">
         <button (click)="updateProfile()" [disabled]="loading" mat-raised-button class="btn-primary">
           <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"

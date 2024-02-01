@@ -33,6 +33,7 @@ import { LoginGoogleComponent } from "./componentes/login-google/login-google.co
 import { ProfileInfoComponent } from "./screens/profile-info/profile-info.component";
 import { AuthorizationInterceptorService } from "../app/interceptors/authorization-interceptor.service";
 import { ProfileActionComponent } from "./componentes/profile-action/profile-action.component";
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { ProfileActionComponent } from "./componentes/profile-action/profile-act
     MatDialogModule,
     FormsModule,
     MatMenuModule,
+    MatSelectCountryModule.forRoot('br'),
   ],
   providers: [
     {

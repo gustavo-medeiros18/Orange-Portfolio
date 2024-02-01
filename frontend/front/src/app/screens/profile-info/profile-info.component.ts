@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
+import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { ProfileInfoService } from "./services/profile-info.service";
 import { ProfileActionService } from "src/app/componentes/profile-action/services/profile-action.service";
 
@@ -14,6 +14,9 @@ export class ProfileInfoComponent implements OnInit {
   password: string = "password";
 
   formProfile!: FormGroup;
+  formCountry: FormGroup = this.formBuilder.group({
+    country: []
+  });
 
   formPassword!: FormGroup;
 
@@ -26,29 +29,43 @@ export class ProfileInfoComponent implements OnInit {
   formDataPassword = new FormData();
 
   user: any;
+  country!: string
 
-  constructor(private formBuilder: NonNullableFormBuilder, private profileInfoService: ProfileInfoService,
-    private profileActionService: ProfileActionService) {
+  constructor(
+    private formBuilder: NonNullableFormBuilder,
+    private profileInfoService: ProfileInfoService,
+    private profileActionService: ProfileActionService
+  ) {
     this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
   }
 
   ngOnInit() {
-    this.clearFormDatas(this.formDataProfile, this.formDataPassword);
+    this.clearFormDatas(this.formDataProfile, this.formDataPassword,this.formCountry);
+
     this.formProfile = this.formBuilder.group({
-      name: [this.user.name? this.user.name : "" , [Validators.required]],
-      lastName: [this.user.lastName? this.user.lastName: "", [Validators.required]],
-      email: [this.user.email? this.user.email : "", [Validators.required, Validators.email]],
-      country: [this.user.country? this.user.country: ""],
+      name: [this.user.name ? this.user.name : "", [Validators.required]],
+      lastName: [this.user.lastName ? this.user.lastName : "", [Validators.required]],
+      email: [this.user.email ? this.user.email : "", [Validators.required, Validators.email]],
     });
+
+    this.formCountry.get("country")?.valueChanges.subscribe((country) => {
+      if (country) {
+        this.country = country.name;
+      }
+    });
+
     this.formPassword = this.formBuilder.group({
       currentPassword: ["", [Validators.required]],
       newPassword: ["", [Validators.required]],
     });
   }
 
-  clearFormDatas(formDataProfile: FormData,formDataPassword: FormData){
+  onCountrySelected() {}
+
+  clearFormDatas(formDataProfile: FormData, formDataPassword: FormData,formCountry: FormGroup) {
     this.formDataProfile = new FormData();
     this.formDataPassword = new FormData();
+    this.formCountry.reset();
   }
 
   formErrorMessage(fieldName: string) {
@@ -112,42 +129,38 @@ export class ProfileInfoComponent implements OnInit {
   updateProfile() {
     const id = this.user.id;
     const action = "profile";
-    this.formDataProfile.append("name",this.formProfile.value.name);
-    this.formDataProfile.append("lastName",this.formProfile.value.lastName);
-    this.formDataProfile.append("email",this.formProfile.value.email);
-    this.formDataProfile.append("country",this.formProfile.value.country);
-    this.profileInfoService.updateProfileService(this.formDataProfile,id).subscribe({
-      next: (data) =>  {
-        // atualiza os dados do usuário 
-        if (!data.iconUrl) {
-          data.iconUrl = JSON.parse(sessionStorage.getItem("userInfo") || "").iconUrl;
-        }
+    this.formDataProfile.append("name", this.formProfile.value.name);
+    this.formDataProfile.append("lastName", this.formProfile.value.lastName);
+    this.formDataProfile.append("email", this.formProfile.value.email);
+    this.formDataProfile.append("country", this.country);
+    this.profileInfoService.updateProfileService(this.formDataProfile, id).subscribe({
+      next: (data) => {
         sessionStorage.setItem("userInfo", JSON.stringify(data));
         // comunica o resultado
-        this.profileActionService.openDialog(action,"success");
+        this.profileActionService.openDialog(action, "success");
       },
       error: (error) => {
         console.log(error);
-        this.profileActionService.openDialog(action,"error")
-      }
+        this.profileActionService.openDialog(action, "error");
+      },
     });
     this.ngOnInit();
   }
 
-  updatePassword(){
+  updatePassword() {
     const id = this.user.id;
     const action = "password";
-    this.formDataPassword.append("currentPassword",this.formPassword.value.currentPassword);
+    this.formDataPassword.append("currentPassword", this.formPassword.value.currentPassword);
     this.formDataPassword.append("newPassword", this.formPassword.value.newPassword);
     this.profileInfoService.updatePasswordService(id, this.formDataPassword).subscribe({
       next: () => {
         // comunica o resultado
-        this.profileActionService.openDialog(action,"success");
+        this.profileActionService.openDialog(action, "success");
       },
       error: (error) => {
         console.log(error);
-        this.profileActionService.openDialog(action,"error")
-      }
+        this.profileActionService.openDialog(action, "error");
+      },
     });
     this.ngOnInit();
   }
