@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const secretKey = process.env.JWT_SECRET || "senhasecreta";
+const secretKey = process.env.JWT_SECRET as string;
 
 const CONFIG: SignOptions = {
   expiresIn: "1d",
@@ -15,7 +15,7 @@ export const generateToken = (payload: any): string => {
   return token;
 };
 
-export const verifyToken = (token: string, expectedUserId?: string): any => {
+export const verifyToken = (token: string, expectedUserId?: string) => {
   const decodedToken: any = jwt.verify(token, secretKey);
 
   if (expectedUserId && decodedToken.id !== expectedUserId) {
