@@ -11,20 +11,18 @@
           </mat-form-field>
           <mat-form-field class="input" appearance="outline" [floatLabel]="tags.length > 0 ? 'always' : 'auto'">
             <mat-label>Tags</mat-label>
-            <mat-chip-grid  #chipGrid aria-label="Enter Tags" [formControl]="formControl">
-              <mat-chip  *ngFor="let tag of tags" (removed)="removeTag(tag)">
-                  {{ tag }}
+            <mat-chip-grid #chipGrid aria-label="Enter Tags" [formControl]="formControl">
+              <mat-chip *ngFor="let tag of tags" (removed)="removeTag(tag)">
+                {{ tag }}
                 <button matChipRemove aria-label="'remove ' + tag">
                   <mat-icon>cancel</mat-icon>
                 </button>
               </mat-chip>
             </mat-chip-grid>
-            <input matInput formControlName="tags" [placeholder]="isFieldClicked ? 'Digite uma tag e pressione enter' : ''"
-                   [matChipInputFor]="chipGrid"
-                   (matChipInputTokenEnd)="addTag($event)"
-                   (focus)="isFieldClicked = true"
-                   (blur)="isFieldClicked = false"/>
-                   <mat-error *ngIf= "tags.length === 0">{{formErrorMessage('tags') + " (Digite uma tag e pressione enter) "}}</mat-error>
+            <input matInput formControlName="tags"
+              [placeholder]="isFieldClicked ? 'Digite uma tag e pressione enter' : ''" [matChipInputFor]="chipGrid"
+              (matChipInputTokenEnd)="addTag($event)" (focus)="isFieldClicked = true" (blur)="isFieldClicked = false" />
+            <mat-error *ngIf="tags.length === 0">{{formErrorMessage("tags") + " (Digite uma tag e pressione enter)"}}</mat-error>
           </mat-form-field>
         </div>
         <mat-form-field class="input" appearance="outline">
@@ -34,7 +32,7 @@
         </mat-form-field>
         <mat-form-field id="description-field" class="input" appearance="outline">
           <mat-label>Descrição</mat-label>
-          <input matInput formControlName="description" />
+          <textarea matInput formControlName="description" rows="5" cols="50"></textarea>
           <mat-error *ngIf="form.get('description')?.invalid">{{formErrorMessage('description')}}</mat-error>
         </mat-form-field>
       </form>
@@ -43,8 +41,8 @@
     <div class="upload-img">
       <p class="subtitle-2">Selecione o conteúdo que você deseja fazer upload</p>
       <div class="projects">
-        <input  #fileInput type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/png"
-          class="hidden-input"/>
+        <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/png"
+          class="hidden-input" />
         <button (click)="triggerFile(fileInput)">
           <div *ngIf="!selectedImage" class="empty-projects">
             <span class="add-project">
@@ -61,8 +59,10 @@
   <div class="div-finish-modal">
     <a type="button" (click)="viewProject()" class="subtitle-1"> Visualizar publicação</a>
     <mat-dialog-actions class="button-container">
-      <button *ngIf="modal.name === 'Adicionar Projeto'" class="button-save" (click)="addProject()" mat-button mat-dialog-close [disabled]="isButtonDisabled()">SALVAR</button>
-      <button *ngIf="modal.name === 'Editar Projeto'"  class="button-save" (click)="editProject()" mat-button mat-dialog-close [disabled]="isButtonDisabled()">SALVAR</button>
+      <button *ngIf="modal.name === 'Adicionar Projeto'" class="button-save" (click)="addProject()" mat-button
+        mat-dialog-close [disabled]="isButtonDisabled()">SALVAR</button>
+      <button *ngIf="modal.name === 'Editar Projeto'" class="button-save" (click)="editProject()" mat-button
+        mat-dialog-close [disabled]="isButtonDisabled()">SALVAR</button>
       <button id="button-cancel" mat-button mat-dialog-close cdkFocusInitial>
         CANCELAR
       </button>

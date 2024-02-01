@@ -1,9 +1,10 @@
+import { IProject } from "./../../models/iProject";
 import { Component, Inject, OnInit, ViewChild, inject } from "@angular/core";
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ModalActionService } from "./services/modal-action.service";
 import { ProjectActionService } from "../project-action/services/project-action.service";
-import { IProject } from "src/app/models/iProject";
+
 import { IModal } from "../models/iModal";
 import { ViewProjectInfoService } from "../view-project-info/services/view-project-info.service";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
@@ -27,6 +28,7 @@ export class ModalActionComponent implements OnInit {
   project!: IProject | null;
   selectedImage: string | undefined;
   formData = new FormData();
+  hasErrorImg: string = "";
 
   user: any;
 
