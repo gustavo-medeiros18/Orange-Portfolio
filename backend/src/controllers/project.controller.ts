@@ -39,7 +39,7 @@ class ProjectController {
     const projects = await ProjectService.getAllProjects();
 
     if (!projects) return res.status(500);
-    console.log(projects);
+
     return res.status(200).json(projects);
   }
 
