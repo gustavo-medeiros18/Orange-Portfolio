@@ -6,4 +6,4 @@ const loginRouter = Router();
 loginRouter.post("/login", LoginController.loginUser);
 loginRouter.post("/auth/google", LoginController.googleLogin);
 
-export default loginRouter;
+export { loginRouter };

@@ -13,4 +13,4 @@ userRouter.delete("/users/:id", UserController.deleteUser);
 userRouter.put("/users/:id", UserController.updateUser);
 userRouter.put("/users/updatePassword/:id",UserController.updatePassword);
 
-export default userRouter;
+export { userRouter };

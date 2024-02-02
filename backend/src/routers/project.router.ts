@@ -12,4 +12,4 @@ projectRouter.post("/projects", ProjectController.createProject);
 projectRouter.put("/projects/:id", ProjectController.updateProject);
 projectRouter.delete("/projects/:id", ProjectController.deleteProject);
 
-export default projectRouter;
+export { projectRouter };
