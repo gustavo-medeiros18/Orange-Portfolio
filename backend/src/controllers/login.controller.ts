@@ -20,9 +20,8 @@ class LoginController {
 
       if (user) {
         const isAValidPassword = await comparePasswords(password, user.password);
-
         if (isAValidPassword) {
-          const { password, ...dtoUser } = user;
+          const { password,isGoogleLogin,createdAt,updatedAt, ...dtoUser } = user;
           const token = generateToken(dtoUser);
           return res.status(200).json({ message: "Login bem-sucedido.", dtoUser, token });
         }
@@ -37,6 +36,7 @@ class LoginController {
 
   public static async googleLogin(req: Request, res: Response) {
     let tokenGoogle = req.body.token;
+    let iconUrlGoogle = req.body.iconUrl;
     try {
       if (!tokenGoogle) {
         throw new Error("Credencial ausente ou inválida.");
@@ -71,9 +71,10 @@ class LoginController {
           name: payload.given_name,
           lastName: payload.family_name,
           email: payload.email,
+          isGoogleLogin: true,
           password: Math.random().toString(36).slice(-10), //gera senha aleatória (não é usada na autenticação com o google)
           country: "",
-          iconUrl: "",
+          iconUrl: iconUrlGoogle ? iconUrlGoogle : "",
         };
         user = await UserService.createUser(user);
         userInfo = {
