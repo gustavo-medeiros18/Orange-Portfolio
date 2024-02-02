@@ -5,15 +5,15 @@ import { v4 as uuidv4 } from "uuid";
 
 export class UserService {
   public static async getAllUsers(): Promise<User[]> {
-    const [rows] = await connection.query<RowDataPacket[]>("SELECT * FROM users");
+    const sqlStatement = "SELECT * FROM users";
+    const [rows] = await connection.query<RowDataPacket[]>(sqlStatement);
 
     return rows as User[];
   }
 
   public static async getUserById(id: string): Promise<User | undefined> {
-    const [rows] = await connection.query<RowDataPacket[]>("SELECT * FROM users WHERE id = ?", [
-      id,
-    ]);
+    const sqlStatement = "SELECT * FROM users WHERE id = ?";
+    const [rows] = await connection.query<RowDataPacket[]>(sqlStatement, id);
 
     if (rows.length === 1) {
       return rows[0] as User;
@@ -23,33 +23,31 @@ export class UserService {
   }
 
   public static async getUserPasswordById(id: string): Promise<string> {
-    const [rows] = await connection.query<RowDataPacket[]>(
-      "SELECT password FROM users WHERE id = ?",
-      [id]
-    );
+    const sqlStatement = "SELECT password FROM users WHERE id = ?";
+    const [rows] = await connection.query<RowDataPacket[]>(sqlStatement, id);
     return (rows[0] as { password: string }).password;
   }
 
   public static async createUser(newUser: User): Promise<User> {
     const id = uuidv4();
     newUser.id = id;
-    const [result] = await connection.query("INSERT INTO users SET ?", [newUser]);
+
+    const sqlStatement = "INSERT INTO users SET ?";
+    const [result] = await connection.query(sqlStatement, newUser);
+
     return { ...newUser, id } as User;
   }
 
   public static async deleteUserById(userId: string): Promise<boolean> {
-    const [result] = await connection.query<ResultSetHeader>("DELETE FROM users WHERE id = ?", [
-      userId,
-    ]);
+    const sqlStatement = "DELETE FROM users WHERE id = ?";
+    const [result] = await connection.query<ResultSetHeader>(sqlStatement, userId);
 
     return result.affectedRows > 0;
   }
 
   public static async updateUser(id: string, updatedUser: User): Promise<User | undefined> {
-    const [result] = await connection.query<ResultSetHeader>("UPDATE users SET ? WHERE id = ?", [
-      updatedUser,
-      id,
-    ]);
+    const sqlStatement = "UPDATE users SET ? WHERE id = ?";
+    const [result] = await connection.query<ResultSetHeader>(sqlStatement, [updatedUser, id]);
 
     if (result.affectedRows === 1) {
       return { ...updatedUser, id } as User;
@@ -59,10 +57,8 @@ export class UserService {
   }
 
   public static async updateUserPassword(id: string, newPassword: string): Promise<boolean> {
-    const [result] = await connection.query<ResultSetHeader>(
-      "UPDATE users SET password = ? WHERE id = ?",
-      [newPassword, id]
-    );
+    const sqlStatement = "UPDATE users SET password = ? WHERE id = ?";
+    const [result] = await connection.query<ResultSetHeader>(sqlStatement, [newPassword, id]);
     return result.affectedRows === 1;
   }
 }
