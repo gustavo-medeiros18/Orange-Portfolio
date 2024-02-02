@@ -5,10 +5,8 @@ import { connection } from "../database/config";
 export class LoginService {
   public static async authenticateLogin(email: string) {
     try {
-      const [rows] = await connection.query<RowDataPacket[]>(
-        "SELECT * FROM users WHERE email = ?",
-        [email]
-      );
+      const sqlStatement = "SELECT * FROM users WHERE email = ?";
+      const [rows] = await connection.query<RowDataPacket[]>(sqlStatement, [email]);
 
       if (rows.length > 0) {
         return rows[0] as User;
