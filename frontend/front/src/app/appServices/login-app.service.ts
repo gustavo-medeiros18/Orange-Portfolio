@@ -36,13 +36,6 @@ export class LoginAppService {
     sessionStorage.removeItem("token");
   };
 
-
-  loginWithGoogle(credentials: string): Observable<any> {
-    const apiUrl = new URL(environment.apiLoginGoogle, this.API);
-    const requestBody = JSON.stringify(credentials);
-    return this.httpClient.post(environment.apiLoginGoogle, requestBody);
-  }
-
   getAuthorizationToken(item: string) {
     const localItem =  window.sessionStorage.getItem(item) ?? "";
     return localItem;

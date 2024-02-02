@@ -34,6 +34,10 @@ export class ProfileInfoComponent implements OnInit {
   user: any;
   country!: string;
 
+  // Verdadeiro quando o usuário estiver logado com o google (esconde sessão de alterar senha)
+  // por padrao, não deve mostrar o campo de alterar senha
+  isGoogleLogin: boolean = true;
+
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private profileInfoService: ProfileInfoService,
@@ -44,6 +48,11 @@ export class ProfileInfoComponent implements OnInit {
 
   ngOnInit() {
     this.clearFormDatas(this.formDataProfile, this.formDataPassword, this.formCountry);
+
+    // verifica se está logado com o google
+    this.profileInfoService.isGoogleLoginService(this.user.id).subscribe(
+      result => {this.isGoogleLogin = !result}
+    )
 
     this.formProfile = this.formBuilder.group({
       name: [

@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { IUserRegister } from "../models/iUserRegister";
 import { environment } from "src/environments/environment.development";
 import { IUserLogin, LoginResponse } from "../models/iUserLogin";
-import { Observable} from "rxjs";
+import { Observable } from "rxjs";
 import { IUserUpdate } from "../models/iUserUpdate";
 import { IUserUpdatePassword } from "../models/iUserUpdatePassword";
 
@@ -33,5 +33,11 @@ export class UserService {
   updatePassword(record: IUserUpdatePassword): Observable<IUserUpdatePassword> {
     const apiUrl = new URL(environment.getApiUpdatePassword(record.id), this.API).toString();
     return this.httpClient.put<IUserUpdatePassword>(apiUrl, record);
+  }
+
+  isGoogleLogin(id: string): Observable<boolean> {
+    const apiUrl = new URL(environment.getApiIsGoogleLogin(id), this.API).toString();
+    const reqBody = {};
+    return this.httpClient.get<boolean>(apiUrl, reqBody);
   }
 }

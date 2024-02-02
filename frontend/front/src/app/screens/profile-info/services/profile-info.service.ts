@@ -24,4 +24,8 @@ export class ProfileInfoService {
     return this.userService.updatePassword(user);
   }
 
+  isGoogleLoginService(id: string): Observable<boolean>{
+    return this.userService.isGoogleLogin(id);
+  }
+
 }
