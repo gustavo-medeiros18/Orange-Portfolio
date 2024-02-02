@@ -9,9 +9,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const client = new OAuth2Client({
-  clientId: "102685364306-m0ssdqq50ier1aqn5eulgr4eto0qidev.apps.googleusercontent.com",
-  clientSecret: "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",
-  redirectUri: "https://hackathon-orange.onrender.com/auth/google",
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  redirectUri: process.env.REDIRECT_URI,
 });
 
 export class LoginController {
