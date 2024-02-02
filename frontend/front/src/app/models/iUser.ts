@@ -1,4 +1,4 @@
-export interface IUserUpdate {
+export interface IUser {
     id: string;
     name: string;
     lastName: string;

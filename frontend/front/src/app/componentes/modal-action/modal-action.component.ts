@@ -40,7 +40,10 @@ export class ModalActionComponent implements OnInit {
     private viewProjectInfoService: ViewProjectInfoService,
     private formBuilder: NonNullableFormBuilder
   ) {
-    this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
+    const userId = JSON.parse(sessionStorage.getItem("id") || "");
+    this.modalService.getUserInfo(userId).subscribe(
+      user => this.user = user
+    )
   }
 
   ngOnInit(): void {

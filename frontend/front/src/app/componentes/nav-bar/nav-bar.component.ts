@@ -1,21 +1,30 @@
-import { Component, HostListener, ViewChild } from "@angular/core";
+import { Component, HostListener, OnInit, ViewChild } from "@angular/core";
 import { MatIconRegistry } from "@angular/material/icon";
 import { DomSanitizer } from "@angular/platform-browser";
-import { LoginAppService } from "src/app/appServices/login-app.service";
+import { NavBarService } from "./services/nav-bar.service";
+import { IUser } from "src/app/models/iUser";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-nav-bar",
   templateUrl: "./nav-bar.component.html",
   styleUrls: ["./nav-bar.component.scss"],
 })
-export class NavBarComponent {
+export class NavBarComponent implements OnInit {
+
   isMobile!: boolean;
-  user: any;
+  user$!: Observable<IUser>;
+  defaultIcon: string = "assets/imgs/img_profile_orange_portfolio.png";
+
+  ngOnInit(): void {
+    const userId = JSON.parse(sessionStorage.getItem("id") ?? "");
+    this.user$  = this.navBarService.getUserInfo(userId);
+  }
 
   constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    private loginAppService: LoginAppService
+    private navBarService: NavBarService
   ) {
     this.isMobile = window.innerWidth < 600;
     this.matIconRegistry.addSvgIcon(
@@ -30,14 +39,10 @@ export class NavBarComponent {
       "Icon Notification",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../../assets/logos/iconNotification.svg")
     );
-    this.user = JSON.parse(sessionStorage.getItem("userInfo") ?? "");
-    this.user.iconUrl = this.user.iconUrl
-      ? this.user.iconUrl
-      : "assets/imgs/img_profile_orange_portfolio.png";
   }
 
   signOut() {
-    sessionStorage.removeItem("userInfo");
+    sessionStorage.removeItem("id");
     sessionStorage.removeItem("token");
     location.reload();
   }

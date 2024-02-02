@@ -4,6 +4,8 @@ import { ModalActionComponent } from "../modal-action.component";
 import { IProject, IProjectEvent, ProjecEventEnum } from "src/app/models/iProject";
 import { ProjectService } from "src/app/appServices/project.service";
 import { Subject, Observable } from "rxjs";
+import { UserService } from "src/app/appServices/user.service";
+import { IUser } from "src/app/models/iUser";
 
 @Injectable({
   providedIn: "root",
@@ -23,7 +25,7 @@ export class ModalActionService {
   notification: Observable<void> = this.notificationSubject.asObservable();
 
 
-  constructor(private dialog: MatDialog, private projectService: ProjectService) {
+  constructor(private dialog: MatDialog, private projectService: ProjectService, private userService: UserService) {
     this.updateProject.subscribe({
       next: (project) => (this.currentProject = project),
     });
@@ -54,6 +56,10 @@ export class ModalActionService {
 
   putProjectModal(params: FormData, id: string): Observable<IProject> {
     return this.projectService.putProject(params,id);
+  }
+
+  getUserInfo(id: string): Observable<IUser> {
+    return this.userService.getUserById(id);
   }
 
 }

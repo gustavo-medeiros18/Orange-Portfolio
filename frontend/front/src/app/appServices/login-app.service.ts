@@ -18,7 +18,7 @@ export class LoginAppService {
     return new Observable<boolean>((observer) => {
       this.userService.authenticate(data).subscribe({
         next: (result: LoginResponse) => {
-          sessionStorage.setItem("userInfo",JSON.stringify(result.dtoUser));
+          sessionStorage.setItem("id",JSON.stringify(result.dtoUser.id));
           sessionStorage.setItem("token", result.token);
           observer.next(true);
           observer.complete();
@@ -32,7 +32,7 @@ export class LoginAppService {
   }
 
   signOut = () => {
-    sessionStorage.removeItem("userInfo");
+    sessionStorage.removeItem("id");
     sessionStorage.removeItem("token");
   };
 

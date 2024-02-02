@@ -31,9 +31,9 @@
         })
           .then((response) => response.json())
           .then((data) => {
-            const userInfo = data.userInfo;
+            const userId = data.userInfo.id;
             sessionStorage.setItem("token", data.token);
-            sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
+            sessionStorage.setItem("id", JSON.stringify(userId));
             window.location.reload();
           })
           .catch((error) => {
