@@ -44,7 +44,7 @@
         <mat-select-country appearance="outline"
                             label="Country"
                             formControlName="country"
-                            (onCountrySelected)="onCountrySelected()" >
+                            [itemsLoadSize]="5">
         </mat-select-country>
       </form>
       <div class="div-btn-signin">
