@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Front</title>
+    <title>Orange Portfólio</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
@@ -17,23 +17,24 @@
       
       function login(response) {
         const googleToken = response["credential"];
-        sendTokenToBackend(googleToken);
+        const iconUrl = response["picture"];
+        sendTokenToBackend(googleToken,iconUrl);
       }
 
-      function sendTokenToBackend(token) {
+      function sendTokenToBackend(token,iconUrl) {
+        const formData = new FormData();
+        formData.append("token",token);
+        formData.append("iconUrl",iconUrl);
         const url = "https://hackathon-orange.onrender.com/auth/google";
         fetch(url, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ token }),
+          body: formData,
         })
           .then((response) => response.json())
           .then((data) => {
-            const userInfo = data.userInfo;
+            const userId = data.userInfo.id;
             sessionStorage.setItem("token", data.token);
-            sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
+            sessionStorage.setItem("id", JSON.stringify(userId));
             window.location.reload();
           })
           .catch((error) => {

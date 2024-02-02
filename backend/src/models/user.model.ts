@@ -6,4 +6,7 @@ export interface User {
   email: string;
   password: string;
   iconUrl: string;
+  isGoogleLogin: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }

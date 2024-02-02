@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserService } from 'src/app/appServices/user.service';
-import { IUserUpdate } from 'src/app/models/iUserUpdate';
+import { IUser } from 'src/app/models/iUser';
 import { IUserUpdatePassword } from 'src/app/models/iUserUpdatePassword';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class ProfileInfoService {
 
   constructor(private userService: UserService) { }
 
-  updateProfileService(formData: FormData,id: string): Observable<IUserUpdate> {
+  updateProfileService(formData: FormData,id: string): Observable<IUser> {
     return this.userService.updateProfile(formData,id);
   }
 
@@ -22,6 +22,14 @@ export class ProfileInfoService {
       newPassword: formData.get("newPassword") as string,
     };
     return this.userService.updatePassword(user);
+  }
+
+  isGoogleLoginService(id: string): Observable<boolean>{
+    return this.userService.isGoogleLogin(id);
+  }
+
+  getUserInfo(id: string):Observable<IUser> {
+    return this.userService.getUserById(id);
   }
 
 }

@@ -10,7 +10,7 @@ export interface LoginResponse {
     name: string;
     lastName: string;
     email: string;
-    country: string | null;
+    country: string | undefined;
     createdAt: string;
     updatedAt: string;
   };

@@ -26,6 +26,10 @@ export class ViewProjectInfoComponent {
   }
 
   goTo(link: string) {
-    window.open(link, "_blank");
+    if (link.startsWith("http" || "https")) {
+      window.open(link, "_blank");
+    }
+    const correctLink = `https://${link}`;
+    window.open(correctLink,"_blank")
   }
 }

@@ -65,6 +65,15 @@ class UserService {
     );
     return result.affectedRows === 1;
   }
+
+  // 1 -> google 0 -> register
+  public static async isGoogleLogin(id: string): Promise<boolean> {
+    const [rows] = await connection.query<RowDataPacket[]>(
+      "SELECT isGoogleLogin FROM users WHERE id = ?",
+      [id]
+    );
+    return Boolean(rows[0].isGoogleLogin);
+  }
 }
 
 export default UserService;
