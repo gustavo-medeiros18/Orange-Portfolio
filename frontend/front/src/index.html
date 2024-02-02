@@ -17,24 +17,23 @@
       
       function login(response) {
         const googleToken = response["credential"];
-        const iconUrl = response["picture"];
-        sendTokenToBackend(googleToken,iconUrl);
+        sendTokenToBackend(googleToken);
       }
 
-      function sendTokenToBackend(token,iconUrl) {
-        const formData = new FormData();
-        formData.append("token",token);
-        formData.append("iconUrl",iconUrl);
+      function sendTokenToBackend(token) {
         const url = "https://hackathon-orange.onrender.com/auth/google";
         fetch(url, {
           method: "POST",
-          body: formData,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token }),
         })
           .then((response) => response.json())
           .then((data) => {
-            const userId = data.userInfo.id;
+            const userInfo = data.userInfo;
             sessionStorage.setItem("token", data.token);
-            sessionStorage.setItem("id", JSON.stringify(userId));
+            sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
             window.location.reload();
           })
           .catch((error) => {
