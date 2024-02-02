@@ -48,7 +48,8 @@
         </mat-select-country>
       </form>
       <div class="div-btn-signin">
-        <button (click)="updateProfile()" [disabled]="loading" mat-raised-button class="btn-primary">
+        <!-- <button (click)="updateProfile()" [disabled]="loading" mat-raised-button class="btn-primary"> -->
+          <button (click)="updateProfile()" [disabled]="isButtonDisabledProfile()" mat-raised-button class="btn-primary">
           <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
             [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
           <span *ngIf="!loading">ATUALIZAR INFORMAÇÕES</span></button>
@@ -76,7 +77,8 @@
         </mat-form-field>
         <div class="div-btn-signin">
           <p *ngIf="hasError" class="error-message">{{ hasError }}</p>
-          <button (click)="updatePassword()" [disabled]="loadingPassword" mat-raised-button class="btn-primary">
+          <!-- <button (click)="updatePassword()" [disabled]="loadingPassword" mat-raised-button class="btn-primary"> -->
+            <button (click)="updatePassword()" [disabled]="isButtonDisabledPassword()" mat-raised-button class="btn-primary">
             <mat-progress-spinner *ngIf="loadingPassword" diameter="24" mode="indeterminate"
               [color]="loadingPassword ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
             <span *ngIf="!loadingPassword">ATUALIZAR SENHA</span></button>

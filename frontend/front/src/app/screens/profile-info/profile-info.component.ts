@@ -184,4 +184,12 @@ export class ProfileInfoComponent implements OnInit {
     });
     this.ngOnInit();
   }
+
+  isButtonDisabledProfile(): boolean {
+    return this.formProfile.invalid;
+  }
+
+  isButtonDisabledPassword(): boolean {
+    return this.formPassword.invalid;
+  }
 }
