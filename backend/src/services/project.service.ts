@@ -1,4 +1,4 @@
-import connection from "../database/config";
+import { connection } from "../database/config";
 import { Project } from "../models/project.model";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { v4 as uuidv4 } from "uuid";

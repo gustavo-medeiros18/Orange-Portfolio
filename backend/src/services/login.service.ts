@@ -1,6 +1,6 @@
 import { RowDataPacket } from "mysql2";
 import { User } from "../models/user.model";
-import connection from "../database/config";
+import { connection } from "../database/config";
 
 export class LoginService {
   public static async authenticateLogin(email: string) {
