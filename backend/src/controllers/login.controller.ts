@@ -33,7 +33,6 @@ export class LoginController {
 
   public static async googleLogin(req: Request, res: Response) {
     let tokenGoogle = req.body.token;
-    let iconUrlGoogle = req.body.iconUrl;
     try {
       if (!tokenGoogle) {
         throw new Error("Credencial ausente ou inválida.");
@@ -71,7 +70,7 @@ export class LoginController {
           isGoogleLogin: true,
           password: Math.random().toString(36).slice(-10), //gera senha aleatória (não é usada na autenticação com o google)
           country: "",
-          iconUrl: iconUrlGoogle ? iconUrlGoogle : "",
+          iconUrl: payload.picture ? payload.picture : "",
         };
         user = await UserService.createUser(user);
         userInfo = {
