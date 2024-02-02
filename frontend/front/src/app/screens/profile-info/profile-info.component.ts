@@ -37,7 +37,7 @@ export class ProfileInfoComponent implements OnInit {
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private profileInfoService: ProfileInfoService,
-    private profileActionService: ProfileActionService
+    private profileActionService: ProfileActionService,
   ) {
     this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
   }
@@ -68,8 +68,6 @@ export class ProfileInfoComponent implements OnInit {
       newPassword: ["", [Validators.required, Validators.minLength(8), createPassword()]],
     });
   }
-
-  onCountrySelected() {}
 
   clearFormDatas(formDataProfile: FormData, formDataPassword: FormData, formCountry: FormGroup) {
     this.formDataProfile = new FormData();
