@@ -38,7 +38,6 @@ h5 {
   display: none;
 }
 
-
 #description-field {
   display: flex;
   height: 6.5rem;
@@ -127,14 +126,20 @@ h5 {
   text-transform: uppercase;
 }
 
+.upload-img {
+  margin-top: 4rem;
+}
 @media screen and (min-width: 992px) {
+  .upload-img {
+    margin-top: 0;
+  }
   .container {
     display: flex;
     flex-direction: row-reverse;
     gap: 3rem;
     padding-top: 0.5rem;
   }
-  
+
   .empty-projects {
     width: 24.3125rem;
     height: 19rem;

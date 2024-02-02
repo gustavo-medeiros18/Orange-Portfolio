@@ -13,11 +13,11 @@ export class ProfileInfoComponent implements OnInit {
   visibilityNew: boolean = false;
   visibilityCurrent: boolean = false;
   currentPassword: string = "password";
-  newPassword: string = "password"
+  newPassword: string = "password";
 
   formProfile!: FormGroup;
   formCountry: FormGroup = this.formBuilder.group({
-    country: []
+    country: [],
   });
 
   formPassword!: FormGroup;
@@ -32,23 +32,28 @@ export class ProfileInfoComponent implements OnInit {
   formDataPassword = new FormData();
 
   user: any;
-  country!: string
+  country!: string;
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private profileInfoService: ProfileInfoService,
-    private profileActionService: ProfileActionService,
+    private profileActionService: ProfileActionService
   ) {
     this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
   }
 
   ngOnInit() {
-
-    this.clearFormDatas(this.formDataProfile, this.formDataPassword,this.formCountry);
+    this.clearFormDatas(this.formDataProfile, this.formDataPassword, this.formCountry);
 
     this.formProfile = this.formBuilder.group({
-      name: [this.user.name ? this.user.name : "", [Validators.required, noWhitespaceValidator(), Validators.minLength(3)]],
-      lastName: [this.user.lastName ? this.user.lastName : "", [Validators.required, noWhitespaceValidator(), Validators.minLength(3)]],
+      name: [
+        this.user.name ? this.user.name : "",
+        [Validators.required, noWhitespaceValidator(), Validators.minLength(3)],
+      ],
+      lastName: [
+        this.user.lastName ? this.user.lastName : "",
+        [Validators.required, noWhitespaceValidator(), Validators.minLength(3)],
+      ],
       email: [this.user.email ? this.user.email : "", [Validators.required, Validators.email]],
     });
 
@@ -59,14 +64,14 @@ export class ProfileInfoComponent implements OnInit {
     });
 
     this.formPassword = this.formBuilder.group({
-      currentPassword: ["", [Validators.required,Validators.minLength(8), createPassword()]],
+      currentPassword: ["", [Validators.required, Validators.minLength(8), createPassword()]],
       newPassword: ["", [Validators.required, Validators.minLength(8), createPassword()]],
     });
   }
 
   onCountrySelected() {}
 
-  clearFormDatas(formDataProfile: FormData, formDataPassword: FormData,formCountry: FormGroup) {
+  clearFormDatas(formDataProfile: FormData, formDataPassword: FormData, formCountry: FormGroup) {
     this.formDataProfile = new FormData();
     this.formDataPassword = new FormData();
     this.formCountry.reset();
@@ -81,10 +86,10 @@ export class ProfileInfoComponent implements OnInit {
       return "Endereço de email inválido";
     }
     if (field?.hasError("whitespace")) {
-      return "O campo Título não pode conter apenas espaços em branco.";
+      return "O campo não pode conter apenas espaços em branco.";
     }
     if (field?.hasError("minlength")) {
-      return `O campo Título está muito curto`;
+      return `O campo está muito curto`;
     }
     return;
   }
@@ -143,12 +148,12 @@ export class ProfileInfoComponent implements OnInit {
     this.loading = true;
     const id = this.user.id;
     const action = "profile";
-    this.formDataProfile.append("name",this.formProfile.value.name);
-    this.formDataProfile.append("lastName",this.formProfile.value.lastName);
-    this.formDataProfile.append("email",this.formProfile.value.email);
+    this.formDataProfile.append("name", this.formProfile.value.name);
+    this.formDataProfile.append("lastName", this.formProfile.value.lastName);
+    this.formDataProfile.append("email", this.formProfile.value.email);
     this.formDataProfile.append("country", this.country);
-    this.profileInfoService.updateProfileService(this.formDataProfile,id).subscribe({
-      next: (data) =>  {
+    this.profileInfoService.updateProfileService(this.formDataProfile, id).subscribe({
+      next: (data) => {
         // atualiza os dados do usuário
         sessionStorage.setItem("userInfo", JSON.stringify(data));
         // comunica o resultado
@@ -181,5 +186,4 @@ export class ProfileInfoComponent implements OnInit {
     });
     this.ngOnInit();
   }
-
 }

@@ -14,10 +14,14 @@
   height: 1.5rem !important;
 }
 
+.mat-mdc-card-header {
+  padding: 0;
+  padding-top: 1rem;
+}
 .img-card {
-  max-width: 24.313rem;
+  max-width: 20.063rem;
   max-height: 16.125rem;
-  min-width: 24.313rem;
+  min-width: 20.063rem;
   min-height: 16.125rem;
   border-radius: 0.5rem;
 }
@@ -63,5 +67,13 @@ p {
 @media screen and (min-width: 992px) {
   .project-card {
     width: 24.3125rem;
+  }
+
+  .img-card {
+    max-width: 24.313rem;
+    max-height: 16.125rem;
+    min-width: 24.313rem;
+    min-height: 16.125rem;
+    border-radius: 0.5rem;
   }
 }

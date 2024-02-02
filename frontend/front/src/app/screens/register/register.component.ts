@@ -29,8 +29,8 @@ export class RegisterComponent {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      name: ["", [Validators.required, noWhitespaceValidator(), Validators.minLength(5)]],
-      lastName: ["", [Validators.required, noWhitespaceValidator(), Validators.minLength(5)]],
+      name: ["", [Validators.required, noWhitespaceValidator(), Validators.minLength(3)]],
+      lastName: ["", [Validators.required, noWhitespaceValidator(), Validators.minLength(3)]],
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(8), createPassword()]],
     });
@@ -48,10 +48,10 @@ export class RegisterComponent {
       return "A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números";
     }
     if (field?.hasError("whitespace")) {
-      return "O campo Título não pode conter apenas espaços em branco.";
+      return "O campo não pode conter apenas espaços em branco.";
     }
     if (field?.hasError("minlength")) {
-      return `O campo Título está muito curto`;
+      return `O campo está muito curto`;
     }
     return;
   }

@@ -100,12 +100,18 @@
 
   color: #fff;
   font-feature-settings: "clig" off, "liga" off;
-  font-family: Roboto;
   font-size: 1rem;
   font-style: normal;
   font-weight: 500;
   line-height: 150%;
   letter-spacing: 0.00938rem;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 @media screen and (min-width: 992px) {
@@ -131,8 +137,12 @@
     gap: 1+0.25rem;
   }
 
-  .div-form {
+  .form-container {
     width: 70%;
+  }
+
+  .div-form {
+    width: 32.313rem;
   }
 
   .on-sign-up-success {
