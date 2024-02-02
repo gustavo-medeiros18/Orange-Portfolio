@@ -2,7 +2,7 @@ import { RowDataPacket } from "mysql2";
 import { User } from "../models/user.model";
 import connection from "../database/config";
 
-class LoginService {
+export class LoginService {
   public static async authenticateLogin(email: string) {
     try {
       const [rows] = await connection.query<RowDataPacket[]>(
@@ -21,5 +21,3 @@ class LoginService {
     }
   }
 }
-
-export default LoginService;

@@ -3,7 +3,7 @@ import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { User } from "../models/user.model";
 import { v4 as uuidv4 } from "uuid";
 
-class UserService {
+export class UserService {
   public static async getAllUsers(): Promise<User[]> {
     const [rows] = await connection.query<RowDataPacket[]>("SELECT * FROM users");
 
@@ -66,5 +66,3 @@ class UserService {
     return result.affectedRows === 1;
   }
 }
-
-export default UserService;

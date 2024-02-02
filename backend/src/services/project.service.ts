@@ -3,7 +3,7 @@ import { Project } from "../models/project.model";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { v4 as uuidv4 } from "uuid";
 
-class ProjectService {
+export class ProjectService {
   public static async createProject(newProject: Project): Promise<any> {
     const id = uuidv4();
     newProject.id = id;
@@ -85,5 +85,3 @@ class ProjectService {
     return result.affectedRows > 0;
   }
 }
-
-export default ProjectService;
