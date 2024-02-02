@@ -11,7 +11,7 @@ const client = new OAuth2Client({
   redirectUri: "https://hackathon-orange.onrender.com/auth/google",
 });
 
-class LoginController {
+export class LoginController {
   public static async loginUser(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
@@ -92,4 +92,3 @@ class LoginController {
     }
   }
 }
-export default LoginController;
