@@ -1,5 +1,5 @@
 import { Router } from "express";
-import ProjectController from "../controllers/project.controller";
+import { ProjectController } from "../controllers/project.controller";
 import { authenticateMiddleware } from "../middlewares/authMiddleware";
 
 const projectRouter = Router();
@@ -12,4 +12,4 @@ projectRouter.post("/projects", ProjectController.createProject);
 projectRouter.put("/projects/:id", ProjectController.updateProject);
 projectRouter.delete("/projects/:id", ProjectController.deleteProject);
 
-export default projectRouter;
+export { projectRouter };

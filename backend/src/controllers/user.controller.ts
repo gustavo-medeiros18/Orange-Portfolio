@@ -1,12 +1,12 @@
 import { User } from "../models/user.model";
-import UserService from "../services/user.service";
+import { UserService } from "../services/user.service";
 import { comparePasswords, hashPassword } from "../utils/bcryptUtils";
 import { Request, Response } from "express";
 import { uploadFile } from "../utils/fileUploadUtils";
 import { UserPassword } from "../models/userPassword.model";
 import { verifyToken } from "../utils/jwtAuth";
 
-class UserController {
+export class UserController {
   public static async getAllUsers(_req: Request, res: Response) {
     const users = await UserService.getAllUsers();
 
@@ -174,5 +174,3 @@ class UserController {
     }
   }
 }
-
-export default UserController;
