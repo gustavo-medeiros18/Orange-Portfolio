@@ -2,17 +2,11 @@ import { Request, Response } from "express";
 import { LoginService } from "../services/login.service";
 import { comparePasswords } from "../utils/bcryptUtils";
 import { generateToken } from "../utils/jwtAuth";
-import { OAuth2Client } from "google-auth-library";
 import { UserService } from "../services/user.service";
+import { client } from "../config/oauth.config";
 import dotenv from "dotenv";
 
 dotenv.config();
-
-const client = new OAuth2Client({
-  clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
-  redirectUri: process.env.REDIRECT_URI,
-});
 
 export class LoginController {
   public static async loginUser(req: Request, res: Response) {
@@ -48,7 +42,7 @@ export class LoginController {
       // busca as informações do usuário
       const ticket = await client.verifyIdToken({
         idToken: tokenGoogle,
-        audience: "102685364306-m0ssdqq50ier1aqn5eulgr4eto0qidev.apps.googleusercontent.com",
+        audience: process.env.CLIENT_ID,
       });
 
       // formata as informações do usuário através do ticket
