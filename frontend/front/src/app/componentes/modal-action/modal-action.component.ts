@@ -128,7 +128,6 @@ export class ModalActionComponent implements OnInit {
     this.formData.append("link", this.form.value.link);
     this.formData.append("description", this.form.value.description);
     this.formData.append("idUser", idUser);
-
     this.modalService.putProjectModal(this.formData, this.project?.id!).subscribe({
       next: () => {
         this.projectActionService.openDialog(action, "success");

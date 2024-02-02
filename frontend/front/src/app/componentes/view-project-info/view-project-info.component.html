@@ -11,9 +11,11 @@
     </span>
     </div>
     <h5 id="project-title">{{modal.project.title}}</h5>
-    <mat-chip-set *ngIf="modal.project.tags && !(modal.project.tags.length === 1 && modal.project.tags[0] == '')">
-      <mat-chip *ngFor="let tag of modal.project.tags">{{tag}}</mat-chip>
-    </mat-chip-set>
+    <div class ="tags">
+      <mat-chip-set *ngIf="modal.project.tags && !(modal.project.tags.length === 1 && modal.project.tags[0] == '')">
+        <mat-chip *ngFor="let tag of modal.project.tags">{{tag}}</mat-chip>
+      </mat-chip-set>
+    </div>
   </div>
   <!-- carregar componente de upload-->
   <div class="upload-img">

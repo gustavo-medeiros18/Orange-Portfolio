@@ -184,7 +184,6 @@ export class ProfileInfoComponent implements OnInit {
         this.profileActionService.openDialog(action, "error");
       },
     });
-    this.ngOnInit();
   }
 
   updatePassword() {
@@ -202,7 +201,6 @@ export class ProfileInfoComponent implements OnInit {
         this.profileActionService.openDialog(action, "error");
       },
     });
-    this.ngOnInit();
   }
 
   isButtonDisabledProfile(): boolean {

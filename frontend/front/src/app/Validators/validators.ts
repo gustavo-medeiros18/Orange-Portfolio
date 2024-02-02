@@ -22,3 +22,9 @@ export function noWhitespaceValidator(): ValidatorFn {
     return isWhitespace ? { whitespace: true } : null;
   };
 }
+
+/*export function isLink(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrros | null => {
+    const isDot = 
+  }
+}*/
