@@ -1,5 +1,5 @@
 import { Router } from "express";
-import ProjectController from "../controllers/project.controller";
+import { ProjectController } from "../controllers/project.controller";
 import { authenticateMiddleware } from "../middlewares/authMiddleware";
 
 const projectRouter = Router();
