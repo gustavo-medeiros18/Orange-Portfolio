@@ -4,7 +4,7 @@ import { Project } from "../models/project.model";
 import { uploadFile } from "../utils/fileUploadUtils";
 import UserService from "../services/user.service";
 
-class ProjectController {
+export class ProjectController {
   public static async createProject(req: Request, res: Response) {
     const newProject: Project = req.body;
     if (
@@ -92,5 +92,3 @@ class ProjectController {
     }
   }
 }
-
-export default ProjectController;
