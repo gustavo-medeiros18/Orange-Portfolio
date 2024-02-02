@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import LoginService from "../services/login.service";
+import { LoginService } from "../services/login.service";
 import { comparePasswords } from "../utils/bcryptUtils";
 import { generateToken } from "../utils/jwtAuth";
 import { OAuth2Client } from "google-auth-library";
