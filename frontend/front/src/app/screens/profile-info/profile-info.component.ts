@@ -149,7 +149,7 @@ export class ProfileInfoComponent implements OnInit {
     this.formDataProfile.append("name", this.formProfile.value.name);
     this.formDataProfile.append("lastName", this.formProfile.value.lastName);
     this.formDataProfile.append("email", this.formProfile.value.email);
-    this.formDataProfile.append("country", this.country);
+    if (this.country) this.formDataProfile.append("country", this.country);
     this.profileInfoService.updateProfileService(this.formDataProfile, id).subscribe({
       next: (data) => {
         // atualiza os dados do usuário
