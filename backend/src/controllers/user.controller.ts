@@ -6,7 +6,7 @@ import { uploadFile } from "../utils/fileUploadUtils";
 import { UserPassword } from "../models/userPassword.model";
 import { verifyToken } from "../utils/jwtAuth";
 
-class UserController {
+export class UserController {
   public static async getAllUsers(_req: Request, res: Response) {
     const users = await UserService.getAllUsers();
 
@@ -162,5 +162,3 @@ class UserController {
     }
   }
 }
-
-export default UserController;
