@@ -1,5 +1,5 @@
 import { User } from "../models/user.model";
-import UserService from "../services/user.service";
+import { UserService } from "../services/user.service";
 import { comparePasswords, hashPassword } from "../utils/bcryptUtils";
 import { Request, Response } from "express";
 import { uploadFile } from "../utils/fileUploadUtils";

@@ -3,7 +3,10 @@ import LoginService from "../services/login.service";
 import { comparePasswords } from "../utils/bcryptUtils";
 import { generateToken } from "../utils/jwtAuth";
 import { OAuth2Client } from "google-auth-library";
-import UserService from "../services/user.service";
+import { UserService } from "../services/user.service";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const client = new OAuth2Client({
   clientId: "102685364306-m0ssdqq50ier1aqn5eulgr4eto0qidev.apps.googleusercontent.com",

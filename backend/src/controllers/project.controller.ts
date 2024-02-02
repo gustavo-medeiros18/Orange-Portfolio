@@ -1,8 +1,8 @@
-import ProjectService from "../services/project.service";
+import { ProjectService } from "../services/project.service";
 import { Request, Response } from "express";
 import { Project } from "../models/project.model";
 import { uploadFile } from "../utils/fileUploadUtils";
-import UserService from "../services/user.service";
+import { UserService } from "../services/user.service";
 
 export class ProjectController {
   public static async createProject(req: Request, res: Response) {
