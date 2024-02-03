@@ -65,7 +65,7 @@ export class ProfileInfoComponent implements OnInit {
 
     // verifica se está logado com o google
     this.profileInfoService.isGoogleLoginService(this.user.id).subscribe((result) => {
-      this.isGoogleLogin = !result;
+      this.isGoogleLogin = result;
     });
 
     this.formProfile = this.formBuilder.group({

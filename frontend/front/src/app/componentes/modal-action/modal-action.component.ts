@@ -69,13 +69,13 @@ export class ModalActionComponent implements OnInit {
   formErrorMessage(fieldName: string) {
     const field = this.form.get(fieldName);
     if (field?.hasError("required")) {
-      return "O campo Título é obrigatório.";
+      return "Este campo é necessário";
     }
     if (field?.hasError("whitespace")) {
-      return "O campo Título não pode conter apenas espaços em branco.";
+      return "Este campo não pode conter apenas espaços em branco.";
     }
     if (field?.hasError("minlength")) {
-      return `O campo Título está muito curto`;
+      return `Este campo está muito curto`;
     }
     return "Este campo é necessário";
   }
