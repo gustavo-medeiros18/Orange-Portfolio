@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { LoginService } from "./services/login.service";
-import { ModalActionService } from "src/app/componentes/modal-action/services/modal-action.service";
 import { Router } from "@angular/router";
 
 @Component({
@@ -27,7 +26,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private loginService: LoginService,
-    private modalActionService: ModalActionService,
     private router: Router
   ) {}
 
@@ -40,8 +38,24 @@ export class LoginComponent implements OnInit {
   }
 
   // Função para retornar a mensagem de erro do formulário
-  formErrorMessage() {
-    return "Field required";
+  formErrorMessage(fieldName: string) {
+    const field = this.form.get(fieldName);
+    if (field?.hasError("required")) {
+      return "Este campo é necessário";
+    }
+    if (field?.hasError("email")) {
+      return "Endereço de email inválido";
+    }
+    if (field?.hasError("invalidPassword") || field?.hasError("minLength")) {
+      return "A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e números";
+    }
+    if (field?.hasError("whitespace")) {
+      return "O campo não pode conter apenas espaços em branco.";
+    }
+    if (field?.hasError("minlength")) {
+      return `O campo está muito curto`;
+    }
+    return;
   }
 
   // Função para alternar a visibilidade da senha

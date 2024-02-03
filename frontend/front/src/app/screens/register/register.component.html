@@ -26,18 +26,18 @@
           <mat-form-field class="input" id="nameField" appearance="outline">
             <mat-label>Nome</mat-label>
             <input matInput formControlName="name">
-            <mat-error *ngIf="form.get('name')?.invalid">{{formErrorMessage('name')}}</mat-error>
+            <mat-error *ngIf="form.get('name')?.invalid">{{formErrorMessage("name")}}</mat-error>
           </mat-form-field>
           <mat-form-field class="input" id="lastNameField" appearance="outline">
             <mat-label>Sobrenome</mat-label>
             <input matInput formControlName="lastName">
-            <mat-error *ngIf="form.get('lastName')?.invalid">{{formErrorMessage('lastName')}}</mat-error>
+            <mat-error *ngIf="form.get('lastName')?.invalid">{{formErrorMessage("lastName")}}</mat-error>
           </mat-form-field>
         </div>
         <mat-form-field class="input" appearance="outline">
           <mat-label>Email address</mat-label>
           <input matInput formControlName="email">
-          <mat-error *ngIf="form.get('email')?.invalid">{{formErrorMessage('email')}}</mat-error>
+          <mat-error *ngIf="form.get('email')?.invalid">{{formErrorMessage("email")}}</mat-error>
         </mat-form-field>
         <mat-form-field class="input" appearance="outline">
           <mat-label>Password</mat-label>
@@ -46,10 +46,10 @@
           <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>
           <mat-icon (click)="onClick()" *ngIf="visibility" matSuffix>visibility_off</mat-icon>
         </mat-form-field>
-        <button (click)="signUp()" class="btn-primary" mat-raised-button color="primary">
+        <button [disabled]="isButtonDisabled()" (click)="signUp()" class="btn-primary" mat-raised-button color="primary">
           <mat-progress-spinner *ngIf="loading" diameter="24" mode="indeterminate"
             [color]="loading ? 'var(--color-principal-70)' : '#edeff2'"></mat-progress-spinner>
-          <span *ngIf="!loading" (click)="signUp()">CADASTRAR</span></button>
+          <span *ngIf="!loading">CADASTRAR</span></button>
       </form>
       <a routerLink="/login" class="msg-register"> Entrar</a>
       <span class="password">*A senha deve conter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas e
