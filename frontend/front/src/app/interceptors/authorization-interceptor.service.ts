@@ -10,7 +10,7 @@ export class AuthorizationInterceptorService implements HttpInterceptor{
   constructor() { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.url.includes("/login") || req.url.includes("/loginGoogle")) {
+    if (req.url.includes("/login") || req.url.includes("/auth/google")) {
       return next.handle(req);
     }
     if (req.url.includes("/users") && req.method == "POST"){
