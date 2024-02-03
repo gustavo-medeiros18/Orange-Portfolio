@@ -70,7 +70,7 @@ export class LoginController {
           isGoogleLogin: true,
           password: Math.random().toString(36).slice(-10), //gera senha aleatória (não é usada na autenticação com o google)
           country: "",
-          iconUrl: payload.picture ? payload.picture : "",
+          iconUrl: payload.picture ?? ""
         };
         user = await UserService.createUser(user);
         userInfo = {
