@@ -1,12 +1,12 @@
 import { User } from "../models/user.model";
-import UserService from "../services/user.service";
+import { UserService } from "../services/user.service";
 import { comparePasswords, hashPassword } from "../utils/bcryptUtils";
 import { Request, Response } from "express";
 import { uploadFile } from "../utils/fileUploadUtils";
 import { UserPassword } from "../models/userPassword.model";
 import { verifyToken } from "../utils/jwtAuth";
 
-class UserController {
+export class UserController {
   public static async getAllUsers(_req: Request, res: Response) {
     const users = await UserService.getAllUsers();
 
@@ -82,13 +82,13 @@ class UserController {
 
       verifyToken(token as string, userId);
 
-      const currentUser = await UserService.getUserById(userId);  
+      const currentUser = await UserService.getUserById(userId);
       if (!currentUser) return res.status(404).json({ message: "Usuário não encontrado." });
 
       if (updatedUserData.password) {
         updatedUserData.password = await hashPassword(updatedUserData.password);
       }
-      
+
       if (req.files) {
         let downloadUrl;
         if ("iconUrl" in req.files) {
@@ -96,13 +96,13 @@ class UserController {
           updatedUserData.iconUrl = downloadUrl;
         }
       }
-      
+
       if (!updatedUserData.iconUrl) updatedUserData.iconUrl = currentUser.iconUrl;
-      if(!updatedUserData.country) updatedUserData.country = currentUser.country;
+      if (!updatedUserData.country) updatedUserData.country = currentUser.country;
 
       const updatedUser = await UserService.updateUser(userId, updatedUserData);
       if (!updatedUser) {
-        return res.status(500).json({ message: "Não foi possível atualizar o usuário."});
+        return res.status(500).json({ message: "Não foi possível atualizar o usuário." });
       }
       const { password, ...dtoUser } = updatedUser;
       return res.status(200).json(dtoUser);
@@ -161,6 +161,16 @@ class UserController {
       else return res.status(500).json({ message: "Erro interno ao atualizar senha do usuário." });
     }
   }
-}
 
-export default UserController;
+  public static async isGoogleLogin(req: Request, res: Response) {
+    const userId = req.params.id;
+    try {
+      const isGoogleLogin = await UserService.isGoogleLogin(userId);
+      return res.status(200).json(isGoogleLogin);
+    } catch (error: any) {
+      return res
+        .status(500)
+        .json({ messsage: "Erro interno ao verificar tipo de login do usuário" });
+    }
+  }
+}

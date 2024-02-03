@@ -2,8 +2,9 @@ import { ProfileService } from "./services/profile.service";
 import { FormBuilder } from "@angular/forms";
 import { IProject } from "../../models/iProject";
 import { Component, OnInit } from "@angular/core";
-import { debounceTime, distinctUntilChanged, map, switchMap } from "rxjs";
+import { Observable, debounceTime, distinctUntilChanged, map, switchMap } from "rxjs";
 import { ModalActionService } from "src/app/componentes/modal-action/services/modal-action.service";
+import { IUser } from "src/app/models/iUser";
 
 @Component({
   selector: "app-profile",
@@ -16,8 +17,8 @@ export class ProfileComponent implements OnInit {
     search: [""],
   });
 
-  // usuario logado
-  user: any;
+  user$!: Observable<IUser>;
+  defaultIcon: string = "assets/imgs/img_profile_orange_portfolio.png";
 
   //controle de mensagem de pesquisa
   searchResultEmpty: boolean = false;
@@ -33,16 +34,18 @@ export class ProfileComponent implements OnInit {
     private profileService: ProfileService,
     private modalActionService: ModalActionService
   ) {
-    this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
     this.modalActionService.notification.subscribe(() => {
       this.ngOnInit();
     })
   }
 
   ngOnInit(): void {
+
+    const userId = JSON.parse(sessionStorage.getItem("id") || "");
+    this.user$ = this.profileService.getUserInfo(userId);
     this.projects = [];
     // carregando dados do usuario
-    this.getProjectsById(this.user.id);
+    this.getProjectsById(userId);
     this.searchForm
       .get("search")
       ?.valueChanges.pipe(
@@ -68,7 +71,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getProjectsById(id: string) {
-    this.profileService.getProjectsByIdProfile(id).subscribe({
+    this.profileService.getProjectsByUserIdProfile(id).subscribe({
       next: (projects: IProject[]) => {
         projects.forEach(projectData => {
           const project: IProject = this.profileService.fillProjectProfile(projectData);

@@ -1,10 +1,10 @@
-import ProjectService from "../services/project.service";
+import { ProjectService } from "../services/project.service";
 import { Request, Response } from "express";
 import { Project } from "../models/project.model";
 import { uploadFile } from "../utils/fileUploadUtils";
-import UserService from "../services/user.service";
+import { UserService } from "../services/user.service";
 
-class ProjectController {
+export class ProjectController {
   public static async createProject(req: Request, res: Response) {
     const newProject: Project = req.body;
     if (
@@ -71,11 +71,14 @@ class ProjectController {
         .status(422)
         .json({ message: "Solicitação inválida. Verifique os parâmetros enviados." });
     }
-    if (req.file) {
-      const downloadURL = await uploadFile(req.file);
-      updatedProject.imgUrl = downloadURL;
+    
+    if (req.files) {
+      let downloadUrl;
+      if ("imgUrl" in req.files) {
+        downloadUrl = await uploadFile(req.files["imgUrl"][0]);
+        updatedProject.imgUrl = downloadUrl;
+      }
     }
-
     const updated = await ProjectService.updateProject(projectId, updatedProject);
 
     return res.status(200).json(updated);
@@ -92,5 +95,3 @@ class ProjectController {
     }
   }
 }
-
-export default ProjectController;

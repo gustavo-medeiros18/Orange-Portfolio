@@ -30,6 +30,11 @@ a {
   cursor: pointer;
 }
 
+.tags {
+  display: flex;
+  justify-content: flex-end;
+}
+
 #date {
   color: var(--Neutral-Colors-Neutral-110, #515255);
   font-size: 1rem;
@@ -62,7 +67,6 @@ a {
   width: 80%;
   display: flex;
   align-items: center;
-  justify-content: center;
   margin: 0 auto;
   gap: calc(0.33 * 80%);
 }

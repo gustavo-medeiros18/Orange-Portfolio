@@ -1,17 +1,14 @@
 import { Request, Response } from "express";
-import LoginService from "../services/login.service";
+import { LoginService } from "../services/login.service";
 import { comparePasswords } from "../utils/bcryptUtils";
 import { generateToken } from "../utils/jwtAuth";
-import { OAuth2Client } from "google-auth-library";
-import UserService from "../services/user.service";
+import { UserService } from "../services/user.service";
+import { client } from "../config/oauth.config";
+import dotenv from "dotenv";
 
-const client = new OAuth2Client({
-  clientId: "102685364306-m0ssdqq50ier1aqn5eulgr4eto0qidev.apps.googleusercontent.com",
-  clientSecret: "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",
-  redirectUri: "https://hackathon-orange.onrender.com/auth/google",
-});
+dotenv.config();
 
-class LoginController {
+export class LoginController {
   public static async loginUser(req: Request, res: Response) {
     try {
       const { email, password } = req.body;
@@ -20,9 +17,8 @@ class LoginController {
 
       if (user) {
         const isAValidPassword = await comparePasswords(password, user.password);
-
         if (isAValidPassword) {
-          const { password, ...dtoUser } = user;
+          const { password,isGoogleLogin,createdAt,updatedAt, ...dtoUser } = user;
           const token = generateToken(dtoUser);
           return res.status(200).json({ message: "Login bem-sucedido.", dtoUser, token });
         }
@@ -45,7 +41,7 @@ class LoginController {
       // busca as informações do usuário
       const ticket = await client.verifyIdToken({
         idToken: tokenGoogle,
-        audience: "102685364306-m0ssdqq50ier1aqn5eulgr4eto0qidev.apps.googleusercontent.com",
+        audience: process.env.CLIENT_ID,
       });
 
       // formata as informações do usuário através do ticket
@@ -71,9 +67,10 @@ class LoginController {
           name: payload.given_name,
           lastName: payload.family_name,
           email: payload.email,
+          isGoogleLogin: true,
           password: Math.random().toString(36).slice(-10), //gera senha aleatória (não é usada na autenticação com o google)
           country: "",
-          iconUrl: "",
+          iconUrl: payload.picture ?? ""
         };
         user = await UserService.createUser(user);
         userInfo = {
@@ -92,4 +89,3 @@ class LoginController {
     }
   }
 }
-export default LoginController;

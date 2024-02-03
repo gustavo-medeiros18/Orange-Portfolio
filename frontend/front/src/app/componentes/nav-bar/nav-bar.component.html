@@ -1,3 +1,4 @@
+<ng-container *ngIf="user$ | async as user">
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <button class="button-menu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu button" fxHide.gt-sm>
@@ -46,10 +47,10 @@
     </div>
     <div class="div-icons">
       <a class="div-profile-img" routerLink="/profile/info" *ngIf="isMobile">
-        <img class="profile-img" src="{{ user.iconUrl }}" alt="{{ user.name }}">
+        <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="{{ user.name }}">
       </a>
       <a class="div-profile-img" *ngIf="!isMobile" [matMenuTriggerFor]="menu2">
-        <img class="profile-img" src="{{ user.iconUrl }}" alt="{{ user.name }}">
+        <img class="profile-img" [src]="user.iconUrl || defaultIcon" alt="{{ user.name }}">
       </a>
       <mat-menu class="mat-menu" #menu2="matMenu">
         <div class="info-user">
@@ -80,3 +81,4 @@
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
+</ng-container>

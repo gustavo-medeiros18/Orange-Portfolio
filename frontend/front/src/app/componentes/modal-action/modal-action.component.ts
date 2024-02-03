@@ -40,7 +40,10 @@ export class ModalActionComponent implements OnInit {
     private viewProjectInfoService: ViewProjectInfoService,
     private formBuilder: NonNullableFormBuilder
   ) {
-    this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
+    const userId = JSON.parse(sessionStorage.getItem("id") || "");
+    this.modalService.getUserInfo(userId).subscribe(
+      user => this.user = user
+    )
   }
 
   ngOnInit(): void {
@@ -125,7 +128,6 @@ export class ModalActionComponent implements OnInit {
     this.formData.append("link", this.form.value.link);
     this.formData.append("description", this.form.value.description);
     this.formData.append("idUser", idUser);
-
     this.modalService.putProjectModal(this.formData, this.project?.id!).subscribe({
       next: () => {
         this.projectActionService.openDialog(action, "success");

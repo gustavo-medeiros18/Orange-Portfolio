@@ -3,6 +3,8 @@ import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { ProfileInfoService } from "./services/profile-info.service";
 import { ProfileActionService } from "src/app/componentes/profile-action/services/profile-action.service";
 import { createPassword, noWhitespaceValidator } from "../../Validators/validators";
+import { Observable } from "rxjs";
+import { IUser } from "src/app/models/iUser";
 
 @Component({
   selector: "app-profile-info",
@@ -31,19 +33,40 @@ export class ProfileInfoComponent implements OnInit {
   formDataProfile = new FormData();
   formDataPassword = new FormData();
 
-  user: any;
+  user$!: Observable<IUser>;
+  user!: IUser;
   country!: string;
+  defaultIcon: string = "assets/imgs/img_profile_orange_portfolio.png";
+
+  // Verdadeiro quando o usuário estiver logado com o google (esconde sessão de alterar senha)
+  // por padrao, não deve mostrar o campo de alterar senha
+  isGoogleLogin: boolean = true;
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private profileInfoService: ProfileInfoService,
-    private profileActionService: ProfileActionService,
-  ) {
-    this.user = JSON.parse(sessionStorage.getItem("userInfo") || "");
-  }
+    private profileActionService: ProfileActionService
+  ) {}
 
   ngOnInit() {
+    const userId = JSON.parse(sessionStorage.getItem("id") || "");
+    this.user$ = this.profileInfoService.getUserInfo(userId);
+
+    this.user$.subscribe((user) => {
+      this.user = user;
+      this.initializeFormProfile();
+      this.initializeFormPassword();
+    });
+  }
+
+  initializeFormProfile() {
+
     this.clearFormDatas(this.formDataProfile, this.formDataPassword, this.formCountry);
+
+    // verifica se está logado com o google
+    this.profileInfoService.isGoogleLoginService(this.user.id).subscribe((result) => {
+      this.isGoogleLogin = !result;
+    });
 
     this.formProfile = this.formBuilder.group({
       name: [
@@ -62,7 +85,9 @@ export class ProfileInfoComponent implements OnInit {
         this.country = country.name;
       }
     });
+  }
 
+  initializeFormPassword(){
     this.formPassword = this.formBuilder.group({
       currentPassword: ["", [Validators.required, Validators.minLength(8), createPassword()]],
       newPassword: ["", [Validators.required, Validators.minLength(8), createPassword()]],
@@ -149,20 +174,16 @@ export class ProfileInfoComponent implements OnInit {
     this.formDataProfile.append("name", this.formProfile.value.name);
     this.formDataProfile.append("lastName", this.formProfile.value.lastName);
     this.formDataProfile.append("email", this.formProfile.value.email);
-    this.formDataProfile.append("country", this.country);
+    if (this.country) this.formDataProfile.append("country", this.country);
     this.profileInfoService.updateProfileService(this.formDataProfile, id).subscribe({
       next: (data) => {
-        // atualiza os dados do usuário
-        sessionStorage.setItem("userInfo", JSON.stringify(data));
         // comunica o resultado
         this.profileActionService.openDialog(action, "success");
       },
       error: (error) => {
-        this.loading = false;
         this.profileActionService.openDialog(action, "error");
       },
     });
-    this.ngOnInit();
   }
 
   updatePassword() {
@@ -173,15 +194,20 @@ export class ProfileInfoComponent implements OnInit {
     this.formDataPassword.append("newPassword", this.formPassword.value.newPassword);
     this.profileInfoService.updatePasswordService(id, this.formDataPassword).subscribe({
       next: () => {
-        this.loadingPassword = false;
         // comunica o resultado
         this.profileActionService.openDialog(action, "success");
       },
       error: (error) => {
-        this.loadingPassword = false;
         this.profileActionService.openDialog(action, "error");
       },
     });
-    this.ngOnInit();
+  }
+
+  isButtonDisabledProfile(): boolean {
+    return this.formProfile.invalid;
+  }
+
+  isButtonDisabledPassword(): boolean {
+    return this.formPassword.invalid;
   }
 }

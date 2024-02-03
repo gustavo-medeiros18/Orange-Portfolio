@@ -1,14 +1,12 @@
 import { RowDataPacket } from "mysql2";
 import { User } from "../models/user.model";
-import connection from "../database/config";
+import { connection } from "../database/config";
 
-class LoginService {
+export class LoginService {
   public static async authenticateLogin(email: string) {
     try {
-      const [rows] = await connection.query<RowDataPacket[]>(
-        "SELECT * FROM users WHERE email = ?",
-        [email]
-      );
+      const sqlStatement = "SELECT * FROM users WHERE email = ?";
+      const [rows] = await connection.query<RowDataPacket[]>(sqlStatement, [email]);
 
       if (rows.length > 0) {
         return rows[0] as User;
@@ -21,5 +19,3 @@ class LoginService {
     }
   }
 }
-
-export default LoginService;

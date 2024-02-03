@@ -44,7 +44,7 @@ export class ProjectService {
     });*/
   }
 
-  getProjectsById(id: string): Observable<IProject[]> {
+  getProjectsByUserId(id: string): Observable<IProject[]> {
     const apiUrl = new URL(environment.getApiProjectUserId(id), this.API).toString();
     return this.httpClient.get<IProject[]>(apiUrl);
   }
