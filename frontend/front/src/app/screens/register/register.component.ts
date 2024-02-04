@@ -22,6 +22,8 @@ export class RegisterComponent {
   successAlert: boolean = false;
   errorAlert: boolean = false;
 
+  hasError: string = "";
+
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private registerService: RegisterService,
@@ -75,18 +77,27 @@ export class RegisterComponent {
       this.loading = false;
       return;
     }
-    this.registerService.save(this.form.value).pipe(
-      first()
-    ).subscribe({
-      next: () => {
-        this.loading = false;
-        this.onSuccess();
-      },
-      error: (error) => {
-        this.loading = false;
-        this.onError();
-      },
-    });
+    this.registerService
+      .save(this.form.value)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.loading = false;
+          this.onSuccess();
+        },
+        error: (error) => {
+          console.log(error.status);
+          if (error.status === 409) {
+            this.hasError = "Este e-mail já está cadastrado.";
+            this.loading = false;
+            this.onError();
+          } else {
+            this.hasError = "Ocorreu um erro ao tentar realizar o cadastro";
+            this.loading = false;
+            this.onError();
+          }
+        },
+      });
   }
 
   onSuccess() {
