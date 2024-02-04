@@ -193,9 +193,7 @@ export class ModalActionComponent implements OnInit {
     }
   }
 
-  onKeyPress(event: KeyboardEvent): void {
-    if (event.key === "Enter") {
+  onKeyPress(event: any): void {
       event.preventDefault(); 
-    }
   }
 }
