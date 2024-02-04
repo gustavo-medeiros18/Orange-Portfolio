@@ -46,10 +46,10 @@ describe("LoginService", () => {
       });
     });
 
-    it("should handle authentication result correctly", () => {
+    it("Verifica se, caso o login seja encontrado no banco, retorna true corretamente no service", () => {
       const form = new FormBuilder().group({
-        email: "test@example.com",
-        password: "password123",
+        email: "email@gmail.com",
+        password: "password",
       });
 
       authServiceSpy.authUser.and.returnValue(of(true));
@@ -59,7 +59,5 @@ describe("LoginService", () => {
 
       expect(result).toBe(true);
     });
-
-    // Add more test cases as needed
   });
 });
