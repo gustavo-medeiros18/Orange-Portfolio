@@ -4,7 +4,7 @@ import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from "@ang
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ModalActionService } from "./services/modal-action.service";
 import { ProjectActionService } from "../project-action/services/project-action.service";
-import { SPACE } from '@angular/cdk/keycodes';
+import { COMMA, ENTER} from '@angular/cdk/keycodes';
 import { IModal } from "../models/iModal";
 import { ViewProjectInfoService } from "../view-project-info/services/view-project-info.service";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
@@ -20,7 +20,7 @@ export class ModalActionComponent implements OnInit {
 
   //tag system
   tags: string[] = [];
-  separatorKeysCodes: number[] = [SPACE];
+  separatorKeysCodes: number[] = [COMMA,ENTER];
   formControl = new FormControl("", [Validators.required]);
   announcer = inject(LiveAnnouncer);
   isFieldClicked: boolean = false;
