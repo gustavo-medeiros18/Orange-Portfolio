@@ -16,7 +16,6 @@ import { noWhitespaceValidator } from "../../Validators/validators";
   styleUrls: ["./modal-action.component.scss"],
 })
 export class ModalActionComponent implements OnInit {
-
   //tag system
   tags: string[] = [];
   formControl = new FormControl("", [Validators.required]);
@@ -41,9 +40,7 @@ export class ModalActionComponent implements OnInit {
     private formBuilder: NonNullableFormBuilder
   ) {
     const userId = JSON.parse(sessionStorage.getItem("id") || "");
-    this.modalService.getUserInfo(userId).subscribe(
-      user => this.user = user
-    )
+    this.modalService.getUserInfo(userId).subscribe((user) => (this.user = user));
   }
 
   ngOnInit(): void {
@@ -178,7 +175,7 @@ export class ModalActionComponent implements OnInit {
       if (newTag && !this.tags.includes(newTag)) {
         this.tags.push(newTag);
       }
-      (event.target as HTMLInputElement).value = '';
+      (event.target as HTMLInputElement).value = "";
       if (this.tags.length === 0) this.emptyFormTags();
       event.preventDefault();
     }

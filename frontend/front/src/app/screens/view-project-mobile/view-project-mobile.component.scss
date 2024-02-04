@@ -22,6 +22,10 @@
   flex-direction: column;
 }
 
+.description {
+  word-break: break-all;
+}
+
 a {
   color: var(--Support-Colors-Info-info-80, #608ae1);
   font-size: 0.875rem;

@@ -14,6 +14,7 @@ export class ViewProjectMobileComponent implements OnInit {
 
   constructor(private viewProjectMobileService: ViewProjectMobileService) {}
   ngOnInit(): void {
+    window.scroll({ top: 0 });
     const currentProject = this.viewProjectMobileService.currentProject;
     if (currentProject) {
       this.project = currentProject.data;
