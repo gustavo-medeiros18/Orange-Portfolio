@@ -170,20 +170,6 @@ export class ModalActionComponent implements OnInit {
     if (this.tags.length === 0) this.emptyFormTags();
   }
 
-  // adaptação para android
-  onEnterKeyPress(event: any): void {
-    const enterKey = 13; // codigo da tecla enter
-    if (event.keyCode === enterKey) {
-      const newTag = (event.target as HTMLInputElement).value.trim();
-      if (newTag && !this.tags.includes(newTag)) {
-        this.tags.push(newTag);
-      }
-      (event.target as HTMLInputElement).value = '';
-      if (this.tags.length === 0) this.emptyFormTags();
-      event.preventDefault();
-    }
-  }
-
   removeTag(tag: string) {
     const index = this.tags.indexOf(tag);
     if (index >= 0) {
