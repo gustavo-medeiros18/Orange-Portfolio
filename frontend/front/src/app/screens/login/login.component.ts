@@ -68,7 +68,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  // Função de simulação de login assíncrono
   login() {
     if (this.form.invalid) {
       this.onError(true);
