@@ -192,4 +192,10 @@ export class ModalActionComponent implements OnInit {
       this.formData.append("tags", tags.toString());
     }
   }
+
+  onKeyPress(event: KeyboardEvent): void {
+    if (event.key === "Enter") {
+      event.preventDefault(); 
+    }
+  }
 }

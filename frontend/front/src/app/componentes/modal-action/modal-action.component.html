@@ -20,7 +20,7 @@
               </mat-chip>
             </mat-chip-grid>
             <input matInput formControlName="tags"
-              [placeholder]="isFieldClicked ? 'Digite uma tag e pressione enter' : ''" [matChipInputFor]="chipGrid"
+              [placeholder]="isFieldClicked ? 'Digite uma tag e pressione enter' : ''" [matChipInputFor]="chipGrid" (keypress)="onKeyPress($event)"
               (matChipInputTokenEnd)="addTag($event)" (focus)="isFieldClicked = true" (blur)="isFieldClicked = false" />
             <mat-error *ngIf="tags.length === 0">{{formErrorMessage("tags") + " (Digite uma tag e pressione enter)"}}</mat-error>
           </mat-form-field>
