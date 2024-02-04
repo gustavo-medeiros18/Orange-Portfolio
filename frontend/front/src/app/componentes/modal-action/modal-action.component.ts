@@ -4,7 +4,6 @@ import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from "@ang
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ModalActionService } from "./services/modal-action.service";
 import { ProjectActionService } from "../project-action/services/project-action.service";
-import { COMMA, ENTER} from '@angular/cdk/keycodes';
 import { IModal } from "../models/iModal";
 import { ViewProjectInfoService } from "../view-project-info/services/view-project-info.service";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
@@ -20,7 +19,6 @@ export class ModalActionComponent implements OnInit {
 
   //tag system
   tags: string[] = [];
-  separatorKeysCodes: number[] = [COMMA,ENTER];
   formControl = new FormControl("", [Validators.required]);
   announcer = inject(LiveAnnouncer);
   isFieldClicked: boolean = false;
@@ -170,6 +168,18 @@ export class ModalActionComponent implements OnInit {
     }
     event.chipInput!.clear();
     if (this.tags.length === 0) this.emptyFormTags();
+  }
+
+  // adaptação para android
+  onEnterKeyPress(event: any): void {
+    if (event.key === 'Enter') {
+      const newTag = (event.target as HTMLInputElement).value.trim();
+      if (newTag && !this.tags.includes(newTag)) {
+        this.tags.push(newTag);
+      }
+      (event.target as HTMLInputElement).value = '';
+      event.preventDefault();
+    }
   }
 
   removeTag(tag: string) {
