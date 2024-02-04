@@ -78,16 +78,18 @@ export class LoginComponent implements OnInit {
     this.loginService.authenticate(this.form).subscribe({
       next: (result: boolean) => {
         if (result) {
+          this.loading = false;
           this.onSuccess();
         } else {
+          this.loading = false;
           this.onError(false);
         }
       },
       error: () => {
+        this.loading = false;
         this.onError(false);
       },
     });
-    this.loading = false;
   }
 
   onSuccess() {
