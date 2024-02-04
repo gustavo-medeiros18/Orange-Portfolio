@@ -8,7 +8,7 @@ import { IModal } from "../models/iModal";
 import { ViewProjectInfoService } from "../view-project-info/services/view-project-info.service";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { MatChipInputEvent } from "@angular/material/chips";
-import { noWhitespaceValidator } from "../../Validators/validators";
+import { isLink, noWhitespaceValidator } from "../../Validators/validators";
 
 @Component({
   selector: "app-modal-action",
@@ -57,7 +57,7 @@ export class ModalActionComponent implements OnInit {
         [Validators.required, noWhitespaceValidator(), Validators.minLength(5)],
       ],
       tags: "",
-      link: [this.project ? this.project.link : "", [Validators.required]],
+      link: [this.project ? this.project.link : "", [isLink(), Validators.required]],
       description: [this.project ? this.project.description : "", [Validators.required]],
     });
     this.modalService.clearProjectInfo(); // retorna ao estado inicial (inputs vazios)
@@ -74,6 +74,10 @@ export class ModalActionComponent implements OnInit {
     if (field?.hasError("minlength")) {
       return "Este campo está muito curto";
     }
+    if (field?.hasError("link")) {
+      return "Link inválido";
+    }
+
     return "Este campo é necessário";
   }
 
