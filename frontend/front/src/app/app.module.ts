@@ -34,6 +34,7 @@ import { ProfileInfoComponent } from "./screens/profile-info/profile-info.compon
 import { AuthorizationInterceptorService } from "../app/interceptors/authorization-interceptor.service";
 import { ProfileActionComponent } from "./componentes/profile-action/profile-action.component";
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { MatSelectCountryModule } from '@angular-material-extensions/select-coun
     MatDialogModule,
     FormsModule,
     MatMenuModule,
+    MatAutocompleteModule,
     MatSelectCountryModule.forRoot('br'),
   ],
   providers: [

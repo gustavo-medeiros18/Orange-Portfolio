@@ -21,7 +21,7 @@ export class ModalActionService {
   currentProject: IProjectEvent<ProjecEventEnum, IProject> | null = null;
 
   private notificationSubject: Subject<void> = new Subject<void>();
-  
+
   notification: Observable<void> = this.notificationSubject.asObservable();
 
 
@@ -39,6 +39,7 @@ export class ModalActionService {
     const dialogRef = this.dialog.open(ModalActionComponent, {
       position: { top: "9.25rem" },
       data: { name: name },
+      autoFocus: false
     });
   }
 

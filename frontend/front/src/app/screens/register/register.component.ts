@@ -3,6 +3,7 @@ import { FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { RegisterService } from "./services/register.service";
 import { Router } from "@angular/router";
 import { createPassword, noWhitespaceValidator } from "../../Validators/validators";
+import { first } from "rxjs";
 
 @Component({
   selector: "app-register",
@@ -20,6 +21,8 @@ export class RegisterComponent {
   // Variaveis  para exibicao da mensagem de sucesso/erro
   successAlert: boolean = false;
   errorAlert: boolean = false;
+
+  hasError: string = "";
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
@@ -68,35 +71,49 @@ export class RegisterComponent {
   // Função de simulação de login assíncrono
   signUp() {
     this.loading = true;
-    // Simula uma operação assíncrona (por exemplo, uma requisição HTTP)
-    // Deve ser alterado quando implementar o service de autenticação!
+
     if (this.form.invalid) {
       this.onError();
       this.loading = false;
       return;
     }
-    this.registerService.save(this.form.value).subscribe({
-      next: () => {
-        this.loading = false;
-        this.onSuccess();
-      },
-      error: (error) => {
-        this.loading = false;
-        this.onError();
-      },
-    });
+    this.registerService
+      .save(this.form.value)
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.loading = false;
+          this.onSuccess();
+        },
+        error: (error) => {
+          console.log(error.status);
+          if (error.status === 409) {
+            this.hasError = "Este e-mail já está cadastrado.";
+            this.loading = false;
+            this.onError();
+          } else {
+            this.hasError = "Ocorreu um erro ao tentar realizar o cadastro";
+            this.loading = false;
+            this.onError();
+          }
+        },
+      });
   }
 
   onSuccess() {
-    this.successAlert = true;
     this.errorAlert = false;
+    this.successAlert = true;
     setTimeout(() => {
       this.router.navigateByUrl("/login");
     }, 1500);
   }
 
   onError() {
-    this.errorAlert = true;
     this.successAlert = false;
+    this.errorAlert = true;
+  }
+
+  isButtonDisabled(): boolean {
+    return this.form.invalid;
   }
 }

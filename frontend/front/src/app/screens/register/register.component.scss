@@ -52,17 +52,18 @@
   align-items: center;
   border-radius: 0.25rem;
   background: #2e7d32;
-  margin-bottom: 6.75rem;
+  margin-bottom: 5%;
 }
 
 .on-sign-up-error {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   width: 20rem;
   padding: 0.375rem 1rem;
   border-radius: 0.25rem;
   background: #d00;
-  margin-bottom: 6.75rem;
+  margin-bottom: 4%;
 }
 
 .on-sign-up-success-icon {
