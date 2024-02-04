@@ -1,5 +1,5 @@
 import { IProject } from "./../../models/iProject";
-import { Component, Inject, OnInit, inject } from "@angular/core";
+import { Component, ElementRef, Inject, OnInit, ViewChild, inject } from "@angular/core";
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ModalActionService } from "./services/modal-action.service";
@@ -9,6 +9,9 @@ import { ViewProjectInfoService } from "../view-project-info/services/view-proje
 import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { isLink, noWhitespaceValidator } from "../../Validators/validators";
+import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
+import { preSelectedTags } from "./helper";
+import { Observable, map, startWith } from "rxjs";
 
 @Component({
   selector: "app-modal-action",
@@ -32,6 +35,14 @@ export class ModalActionComponent implements OnInit {
 
   user: any;
 
+  tagsCtrl = new FormControl();
+
+  //filteredTags: string[] = preSelectedTags;
+
+  filteredTags!: Observable<string[]>;
+
+  @ViewChild("tagsInput") tagsInput!: ElementRef<HTMLInputElement>;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public modal: IModal,
     private modalService: ModalActionService,
@@ -41,6 +52,10 @@ export class ModalActionComponent implements OnInit {
   ) {
     const userId = JSON.parse(sessionStorage.getItem("id") || "");
     this.modalService.getUserInfo(userId).subscribe((user) => (this.user = user));
+    this.filteredTags = this.tagsCtrl.valueChanges.pipe(
+      startWith(null),
+      map((fruit: string | null) => (fruit ? this._filter(fruit) : preSelectedTags.slice()))
+    );
   }
 
   ngOnInit(): void {
@@ -169,6 +184,18 @@ export class ModalActionComponent implements OnInit {
     }
     event.chipInput!.clear();
     if (this.tags.length === 0) this.emptyFormTags();
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.tags.push(event.option.viewValue);
+    this.tagsInput.nativeElement.value = "";
+    this.tagsCtrl.setValue(null);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return preSelectedTags.filter((tags) => tags.toLowerCase().includes(filterValue));
   }
 
   removeTag(tag: string) {

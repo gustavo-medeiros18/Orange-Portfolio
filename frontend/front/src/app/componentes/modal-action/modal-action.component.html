@@ -19,9 +19,15 @@
                 </button>
               </mat-chip>
             </mat-chip-grid>
-            <input matInput formControlName="tags"
+            <input matInput #tagsInput formControlName="tags"
               [placeholder]="isFieldClicked ? 'Digite uma tag e pressione enter' : ''" [matChipInputFor]="chipGrid"
-              (matChipInputTokenEnd)="addTag($event)" (focus)="isFieldClicked = true" (blur)="isFieldClicked = false"/>
+              (matChipInputTokenEnd)="addTag($event)" [matAutocomplete]="auto" (focus)="isFieldClicked = true"
+              (blur)="isFieldClicked = false" />
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+              <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                {{ tag }}
+              </mat-option>
+            </mat-autocomplete>
             <mat-error *ngIf="tags.length === 0">{{"Digite uma tag e pressione enter"}}</mat-error>
           </mat-form-field>
         </div>
