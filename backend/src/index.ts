@@ -13,8 +13,14 @@ const app = express();
 app.use(cors()); // Use o middleware cors
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.listen(3000, () => console.log(`Express rodando na porta ${process.env.PORT}`));
+app.get("/ping", (_req, res) => {
+  res.status(200).json({ message: "A API está online" });
+});
+
 app.use(multerMiddleware);
+
 app.use(loginRouter);
 app.use(userRouter);
 app.use(projectRouter);
