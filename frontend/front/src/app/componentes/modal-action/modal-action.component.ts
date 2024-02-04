@@ -1,10 +1,10 @@
 import { IProject } from "./../../models/iProject";
-import { Component, Inject, OnInit, ViewChild, inject } from "@angular/core";
+import { Component, Inject, OnInit, inject } from "@angular/core";
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ModalActionService } from "./services/modal-action.service";
 import { ProjectActionService } from "../project-action/services/project-action.service";
-
+import { SPACE } from '@angular/cdk/keycodes';
 import { IModal } from "../models/iModal";
 import { ViewProjectInfoService } from "../view-project-info/services/view-project-info.service";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
@@ -17,8 +17,10 @@ import { noWhitespaceValidator } from "../../Validators/validators";
   styleUrls: ["./modal-action.component.scss"],
 })
 export class ModalActionComponent implements OnInit {
+
   //tag system
   tags: string[] = [];
+  separatorKeysCodes: number[] = [SPACE];
   formControl = new FormControl("", [Validators.required]);
   announcer = inject(LiveAnnouncer);
   isFieldClicked: boolean = false;
@@ -191,9 +193,5 @@ export class ModalActionComponent implements OnInit {
     } else if (tags.length === 1) {
       this.formData.append("tags", tags.toString());
     }
-  }
-
-  onKeyPress(event: any): void {
-      event.preventDefault(); 
   }
 }

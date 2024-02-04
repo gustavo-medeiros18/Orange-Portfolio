@@ -15,7 +15,7 @@
             <mat-error *ngIf="form.get('email')?.invalid">{{formErrorMessage("email")}}</mat-error>
           </mat-form-field>
           <mat-form-field class="input" appearance="outline">
-            <mat-label>Password</mat-label>
+            <mat-label>Senha</mat-label>
             <input type={{password}} matInput formControlName="password">
             <mat-error *ngIf="form.get('password')?.invalid">{{formErrorMessage("password")}}</mat-error>
             <mat-icon (click)="onClick()" *ngIf="!visibility" matSuffix>visibility</mat-icon>

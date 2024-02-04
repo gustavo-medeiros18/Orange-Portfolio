@@ -20,9 +20,10 @@
               </mat-chip>
             </mat-chip-grid>
             <input matInput formControlName="tags"
-              [placeholder]="isFieldClicked ? 'Digite uma tag e pressione enter' : ''" [matChipInputFor]="chipGrid" (keydown.enter)="onKeyPress($event)"
-              (matChipInputTokenEnd)="addTag($event)" (focus)="isFieldClicked = true" (blur)="isFieldClicked = false" />
-            <mat-error *ngIf="tags.length === 0">{{"Digite uma tag e pressione enter"}}</mat-error>
+              [placeholder]="isFieldClicked ? 'Digite uma tag e pressione a barra de espaço' : ''" [matChipInputFor]="chipGrid"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="addTag($event)" (focus)="isFieldClicked = true" (blur)="isFieldClicked = false"/>
+            <mat-error *ngIf="tags.length === 0">{{"Digite uma tag e pressione a barra de espaço"}}</mat-error>
           </mat-form-field>
         </div>
         <mat-form-field class="input" appearance="outline">
