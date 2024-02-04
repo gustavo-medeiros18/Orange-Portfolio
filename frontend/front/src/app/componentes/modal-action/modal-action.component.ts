@@ -1,15 +1,17 @@
 import { IProject } from "./../../models/iProject";
-import { Component, Inject, OnInit, ViewChild, inject } from "@angular/core";
+import { Component, ElementRef, Inject, OnInit, ViewChild, inject } from "@angular/core";
 import { FormControl, FormGroup, NonNullableFormBuilder, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ModalActionService } from "./services/modal-action.service";
 import { ProjectActionService } from "../project-action/services/project-action.service";
-
 import { IModal } from "../models/iModal";
 import { ViewProjectInfoService } from "../view-project-info/services/view-project-info.service";
 import { LiveAnnouncer } from "@angular/cdk/a11y";
 import { MatChipInputEvent } from "@angular/material/chips";
-import { noWhitespaceValidator } from "../../Validators/validators";
+import { isLink, noWhitespaceValidator } from "../../Validators/validators";
+import { MatAutocompleteSelectedEvent } from "@angular/material/autocomplete";
+import { preSelectedTags } from "./helper";
+import { Observable, map, startWith } from "rxjs";
 
 @Component({
   selector: "app-modal-action",
@@ -33,6 +35,14 @@ export class ModalActionComponent implements OnInit {
 
   user: any;
 
+  tagsCtrl = new FormControl();
+
+  //filteredTags: string[] = preSelectedTags;
+
+  filteredTags!: Observable<string[]>;
+
+  @ViewChild("tagsInput") tagsInput!: ElementRef<HTMLInputElement>;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public modal: IModal,
     private modalService: ModalActionService,
@@ -41,9 +51,11 @@ export class ModalActionComponent implements OnInit {
     private formBuilder: NonNullableFormBuilder
   ) {
     const userId = JSON.parse(sessionStorage.getItem("id") || "");
-    this.modalService.getUserInfo(userId).subscribe(
-      user => this.user = user
-    )
+    this.modalService.getUserInfo(userId).subscribe((user) => (this.user = user));
+    this.filteredTags = this.tagsCtrl.valueChanges.pipe(
+      startWith(null),
+      map((fruit: string | null) => (fruit ? this._filter(fruit) : preSelectedTags.slice()))
+    );
   }
 
   ngOnInit(): void {
@@ -60,7 +72,7 @@ export class ModalActionComponent implements OnInit {
         [Validators.required, noWhitespaceValidator(), Validators.minLength(5)],
       ],
       tags: "",
-      link: [this.project ? this.project.link : "", [Validators.required]],
+      link: [this.project ? this.project.link : "", [isLink(), Validators.required]],
       description: [this.project ? this.project.description : "", [Validators.required]],
     });
     this.modalService.clearProjectInfo(); // retorna ao estado inicial (inputs vazios)
@@ -70,13 +82,18 @@ export class ModalActionComponent implements OnInit {
     const field = this.form.get(fieldName);
     if (field?.hasError("required")) {
       return "Este campo é necessário";
+      return "Este campo é necessário";
     }
     if (field?.hasError("whitespace")) {
-      return "Este campo não pode conter apenas espaços em branco.";
+      return "Este campo não pode conter apenas espaços em branco";
     }
     if (field?.hasError("minlength")) {
-      return `Este campo está muito curto`;
+      return "Este campo está muito curto";
     }
+    if (field?.hasError("link")) {
+      return "Link inválido";
+    }
+
     return "Este campo é necessário";
   }
 
@@ -168,6 +185,18 @@ export class ModalActionComponent implements OnInit {
     }
     event.chipInput!.clear();
     if (this.tags.length === 0) this.emptyFormTags();
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.tags.push(event.option.viewValue);
+    this.tagsInput.nativeElement.value = "";
+    this.tagsCtrl.setValue(null);
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return preSelectedTags.filter((tags) => tags.toLowerCase().includes(filterValue));
   }
 
   removeTag(tag: string) {

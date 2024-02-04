@@ -19,7 +19,6 @@
         const googleToken = response["credential"];
         sendTokenToBackend(googleToken);
       }
-
       function sendTokenToBackend(token) {
         const url = "https://hackathon-orange.onrender.com/auth/google";
         fetch(url, {
