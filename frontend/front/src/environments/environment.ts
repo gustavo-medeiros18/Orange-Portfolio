@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  baseUrl: "http://localhost:3000/",
+  baseUrl: "https://hackathon-orange-juice-2024-production.up.railway.app/",
   apiAuthenticate: "login",
   apiUsers: "users",
   apiProjects: "projects",
