@@ -62,7 +62,7 @@
 
           <mat-form-field class="input" appearance="outline">
             <mat-label>E-mail</mat-label>
-            <input type="email" matInput formControlName="email" />
+            <input type="email" matInput formControlName="email" readonly/>
             <mat-error *ngIf="formProfile.get('email')?.invalid">{{
               formErrorMessage("email")
             }}</mat-error>
