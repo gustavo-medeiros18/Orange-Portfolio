@@ -60,8 +60,9 @@ export class ProfileComponent implements OnInit {
   }
 
   handleSearch(value: string) {
+    const lowerCaseValue = value.toLowerCase();
     this.searchProjects = this.projects.filter((project) => {
-      return project.tags && project.tags.some((tag) => tag.startsWith(value));
+      return project.tags && project.tags.some((tag) => tag.toLowerCase().startsWith(lowerCaseValue));
     });
     this.searchResultEmpty = this.searchProjects.length === 0;
   }

@@ -16,6 +16,7 @@ export class ProjectCardComponent implements OnInit {
   @Input() projects: IProject[] = [];
   @Input() edit: boolean = false;
   @Input() tags: boolean = true;
+  @Input() cover: boolean = true;
   user: any;
 
   constructor(

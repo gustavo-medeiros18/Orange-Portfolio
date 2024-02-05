@@ -82,7 +82,6 @@ export class ModalActionComponent implements OnInit {
     const field = this.form.get(fieldName);
     if (field?.hasError("required")) {
       return "Este campo é necessário";
-      return "Este campo é necessário";
     }
     if (field?.hasError("whitespace")) {
       return "Este campo não pode conter apenas espaços em branco";
