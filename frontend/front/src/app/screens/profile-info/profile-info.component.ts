@@ -39,7 +39,6 @@ export class ProfileInfoComponent implements OnInit {
   defaultIcon: string = "assets/imgs/img_profile_orange_portfolio.png";
 
   // Verdadeiro quando o usuário estiver logado com o google (esconde sessão de alterar senha)
-  // por padrao, não deve mostrar o campo de alterar senha
   isGoogleLogin: boolean = true;
 
   constructor(
