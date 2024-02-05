@@ -14,7 +14,8 @@
           </button>
         </mat-menu>
     </div>
-    <img mat-card-image class="img-card" src="{{project.imgUrl}}" alt="{{project.title}}">
+    <img *ngIf="cover" mat-card-image class="img-card" src="{{project.imgUrl}}" alt="{{project.title}}">
+    <img *ngIf="!cover" mat-card-image  class="img-card-no-cover" src="{{project.imgUrl}}" alt="{{project.title}}">
     <mat-card-header>
       <div class="card-infos">
         <div class="data-user">
